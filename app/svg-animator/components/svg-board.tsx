@@ -45,7 +45,7 @@ const SvgBoard = () => {
       </div>
       <div className="flex w-full h-full min-h-0 border border-dashed items-center justify-center rounded">
         <div
-          className="flex w-full h-full p-0 md:p-12 rounded bg-[var(--chosen-background)]"
+          className="flex w-full h-full p-0 md:p-12 rounded bg-(--chosen-background)"
           style={
             {
               '--chosen-background': backgroundColor,

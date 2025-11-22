@@ -33,7 +33,7 @@ const ColorPicker = ({
       <PopoverTrigger disabled={disabled} asChild>
         <Button size="icon" variant="ghost" className={cn('w-7 h-7', className)}>
           <Circle
-            className="w-5 h-5 border rounded-full text-[var(--selected-color)] fill-[var(--selected-color)]"
+            className="w-5 h-5 border rounded-full text-(--selected-color) fill-(--selected-color)"
             style={{ '--selected-color': value || defaultValue } as React.CSSProperties}
           />
         </Button>
@@ -47,7 +47,7 @@ const ColorPicker = ({
                   key={colorIdx}
                   size="icon"
                   variant="outline"
-                  className={cn('w-7 h-7 p-0.5', value === colorOption && 'border-[var(--selected-color)]')}
+                  className={cn('w-7 h-7 p-0.5', value === colorOption && 'border-(--selected-color)')}
                   style={
                     {
                       '--selected-color': value,
