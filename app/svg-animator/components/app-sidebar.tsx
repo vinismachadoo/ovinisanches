@@ -41,11 +41,11 @@ const AppSidebar = () => {
   return (
     <div className="no-scrollbar flex flex-col gap-y-8 h-full overflow-auto px-4 py-4">
       <section className="flex flex-col gap-y-4">
-        <div className="flex flex-col gap-y-3">
-          <Label>Background color</Label>
-          <div className="flex gap-x-2">
+        <div className="flex flex-col gap-y-2">
+          <Label>Cor de fundo</Label>
+          <div className="flex gap-x-2 items-center">
             <ColorPicker value={backgroundColor} onValueChange={setBackgroundColor} />
-            <Badge variant="outline" className="whitespace-nowrap font-normal">
+            <Badge variant="outline" className="whitespace-nowrap font-normal rounded-md">
               {backgroundColor}
             </Badge>
             <Button variant="outline" size="icon" onClick={() => setBackgroundColor(null)}>
@@ -53,11 +53,11 @@ const AppSidebar = () => {
             </Button>
           </div>
         </div>
-        <div className="flex flex-col gap-y-3">
-          <Label>Stroke color</Label>
-          <div className="flex gap-x-2">
+        <div className="flex flex-col gap-y-2">
+          <Label>Cor da linha</Label>
+          <div className="flex gap-x-2 items-center">
             <ColorPicker value={strokeColor} onValueChange={setStrokeColor} />
-            <Badge variant="outline" className="whitespace-nowrap font-normal">
+            <Badge variant="outline" className="whitespace-nowrap font-normal rounded-md">
               {strokeColor}
             </Badge>
             <Button variant="outline" size="icon" onClick={() => setStrokeColor(null)}>
@@ -65,8 +65,21 @@ const AppSidebar = () => {
             </Button>
           </div>
         </div>
+
+        <div className="flex gap-x-2 border rounded-md p-2">
+          <Checkbox
+            id="fill-after-each-path"
+            checked={fillAfterEachPath}
+            onCheckedChange={(checked: boolean) => setFillAfterEachPath(checked)}
+          />
+          <Label htmlFor="fill-after-each-path">Preencher após cada caminho</Label>
+        </div>
+
         <div className="flex flex-col gap-y-3">
-          <Label>Draw Duration</Label>
+          <div className="flex flex-col gap-y-2">
+            <Label>Duração</Label>
+            <p className="text-xs text-muted-foreground">Duração de cada pedaço do arquivo</p>
+          </div>
           <NumberInput
             aria-label="draw-duration-input"
             value={drawDuration}
@@ -81,7 +94,10 @@ const AppSidebar = () => {
           />
         </div>
         <div className="flex flex-col gap-y-3">
-          <Label>Draw Delay</Label>
+          <div className="flex flex-col gap-y-2">
+            <Label>Atraso</Label>
+            <p className="text-xs text-muted-foreground">Atraso entre cada animação</p>
+          </div>
           <NumberInput
             aria-label="draw-duration-input"
             value={delay}
@@ -96,7 +112,7 @@ const AppSidebar = () => {
           />
         </div>
         <div className="flex flex-col gap-y-3">
-          <Label>Padding</Label>
+          <Label>Espaçamento</Label>
           <div className="flex gap-x-2">
             <Slider
               defaultValue={[0]}
@@ -109,15 +125,6 @@ const AppSidebar = () => {
             <Badge variant="outline" className="whitespace-nowrap font-normal">
               {padding * 4} rem
             </Badge>
-          </div>
-        </div>
-        <div className="flex flex-col gap-y-3">
-          <div className="flex gap-x-2">
-            <Checkbox
-              checked={fillAfterEachPath}
-              onCheckedChange={(checked: boolean) => setFillAfterEachPath(checked)}
-            />
-            <Label>Fill after each path</Label>
           </div>
         </div>
       </section>

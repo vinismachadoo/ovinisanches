@@ -4,8 +4,9 @@ import { AnimatedSvg } from '@/app/svg-animator/components/animated-svg';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useSvgSearchParams } from '@/app/svg-animator/hooks/use-svg-search-params';
-import { Play } from 'lucide-react';
+import { Paperclip, Play } from 'lucide-react';
 import React from 'react';
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 
 const SvgBoard = () => {
   const { backgroundColor, padding } = useSvgSearchParams();
@@ -31,14 +32,19 @@ const SvgBoard = () => {
   return (
     <div className="flex flex-col w-full h-full min-h-[500px] p-4 md:p-10 gap-y-2">
       <div className="flex gap-x-2">
-        <Input
-          id="svg-input"
-          className="p-0 pe-3 file:me-3 file:border-0 file:border-e"
-          type="file"
-          accept=".svg"
-          onChange={handleFileChange}
-          aria-label="Select SVG file"
-        />
+        <InputGroup>
+          <InputGroupInput
+            id="svg-input"
+            type="file"
+            accept=".svg"
+            onChange={handleFileChange}
+            aria-label="Select SVG file"
+            className="cursor-pointer"
+          />
+          <InputGroupAddon>
+            <Paperclip />
+          </InputGroupAddon>
+        </InputGroup>
         <Button onClick={replayAnimation}>
           <Play className="size-3" /> Replay
         </Button>

@@ -28,6 +28,9 @@ export const AnimatedSvg = ({ svgContent, ...props }: AnimatedSvgProps) => {
     if (isMounted && svgRef.current) {
       const svgElement = svgRef.current.querySelector('svg');
       if (svgElement) {
+        const originalWidth = svgElement.getAttribute('width') || svgElement.getAttribute('viewBox')?.split(' ')[2];
+        const originalHeight = svgElement.getAttribute('height') || svgElement.getAttribute('viewBox')?.split(' ')[3];
+
         svgElement.setAttribute('width', '100%');
         svgElement.setAttribute('height', '100%');
 
@@ -61,6 +64,7 @@ export const AnimatedSvg = ({ svgContent, ...props }: AnimatedSvgProps) => {
         const svgStroke = svgElement.getAttribute('stroke');
 
         const paths = svgElement.querySelectorAll('path, line, circle, rect, ellipse, polygon, polyline');
+
         let maxStrokeDuration = 0;
 
         paths.forEach((path, index) => {
@@ -122,7 +126,7 @@ export const AnimatedSvg = ({ svgContent, ...props }: AnimatedSvgProps) => {
             path.style.strokeDashoffset = length.toString();
             path.style.stroke = originalStroke || strokeColor;
             path.style.fill = originalFill || 'none';
-            path.style.strokeWidth = '1';
+            path.style.strokeWidth = (1 / (1000 / Math.max(Number(originalWidth), Number(originalHeight)))).toString();
             path.style.fillOpacity = '0';
 
             path.style.animation = `
