@@ -102,7 +102,7 @@ function Map({
       zoom={zoom}
       attributionControl={false}
       zoomControl={false}
-      className={cn('z-50 size-full min-h-96 flex-1 rounded-md', className)}
+      className={cn('z-50 size-full min-h-96 flex-1 rounded-sm', className)}
       {...props}
     />
   );
@@ -449,7 +449,7 @@ function MapPopup({ className, ...props }: Omit<PopupProps, 'content'> & { ref?:
   return (
     <LeafletPopup
       className={cn(
-        'bg-popover text-popover-foreground animate-in fade-out-0 fade-in-0 zoom-out-95 zoom-in-95 slide-in-from-bottom-2 z-50 w-72 rounded-md border p-4 font-sans shadow-md outline-hidden',
+        'bg-popover text-popover-foreground animate-in fade-out-0 fade-in-0 zoom-out-95 zoom-in-95 slide-in-from-bottom-2 z-50 w-72 rounded-sm border p-4 font-sans shadow-md outline-hidden',
         className
       )}
       {...props}

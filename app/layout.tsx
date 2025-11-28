@@ -7,6 +7,7 @@ import { StyleSwitcher } from '@/components/style-switcher';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
+import { MainCommandMenuProvider } from '@/app/main-command-menu';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -61,13 +62,15 @@ export default function RootLayout({
         <meta name="theme-color" content={META_THEME_COLORS.light} />
       </head>
       <body className={cn('group/body overscroll-none antialiased', `${geistSans.variable} ${geistMono.variable}`)}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <NuqsAdapter>
-            <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
-            <StyleSwitcher />
-            <TailwindIndicator />
-          </NuqsAdapter>
-        </ThemeProvider>
+        <MainCommandMenuProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <NuqsAdapter>
+              <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
+              <StyleSwitcher />
+              <TailwindIndicator />
+            </NuqsAdapter>
+          </ThemeProvider>
+        </MainCommandMenuProvider>
       </body>
     </html>
   );

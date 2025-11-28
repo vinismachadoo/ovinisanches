@@ -1,3 +1,4 @@
+import { MainCommandMenuContent } from '@/app/main-command-menu';
 import { Header } from '@/app/svg-animator/components/header';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <span> © 2024</span>
         </span>
       </div>
+      <MainCommandMenuContent />
     </div>
   );
 }

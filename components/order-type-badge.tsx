@@ -12,7 +12,7 @@ function OrderTypeBadge({ className, variant, ...props }: OrderTypeBadgeProps) {
 }
 
 const orderTypeBadgeVariants = cva(
-  'flex flex-row gap-x-1 text-xs leading-none py-1 px-1.5 rounded-md whitespace-nowrap w-fit items-center border uppercase font-medium',
+  'flex flex-row gap-x-1 text-xs leading-none py-1 px-1.5 rounded-sm whitespace-nowrap w-fit items-center border uppercase font-medium',
   {
     variants: {
       variant: {

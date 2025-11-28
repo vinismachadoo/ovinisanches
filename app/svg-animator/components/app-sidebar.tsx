@@ -11,6 +11,8 @@ import { Slider } from '@/components/ui/slider';
 import { Undo2 } from 'lucide-react';
 import * as React from 'react';
 import { useSvgSearchParams } from '@/app/svg-animator/hooks/use-svg-search-params';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 
 const AppSidebar = () => {
   const {
@@ -44,29 +46,49 @@ const AppSidebar = () => {
         <div className="flex flex-col gap-y-2">
           <Label>Cor de fundo</Label>
           <div className="flex gap-x-2 items-center">
-            <ColorPicker value={backgroundColor} onValueChange={setBackgroundColor} />
-            <Badge variant="outline" className="whitespace-nowrap font-normal rounded-md">
-              {backgroundColor}
-            </Badge>
-            <Button variant="outline" size="icon" onClick={() => setBackgroundColor(null)}>
-              <Undo2 className="size-3" />
-            </Button>
+            <InputGroup
+              style={{ '--background-color': backgroundColor } as React.CSSProperties}
+              className="border-(--background-color)"
+            >
+              <InputGroupInput placeholder={backgroundColor} disabled />
+              <InputGroupAddon>
+                <ColorPicker value={backgroundColor} onValueChange={setBackgroundColor} />
+              </InputGroupAddon>
+            </InputGroup>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" size="icon" onClick={() => setBackgroundColor(null)}>
+                  <Undo2 />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Redefinir</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </div>
         <div className="flex flex-col gap-y-2">
           <Label>Cor da linha</Label>
           <div className="flex gap-x-2 items-center">
             <ColorPicker value={strokeColor} onValueChange={setStrokeColor} />
-            <Badge variant="outline" className="whitespace-nowrap font-normal rounded-md">
+            <Badge variant="outline" className="whitespace-nowrap font-normal rounded-sm h-full">
               {strokeColor}
             </Badge>
-            <Button variant="outline" size="icon" onClick={() => setStrokeColor(null)}>
-              <Undo2 className="size-3" />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" size="icon" onClick={() => setStrokeColor(null)}>
+                  <Undo2 />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Redefinir</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </div>
 
-        <div className="flex gap-x-2 border rounded-md p-2">
+        <div className="flex gap-x-2 border rounded-sm p-2">
           <Checkbox
             id="fill-after-each-path"
             checked={fillAfterEachPath}

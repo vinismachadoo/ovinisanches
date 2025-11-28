@@ -1,3 +1,4 @@
+import { MainCommandMenuContent } from '@/app/main-command-menu';
 import { DoubleSidebarInset, DoubleSidebarProvider } from '@/components/ui/double-sidebar';
 import type { Metadata } from 'next';
 
@@ -14,7 +15,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className="[--header-height:3rem]"
     >
       {/* <AppSidebar /> */}
-      <DoubleSidebarInset className="h-[calc(100vh)] min-w-0">{children}</DoubleSidebarInset>
+      <DoubleSidebarInset className="h-[calc(100vh)] min-w-0">
+        {children}
+        <MainCommandMenuContent />
+      </DoubleSidebarInset>
     </DoubleSidebarProvider>
   );
 }

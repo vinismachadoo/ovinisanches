@@ -482,13 +482,13 @@ const OrderMapTracking = ({
       ))}
 
       <Button
-        className="leaflet-top leaflet-left pointer-events-auto absolute left-2! top-2! rounded-full p-2"
+        className="leaflet-top leaflet-left pointer-events-auto! absolute left-2! top-2! rounded-full"
         onClick={() => (allEventsVisible ? handleToggleAllEvents(false) : handleToggleAllEvents(true))}
       >
-        {allEventsVisible ? <EyeOffIcon className="size-4" size="icon" /> : <EyeIcon className="size-4" size="icon" />}
+        {allEventsVisible ? <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
       </Button>
 
-      <div className="leaflet-bottom leaflet-left pointer-events-auto absolute bottom-2! left-2! flex flex-col gap-y-2">
+      <div className="leaflet-bottom leaflet-left absolute bottom-2! left-2! flex flex-col gap-y-2">
         {polyline ? <Badge className="bg-foreground text-background w-fit">Rota sugerida</Badge> : null}
         {successfulEventDistance ? (
           <Badge className="w-fit bg-green-800 text-white">

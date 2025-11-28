@@ -1,21 +1,21 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
+  CommandDialog,
+  CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandDialog,
   CommandItem,
+  CommandList,
+  CommandSeparator,
 } from '@/components/ui/command';
 import { useIsMac } from '@/hooks/use-is-mac';
 import { useMutationObserver } from '@/hooks/use-mutation-observer';
 import { cn } from '@/lib/utils';
 import { LucideProps } from 'lucide-react';
 import * as React from 'react';
-import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 interface ActionOptions {
   label: string;
@@ -26,25 +26,36 @@ interface ActionOptions {
 }
 
 interface CommandMenuProps {
-  actions: ActionOptions[];
+  sections: {
+    title: string;
+    actions: ActionOptions[];
+  }[];
   placeholder: string;
   notFoundLabel: string;
 }
 
-const CommandMenu = ({ actions, placeholder, notFoundLabel }: CommandMenuProps) => {
+// CommandMenuContext implementation
+interface CommandMenuContextType {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isMac: boolean;
+}
+
+const CommandMenuContext = React.createContext<CommandMenuContextType | undefined>(undefined);
+
+export const useCommandMenu = () => {
+  const context = React.useContext(CommandMenuContext);
+  if (!context) {
+    throw new Error('useCommandMenu must be used within a CommandMenuProvider');
+  }
+  return context;
+};
+
+const CommandMenuProvider = ({ children }: { children: React.ReactNode }) => {
+  const [open, setOpen] = React.useState(false);
   const isMac = useIsMac();
 
-  const [open, setOpen] = React.useState(false);
-
-  const { disableScope, enableScope } = useHotkeysContext();
-
-  React.useEffect(() => {
-    if (open) {
-      enableScope('command-menu');
-    } else {
-      disableScope('command-menu');
-    }
-  }, [open, disableScope, enableScope]);
+  const value = React.useMemo(() => ({ open, setOpen, isMac }), [open, isMac]);
 
   useHotkeys(['ctrl+k', 'meta+k'], () => setOpen((open) => !open), {
     preventDefault: true,
@@ -52,42 +63,53 @@ const CommandMenu = ({ actions, placeholder, notFoundLabel }: CommandMenuProps) 
     enableOnContentEditable: true,
   });
 
-  const runCommand = React.useCallback((command: () => unknown) => {
-    setOpen(false);
-    command();
-  }, []);
+  return <CommandMenuContext.Provider value={value}>{children}</CommandMenuContext.Provider>;
+};
+
+const CommandMenuTrigger = ({ children }: { children: React.ReactNode }) => {
+  const { setOpen } = useCommandMenu();
 
   return (
-    <React.Fragment>
-      <Button variant="outline" onClick={() => setOpen(true)}>
-        {placeholder}
-        <div className="flex items-center gap-x-1">
-          <CommandMenuKbd className="aspect-square text-xs">{isMac ? '⌘' : 'Ctrl'}</CommandMenuKbd>
-          <CommandMenuKbd className="aspect-square">K</CommandMenuKbd>
-        </div>
-      </Button>
+    <Button variant="outline" onClick={() => setOpen(true)}>
+      {children}
+    </Button>
+  );
+};
 
-      <CommandDialog open={open} onOpenChange={setOpen} className="max-w-[50%]">
-        <CommandInput placeholder={placeholder} />
-        <CommandList>
-          <CommandEmpty>{notFoundLabel}</CommandEmpty>
-          <CommandGroup>
-            {actions.map((option) => (
+const CommandMenuContent = ({ placeholder, notFoundLabel, sections }: CommandMenuProps) => {
+  const { open, setOpen } = useCommandMenu();
+
+  const runCommand = React.useCallback(
+    (command: () => unknown) => {
+      setOpen(false);
+      command();
+    },
+    [setOpen]
+  );
+
+  return (
+    <CommandDialog open={open} onOpenChange={setOpen} className="max-w-[50%]">
+      <CommandInput placeholder={placeholder} />
+      <CommandList>
+        <CommandEmpty>{notFoundLabel}</CommandEmpty>
+        {sections.map((section) => (
+          <CommandGroup key={section.title} heading={section.title}>
+            {section.actions.map((action) => (
               <CommandMenuItem
-                key={option.label}
-                value={option.label}
-                onSelect={() => runCommand(() => option.action())}
-                disabled={option.disabled || option.soon}
+                key={action.label}
+                value={action.label}
+                onSelect={() => runCommand(() => action.action())}
+                disabled={action.disabled || action.soon}
               >
-                <option.icon className="h-4 w-4" />
-                <span>{option.label}</span>
-                {option.soon && <span className="text-muted-foreground text-xs">Em breve</span>}
+                <action.icon className="h-4 w-4" />
+                <span>{action.label}</span>
+                {action.soon && <span className="text-muted-foreground text-xs">Em breve</span>}
               </CommandMenuItem>
             ))}
           </CommandGroup>
-        </CommandList>
-      </CommandDialog>
-    </React.Fragment>
+        ))}
+      </CommandList>
+    </CommandDialog>
   );
 };
 
@@ -119,7 +141,7 @@ function CommandMenuItem({
     <CommandItem
       ref={ref}
       className={cn(
-        'data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent px-3! font-medium',
+        'data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-sm border border-transparent px-3! font-medium',
         className
       )}
       {...props}
@@ -141,4 +163,4 @@ function CommandMenuKbd({ className, ...props }: React.ComponentProps<'kbd'>) {
   );
 }
 
-export default CommandMenu;
+export { CommandMenuContent, CommandMenuProvider, CommandMenuTrigger, CommandMenuKbd, CommandMenuItem };

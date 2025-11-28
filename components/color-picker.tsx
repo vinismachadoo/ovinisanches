@@ -34,13 +34,13 @@ const ColorPicker = ({
         <Button
           size="icon"
           variant="ghost"
-          className={cn('w-7 h-7 ring ring-(--selected-color)', className)}
+          className={cn('w-7 h-7', className)}
           style={{ '--selected-color': value || defaultValue } as React.CSSProperties}
         >
           <Circle className="w-5 h-5 border rounded-full text-(--selected-color) fill-(--selected-color)" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="center" className={cn('p-2 rounded-md w-fit max-w-xs border-0', popoverContentClassName)}>
+      <PopoverContent align="center" className={cn('p-2 rounded-sm w-fit max-w-xs border-0', popoverContentClassName)}>
         <div
           className="flex flex-col gap-y-2"
           style={

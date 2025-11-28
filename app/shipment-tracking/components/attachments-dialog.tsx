@@ -32,7 +32,7 @@ const OrderAttachmentsDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[60%]">
+      <DialogContent className="max-w-[80%]">
         <DialogHeader>
           <DialogTitle>Comprovantes</DialogTitle>
         </DialogHeader>
@@ -47,13 +47,13 @@ const OrderAttachmentsDialog = ({
             <CarouselContent>
               {attachmentsWithStatus.map((attachment, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <Card className="h-full">
+                  <Card className="h-full p-0">
                     <CardContent className="flex h-full flex-col items-center justify-between gap-y-2 p-2">
                       <a href={attachment.url} target="_blank" rel="noopener noreferrer" className="block">
                         <img
                           src={attachment.url}
                           alt={`Attachment for ${attachment.status}`}
-                          className="h-auto w-full rounded-lg border transition-opacity hover:opacity-80"
+                          className="h-auto w-full rounded-sm border transition-opacity hover:opacity-80"
                         />
                       </a>
                       <div className="flex w-full flex-col gap-y-2">
