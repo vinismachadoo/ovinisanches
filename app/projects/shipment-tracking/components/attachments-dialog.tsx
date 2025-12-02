@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import * as React from 'react';
 import { OrderStatus, OrderStatusBadge } from '@/components/order-status-badge';
 import { formatTime } from '@/lib/times';
-import { Order } from '@/app/shipment-tracking/data/order';
+import { Order } from '@/app/projects/shipment-tracking/data/order';
 import { Dialog, DialogTitle, DialogHeader, DialogContent } from '@/components/ui/dialog';
 
 const OrderAttachmentsDialog = ({

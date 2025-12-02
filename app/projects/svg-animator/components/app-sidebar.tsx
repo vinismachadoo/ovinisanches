@@ -5,12 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ColorPicker } from '@/components/color-picker';
 import { Label } from '@/components/ui/label';
-import { NumberInput } from '@/components/number-input';
+import { NumberInput } from '@/components/ui/number-input';
 import { Slider } from '@/components/ui/slider';
 
 import { Undo2 } from 'lucide-react';
 import * as React from 'react';
-import { useSvgSearchParams } from '@/app/svg-animator/hooks/use-svg-search-params';
+import { useSvgSearchParams } from '@/app/projects/svg-animator/hooks/use-svg-search-params';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 

@@ -1,12 +1,12 @@
 'use client';
 
-import { useSvgSearchParams } from '@/app/svg-animator/hooks/use-svg-search-params';
+import { useSvgSearchParams } from '@/app/projects/svg-animator/hooks/use-svg-search-params';
 import {
   parseGradients,
   parseGroupsFromDefs,
   parseStylesFromDefs,
   resolveReferences,
-} from '@/app/svg-animator/utils/utils';
+} from '@/app/projects/svg-animator/utils/utils';
 import React from 'react';
 
 interface AnimatedSvgProps extends React.ComponentPropsWithoutRef<'div'> {

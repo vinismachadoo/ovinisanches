@@ -80,7 +80,7 @@ import { POLYLINE } from '../data/polyline';
 import { getStraightDistanceBetweenTwoPoints } from '@/lib/distances';
 import { DoubleSidebarInset, DoubleSidebarTrigger } from '@/components/ui/double-sidebar';
 import { smartTrim } from '@/lib/strings';
-import OrderAttachmentsDialog from '@/app/shipment-tracking/components/attachments-dialog';
+import OrderAttachmentsDialog from '@/app/projects/shipment-tracking/components/attachments-dialog';
 
 const ViewOrderPage = () => {
   const order = ORDER;

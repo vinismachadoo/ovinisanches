@@ -1,4 +1,4 @@
-import { ViewOrderPage } from '@/app/shipment-tracking/components/tracking';
+import { ViewOrderPage } from '@/app/projects/shipment-tracking/components/tracking';
 import * as React from 'react';
 
 export default async function Page() {

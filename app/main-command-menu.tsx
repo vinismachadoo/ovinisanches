@@ -2,7 +2,7 @@
 
 import { CommandMenuContent, CommandMenuKbd, CommandMenuProvider, CommandMenuTrigger } from '@/components/command-menu';
 import { useIsMac } from '@/hooks/use-is-mac';
-import { Image, Laptop, Moon, Sun, Truck } from 'lucide-react';
+import { Box, Image, Laptop, Moon, Sun, Truck } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 
@@ -25,14 +25,21 @@ const MainCommandMenuContent = () => {
             label: 'SVG Animator',
             icon: Image,
             action: () => {
-              router.push('/svg-animator');
+              router.push('/projects/svg-animator');
             },
           },
           {
             label: 'Shipment Tracking',
             icon: Truck,
             action: () => {
-              router.push('/shipment-tracking');
+              router.push('/projects/shipment-tracking');
+            },
+          },
+          {
+            label: 'EverythingBox',
+            icon: Box,
+            action: () => {
+              router.push('/projects/everythingbox');
             },
           },
         ],
@@ -80,10 +87,10 @@ const MainCommandMenuTrigger = () => {
 
   return (
     <CommandMenuTrigger>
-      <div className="flex items-center gap-x-1">
-        Buscar projeto
-        <CommandMenuKbd className="aspect-square text-xs">{isMac ? '⌘' : 'Ctrl'}</CommandMenuKbd>
-        <CommandMenuKbd className="aspect-square">K</CommandMenuKbd>
+      Buscar projeto
+      <div className="flex items-center gap-x-1 font-mono">
+        <CommandMenuKbd className="text-xs h-full">{isMac ? '⌘' : 'Ctrl'}</CommandMenuKbd>
+        <CommandMenuKbd className="text-xs h-full">K</CommandMenuKbd>
       </div>
     </CommandMenuTrigger>
   );

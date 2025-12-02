@@ -1,9 +1,9 @@
 'use client';
 
-import { AnimatedSvg } from '@/app/svg-animator/components/animated-svg';
+import { AnimatedSvg } from '@/app/projects/svg-animator/components/animated-svg';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useSvgSearchParams } from '@/app/svg-animator/hooks/use-svg-search-params';
+import { useSvgSearchParams } from '@/app/projects/svg-animator/hooks/use-svg-search-params';
 import { Paperclip, Play } from 'lucide-react';
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';

@@ -1,5 +1,5 @@
-import AppSidebar from '@/app/svg-animator/components/app-sidebar';
-import SvgBoard from '@/app/svg-animator/components/svg-board';
+import AppSidebar from '@/app/projects/svg-animator/components/app-sidebar';
+import SvgBoard from '@/app/projects/svg-animator/components/svg-board';
 import * as React from 'react';
 
 export default async function Page() {
