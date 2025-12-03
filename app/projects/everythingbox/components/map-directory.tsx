@@ -2,10 +2,13 @@
 
 import { COFFEE_PLACES } from '@/app/projects/everythingbox/components/places';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ButtonGroup } from '@/components/ui/button-group';
 import { DoubleSidebarInset, DoubleSidebarTrigger } from '@/components/ui/double-sidebar';
 import { Map as MapComponent, MapMarker, MapTileLayer } from '@/components/ui/map';
 import { cn } from '@/lib/utils';
 import 'leaflet/dist/leaflet.css';
+import { XIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 const MapDirectory = () => {
@@ -18,11 +21,21 @@ const MapDirectory = () => {
         <div className="flex h-(--header-height) w-full items-center justify-between border-b p-2">
           <div className="flex items-center gap-x-2">
             <DoubleSidebarTrigger />
+            <span className="text-sm font-medium">Cafeterias</span>
           </div>
         </div>
 
         <div className="flex flex-1">
           <DoubleSidebarInset className={cn('h-[calc(100vh-var(--header-height))] min-w-0')}>
+            <div className="h-12 flex items-center px-2 gap-x-2">
+              Filtros:
+              <FilterItem category="Bairro" operator="=" value="Flamengo" />
+              <FilterItem category="Wifi" operator="=" value="Sim" />
+              <FilterItem category="Pet Friendly" operator="=" value="Sim" />
+              <Button size="sm" variant="outline">
+                Limpar
+              </Button>
+            </div>
             <MapComponent
               center={[-22.9255953, -43.2328815]}
               zoom={15}
@@ -64,4 +77,24 @@ const MapDirectory = () => {
     </div>
   );
 };
+
+const FilterItem = ({ category, operator, value }: { category: string; operator: string; value: string }) => {
+  return (
+    <ButtonGroup>
+      <Button size="sm" variant="outline">
+        {category}
+      </Button>
+      <Button size="sm" variant="outline">
+        {operator}
+      </Button>
+      <Button size="sm" variant="outline">
+        {value}
+      </Button>
+      <Button size="sm" variant="outline">
+        <XIcon />
+      </Button>
+    </ButtonGroup>
+  );
+};
+
 export { MapDirectory };
