@@ -9,13 +9,14 @@ interface NumberInputProps extends NumberFieldProps {
   placeholder?: number;
 }
 
-const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(({ ...props }, ref) => {
+const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(({ className, ...props }, ref) => {
   return (
     <NumberField {...props} ref={ref}>
       <Group
         className={cn(
           'relative inline-flex h-8 w-full items-center overflow-hidden whitespace-nowrap rounded-sm border border-input text-xs',
-          'hover:border-ring/30 disabled:hover:border-border'
+          'hover:border-ring/30 disabled:hover:border-border',
+          className
         )}
       >
         <Button
