@@ -106,7 +106,7 @@ export function GroupCard({ groupName, teams, matches, onMatchesChange, onStandi
                       qualified ? 'bg-green-500/10' : thirdPlace ? 'bg-yellow-500/10' : ''
                     }`}
                   >
-                    <td className="py-2 px-3">
+                    <td className="py-2 px-3 flex items-center justify-center">
                       <span
                         className={cn(
                           'w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold',
