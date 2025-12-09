@@ -2,7 +2,7 @@
 
 import { CommandMenuContent, CommandMenuKbd, CommandMenuProvider, CommandMenuTrigger } from '@/components/command-menu';
 import { useIsMac } from '@/hooks/use-is-mac';
-import { Box, Image, Laptop, Moon, Sun, Truck } from 'lucide-react';
+import { Box, Image, Laptop, Moon, Sun, Truck, Volleyball } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 
@@ -40,6 +40,13 @@ const MainCommandMenuContent = () => {
             icon: Box,
             action: () => {
               router.push('/projects/everythingbox');
+            },
+          },
+          {
+            label: "World Cup '26",
+            icon: Volleyball,
+            action: () => {
+              router.push('/projects/world-cup-26');
             },
           },
         ],
