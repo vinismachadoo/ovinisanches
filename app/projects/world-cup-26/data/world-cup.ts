@@ -12,6 +12,7 @@ export interface GroupMatch {
   awayTeam: string;
   homeScore: number | null;
   awayScore: number | null;
+  confirmed: boolean;
 }
 
 export interface GroupStanding {
@@ -39,76 +40,76 @@ export interface KnockoutMatch {
 // World Cup 2026 will have 48 teams in 12 groups
 export const worldCup2026Teams: Record<string, Team[]> = {
   A: [
-    { name: 'Mexico', code: 'MEX', countryCode: 'MX' },
-    { name: 'South Africa', code: 'RSA', countryCode: 'ZA' },
-    { name: 'Korea Republic', code: 'KOR', countryCode: 'KR' },
+    { name: 'Mexico', code: 'MEX', countryCode: 'mx' },
+    { name: 'South Africa', code: 'RSA', countryCode: 'za' },
+    { name: 'Korea Republic', code: 'KOR', countryCode: 'kr' },
     { name: 'FIFA WINNER PLAY-OFF D', code: 'PO-D', countryCode: null, isPlayoff: true, playoffLabel: 'PLAY-OFF D' },
   ],
   B: [
-    { name: 'Canada', code: 'CAN', countryCode: 'CA' },
+    { name: 'Canada', code: 'CAN', countryCode: 'ca' },
     { name: 'FIFA WINNER PLAY-OFF A', code: 'PO-A', countryCode: null, isPlayoff: true, playoffLabel: 'PLAY-OFF A' },
-    { name: 'Qatar', code: 'QAT', countryCode: 'QA' },
-    { name: 'Switzerland', code: 'SUI', countryCode: 'CH' },
+    { name: 'Qatar', code: 'QAT', countryCode: 'qa' },
+    { name: 'Switzerland', code: 'SUI', countryCode: 'ch' },
   ],
   C: [
-    { name: 'Brazil', code: 'BRA', countryCode: 'BR' },
-    { name: 'Morocco', code: 'MAR', countryCode: 'MA' },
-    { name: 'Haiti', code: 'HAI', countryCode: 'HT' },
-    { name: 'Scotland', code: 'SCO', countryCode: 'GB' },
+    { name: 'Brazil', code: 'BRA', countryCode: 'br' },
+    { name: 'Morocco', code: 'MAR', countryCode: 'ma' },
+    { name: 'Haiti', code: 'HAI', countryCode: 'ht' },
+    { name: 'Scotland', code: 'SCO', countryCode: 'gb-sct' },
   ],
   D: [
-    { name: 'USA', code: 'USA', countryCode: 'US' },
-    { name: 'Paraguay', code: 'PAR', countryCode: 'PY' },
-    { name: 'Australia', code: 'AUS', countryCode: 'AU' },
+    { name: 'USA', code: 'USA', countryCode: 'us' },
+    { name: 'Paraguay', code: 'PAR', countryCode: 'py' },
+    { name: 'Australia', code: 'AUS', countryCode: 'au' },
     { name: 'FIFA WINNER PLAY-OFF C', code: 'PO-C', countryCode: null, isPlayoff: true, playoffLabel: 'PLAY-OFF C' },
   ],
   E: [
-    { name: 'Germany', code: 'GER', countryCode: 'DE' },
-    { name: 'Curaçao', code: 'CUW', countryCode: 'CW' },
-    { name: "Côte d'Ivoire", code: 'CIV', countryCode: 'CI' },
-    { name: 'Ecuador', code: 'ECU', countryCode: 'EC' },
+    { name: 'Germany', code: 'GER', countryCode: 'de' },
+    { name: 'Curaçao', code: 'CUW', countryCode: 'cw' },
+    { name: "Côte d'Ivoire", code: 'CIV', countryCode: 'ci' },
+    { name: 'Ecuador', code: 'ECU', countryCode: 'ec' },
   ],
   F: [
-    { name: 'Netherlands', code: 'NED', countryCode: 'NL' },
-    { name: 'Japan', code: 'JPN', countryCode: 'JP' },
+    { name: 'Netherlands', code: 'NED', countryCode: 'nl' },
+    { name: 'Japan', code: 'JPN', countryCode: 'jp' },
     { name: 'FIFA WINNER PLAY-OFF B', code: 'PO-B', countryCode: null, isPlayoff: true, playoffLabel: 'PLAY-OFF B' },
-    { name: 'Tunisia', code: 'TUN', countryCode: 'TN' },
+    { name: 'Tunisia', code: 'TUN', countryCode: 'tn' },
   ],
   G: [
-    { name: 'Belgium', code: 'BEL', countryCode: 'BE' },
-    { name: 'Egypt', code: 'EGY', countryCode: 'EG' },
-    { name: 'IR Iran', code: 'IRN', countryCode: 'IR' },
-    { name: 'New Zealand', code: 'NZL', countryCode: 'NZ' },
+    { name: 'Belgium', code: 'BEL', countryCode: 'be' },
+    { name: 'Egypt', code: 'EGY', countryCode: 'eg' },
+    { name: 'IR Iran', code: 'IRN', countryCode: 'ir' },
+    { name: 'New Zealand', code: 'NZL', countryCode: 'nz' },
   ],
   H: [
-    { name: 'Spain', code: 'ESP', countryCode: 'ES' },
-    { name: 'Cabo Verde', code: 'CPV', countryCode: 'CV' },
-    { name: 'Saudi Arabia', code: 'KSA', countryCode: 'SA' },
-    { name: 'Uruguay', code: 'URU', countryCode: 'UY' },
+    { name: 'Spain', code: 'ESP', countryCode: 'es' },
+    { name: 'Cabo Verde', code: 'CPV', countryCode: 'cv' },
+    { name: 'Saudi Arabia', code: 'KSA', countryCode: 'sa' },
+    { name: 'Uruguay', code: 'URU', countryCode: 'uy' },
   ],
   I: [
-    { name: 'France', code: 'FRA', countryCode: 'FR' },
-    { name: 'Senegal', code: 'SEN', countryCode: 'SN' },
+    { name: 'France', code: 'FRA', countryCode: 'fr' },
+    { name: 'Senegal', code: 'SEN', countryCode: 'sn' },
     { name: 'FIFA WINNER PLAY-OFF 2', code: 'PO-2', countryCode: null, isPlayoff: true, playoffLabel: 'PLAY-OFF 2' },
-    { name: 'Norway', code: 'NOR', countryCode: 'NO' },
+    { name: 'Norway', code: 'NOR', countryCode: 'no' },
   ],
   J: [
-    { name: 'Argentina', code: 'ARG', countryCode: 'AR' },
-    { name: 'Algeria', code: 'ALG', countryCode: 'DZ' },
-    { name: 'Austria', code: 'AUT', countryCode: 'AT' },
-    { name: 'Jordan', code: 'JOR', countryCode: 'JO' },
+    { name: 'Argentina', code: 'ARG', countryCode: 'ar' },
+    { name: 'Algeria', code: 'ALG', countryCode: 'dz' },
+    { name: 'Austria', code: 'AUT', countryCode: 'at' },
+    { name: 'Jordan', code: 'JOR', countryCode: 'jo' },
   ],
   K: [
-    { name: 'Portugal', code: 'POR', countryCode: 'PT' },
+    { name: 'Portugal', code: 'POR', countryCode: 'pt' },
     { name: 'FIFA WINNER PLAY-OFF 1', code: 'PO-1', countryCode: null, isPlayoff: true, playoffLabel: 'PLAY-OFF 1' },
-    { name: 'Uzbekistan', code: 'UZB', countryCode: 'UZ' },
-    { name: 'Colombia', code: 'COL', countryCode: 'CO' },
+    { name: 'Uzbekistan', code: 'UZB', countryCode: 'uz' },
+    { name: 'Colombia', code: 'COL', countryCode: 'co' },
   ],
   L: [
-    { name: 'England', code: 'ENG', countryCode: 'GB' },
-    { name: 'Croatia', code: 'CRO', countryCode: 'HR' },
-    { name: 'Ghana', code: 'GHA', countryCode: 'GH' },
-    { name: 'Panama', code: 'PAN', countryCode: 'PA' },
+    { name: 'England', code: 'ENG', countryCode: 'gb-eng' },
+    { name: 'Croatia', code: 'CRO', countryCode: 'hr' },
+    { name: 'Ghana', code: 'GHA', countryCode: 'gh' },
+    { name: 'Panama', code: 'PAN', countryCode: 'pa' },
   ],
 };
 
@@ -120,8 +121,9 @@ export function generateGroupMatches(teams: Team[]): GroupMatch[] {
         id: `${teams[i].code}-${teams[j].code}`,
         homeTeam: teams[i].code,
         awayTeam: teams[j].code,
-        homeScore: null,
-        awayScore: null,
+        homeScore: 0,
+        awayScore: 0,
+        confirmed: false,
       });
     }
   }
@@ -146,7 +148,7 @@ export function calculateStandings(teams: Team[], matches: GroupMatch[]): GroupS
   });
 
   matches.forEach((match) => {
-    if (match.homeScore !== null && match.awayScore !== null) {
+    if (match.confirmed && match.homeScore !== null && match.awayScore !== null) {
       const home = standings[match.homeTeam];
       const away = standings[match.awayTeam];
 

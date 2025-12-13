@@ -2,41 +2,28 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { NumberInput } from '@/components/ui/number-input';
 import { cn } from '@/lib/utils';
 import { parseAsString, useQueryState } from 'nuqs';
-import { useEffect, useState } from 'react';
-import ReactCountryFlag from 'react-country-flag';
-import { type GroupMatch, type GroupStanding, type Team, calculateStandings, getTeamByCode } from '../data/world-cup';
-
+import { CircleFlag } from 'react-circle-flags';
+import { type GroupMatch, type Team, calculateStandings, getTeamByCode } from '../data/world-cup';
 interface GroupCardProps {
   groupName: string;
   teams: Team[];
   matches: GroupMatch[];
-  onMatchesChange: (matches: GroupMatch[]) => void;
-  onStandingsChange: (groupName: string, standings: GroupStanding[]) => void;
 }
 
-export function GroupCard({ groupName, teams, matches, onMatchesChange, onStandingsChange }: GroupCardProps) {
-  const [standings, setStandings] = useState<GroupStanding[]>([]);
+export function GroupCard({ groupName, teams, matches }: GroupCardProps) {
   const [showMatchesGroup, setShowMatchesGroup] = useQueryState('showMatches', parseAsString);
   const showMatches = showMatchesGroup === groupName;
 
-  useEffect(() => {
-    const newStandings = calculateStandings(teams, matches);
-    setStandings(newStandings);
-    onStandingsChange(groupName, newStandings);
-  }, [matches, teams, groupName, onStandingsChange]);
-
-  const updateScore = (matchId: string, isHome: boolean, value: number) => {
-    const score = value === 0 ? null : value;
-    const updatedMatches = matches.map((m) =>
-      m.id === matchId ? { ...m, [isHome ? 'homeScore' : 'awayScore']: score } : m
-    );
-    onMatchesChange(updatedMatches);
-  };
+  const standings = calculateStandings(teams, matches);
 
   const getTeam = (code: string) => getTeamByCode(code);
+
+  // Calculate match count (only confirmed matches)
+  const confirmedMatches = matches.filter((m) => m.confirmed).length;
+  const totalMatches = matches.length;
+  const matchCountText = `${confirmedMatches}/${totalMatches}`;
 
   const TeamFlag = ({ team }: { team: Team | undefined }) => {
     if (!team) return null;
@@ -44,17 +31,7 @@ export function GroupCard({ groupName, teams, matches, onMatchesChange, onStandi
       return <span className="flex items-center justify-center w-6 h-4 bg-muted rounded text-xs font-bold">?</span>;
     }
     if (team.countryCode) {
-      return (
-        <ReactCountryFlag
-          countryCode={team.countryCode}
-          svg
-          style={{
-            width: '1.5em',
-            height: '1.5em',
-          }}
-          title={team.name}
-        />
-      );
+      return <CircleFlag countryCode={team.countryCode} className="size-5" />;
     }
     return null;
   };
@@ -75,7 +52,7 @@ export function GroupCard({ groupName, teams, matches, onMatchesChange, onStandi
             className="text-xs"
             variant={showMatches ? 'default' : 'outline'}
           >
-            PARTIDAS
+            PARTIDAS {matchCountText}
           </Button>
         </div>
       </CardHeader>
