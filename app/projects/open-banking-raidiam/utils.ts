@@ -145,7 +145,7 @@ export function checkPaymentsPixResource(authServer: AuthorisationServer): boole
 
   const paymentsPixEndpoints = (paymentsPixResource.ApiDiscoveryEndpoints || []).map((e) => extractPath(e.ApiEndpoint));
 
-  const requiredPaymentsPixEndpoints = ['/payments'];
+  const requiredPaymentsPixEndpoints = ['/pix/payments'];
 
   for (const required of requiredPaymentsPixEndpoints) {
     const found = paymentsPixEndpoints.some((endpoint: string) => matchesPath(endpoint, required));

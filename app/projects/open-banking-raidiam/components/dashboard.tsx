@@ -173,6 +173,11 @@ const MetricsSection = ({ data }: MetricsSectionProps) => {
     (server: AuthorisationServer | undefined) =>
       server && supportsContactlessPix(server, DEFAULT_REQUIREMENTS_TO_VALIDATE).hasAllRequirements
   );
+  const participantsWithSupportToContactlessPix = [
+    ...new Set(
+      serversWithSupportToContactlessPix.map((server: AuthorisationServer | undefined) => server?.OrganisationId)
+    ),
+  ];
 
   const serversWithSupportToPaymentsPix = listOfServers.filter(
     (server: AuthorisationServer | undefined) => server && checkPaymentsPixResource(server)
@@ -239,12 +244,20 @@ const MetricsSection = ({ data }: MetricsSectionProps) => {
           <p className="text-lg font-bold">{serversWithSupportToContactlessPix.length}</p>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-wrap gap-2">
-            {['enrollments', 'payments-consents', 'payments-pix'].map((requirement) => (
-              <Badge key={requirement}>{requirement}</Badge>
-            ))}
-          </div>
+        <Badge>from {participantsWithSupportToContactlessPix.length} participants</Badge>
+      </div>
+
+      <div className="flex flex-col gap-2 border rounded-sm p-4 h-fit max-w-160 w-fit border-l-3 border-l-orange-400">
+        <div className="flex gap-2 items-center">
+          <p className="text-muted-foreground">Required ApiFamilyType </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {['enrollments', 'payments-consents', 'payments-pix'].map((requirement) => (
+            <Badge key={requirement} variant="outline">
+              {requirement}
+            </Badge>
+          ))}
         </div>
       </div>
     </div>
