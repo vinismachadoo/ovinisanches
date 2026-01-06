@@ -2,7 +2,7 @@
 
 import { CommandMenuContent, CommandMenuKbd, CommandMenuProvider, CommandMenuTrigger } from '@/components/command-menu';
 import { useIsMac } from '@/hooks/use-is-mac';
-import { Banknote, Box, Image, Laptop, Moon, Shield, Sun, Truck, Volleyball } from 'lucide-react';
+import { Banknote, Box, Image, Laptop, Moon, Puzzle, Shield, Sun, Truck, Volleyball } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 
@@ -61,6 +61,13 @@ const MainCommandMenuContent = () => {
             icon: Banknote,
             action: () => {
               router.push('/projects/open-banking-raidiam');
+            },
+          },
+          {
+            label: 'Daily Sudoku',
+            icon: Puzzle,
+            action: () => {
+              router.push('/projects/daily-sudoku');
             },
           },
         ],
