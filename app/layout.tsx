@@ -8,6 +8,7 @@ import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { MainCommandMenuContent, MainCommandMenuProvider } from '@/app/main-command-menu';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -68,6 +69,7 @@ export default function RootLayout({
               <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
               <StyleSwitcher />
               <TailwindIndicator />
+              <Toaster />
 
               {/* open cmd+k in all pages */}
               <MainCommandMenuContent />
