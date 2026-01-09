@@ -1,24 +1,23 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle, CardAction } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Badge } from '@/components/ui/badge';
-import { MoreVertical, Plus, Receipt, Pencil, Trash2, DollarSign } from 'lucide-react';
+import { type Expense } from '@/lib/supabase';
+import { format } from 'date-fns';
+import { DollarSign, MoreVertical, Pencil, Plus, Receipt, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { useExpenseDetails } from '../hooks/use-expense-details';
+import { useDeleteExpense, useExpenses } from '../hooks/use-expenses';
+import { useMembers } from '../hooks/use-members';
 import { CreateExpenseDialog } from './create-expense-dialog';
 import { EditExpenseDialog } from './edit-expense-dialog';
-import { useState } from 'react';
-import { format } from 'date-fns';
-import { useExpenses } from '../hooks/use-expenses';
-import { useMembers } from '../hooks/use-members';
-import { useExpenseDetails, type ExpenseWithDetails } from '../hooks/use-expense-details';
-import { useDeleteExpense } from '../hooks/use-expenses';
-import { type Expense } from '@/lib/supabase';
 
 interface ExpensesListProps {
   groupId: string | null;
@@ -159,7 +158,11 @@ export function ExpensesList({ groupId }: ExpensesListProps) {
                 <div>
                   <span className="text-muted-foreground">Split with: </span>
                   <span className="font-medium">
-                    {expense.shares.map((s) => `${s.member.name} (${formatCurrency(parseFloat(s.amount.toString()), expense.currency)})`).join(', ')}
+                    {expense.shares
+                      .map(
+                        (s) => `${s.member.name} (${formatCurrency(parseFloat(s.amount.toString()), expense.currency)})`
+                      )
+                      .join(', ')}
                   </span>
                 </div>
               </div>
@@ -190,4 +193,3 @@ export function ExpensesList({ groupId }: ExpensesListProps) {
     </Card>
   );
 }
-

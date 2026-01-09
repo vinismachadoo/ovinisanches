@@ -1,5 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase, type Member } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 export function useMembers(groupId: string | null) {
@@ -53,7 +53,16 @@ export function useUpdateMember() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ id, group_id, ...updates }: { id: string; group_id: string; name: string; email?: string }) => {
+    mutationFn: async ({
+      id,
+      group_id,
+      ...updates
+    }: {
+      id: string;
+      group_id: string;
+      name: string;
+      email?: string;
+    }) => {
       const { data, error } = await supabase
         .from('members')
         .update({

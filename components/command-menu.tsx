@@ -8,7 +8,6 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from '@/components/ui/command';
 import { useIsMac } from '@/hooks/use-is-mac';
 import { useMutationObserver } from '@/hooks/use-mutation-observer';
@@ -163,4 +162,4 @@ function CommandMenuKbd({ className, ...props }: React.ComponentProps<'kbd'>) {
   );
 }
 
-export { CommandMenuContent, CommandMenuProvider, CommandMenuTrigger, CommandMenuKbd, CommandMenuItem };
+export { CommandMenuContent, CommandMenuItem, CommandMenuKbd, CommandMenuProvider, CommandMenuTrigger };

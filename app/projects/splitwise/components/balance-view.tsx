@@ -1,15 +1,15 @@
 'use client';
 
-import { useMemo } from 'react';
-import { type Member, type ExpensePayer, type ExpenseShare } from '@/lib/supabase';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { ArrowDown, ArrowUp, TrendingUp } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useMembers } from '../hooks/use-members';
-import { useExpenses } from '../hooks/use-expenses';
+import { type Member } from '@/lib/supabase';
+import { ArrowDown, ArrowUp, TrendingUp } from 'lucide-react';
+import { useMemo } from 'react';
 import { useExpenseDetails } from '../hooks/use-expense-details';
+import { useExpenses } from '../hooks/use-expenses';
+import { useMembers } from '../hooks/use-members';
 
 interface BalanceViewProps {
   groupId: string | null;
@@ -184,15 +184,11 @@ export function BalanceView({ groupId }: BalanceViewProps) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <p className="text-sm text-muted-foreground mb-1">Total Paid</p>
-              <p className="text-2xl font-semibold text-green-600 dark:text-green-400">
-                {formatCurrency(totalPaid)}
-              </p>
+              <p className="text-2xl font-semibold text-green-600 dark:text-green-400">{formatCurrency(totalPaid)}</p>
             </div>
             <div>
               <p className="text-sm text-muted-foreground mb-1">Total Owed</p>
-              <p className="text-2xl font-semibold text-orange-600 dark:text-orange-400">
-                {formatCurrency(totalOwed)}
-              </p>
+              <p className="text-2xl font-semibold text-orange-600 dark:text-orange-400">{formatCurrency(totalOwed)}</p>
             </div>
           </div>
         </CardContent>
@@ -298,4 +294,3 @@ export function BalanceView({ groupId }: BalanceViewProps) {
     </div>
   );
 }
-

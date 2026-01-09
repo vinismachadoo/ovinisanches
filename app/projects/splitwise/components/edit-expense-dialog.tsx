@@ -1,10 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { supabase, type Expense, type Member, type ExpensePayer, type ExpenseShare } from '@/lib/supabase';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -13,26 +10,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
+import { supabase, type Expense, type Member } from '@/lib/supabase';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 import { useUpdateExpense } from '../hooks/use-expenses';
 
 const expenseSchema = z
@@ -150,6 +136,7 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
     if (open) {
       loadExpenseData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expense.id, open]);
 
   const loadExpenseData = async () => {
@@ -168,18 +155,19 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
 
       // Use paid_type from expense if available, otherwise determine from payers
       const totalAmount = parseFloat(expense.amount.toString());
-      let payerSplitType: 'even' | 'percentage' | 'amount' = (expense as any).paid_type || 'even';
-      let payerPercentages: Record<string, string> = {};
-      let payerAmounts: Record<string, string> = {};
+      let payerSplitType: 'even' | 'percentage' | 'amount' =
+        (expense as Expense & { paid_type: 'even' | 'percentage' | 'amount' }).paid_type || 'even';
+      const payerPercentages: Record<string, string> = {};
+      const payerAmounts: Record<string, string> = {};
 
       // If paid_type is not set, determine it from payer amounts
-      if (!(expense as any).paid_type && payers.length > 0) {
+      if (!(expense as Expense & { paid_type?: string }).paid_type && payers.length > 0) {
         const payerAmountsList = payers.map((p) => parseFloat(p.amount.toString()));
         const firstAmount = payerAmountsList[0];
         const allEqual = payerAmountsList.every((a) => Math.abs(a - firstAmount) < 0.01);
 
         if (allEqual) {
-          payerSplitType = 'even';
+          payerSplitType = 'even' as const;
         } else {
           // Check if amounts are proportional to percentages
           const percentages = payerAmountsList.map((a) => (a / totalAmount) * 100);
@@ -187,12 +175,12 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
           const sumPercentages = roundedPercentages.reduce((sum, p) => sum + p, 0);
 
           if (Math.abs(sumPercentages - 100) < 0.01) {
-            payerSplitType = 'percentage';
+            payerSplitType = 'percentage' as const;
             payers.forEach((p, idx) => {
               payerPercentages[p.member_id] = roundedPercentages[idx].toFixed(2);
             });
           } else {
-            payerSplitType = 'amount';
+            payerSplitType = 'amount' as const;
             payers.forEach((p) => {
               payerAmounts[p.member_id] = p.amount.toString();
             });
@@ -212,8 +200,8 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
         }
       }
 
-      let percentages: Record<string, string> = {};
-      let amounts: Record<string, string> = {};
+      const percentages: Record<string, string> = {};
+      const amounts: Record<string, string> = {};
 
       if (expense.split_type === 'percentage') {
         shares.forEach((share) => {
@@ -230,7 +218,7 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
         description: expense.description,
         amount: expense.amount.toString(),
         currency: expense.currency,
-        payer_split_type: (expense as any).paid_type || payerSplitType,
+        payer_split_type: payerSplitType,
         payerIds,
         payerPercentages,
         payerAmounts,
@@ -241,7 +229,6 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
       });
     } catch (error) {
       console.error('Error loading expense data:', error);
-      toast.error('Failed to load expense data');
     } finally {
       setLoadingData(false);
     }
@@ -485,7 +472,8 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
                         <FormDescription>
                           {payerSplitType === 'even' && 'Each payer paid an equal share'}
                           {payerSplitType === 'percentage' && 'Enter percentage for each payer (must total 100%)'}
-                          {payerSplitType === 'amount' && 'Enter exact amount each payer paid (must total expense amount)'}
+                          {payerSplitType === 'amount' &&
+                            'Enter exact amount each payer paid (must total expense amount)'}
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -757,7 +745,12 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
             )}
 
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={updateExpense.isPending}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => onOpenChange(false)}
+                disabled={updateExpense.isPending}
+              >
                 Cancel
               </Button>
               <Button type="submit" disabled={updateExpense.isPending}>
@@ -770,4 +763,3 @@ export function EditExpenseDialog({ expense, members, open, onOpenChange }: Edit
     </Dialog>
   );
 }
-
