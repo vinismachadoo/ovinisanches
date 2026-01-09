@@ -19,19 +19,11 @@ interface GroupsListProps {
   groups: Group[];
   selectedGroupId: string | null;
   onSelectGroup: (groupId: string) => Promise<void>;
-  onGroupUpdated: (group: Group) => void;
   onGroupDeleted: (groupId: string) => Promise<void>;
   onCreateGroup: () => void;
 }
 
-export function GroupsList({
-  groups,
-  selectedGroupId,
-  onSelectGroup,
-  onGroupUpdated,
-  onGroupDeleted,
-  onCreateGroup,
-}: GroupsListProps) {
+export function GroupsList({ groups, selectedGroupId, onSelectGroup, onGroupDeleted, onCreateGroup }: GroupsListProps) {
   const [editingGroup, setEditingGroup] = useState<Group | null>(null);
 
   const handleDelete = async (groupId: string) => {
@@ -80,9 +72,7 @@ export function GroupsList({
             >
               <div className="flex-1 min-w-0">
                 <h3 className="font-medium truncate">{group.name}</h3>
-                {group.description && (
-                  <p className="text-sm text-muted-foreground truncate">{group.description}</p>
-                )}
+                {group.description && <p className="text-sm text-muted-foreground truncate">{group.description}</p>}
               </div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
@@ -121,8 +111,9 @@ export function GroupsList({
           group={editingGroup}
           open={!!editingGroup}
           onOpenChange={(open) => !open && setEditingGroup(null)}
-          onGroupUpdated={(updatedGroup) => {
-            onGroupUpdated(updatedGroup);
+          onGroupUpdated={() => {
+            // onGroupUpdated is called by EditGroupDialog after successful update
+            // The group update is handled by TanStack Query cache invalidation
             setEditingGroup(null);
           }}
         />
@@ -130,4 +121,3 @@ export function GroupsList({
     </Card>
   );
 }
-
