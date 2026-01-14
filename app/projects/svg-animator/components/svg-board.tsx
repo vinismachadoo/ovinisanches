@@ -1,12 +1,11 @@
 'use client';
 
 import { AnimatedSvg } from '@/app/projects/svg-animator/components/animated-svg';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { useSvgSearchParams } from '@/app/projects/svg-animator/hooks/use-svg-search-params';
+import { Button } from '@/components/ui/button';
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { Paperclip, Play } from 'lucide-react';
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 
 const SvgBoard = () => {
   const { backgroundColor, padding } = useSvgSearchParams();

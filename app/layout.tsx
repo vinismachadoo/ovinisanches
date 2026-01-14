@@ -9,6 +9,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { MainCommandMenuContent, MainCommandMenuProvider } from '@/app/main-command-menu';
 import { Toaster } from '@/components/ui/sonner';
+import ReactQueryProvider from '@/app/react-query-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -63,19 +64,21 @@ export default function RootLayout({
         <meta name="theme-color" content={META_THEME_COLORS.light} />
       </head>
       <body className={cn('group/body overscroll-none antialiased', `${geistSans.variable} ${geistMono.variable}`)}>
-        <MainCommandMenuProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <NuqsAdapter>
-              <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
-              <StyleSwitcher />
-              <TailwindIndicator />
-              <Toaster />
+        <ReactQueryProvider>
+          <MainCommandMenuProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+              <NuqsAdapter>
+                <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
+                <StyleSwitcher />
+                <TailwindIndicator />
+                <Toaster />
 
-              {/* open cmd+k in all pages */}
-              <MainCommandMenuContent />
-            </NuqsAdapter>
-          </ThemeProvider>
-        </MainCommandMenuProvider>
+                {/* open cmd+k in all pages */}
+                <MainCommandMenuContent />
+              </NuqsAdapter>
+            </ThemeProvider>
+          </MainCommandMenuProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

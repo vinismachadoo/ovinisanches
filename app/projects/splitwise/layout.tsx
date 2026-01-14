@@ -1,18 +1,20 @@
 'use client';
 
+import * as React from 'react';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { GroupsSidebar } from './components/groups-sidebar';
-import { QueryProvider } from './providers/query-provider';
 
 export default function SplitwiseLayout({ children }: { children: React.ReactNode }) {
   return (
-    <QueryProvider>
-      <SidebarProvider className="[--header-height:3rem]">
+    <SidebarProvider className="[--header-height:3rem]">
+      <React.Suspense fallback={null}>
         <GroupsSidebar />
-        <SidebarInset className="flex flex-col">
-          <div className="flex-1 overflow-auto">{children}</div>
-        </SidebarInset>
-      </SidebarProvider>
-    </QueryProvider>
+      </React.Suspense>
+      <SidebarInset className="flex flex-col">
+        <div className="flex-1 overflow-auto">
+          <React.Suspense fallback={null}>{children}</React.Suspense>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

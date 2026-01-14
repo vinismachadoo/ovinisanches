@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { generateDailySudoku, isSolved, type SudokuGrid } from '../utils/sudoku-generator';
 import { CheckCircle2, RotateCcw, XCircle } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface SudokuGameProps {
   date: string;
@@ -143,37 +144,46 @@ export function SudokuGame({ date }: SudokuGameProps) {
       <button
         type="button"
         onClick={() => handleCellClick(row, col)}
-        className={`
-          relative flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14
-          border border-border text-center text-lg font-medium
-          transition-colors
-          ${isInitial ? 'bg-muted font-semibold' : 'bg-background hover:bg-accent'}
-          ${isSelected ? 'ring-2 ring-primary ring-offset-1 z-10' : ''}
-          ${isInRegion && selectedCell && !isSelected ? 'bg-accent/50' : ''}
-          ${isError ? 'bg-destructive/20 text-destructive' : ''}
-          ${(col + 1) % 3 === 0 && col < 8 ? 'border-r-2' : ''}
-          ${(row + 1) % 3 === 0 && row < 8 ? 'border-b-2' : ''}
-          focus:outline-none focus:ring-2 focus:ring-primary
-        `}
+        className={cn(
+          'relative flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14',
+          'border border-border text-center text-lg font-medium',
+          'transition-colors',
+          'focus:outline-none focus:ring-2 focus:ring-primary',
+          isInitial ? 'bg-muted font-semibold' : 'bg-background hover:bg-accent',
+          isSelected && 'ring-2 ring-primary ring-offset-1 z-10',
+          isInRegion && selectedCell && !isSelected && 'bg-accent/50',
+          isError && 'bg-destructive/20 text-destructive',
+          (col + 1) % 3 === 0 && col < 8 && 'border-r-2',
+          (row + 1) % 3 === 0 && row < 8 && 'border-b-2'
+        )}
       >
         {value !== 0 ? value : ''}
       </button>
     );
   };
 
+  console.log(
+    new Intl.DateTimeFormat('pt-BR', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(new Date(date))
+  );
+
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Daily Sudoku</CardTitle>
+            <CardTitle>Sudoku do dia</CardTitle>
             <CardDescription>
-              {new Date(date).toLocaleDateString('en-US', {
+              {new Intl.DateTimeFormat('pt-BR', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
-              })}
+              }).format(new Date(date))}
             </CardDescription>
           </div>
           {isComplete && (
