@@ -70,13 +70,6 @@ const MainCommandMenuContent = () => {
               router.push('/projects/daily-sudoku');
             },
           },
-          {
-            label: 'Splitwise Clone',
-            icon: Receipt,
-            action: () => {
-              router.push('/projects/splitwise');
-            },
-          },
         ],
       },
       {
