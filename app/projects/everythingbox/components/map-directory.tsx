@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/button-group';
 import { DoubleSidebarInset, DoubleSidebarTrigger } from '@/components/ui/double-sidebar';
-import { Map as MapComponent, MapMarker, MapTileLayer } from '@/components/ui/map';
+import { Map as MapComponent, MapMarker, MapTileLayer } from '@/components/ui/leaflet-map';
 import { cn } from '@/lib/utils';
 import 'leaflet/dist/leaflet.css';
 import { XIcon } from 'lucide-react';

@@ -73,7 +73,7 @@ import {
   MapMarker,
   MapPolyline,
   MapTileLayer,
-} from '@/components/ui/map';
+} from '@/components/ui/leaflet-map';
 import type { Delivery, DeliveryEvent, Order } from '../data/order';
 import { ORDER } from '../data/order';
 import { POLYLINE } from '../data/polyline';
