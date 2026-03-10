@@ -4,8 +4,7 @@ import { cn } from '@/lib/utils';
 import { OrderTypes } from '@/components/order-status-badge';
 
 export interface OrderTypeBadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof orderTypeBadgeVariants> {}
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof orderTypeBadgeVariants> {}
 
 function OrderTypeBadge({ className, variant, ...props }: OrderTypeBadgeProps) {
   return <div className={cn(orderTypeBadgeVariants({ variant }), className)} {...props} />;
@@ -29,7 +28,7 @@ const orderTypeBadgeVariants = cva(
     defaultVariants: {
       variant: OrderTypes.DELIVERY,
     },
-  }
+  },
 );
 
 export { OrderTypeBadge, orderTypeBadgeVariants };

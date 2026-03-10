@@ -64,7 +64,9 @@ export function MembersList({ groupId }: MembersListProps) {
         {members.length === 0 ? (
           <div className="text-center py-8">
             <User className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-            <p className="text-sm text-muted-foreground mb-4">No members yet. Add members to start splitting expenses!</p>
+            <p className="text-sm text-muted-foreground mb-4">
+              No members yet. Add members to start splitting expenses!
+            </p>
             <Button onClick={() => setCreateDialogOpen(true)} variant="outline">
               <Plus className="mr-2 h-4 w-4" />
               Add First Member
@@ -86,10 +88,10 @@ export function MembersList({ groupId }: MembersListProps) {
                 </div>
               </div>
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon-sm" className="opacity-0 group-hover:opacity-100">
-                    <MoreVertical className="h-4 w-4" />
-                  </Button>
+                <DropdownMenuTrigger
+                  render={<Button variant="ghost" size="icon-sm" className="opacity-0 group-hover:opacity-100" />}
+                >
+                  <MoreVertical className="h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={() => setEditingMember(member)}>
@@ -109,11 +111,7 @@ export function MembersList({ groupId }: MembersListProps) {
 
       {groupId && (
         <>
-          <CreateMemberDialog
-            groupId={groupId}
-            open={createDialogOpen}
-            onOpenChange={setCreateDialogOpen}
-          />
+          <CreateMemberDialog groupId={groupId} open={createDialogOpen} onOpenChange={setCreateDialogOpen} />
 
           {editingMember && (
             <EditMemberDialog
@@ -127,4 +125,3 @@ export function MembersList({ groupId }: MembersListProps) {
     </Card>
   );
 }
-

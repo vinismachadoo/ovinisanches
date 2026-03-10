@@ -11,7 +11,7 @@ const CarrierAvatar = React.forwardRef<React.ElementRef<typeof Avatar>, CarrierA
     const isUnassigned = carrier_name === 'ABBIAMO' || carrier_name === 'PRIVATE-FLEET';
 
     const carrier_logo = `https://abbiamo-public.s3.amazonaws.com/carrier-logos/${String(
-      encodeURIComponent(carrier_name)
+      encodeURIComponent(carrier_name),
     ).toUpperCase()}.png`;
 
     return isUnassigned ? (
@@ -28,14 +28,14 @@ const CarrierAvatar = React.forwardRef<React.ElementRef<typeof Avatar>, CarrierA
         className={cn(
           'h-6 w-6 select-none cursor-default bg-(--avatar-bg)] border shadow-md',
           isUnassigned && 'border-dashed',
-          className
+          className,
         )}
       >
         <AvatarImage src={carrier_logo} />
         <AvatarFallback className="text-xs">{carrier_name?.slice(0, 2)?.toUpperCase()}</AvatarFallback>
       </Avatar>
     );
-  }
+  },
 );
 CarrierAvatar.displayName = 'CarrierAvatar';
 

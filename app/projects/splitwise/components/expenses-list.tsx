@@ -125,10 +125,10 @@ export function ExpensesList({ groupId }: ExpensesListProps) {
                   </p>
                 </div>
                 <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon-sm" className="opacity-0 group-hover:opacity-100">
-                      <MoreVertical className="h-4 w-4" />
-                    </Button>
+                  <DropdownMenuTrigger
+                    render={<Button variant="ghost" size="icon-sm" className="opacity-0 group-hover:opacity-100" />}
+                  >
+                    <MoreVertical className="h-4 w-4" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={() => setEditingExpense(expense)}>
@@ -150,7 +150,7 @@ export function ExpensesList({ groupId }: ExpensesListProps) {
                     {expense.payers.map((p) => p.member.name).join(', ')} (
                     {formatCurrency(
                       expense.payers.reduce((sum, p) => sum + parseFloat(p.amount.toString()), 0),
-                      expense.currency
+                      expense.currency,
                     )}
                     )
                   </span>
@@ -160,7 +160,8 @@ export function ExpensesList({ groupId }: ExpensesListProps) {
                   <span className="font-medium">
                     {expense.shares
                       .map(
-                        (s) => `${s.member.name} (${formatCurrency(parseFloat(s.amount.toString()), expense.currency)})`
+                        (s) =>
+                          `${s.member.name} (${formatCurrency(parseFloat(s.amount.toString()), expense.currency)})`,
                       )
                       .join(', ')}
                   </span>

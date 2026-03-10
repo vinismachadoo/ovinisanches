@@ -9,7 +9,7 @@ interface OrderProviderAvatarProps extends React.ComponentPropsWithoutRef<typeof
 const OrderProviderAvatar = React.forwardRef<React.ElementRef<typeof Avatar>, OrderProviderAvatarProps>(
   ({ order_integration_type, className, ...props }, ref) => {
     const order_provider_logo = `https://abbiamo-public.s3.amazonaws.com/integration-logos/${String(
-      encodeURIComponent(order_integration_type)
+      encodeURIComponent(order_integration_type),
     ).toUpperCase()}.png`;
 
     return (
@@ -22,7 +22,7 @@ const OrderProviderAvatar = React.forwardRef<React.ElementRef<typeof Avatar>, Or
         <AvatarFallback className="text-xs">{order_integration_type?.slice(0, 2)?.toUpperCase()}</AvatarFallback>
       </Avatar>
     );
-  }
+  },
 );
 OrderProviderAvatar.displayName = 'OrderProviderAvatar';
 

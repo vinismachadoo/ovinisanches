@@ -72,12 +72,11 @@ const orderStatusBadgeVariants = cva(
     defaultVariants: {
       variant: OrderStatus.CREATED,
     },
-  }
+  },
 );
 
 export interface OrderStatusBadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof orderStatusBadgeVariants> {
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof orderStatusBadgeVariants> {
   asChild?: boolean;
 }
 

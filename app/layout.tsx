@@ -1,15 +1,16 @@
-import { MainCommandMenuContent, MainCommandMenuProvider } from '@/app/main-command-menu';
-import ReactQueryProvider from '@/app/react-query-provider';
+import { MainCommandMenuContent, MainCommandMenuProvider } from '@/components/main-command-menu';
+import ReactQueryProvider from '@/components/providers/react-query-provider';
+import { ThemeProvider } from '@/components/providers/theme-provider';
 import { StyleSwitcher } from '@/components/style-switcher';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
-import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import './globals.css';
+import MainNav from '@/components/main-nav';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,19 +32,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
-  colorScheme: 'dark light',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
-};
-
-const META_THEME_COLORS = {
-  light: '#ffffff',
-  dark: '#09090b',
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -51,39 +39,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
-                }
-                if (localStorage.layout) {
-                  document.documentElement.classList.add('layout-' + localStorage.layout)
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
-        <meta name="theme-color" content={META_THEME_COLORS.light} />
-      </head>
-      <body className={cn('group/body overscroll-none antialiased', `${geistSans.variable} ${geistMono.variable}`)}>
-        <ReactQueryProvider>
-          <MainCommandMenuProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <body
+        className={cn(
+          geistSans.variable,
+          geistMono.variable,
+          'antialiased group/body overscroll-none [--main-nav-height:calc(var(--spacing)*14)]',
+        )}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ReactQueryProvider>
+            <MainCommandMenuProvider>
               <NuqsAdapter>
-                <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
+                <TooltipProvider>
+                  <div data-slot="layout" className="flex flex-col">
+                    <header className="bg-background sticky top-0 z-50 w-full">
+                      <div className="3xl:fixed:px-0">
+                        <div className="3xl:fixed:container flex h-(--main-nav-height) items-center">
+                          <MainNav />
+                        </div>
+                      </div>
+                    </header>
+
+                    <main className="flex flex-col h-[calc(100svh-var(--main-nav-height))] w-screen">{children}</main>
+                  </div>
+                </TooltipProvider>
                 <StyleSwitcher />
                 <TailwindIndicator />
                 <Toaster />
 
                 {/* open cmd+k in all pages */}
-                <MainCommandMenuContent />
+                {/* <MainCommandMenuContent /> */}
               </NuqsAdapter>
-            </ThemeProvider>
-          </MainCommandMenuProvider>
-        </ReactQueryProvider>
+            </MainCommandMenuProvider>
+          </ReactQueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

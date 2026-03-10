@@ -16,7 +16,7 @@ function EmojiPicker({ className, ...props }: React.ComponentProps<typeof EmojiP
     <EmojiPickerPrimitive.Root
       className={cn(
         'bg-popover text-popover-foreground isolate flex h-full w-fit flex-col overflow-hidden rounded-md',
-        className
+        className,
       )}
       data-slot="emoji-picker"
       {...props}
@@ -106,7 +106,7 @@ function EmojiPickerFooter({ className, ...props }: React.ComponentProps<'div'>)
     <div
       className={cn(
         'max-w-(--frimousse-viewport-width) flex w-full min-w-0 items-center gap-1 border-t p-2',
-        className
+        className,
       )}
       data-slot="emoji-picker-footer"
       {...props}

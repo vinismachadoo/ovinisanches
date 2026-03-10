@@ -26,7 +26,7 @@ const OrderAttachmentsDialog = ({
           status: event.status,
           sub_status: event.sub_status,
           event_at: event.event_at,
-        }))
+        })),
       );
   }, [data?.delivery_events]);
 

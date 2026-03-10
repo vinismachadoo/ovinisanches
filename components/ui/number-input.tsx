@@ -16,7 +16,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(({ clas
         className={cn(
           'relative inline-flex h-8 w-full items-center overflow-hidden whitespace-nowrap rounded-sm border border-input text-xs',
           'hover:border-ring/30 disabled:hover:border-border',
-          className
+          className,
         )}
       >
         <Button

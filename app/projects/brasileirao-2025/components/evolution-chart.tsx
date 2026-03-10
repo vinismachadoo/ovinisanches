@@ -59,7 +59,7 @@ export function EvolutionChart() {
       const newTeams = currentTeams.includes(team) ? currentTeams.filter((t) => t !== team) : [...currentTeams, team];
       setSelectedTeams(newTeams.length > 0 ? newTeams : null); // null removes from URL
     },
-    [selectedTeams, setSelectedTeams]
+    [selectedTeams, setSelectedTeams],
   );
 
   const onZoneToggle = React.useCallback(
@@ -68,7 +68,7 @@ export function EvolutionChart() {
       const newZones = currentZones.includes(zone) ? currentZones.filter((z) => z !== zone) : [...currentZones, zone];
       setVisibleZones(newZones.length > 0 ? newZones : null);
     },
-    [visibleZones, setVisibleZones]
+    [visibleZones, setVisibleZones],
   );
 
   const allTeams = React.useMemo(() => Object.keys(TEAMS) as TeamCode[], []);
@@ -93,7 +93,7 @@ export function EvolutionChart() {
       if (teams.length === 0) return true;
       return teams.includes(team);
     },
-    [selectedTeams]
+    [selectedTeams],
   );
 
   const isZoneVisible = React.useCallback(
@@ -101,7 +101,7 @@ export function EvolutionChart() {
       const zones = (visibleZones || []) as ReferenceAreaCode[];
       return zones.includes(zone);
     },
-    [visibleZones]
+    [visibleZones],
   );
 
   return (

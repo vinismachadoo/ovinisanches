@@ -158,12 +158,12 @@ function MapTileLayer({
   const DEFAULT_DARK_URL = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
 
   const { resolvedTheme } = useTheme();
-  const resolvedUrl = resolvedTheme === 'dark' ? darkUrl ?? url ?? DEFAULT_DARK_URL : url ?? DEFAULT_URL;
+  const resolvedUrl = resolvedTheme === 'dark' ? (darkUrl ?? url ?? DEFAULT_DARK_URL) : (url ?? DEFAULT_URL);
   const resolvedAttribution =
     resolvedTheme === 'dark' && darkAttribution
       ? darkAttribution
-      : attribution ??
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>';
+      : (attribution ??
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>');
 
   useEffect(() => {
     if (context) {
@@ -267,7 +267,7 @@ function MapLayers({
       !tileLayers.some((tileLayer) => tileLayer.name === defaultTileLayer)
     ) {
       throw new Error(
-        `Invalid defaultTileLayer "${defaultTileLayer}" provided to MapLayers. It must match a MapTileLayer's name prop.`
+        `Invalid defaultTileLayer "${defaultTileLayer}" provided to MapLayers. It must match a MapTileLayer's name prop.`,
       );
     }
 
@@ -287,7 +287,7 @@ function MapLayers({
       defaultLayerGroups.some((name) => !layerGroups.some((group) => group.name === name))
     ) {
       throw new Error(
-        `Invalid defaultLayerGroups value provided to MapLayers. All names must match a MapLayerGroup's name prop.`
+        `Invalid defaultLayerGroups value provided to MapLayers. All names must match a MapLayerGroup's name prop.`,
       );
     }
   }, [tileLayers, defaultTileLayer, selectedTileLayer, layerGroups, defaultLayerGroups]);
@@ -332,7 +332,7 @@ function MapLayersControl({
 
   function handleLayerGroupToggle(name: string, checked: boolean) {
     setActiveLayerGroups(
-      checked ? [...activeLayerGroups, name] : activeLayerGroups.filter((groupName) => groupName !== name)
+      checked ? [...activeLayerGroups, name] : activeLayerGroups.filter((groupName) => groupName !== name),
     );
   }
 
@@ -345,18 +345,20 @@ function MapLayersControl({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          type="button"
-          variant="secondary"
-          size="icon-sm"
-          aria-label="Select layers"
-          title="Select layers"
-          className={cn('absolute top-1 right-1 z-1000 border', className)}
-          {...props}
-        >
-          <LayersIcon />
-        </Button>
+      <DropdownMenuTrigger
+        render={
+          <Button
+            type="button"
+            variant="secondary"
+            size="icon-sm"
+            aria-label="Select layers"
+            title="Select layers"
+            className={cn('absolute top-1 right-1 z-1000 border', className)}
+            {...props}
+          />
+        }
+      >
+        <LayersIcon />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="z-1000">
         {showTileLayersDropdown && (
@@ -450,7 +452,7 @@ function MapPopup({ className, ...props }: Omit<PopupProps, 'content'> & { ref?:
     <LeafletPopup
       className={cn(
         'bg-popover text-popover-foreground animate-in fade-out-0 fade-in-0 zoom-out-95 zoom-in-95 slide-in-from-bottom-2 z-50 w-72 rounded-sm border p-4 font-sans shadow-md outline-hidden',
-        className
+        className,
       )}
       {...props}
     />
@@ -485,7 +487,7 @@ function MapTooltip({
     <LeafletTooltip
       className={cn(
         'animate-in fade-in-0 zoom-in-95 fade-out-0 zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 w-fit text-xs text-balance transition-opacity',
-        className
+        className,
       )}
       data-side={side}
       direction={side}
@@ -497,7 +499,7 @@ function MapTooltip({
       <div
         className={cn(
           'bg-foreground fill-foreground absolute z-50 size-2.5 rotate-45 rounded-[2px]',
-          ARROW_POSITION_CLASSES[side]
+          ARROW_POSITION_CLASSES[side],
         )}
       />
     </LeafletTooltip>
@@ -1062,7 +1064,7 @@ function useMapDrawHandleIcon() {
   return L.divIcon({
     iconAnchor: [8, 8],
     html: renderToString(
-      <CircleIcon className="fill-primary stroke-primary size-4 transition-transform hover:scale-110" />
+      <CircleIcon className="fill-primary stroke-primary size-4 transition-transform hover:scale-110" />,
     ),
   });
 }

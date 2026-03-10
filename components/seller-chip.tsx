@@ -106,7 +106,7 @@ const SellerChip = React.forwardRef<HTMLDivElement, SellerChipProps>(
           'border-(--brand-darker-5) bg-(--brand-lighter-15) text-(--brand-darker-50)',
           truncate && 'max-w-[200px]',
           hasOnValueChange && 'gap-x-2',
-          className
+          className,
         )}
         {...props}
       >
@@ -129,7 +129,7 @@ const SellerChip = React.forwardRef<HTMLDivElement, SellerChipProps>(
         ) : null}
       </div>
     );
-  }
+  },
 );
 SellerChip.displayName = 'SellerChip';
 

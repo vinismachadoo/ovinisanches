@@ -3,7 +3,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import { ColorPicker } from '@/components/color-picker';
+import ColorPicker from '@/components/color-picker';
 import { Label } from '@/components/ui/label';
 import { NumberInput } from '@/components/ui/number-input';
 import { Slider } from '@/components/ui/slider';
@@ -57,10 +57,10 @@ const AppSidebar = () => {
             </InputGroup>
 
             <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="outline" size="icon" onClick={() => setBackgroundColor(null)}>
-                  <Undo2 />
-                </Button>
+              <TooltipTrigger
+                render={<Button variant="outline" size="icon" onClick={() => setBackgroundColor(null)} />}
+              >
+                <Undo2 />
               </TooltipTrigger>
               <TooltipContent>
                 <p>Redefinir</p>
@@ -76,10 +76,8 @@ const AppSidebar = () => {
               {strokeColor}
             </Badge>
             <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="outline" size="icon" onClick={() => setStrokeColor(null)}>
-                  <Undo2 />
-                </Button>
+              <TooltipTrigger render={<Button variant="outline" size="icon" onClick={() => setStrokeColor(null)} />}>
+                <Undo2 />
               </TooltipTrigger>
               <TooltipContent>
                 <p>Redefinir</p>
@@ -137,12 +135,12 @@ const AppSidebar = () => {
           <Label>Espaçamento</Label>
           <div className="flex gap-x-2">
             <Slider
-              defaultValue={[0]}
+              defaultValue={0}
               max={24}
               min={0}
               step={1}
-              value={[padding]}
-              onValueChange={(value) => setPadding(value[0])}
+              value={padding}
+              onValueChange={(value) => setPadding(value as number)}
             />
             <Badge variant="outline" className="whitespace-nowrap font-normal">
               {padding * 4} rem

@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import OrderAttachmentsDialog from '@/app/projects/shipment-tracking/components/attachments-dialog';
 import CarrierAvatar from '@/components/carrier-avatar';
 import OrderProviderAvatar from '@/components/order-provider-avatar';
 import { OrderStatus, OrderStatusBadge, OrderStatusColors, OrderTypes } from '@/components/order-status-badge';
@@ -19,6 +19,15 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
+import { DoubleSidebarInset, DoubleSidebarTrigger } from '@/components/ui/double-sidebar';
+import {
+  MapCircle,
+  Map as MapComponent,
+  MapFeatureGroup,
+  MapMarker,
+  MapPolyline,
+  MapTileLayer,
+} from '@/components/ui/leaflet-map';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -31,12 +40,13 @@ import {
   TimelineTitle,
 } from '@/components/ui/timeline';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { getStraightDistanceBetweenTwoPoints } from '@/lib/distances';
+import { smartTrim } from '@/lib/strings';
 import { formatTime, minutesToHour } from '@/lib/times';
 import { cn } from '@/lib/utils';
 import polylineDecode from '@mapbox/polyline';
 import { formatDistance, formatDistanceToNow, formatRelative } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
   ArrowUpRight,
@@ -66,21 +76,9 @@ import {
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
-import {
-  Map as MapComponent,
-  MapCircle,
-  MapFeatureGroup,
-  MapMarker,
-  MapPolyline,
-  MapTileLayer,
-} from '@/components/ui/leaflet-map';
 import type { Delivery, DeliveryEvent, Order } from '../data/order';
 import { ORDER } from '../data/order';
 import { POLYLINE } from '../data/polyline';
-import { getStraightDistanceBetweenTwoPoints } from '@/lib/distances';
-import { DoubleSidebarInset, DoubleSidebarTrigger } from '@/components/ui/double-sidebar';
-import { smartTrim } from '@/lib/strings';
-import OrderAttachmentsDialog from '@/app/projects/shipment-tracking/components/attachments-dialog';
 
 const ViewOrderPage = () => {
   const order = ORDER;
@@ -95,8 +93,8 @@ const ViewOrderPage = () => {
       new Map(
         order?.delivery_events
           .filter((event) => event.latitude && event.longitude)
-          .map((event) => [event.id, { ...event, show: true }]) ?? []
-      )
+          .map((event) => [event.id, { ...event, show: true }]) ?? [],
+      ),
     );
   }, [order?.delivery_events]);
 
@@ -362,7 +360,7 @@ const OrderMapTracking = ({
     successfulEvent?.latitude,
     successfulEvent?.longitude,
     CUSTOMER_LOCATION[0],
-    CUSTOMER_LOCATION[1]
+    CUSTOMER_LOCATION[1],
   );
 
   const isFinished = data?.status_name === OrderStatus.SUCCESSFUL;
@@ -467,7 +465,7 @@ const OrderMapTracking = ({
               }
               className={cn(
                 'group relative flex h-6 w-6 items-center justify-center',
-                !eventsToShow.get(event.id)?.show && 'hidden'
+                !eventsToShow.get(event.id)?.show && 'hidden',
               )}
             >
               <span className="absolute h-6 w-6 rounded-full bg-(--event-color) opacity-25" />
@@ -600,7 +598,7 @@ const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoa
     <Skeleton className="flex h-28 w-full flex-col items-center justify-center gap-y-4" />
   ) : (
     <Alert
-      variant={isOnTime ? 'success' : isLate ? 'error' : 'neutral'}
+      variant={isOnTime ? 'success' : isLate ? 'destructive' : 'neutral'}
       className={cn(isNotFinished && 'border-dashed')}
     >
       {isOnTime && isNotFinished && <ThumbsUp className="h-4 w-4" />}
@@ -646,7 +644,7 @@ const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoa
                   new Date(),
                   {
                     locale: ptBR,
-                  }
+                  },
                 )}`}
               </span>
               <span className="font-medium">
@@ -665,7 +663,7 @@ const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoa
                   new Date(),
                   {
                     locale: ptBR,
-                  }
+                  },
                 )}`}
               </span>
               {data?.expected_customer_shipping_date ? (
@@ -675,7 +673,7 @@ const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoa
                     new Date(data?.last_delivery_delivered_date || ''),
                     {
                       locale: ptBR,
-                    }
+                    },
                   )} ${
                     new Date(data?.expected_customer_shipping_date || '').getTime() >=
                     new Date(data?.last_delivery_delivered_date || '').getTime()
@@ -732,7 +730,7 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
 
       return ((value / total) * 100).toFixed(2);
     },
-    [total]
+    [total],
   );
 
   return isLoading ? (
@@ -743,7 +741,7 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
         <span
           className={cn(
             'bg-muted whitespace-nowrap rounded-sm px-1 text-blue-500',
-            !data?.seller_processed_at && 'text-muted'
+            !data?.seller_processed_at && 'text-muted',
           )}
         >
           {data?.seller_processed_at ? formatTime(data?.seller_processed_at, 'dd/MM/yy HH:mm:ss') : '--/--/-- --:--:--'}
@@ -758,7 +756,7 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
         <span
           className={cn(
             'bg-muted whitespace-nowrap rounded-sm px-1 text-emerald-500',
-            !data?.last_delivery_delivered_date && 'text-muted animate-pulse'
+            !data?.last_delivery_delivered_date && 'text-muted animate-pulse',
           )}
         >
           {data?.last_delivery_delivered_date
@@ -775,7 +773,7 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
               key={idx}
               className={cn(
                 'w-(--bar-width) rounded-sm bg-(--bar-bg)',
-                !data?.last_delivery_delivered_date && cd.id === 'shipping' && 'animate-pulse'
+                !data?.last_delivery_delivered_date && cd.id === 'shipping' && 'animate-pulse',
               )}
               style={
                 {
@@ -793,7 +791,7 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
             <span
               className={cn(
                 'h-3 w-3 rounded-xs bg-(--color)',
-                !data?.last_delivery_delivered_date && cd.id === 'shipping' && 'animate-pulse'
+                !data?.last_delivery_delivered_date && cd.id === 'shipping' && 'animate-pulse',
               )}
               style={
                 {
@@ -856,7 +854,7 @@ const DeliveriesHistory = ({
   const sortedSingleEventsAndDeliveries = [...eventsWithoutDelivery, ...deliveries].sort(
     (a, b) =>
       new Date('event_at' in b ? b.event_at : b.created_at).getTime() -
-      new Date('event_at' in a ? a.event_at : a.created_at).getTime()
+      new Date('event_at' in a ? a.event_at : a.created_at).getTime(),
   );
 
   const lastDelivery = data?.deliveries
@@ -872,7 +870,7 @@ const DeliveriesHistory = ({
         <div
           className={cn(
             'text-muted bg-foreground items-center justify-center rounded-full p-1 transition-opacity',
-            scrollTop > 0 ? 'opacity-100' : 'opacity-0'
+            scrollTop > 0 ? 'opacity-100' : 'opacity-0',
           )}
         >
           <ChevronUp className="h-3 w-3" />
@@ -898,7 +896,7 @@ const DeliveriesHistory = ({
               setOpenAttachmentsDialog={setOpenAttachmentsDialog}
               defaultOpen={lastDelivery?.id === deliveryOrEvent.id}
             />
-          )
+          ),
         )}
       </div>
 
@@ -907,7 +905,7 @@ const DeliveriesHistory = ({
         <div
           className={cn(
             'text-muted bg-foreground items-center justify-center rounded-full p-1 transition-opacity',
-            hasMoreBelow ? 'opacity-100' : 'opacity-0'
+            hasMoreBelow ? 'opacity-100' : 'opacity-0',
           )}
         >
           <ChevronDown className="h-3 w-3" />
@@ -976,7 +974,7 @@ const DeliveryEventTimeline = ({
                   'group-data-completed/timeline-item:border-foreground group-data-completed/timeline-item:bg-foreground cursor-pointer',
                 !data.latitude &&
                   !data.longitude &&
-                  'bg-muted group-data-completed/timeline-item:border-muted border-red-500'
+                  'bg-muted group-data-completed/timeline-item:border-muted border-red-500',
               )}
             />
           </TimelineHeader>
@@ -1006,19 +1004,21 @@ const DeliveryEventTimeline = ({
               <div className="grid w-full grid-cols-5 gap-2">
                 {data?.attachments.map((attachment) => (
                   <Tooltip key={attachment.id}>
-                    <TooltipTrigger asChild>
-                      <div
-                        className="cursor-pointer rounded-sm border p-2"
-                        onClick={() => setOpenAttachmentsDialog(true)}
-                      >
-                        <img
-                          className="w-full"
-                          src={attachment?.url}
-                          alt={attachment?.created_at}
-                          width={100}
-                          height={200}
+                    <TooltipTrigger
+                      render={
+                        <div
+                          className="cursor-pointer rounded-sm border p-2"
+                          onClick={() => setOpenAttachmentsDialog(true)}
                         />
-                      </div>
+                      }
+                    >
+                      <img
+                        className="w-full"
+                        src={attachment?.url}
+                        alt={attachment?.created_at}
+                        width={100}
+                        height={200}
+                      />
                     </TooltipTrigger>
                     {attachment.user_id ? (
                       <TooltipContent>
@@ -1055,12 +1055,7 @@ const DeliveryTimeline = ({
   return isLoading ? (
     <Skeleton className="flex h-80 w-full flex-1 flex-col items-center justify-center" />
   ) : (
-    <Accordion
-      type="single"
-      collapsible
-      className="rounded-sm border px-4"
-      defaultValue={defaultOpen ? 'delivery' : undefined}
-    >
+    <Accordion defaultValue={defaultOpen ? ['delivery'] : []} className="rounded-sm border px-4">
       <AccordionItem value="delivery" className="border-none">
         <AccordionTrigger className="hover:no-underline">
           <div className="grid w-full grid-cols-[auto_1fr] items-center gap-x-2">
@@ -1125,7 +1120,7 @@ const DeliveryTimeline = ({
                           'group-data-completed/timeline-item:border-foreground group-data-completed/timeline-item:bg-foreground cursor-pointer',
                         !event.latitude &&
                           !event.longitude &&
-                          'bg-muted group-data-completed/timeline-item:border-muted pointer-events-none'
+                          'bg-muted group-data-completed/timeline-item:border-muted pointer-events-none',
                       )}
                       onClick={() => handleToggleEvent(event.id)}
                     >
@@ -1134,7 +1129,7 @@ const DeliveryTimeline = ({
                           className={cn(
                             'h-4 w-4',
                             !event.latitude && !event.longitude && 'text-muted-foreground',
-                            event.latitude && event.longitude && 'text-background'
+                            event.latitude && event.longitude && 'text-background',
                           )}
                         />
                       ) : (
@@ -1142,7 +1137,7 @@ const DeliveryTimeline = ({
                           className={cn(
                             'h-4 w-4',
                             !event.latitude && !event.longitude && 'text-muted-foreground',
-                            event.latitude && event.longitude && 'text-background'
+                            event.latitude && event.longitude && 'text-background',
                           )}
                         />
                       )}
@@ -1176,20 +1171,23 @@ const DeliveryTimeline = ({
                       <div className="grid w-full grid-cols-5 gap-2">
                         {event?.attachments.map((attachment) => (
                           <Tooltip key={attachment.id}>
-                            <TooltipTrigger asChild>
-                              <div
-                                className="cursor-pointer rounded-sm border p-2"
-                                onClick={() => setOpenAttachmentsDialog(true)}
-                              >
-                                <img
-                                  className="w-full"
-                                  src={attachment?.url}
-                                  alt={attachment?.created_at}
-                                  width={100}
-                                  height={200}
+                            <TooltipTrigger
+                              render={
+                                <div
+                                  className="cursor-pointer rounded-sm border p-2"
+                                  onClick={() => setOpenAttachmentsDialog(true)}
                                 />
-                              </div>
+                              }
+                            >
+                              <img
+                                className="w-full"
+                                src={attachment?.url}
+                                alt={attachment?.created_at}
+                                width={100}
+                                height={200}
+                              />
                             </TooltipTrigger>
+
                             {attachment.user_id ? (
                               <TooltipContent>
                                 Anexado por <strong>{attachment?.user?.email}</strong> em{' '}
@@ -1246,13 +1244,15 @@ const CustomerCard = ({ data, isLoading = false }: { data?: Order; isLoading?: b
         </AlertDescription>
 
         <Tooltip>
-          <TooltipTrigger asChild>
-            <div
-              data-disabled={disabled}
-              className="hover:bg-muted absolute right-4 top-4 w-fit min-w-fit max-w-fit cursor-pointer rounded-sm p-2 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50"
-            >
-              <Pencil className="h-4 w-4" />
-            </div>
+          <TooltipTrigger
+            render={
+              <div
+                data-disabled={disabled}
+                className="hover:bg-muted absolute right-4 top-4 w-fit min-w-fit max-w-fit cursor-pointer rounded-sm p-2 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50"
+              />
+            }
+          >
+            <Pencil className="h-4 w-4" />
           </TooltipTrigger>
           {disabled ? (
             <TooltipContent side="left" className="max-w-[300px]">
@@ -1328,7 +1328,7 @@ const CsatAlert = ({ data, isLoading = false }: { data?: Order; isLoading?: bool
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-20 w-full flex-col items-center justify-center gap-y-4" />
   ) : (
-    <Alert variant={isPromoter ? 'success' : isPassive ? 'warning' : isDetractor ? 'error' : 'neutral'}>
+    <Alert variant={isPromoter ? 'success' : isPassive ? 'warning' : isDetractor ? 'destructive' : 'neutral'}>
       <Star className="h-4 w-4" />
       <AlertTitle>
         {data?.nps[0]?.response_2
@@ -1376,7 +1376,7 @@ const FreightRevenue = ({ data, isLoading = false }: { data?: Order; isLoading?:
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-44 w-full flex-col items-center justify-center gap-y-4" />
   ) : (
-    <Alert variant={isProfit ? 'success' : isLoss ? 'error' : 'neutral'}>
+    <Alert variant={isProfit ? 'success' : isLoss ? 'destructive' : 'neutral'}>
       {isProfit && <BanknoteArrowUp className="h-4 w-4" />}
       {isLoss && <BanknoteArrowDown className="h-4 w-4" />}
 

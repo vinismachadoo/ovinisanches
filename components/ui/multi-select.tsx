@@ -48,39 +48,41 @@ const MultiSelect = ({
 }: MultiSelectProps) => {
   const [open, setOpen] = React.useState(false);
   const selectedValues = new Set(
-    options.filter((option) => value.includes(option.value)).map((v) => v.value) as string[]
+    options.filter((option) => value.includes(option.value)).map((v) => v.value) as string[],
   );
   const selectedLabels = options.filter((option) => value.includes(option.value)).map((v) => v.label);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          id={id}
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className={cn('w-[200px] justify-between h-auto', className)}
-          disabled={disabled}
-        >
-          {title}
-          {selectedLabels?.length > 0 && (
-            <React.Fragment>
-              {title && <Separator orientation="vertical" className="h-4" />}
-              <div className="hidden space-x-1 lg:flex">
-                {selectedLabels.length > 1 ? (
-                  <Badge variant="secondary" className="rounded-sm px-1 font-normal whitespace-nowrap">
-                    {selectedLabels.length} selecionados
-                  </Badge>
-                ) : (
-                  selectedLabels
-                )}
-              </div>
-            </React.Fragment>
-          )}
-          {selectedLabels?.length === 0 && placeholder}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
+      <PopoverTrigger
+        render={
+          <Button
+            id={id}
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className={cn('w-[200px] justify-between h-auto', className)}
+            disabled={disabled}
+          />
+        }
+      >
+        {title}
+        {selectedLabels?.length > 0 && (
+          <React.Fragment>
+            {title && <Separator orientation="vertical" className="h-4" />}
+            <div className="hidden space-x-1 lg:flex">
+              {selectedLabels.length > 1 ? (
+                <Badge variant="secondary" className="rounded-sm px-1 font-normal whitespace-nowrap">
+                  {selectedLabels.length} selecionados
+                </Badge>
+              ) : (
+                selectedLabels
+              )}
+            </div>
+          </React.Fragment>
+        )}
+        {selectedLabels?.length === 0 && placeholder}
+        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </PopoverTrigger>
       <PopoverContent className={cn('w-[200px] p-0', contentClassName)} align={contentAlign}>
         <Command>
@@ -103,7 +105,7 @@ const MultiSelect = ({
                   <div
                     className={cn(
                       'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                      isSelected ? 'bg-primary text-primary-foreground' : 'opacity-50 [&_svg]:invisible'
+                      isSelected ? 'bg-primary text-primary-foreground' : 'opacity-50 [&_svg]:invisible',
                     )}
                   >
                     <Check className={cn('size-4')} />

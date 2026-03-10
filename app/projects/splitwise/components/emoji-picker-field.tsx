@@ -19,10 +19,8 @@ export function EmojiPickerField({ value, onChange, label }: EmojiPickerFieldPro
     <div className="space-y-2">
       {label && <label className="text-sm font-medium">{label}</label>}
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button type="button" variant="outline" className="w-fit justify-start">
-            {value ? <span className="text-lg">{value}</span> : <Smile className="size-4" />}
-          </Button>
+        <PopoverTrigger render={<Button type="button" variant="outline" className="w-fit justify-start" />}>
+          {value ? <span className="text-lg">{value}</span> : <Smile className="size-4" />}
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
           <EmojiPicker

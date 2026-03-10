@@ -2,7 +2,7 @@
 
 import { CommandMenuContent, CommandMenuKbd, CommandMenuProvider, CommandMenuTrigger } from '@/components/command-menu';
 import { useIsMac } from '@/hooks/use-is-mac';
-import { Banknote, Box, Image, Laptop, Moon, Puzzle, Receipt, Shield, Sun, Truck, Volleyball } from 'lucide-react';
+import { Banknote, Image, Laptop, Moon, Puzzle, Shield, Sun, Truck, Volleyball } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 
@@ -33,13 +33,6 @@ const MainCommandMenuContent = () => {
             icon: Truck,
             action: () => {
               router.push('/projects/shipment-tracking');
-            },
-          },
-          {
-            label: 'EverythingBox',
-            icon: Box,
-            action: () => {
-              router.push('/projects/everythingbox');
             },
           },
           {
@@ -124,4 +117,4 @@ const MainCommandMenuTrigger = () => {
   );
 };
 
-export { MainCommandMenuProvider, MainCommandMenuContent, MainCommandMenuTrigger };
+export { MainCommandMenuContent, MainCommandMenuProvider, MainCommandMenuTrigger };

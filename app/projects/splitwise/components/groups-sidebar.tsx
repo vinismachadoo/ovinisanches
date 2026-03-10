@@ -117,14 +117,17 @@ export function GroupsSidebar() {
                       </div>
                     </SidebarMenuButton>
                     <DropdownMenu>
-                      <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
-                        <Button
-                          variant="ghost"
-                          size="icon-sm"
-                          className="opacity-0 group-hover:opacity-100 h-8 w-8 shrink-0"
-                        >
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
+                      <DropdownMenuTrigger
+                        render={
+                          <Button
+                            variant="ghost"
+                            size="icon-sm"
+                            className="opacity-0 group-hover:opacity-100 h-8 w-8 shrink-0"
+                          />
+                        }
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <MoreVertical className="h-4 w-4" />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem

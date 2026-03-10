@@ -83,7 +83,7 @@ const CommandMenuContent = ({ placeholder, notFoundLabel, sections }: CommandMen
       setOpen(false);
       command();
     },
-    [setOpen]
+    [setOpen],
   );
 
   return (
@@ -141,7 +141,7 @@ function CommandMenuItem({
       ref={ref}
       className={cn(
         'data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-sm border border-transparent px-3! font-medium',
-        className
+        className,
       )}
       {...props}
     >
@@ -155,7 +155,7 @@ function CommandMenuKbd({ className, ...props }: React.ComponentProps<'kbd'>) {
     <kbd
       className={cn(
         'bg-muted text-muted-foreground pointer-events-none flex select-none items-center rounded border px-1.5 font-sans text-xs',
-        className
+        className,
       )}
       {...props}
     />

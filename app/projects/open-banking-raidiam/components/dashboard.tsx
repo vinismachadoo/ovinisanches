@@ -2,7 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import Combobox from '@/components/ui/combobox';
+import { Combobox } from '@/components/ui/combobox';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
@@ -47,8 +47,8 @@ const DashboardPage = () => {
   const selectedServer = data
     .find((item: Participant) =>
       item.AuthorisationServers?.find(
-        (server: AuthorisationServer) => server.AuthorisationServerId === selectedServerId
-      )
+        (server: AuthorisationServer) => server.AuthorisationServerId === selectedServerId,
+      ),
     )
     ?.AuthorisationServers?.find((server: AuthorisationServer) => server.AuthorisationServerId === selectedServerId);
 
@@ -65,29 +65,29 @@ const DashboardPage = () => {
     if (hasEnrollmentsResource !== null) {
       newData = newData.filter(
         (server: AuthorisationServer) =>
-          supportsContactlessPix(server).hasEnrollmentsResource === hasEnrollmentsResource
+          supportsContactlessPix(server).hasEnrollmentsResource === hasEnrollmentsResource,
       );
     }
     if (hasPaymentsConsentsResource !== null) {
       newData = newData.filter(
         (server: AuthorisationServer) =>
-          supportsContactlessPix(server).hasPaymentsConsentsResource === hasPaymentsConsentsResource
+          supportsContactlessPix(server).hasPaymentsConsentsResource === hasPaymentsConsentsResource,
       );
     }
     if (hasPaymentsPixResource !== null) {
       newData = newData.filter(
         (server: AuthorisationServer) =>
-          supportsContactlessPix(server).hasPaymentsPixResource === hasPaymentsPixResource
+          supportsContactlessPix(server).hasPaymentsPixResource === hasPaymentsPixResource,
       );
     }
     if (supportsDCR !== null) {
       newData = newData.filter(
-        (server: AuthorisationServer) => supportsContactlessPix(server).supportsDCR === supportsDCR
+        (server: AuthorisationServer) => supportsContactlessPix(server).supportsDCR === supportsDCR,
       );
     }
     if (supportsRedirect !== null) {
       newData = newData.filter(
-        (server: AuthorisationServer) => supportsContactlessPix(server).supportsRedirect === supportsRedirect
+        (server: AuthorisationServer) => supportsContactlessPix(server).supportsRedirect === supportsRedirect,
       );
     }
     return newData;
@@ -166,25 +166,25 @@ const MetricsSection = ({ data }: MetricsSectionProps) => {
   const listOfServers = data.map((item: Participant) => item.AuthorisationServers).flat();
   const serversAmount = listOfServers.length;
   const activeServersAmount = listOfServers.filter(
-    (server: AuthorisationServer | undefined) => server?.Status === 'Active'
+    (server: AuthorisationServer | undefined) => server?.Status === 'Active',
   ).length;
 
   const serversWithSupportToContactlessPix = listOfServers.filter(
     (server: AuthorisationServer | undefined) =>
-      server && supportsContactlessPix(server, DEFAULT_REQUIREMENTS_TO_VALIDATE).hasAllRequirements
+      server && supportsContactlessPix(server, DEFAULT_REQUIREMENTS_TO_VALIDATE).hasAllRequirements,
   );
   const participantsWithSupportToContactlessPix = [
     ...new Set(
-      serversWithSupportToContactlessPix.map((server: AuthorisationServer | undefined) => server?.OrganisationId)
+      serversWithSupportToContactlessPix.map((server: AuthorisationServer | undefined) => server?.OrganisationId),
     ),
   ];
 
   const serversWithSupportToPaymentsPix = listOfServers.filter(
-    (server: AuthorisationServer | undefined) => server && checkPaymentsPixResource(server)
+    (server: AuthorisationServer | undefined) => server && checkPaymentsPixResource(server),
   );
   const participantsWithSupportToPaymentsPix = [
     ...new Set(
-      serversWithSupportToPaymentsPix.map((server: AuthorisationServer | undefined) => server?.OrganisationId)
+      serversWithSupportToPaymentsPix.map((server: AuthorisationServer | undefined) => server?.OrganisationId),
     ),
   ];
 
@@ -273,22 +273,22 @@ const FilterSection = ({ data }: { data: Participant[] }) => {
 
   const [selectedParticipantId, setSelectedParticipantId] = useQueryState(
     'selectedParticipantId',
-    parseAsString.withDefault('')
+    parseAsString.withDefault(''),
   );
   const [selectedServerId, setSelectedServerId] = useQueryState('selectedServerId', parseAsString.withDefault(''));
 
   const [hasEnrollmentsResource, setHasEnrollmentsResource] = useQueryState(
     'hasEnrollmentsResource',
-    parseAsString.withDefault('')
+    parseAsString.withDefault(''),
   );
 
   const [hasPaymentsConsentsResource, setHasPaymentsConsentsResource] = useQueryState(
     'hasPaymentsConsentsResource',
-    parseAsString.withDefault('')
+    parseAsString.withDefault(''),
   );
   const [hasPaymentsPixResource, setHasPaymentsPixResource] = useQueryState(
     'hasPaymentsPixResource',
-    parseAsString.withDefault('')
+    parseAsString.withDefault(''),
   );
   const [supportsDCR, setSupportsDCR] = useQueryState('supportsDCR', parseAsString.withDefault(''));
   const [supportsRedirect, setSupportsRedirect] = useQueryState('supportsRedirect', parseAsString.withDefault(''));
@@ -299,17 +299,15 @@ const FilterSection = ({ data }: { data: Participant[] }) => {
         <Label>Participant</Label>
         <div className="flex gap-x-2">
           <Combobox
-            options={participantsListOptions}
-            placeholder="Select participant"
-            searchPlaceholder="Search"
+            items={participantsListOptions.map((item) => ({
+              label: item.label,
+              value: item.value,
+            }))}
             value={selectedParticipantId}
             onValueChange={(value) => {
-              setSelectedParticipantId(value.value as string);
+              setSelectedParticipantId(value as string);
               setSelectedServerId('');
             }}
-            className="w-fit"
-            popoverContentClassName="w-fit"
-            align="start"
           />
           <Button
             variant="outline"
@@ -511,7 +509,7 @@ const AuthServerCard = ({ server }: { server: AuthorisationServer }) => {
     <div
       className={cn(
         'flex flex-col gap-2 border rounded-sm p-4 h-full max-w-80 w-full relative',
-        selectedServerId === server.AuthorisationServerId && 'bg-muted border-black'
+        selectedServerId === server.AuthorisationServerId && 'bg-muted border-black',
       )}
     >
       <div className="flex items-center gap-2">

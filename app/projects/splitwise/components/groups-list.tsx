@@ -64,7 +64,7 @@ export function GroupsList({ groups, selectedGroupId, onSelectGroup, onGroupDele
                 'group relative flex items-center justify-between p-3 rounded-sm border cursor-pointer transition-colors',
                 selectedGroupId === group.id
                   ? 'bg-accent border-primary'
-                  : 'hover:bg-accent/50 border-transparent hover:border-border'
+                  : 'hover:bg-accent/50 border-transparent hover:border-border',
               )}
               onClick={() => {
                 onSelectGroup(group.id);
@@ -75,10 +75,11 @@ export function GroupsList({ groups, selectedGroupId, onSelectGroup, onGroupDele
                 {group.description && <p className="text-sm text-muted-foreground truncate">{group.description}</p>}
               </div>
               <DropdownMenu>
-                <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
-                  <Button variant="ghost" size="icon-sm" className="opacity-0 group-hover:opacity-100">
-                    <MoreVertical className="h-4 w-4" />
-                  </Button>
+                <DropdownMenuTrigger
+                  render={<Button variant="ghost" size="icon-sm" className="opacity-0 group-hover:opacity-100" />}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <MoreVertical className="h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem

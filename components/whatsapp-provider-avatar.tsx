@@ -9,7 +9,7 @@ interface WhatsappAvatarProps extends React.ComponentPropsWithoutRef<typeof Avat
 export const WhatsappProviderAvatar = React.forwardRef<React.ElementRef<typeof Avatar>, WhatsappAvatarProps>(
   ({ provider_name, className, ...props }, ref) => {
     const whatsapp_logo = `https://abbiamo-public.s3.amazonaws.com/whatsapp-provider-logos/${String(
-      encodeURIComponent(provider_name)
+      encodeURIComponent(provider_name),
     ).toUpperCase()}.png`;
 
     return (
@@ -22,6 +22,6 @@ export const WhatsappProviderAvatar = React.forwardRef<React.ElementRef<typeof A
         <AvatarFallback className="text-xs">{provider_name?.slice(0, 2)?.toUpperCase()}</AvatarFallback>
       </Avatar>
     );
-  }
+  },
 );
 WhatsappProviderAvatar.displayName = 'WhatsappProviderAvatar';

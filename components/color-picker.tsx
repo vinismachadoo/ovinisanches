@@ -1,62 +1,84 @@
-import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
-import { Circle } from 'lucide-react';
 import * as React from 'react';
-import { HexColorInput, HexColorPicker } from 'react-colorful';
+import { HexColorPicker } from 'react-colorful';
+import { cn } from '@/lib/utils';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { Circle } from 'lucide-react';
+import { isValidHexColor } from '@/lib/swatch-generator';
 
 interface ColorPickerProps {
-  value: string;
+  value?: string;
+  defaultColor?: string;
   onValueChange(value: string): void;
-  defaultValue?: string;
   colorOptions?: string[] | undefined;
   disabled?: boolean;
   className?: string;
   popoverContentClassName?: string;
   colorPickerClassname?: string;
+  deselectable?: boolean;
 }
 
 const ColorPicker = ({
-  colorOptions = ['#3b82f6', '#22c55e', '#fb923c', '#ef4444', '#a855f7', '#ec4899'],
-  defaultValue = '#09090B',
-  value,
+  colorOptions = [
+    '#ef4444',
+    '#f97316',
+    '#f59e0b',
+    '#eab308',
+    '#84cc16',
+    '#22c55e',
+    '#10b981',
+    '#14b8a6',
+    '#06b6d4',
+    '#0ea5e9',
+    '#3b82f6',
+    '#6366f1',
+    '#8b5cf6',
+    '#a855f7',
+    '#d946ef',
+    '#ec4899',
+  ],
+  defaultColor,
+  value = '#000000',
   onValueChange,
   disabled,
   className,
   popoverContentClassName,
   colorPickerClassname,
 }: ColorPickerProps) => {
+  const displayColor = (value && value.length ? value : defaultColor || '#000000').toUpperCase();
   const [open, setOpen] = React.useState<boolean>(false);
+
+  const isHexColor = isValidHexColor(displayColor);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger disabled={disabled} asChild>
-        <Button
-          size="icon"
-          variant="ghost"
-          className={cn('w-7 h-7', className)}
-          style={{ '--selected-color': value || defaultValue } as React.CSSProperties}
-        >
-          <Circle className="w-5 h-5 border rounded-full text-(--selected-color) fill-(--selected-color)" />
-        </Button>
+      <PopoverTrigger
+        disabled={disabled}
+        render={<Button size="icon" variant="ghost" className={cn('size-7', className)} />}
+      >
+        <Circle
+          className={cn(
+            'size-5 border rounded-full text-(--color) fill-(--fill)',
+            !isHexColor && 'border-dashed text-transparent fill-transparent',
+          )}
+          style={{ '--color': displayColor, '--fill': displayColor } as React.CSSProperties}
+        />
       </PopoverTrigger>
-      <PopoverContent align="center" className={cn('p-2 rounded-sm w-fit max-w-xs border-0', popoverContentClassName)}>
-        <div
-          className="flex flex-col gap-y-2"
-          style={
-            {
-              '--selected-color': value,
-            } as React.CSSProperties
-          }
-        >
-          <div className="flex gap-2 flex-wrap w-full items-center justify-center">
+      <PopoverContent align="center" className={cn('p-2 rounded-md w-fit max-w-xs border-0', popoverContentClassName)}>
+        <div className="flex flex-col gap-y-4">
+          <div className="flex gap-2 flex-wrap w-full items-center justify-between">
             {colorOptions?.map((colorOption, colorIdx) => {
               return (
                 <Button
                   key={colorIdx}
                   size="icon"
                   variant="outline"
-                  className={cn('w-7 h-7 p-0.5', value === colorOption && 'border-(--selected-color)')}
+                  className={cn('size-7 p-0.5', displayColor === colorOption && 'border-(--selected-color)')}
+                  style={
+                    {
+                      '--selected-color': displayColor,
+                    } as React.CSSProperties
+                  }
                   onClick={() => onValueChange(colorOption.toUpperCase())}
                 >
                   <div className="aspect-square w-full rounded-sm" style={{ backgroundColor: colorOption }} />
@@ -64,16 +86,15 @@ const ColorPicker = ({
               );
             })}
           </div>
-          <HexColorInput
-            color={value || defaultValue}
-            onChange={(value) => onValueChange(value.toUpperCase())}
-            className="uppercase text-xs text-center rounded-sm w-full h-8 border"
+          <HexColorPicker
+            color={displayColor}
+            onChange={(color) => onValueChange(color.toUpperCase())}
+            className={cn('w-full!', colorPickerClassname)}
           />
-          <HexColorPicker color={value || defaultValue} onChange={onValueChange} className={cn(colorPickerClassname)} />
         </div>
       </PopoverContent>
     </Popover>
   );
 };
 
-export { ColorPicker };
+export default ColorPicker;
