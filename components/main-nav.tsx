@@ -2,6 +2,8 @@
 
 import ModeToggle from '@/components/mode-toggle';
 import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Globe } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -41,7 +43,18 @@ const MainNav = () => {
         </Button>
       </div>
 
-      <ModeToggle />
+      <div className="flex items-center gap-x-2">
+        <Tooltip>
+          <TooltipTrigger render={<Button variant="ghost" />}>
+            <Globe />
+            PT-BR
+            <span className="sr-only">Switch language</span>
+          </TooltipTrigger>
+          <TooltipContent>Switch language</TooltipContent>
+        </Tooltip>
+
+        <ModeToggle />
+      </div>
     </nav>
   );
 };

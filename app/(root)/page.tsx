@@ -1,19 +1,9 @@
 import MotionSignature from '@/app/(root)/components/motion-signature';
+import Presentation from '@/app/(root)/components/presentation';
+import SocialNetworks from '@/app/(root)/components/social-networks';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import {
-  GithubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  ListTree,
-  MailIcon,
-  MessageCircleMore,
-  PackageOpen,
-  ToyBrick,
-  TwitterIcon,
-} from 'lucide-react';
 
 export default function Home() {
   return (
@@ -29,79 +19,33 @@ export default function Home() {
       >
         <div className="size-full flex flex-col items-center justify-between">
           <div className="flex flex-col size-full gap-y-3">
-            <Skeleton className="size-full rounded-lg h-44" />
+            <div className="relative size-full rounded-lg h-44 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1762503203666-1f188d6f6a0a?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Photo by mymind on Unsplash"
+                title="Photo by mymind on Unsplash"
+                className="size-full object-cover brightness-120 dark:brightness-70 grayscale"
+              />
+              <div className="absolute inset-0 bg-lime-500 opacity-50 mix-blend-color" />
+            </div>
 
-            <div className="relative size-fit -mt-24 ms-12">
-              <Avatar className="size-40 after:hidden border-4 border-background bg-muted">
+            <div className="relative ms-12 flex gap-x-6">
+              <Avatar className="size-40 -mt-16 after:hidden border-4 border-background bg-muted">
                 <AvatarImage src="https://github.com/vinismachadoo.png" />
                 {/* <AvatarFallback>VS</AvatarFallback> */}
               </Avatar>
-            </div>
 
-            <div className="size-full p-4 gap-y-6 flex flex-col">
-              <div className="flex flex-wrap gap-2 [&_span]:text-2xl [&_span]:font-medium [&_span]:leading-none [&_span]:h-fit">
-                <span>The</span>
-                <span>agentic</span>
-                <span>way</span>
-                <span>of</span>
-                <div className="flex items-center justify-center rounded-sm bg-sky-500/20 size-7 p-1">
-                  <MessageCircleMore className="size-full text-sky-500" />
-                </div>
-                <span>thinking,</span>
-                <div className="flex items-center justify-center rounded-sm bg-emerald-500/20 size-7 p-1">
-                  <ToyBrick className="size-full text-emerald-500" />
-                </div>
-                <span>building,</span>
-                <div className="flex items-center justify-center rounded-sm bg-yellow-500/20 size-7 p-1">
-                  <PackageOpen className="size-full text-yellow-500" />
-                </div>
-                <span>shipping</span>
-                <span>and</span>
-                <div className="flex items-center justify-center rounded-sm bg-purple-500/20 size-7 p-1">
-                  <ListTree className="size-full text-purple-500" />
-                </div>
-                <span>managing</span>
-                <span>products.</span>
-              </div>
-
-              <div>
-                <p className="text-2xl">
-                  I solidify bridges between business, design and engineering teams with my expertise in product
-                  development and product lifecycle.
-                </p>
-              </div>
-
-              <div className="h-full border border-dashed rounded-sm"></div>
-
-              <div>
-                <p className="text-lg">
-                  Product <span className="line-through decoration-rose-500/60 decoration-double text-lg">Manager</span>{' '}
-                  Engineer based in Rio de Janeiro, Brazil.
-                </p>
+              <div className="flex flex-col gap-y-1">
+                <p className="text-lg font-medium">Vinicius Sanches Machado</p>
+                <Badge className="bg-green-50 text-green-500 dark:bg-green-950 dark:text-green-300 border border-green-400">
+                  Open to work
+                </Badge>
               </div>
             </div>
 
-            <div id="contact" className="flex items-center w-full justify-center gap-x-3 **:extend-touch-target">
-              <Button variant="outline" size="icon-sm">
-                <MailIcon />
-              </Button>
+            <Presentation />
 
-              <Button variant="outline" size="icon-sm">
-                <LinkedinIcon />
-              </Button>
-
-              <Button variant="outline" size="icon-sm">
-                <GithubIcon />
-              </Button>
-
-              <Button variant="outline" size="icon-sm">
-                <InstagramIcon />
-              </Button>
-
-              <Button variant="outline" size="icon-sm">
-                <TwitterIcon />
-              </Button>
-            </div>
+            <SocialNetworks />
           </div>
 
           <div>
