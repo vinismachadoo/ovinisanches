@@ -24,7 +24,7 @@ export default function Home() {
                 src="https://images.unsplash.com/photo-1762503203666-1f188d6f6a0a?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Photo by mymind on Unsplash"
                 title="Photo by mymind on Unsplash"
-                className="size-full object-cover brightness-120 dark:brightness-70 grayscale"
+                className="size-full object-cover brightness-140 dark:brightness-50 grayscale"
               />
               <div className="absolute inset-0 bg-lime-500 opacity-50 mix-blend-color" />
             </div>

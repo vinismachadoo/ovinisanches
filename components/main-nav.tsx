@@ -3,7 +3,7 @@
 import ModeToggle from '@/components/mode-toggle';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Globe } from 'lucide-react';
+import { Citrus, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -13,14 +13,11 @@ const MainNav = () => {
   return (
     <nav className="flex items-center justify-between w-full h-full gap-x-2 px-20 border-b **:data-active:bg-muted">
       <div className="flex items-center gap-x-2">
-        <Button
-          variant="ghost"
-          size="sm"
-          render={<Link href="/" data-active={pathname === '/'} />}
-          nativeButton={false}
-        >
-          Home
-        </Button>
+        <Link href="/">
+          <div className="size-6 rounded-sm flex items-center justify-center bg-lime-300 dark:bg-lime-800 mr-2 extend-touch-target hit-area-2">
+            <Citrus className="size-4" />
+          </div>
+        </Link>
 
         <Button
           variant="ghost"
