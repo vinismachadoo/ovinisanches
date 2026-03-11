@@ -31,12 +31,21 @@ const MainNav = () => {
         <Button
           variant="ghost"
           size="sm"
+          render={<Link href="/pitch" data-active={pathname === '/pitch'} />}
+          nativeButton={false}
+        >
+          Pitch Deck
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="sm"
           render={
             <Link href="/writings" data-active={pathname === '/writings'} className="pointer-events-none opacity-50" />
           }
           nativeButton={false}
         >
-          Writings
+          Writing
         </Button>
       </div>
 
