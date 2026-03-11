@@ -8,32 +8,53 @@ import { Kbd } from '@/components/ui/kbd';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useFullscreen } from '@/hooks/use-fullscreen';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight, Expand, Maximize2, Shrink, Undo2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Expand, Shrink, Undo2 } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import React from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-const SLIDE_COLORS = [
-  '#ef4444',
-  '#f97316',
-  '#f59e0b',
-  '#eab308',
-  '#84cc16',
-  '#22c55e',
-  '#10b981',
-  '#14b8a6',
-  '#06b6d4',
-  '#0ea5e9',
-  '#3b82f6',
-  '#6366f1',
-  '#8b5cf6',
-  '#a855f7',
-  '#d946ef',
-  '#ec4899',
-];
+const SLIDES_CONFIG = {
+  watermark: (
+    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-muted-foreground">Made by Vinicius Sanches</div>
+  ),
+  slides: [
+    {
+      content: (
+        <div className="flex items-center justify-center size-full">
+          <h1 className="text-5xl font-bold">Why me?</h1>
+        </div>
+      ),
+    },
+    {
+      content: (
+        <div className="flex items-center justify-center size-full">
+          <h1 className="text-5xl font-bold">Projects</h1>
+        </div>
+      ),
+    },
+    {
+      content: (
+        <div className="flex flex-col items-center justify-center size-full">
+          <div className="py-12 flex flex-col items-center justify-center gap-2">
+            <h1 className="text-3xl font-bold ">Shades</h1>
+            <p className="text-lg text-muted-foreground">A tool for generating balanced color palettes</p>
+          </div>
+          <div className="h-full w-7/10 rounded-t-lg overflow-hidden border border-b-0 border-border/50 -mb-4">
+            <img src="/labs-shades-dark.png" alt="Labs Shades Dark" className="hidden dark:block" />
+            <img src="/labs-shades-light.png" alt="Labs Shades Light" className="block dark:hidden" />
+          </div>
+        </div>
+      ),
+      showWatermark: false,
+    },
+  ],
+};
 
 const Slides = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
+
+  const { resolvedTheme, setTheme } = useTheme();
 
   React.useEffect(() => {
     if (!api) {
@@ -49,6 +70,11 @@ const Slides = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
 
   const { ref, fullscreen, toggleFullscreen } = useFullscreen();
 
+  useHotkeys('d', () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark'), {
+    enableOnFormTags: true,
+    enableOnContentEditable: true,
+  });
+
   useHotkeys('r', () => api?.scrollTo(0), {
     enableOnFormTags: true,
     enableOnContentEditable: true,
@@ -59,23 +85,37 @@ const Slides = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
     enableOnContentEditable: true,
   });
 
+  useHotkeys('left', () => api?.scrollPrev(), {
+    enableOnFormTags: true,
+    enableOnContentEditable: true,
+  });
+
+  useHotkeys('right', () => api?.scrollNext(), {
+    enableOnFormTags: true,
+    enableOnContentEditable: true,
+  });
+
   return (
-    <div className={cn('relative size-full', className)} {...props} ref={ref}>
+    <div
+      className={cn('relative size-full [--controls-height:calc(var(--spacing)*8)]', className)}
+      {...props}
+      ref={ref}
+    >
       <Carousel
         opts={{
           align: 'center',
         }}
-        className="size-full *:data-[slot=carousel-content]:h-full *:data-[slot=carousel-content]:rounded-lg"
+        className={cn(
+          'bg-background w-full *:data-[slot=carousel-content]:h-full *:data-[slot=carousel-content]:rounded-lg *:data-[slot=carousel-content]:border',
+          fullscreen ? 'h-full' : 'h-[calc(100%-var(--controls-height))]',
+        )}
         setApi={setApi}
       >
         <CarouselContent className="h-full ml-0">
-          {SLIDE_COLORS.map((c) => (
-            <CarouselItem
-              key={c}
-              style={{ '--color': c } as React.CSSProperties}
-              className={cn('flex items-center justify-center bg-(--color)')}
-            >
-              {c}
+          {SLIDES_CONFIG.slides.map((slide, index) => (
+            <CarouselItem key={`slide-${index}`} className={cn('relative flex items-center justify-center p-4')}>
+              {slide.content}
+              {slide.showWatermark !== false ? SLIDES_CONFIG.watermark : null}
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -85,7 +125,7 @@ const Slides = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
             'absolute',
             fullscreen
               ? 'bottom-0 pb-4 opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out w-full inset-x-0 flex justify-center'
-              : 'w-fit inset-x-1/2 -translate-x-1/2 -bottom-2',
+              : 'w-fit inset-x-1/2 -translate-x-1/2 -bottom-12',
           )}
         >
           <ButtonGroup orientation="horizontal" aria-label="slides navigation">
