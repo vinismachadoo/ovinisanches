@@ -73,6 +73,11 @@ const PresentationProvider = ({ children }: React.PropsWithChildren) => {
     enableOnContentEditable: true,
   });
 
+  useHotkeys('f', () => toggleFullscreen(), {
+    enableOnFormTags: true,
+    enableOnContentEditable: true,
+  });
+
   return (
     <PresentationContext.Provider
       data-slot="presentation-provider"
@@ -96,12 +101,7 @@ const Presentation = ({
   children,
   ...props
 }: React.ComponentProps<'div'> & { children: React.ReactNode }) => {
-  const { setApi, fullscreen, fullscreenRef, toggleFullscreen } = usePresentation();
-
-  useHotkeys('f', () => toggleFullscreen(), {
-    enableOnFormTags: true,
-    enableOnContentEditable: true,
-  });
+  const { setApi, fullscreen, fullscreenRef } = usePresentation();
 
   return (
     <div
@@ -115,13 +115,16 @@ const Presentation = ({
           align: 'center',
         }}
         className={cn(
-          'w-full h-full text-foreground *:data-[slot=carousel-content]:bg-background',
+          'size-full text-foreground *:data-[slot=carousel-content]:bg-background',
           '*:data-[slot=carousel-content]:rounded-lg',
           '*:data-[slot=carousel-content]:h-full',
           '*:data-[slot=carousel-content]:border',
-          !fullscreen && 'has-data-[slot=presentation-controls]:*:data-[slot=carousel-content]:rounded-b-none',
-          'has-data-[slot=presentation-controls]:*:data-[slot=carousel-content]:h-[calc(100%-var(--controls-height))]',
-          'has-data-[slot=presentation-controls]:*:data-[slot=carousel-content]:border-b-0',
+          !fullscreen &&
+            cn(
+              'has-data-[slot=presentation-controls]:*:data-[slot=carousel-content]:rounded-b-none',
+              'has-data-[slot=presentation-controls]:*:data-[slot=carousel-content]:h-[calc(100%-var(--controls-height))]',
+              'has-data-[slot=presentation-controls]:*:data-[slot=carousel-content]:border-b-0',
+            ),
         )}
         setApi={setApi}
         id="slides"
