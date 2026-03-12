@@ -82,8 +82,8 @@ const SLIDES_CONFIG = {
               className={cn(
                 'transition-opacity duration-1500 delay-300',
                 'opacity-0 data-open:opacity-100',
-                'has-data-open:**:animate-in has-data-open:**:fade-in-0 has-data-open:**:zoom-in-50 **:duration-1500',
-                'has-data-closed:**:animate-out has-data-closed:**:fade-out-0 has-data-closed:**:zoom-out-50',
+                'has-data-open:*:animate-in has-data-open:*:fade-in-0 has-data-open:*:zoom-in-50 *:duration-1500',
+                'has-data-closed:*:animate-out has-data-closed:*:fade-out-0 has-data-closed:*:zoom-out-50',
               )}
             >
               <ShadesStorageUsage
@@ -160,7 +160,7 @@ const Slides = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
 
   return (
     <div
-      className={cn('relative size-full [--controls-height:calc(var(--spacing)*12)]', className)}
+      className={cn('relative size-full [--controls-height:calc(var(--spacing)*16)]', className)}
       {...props}
       ref={ref}
     >
@@ -170,10 +170,10 @@ const Slides = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
         }}
         className={cn(
           'w-full',
-          '*:data-[slot=carousel-content]:h-full *:data-[slot=carousel-content]:rounded-lg *:data-[slot=carousel-content]:border *:data-[slot=carousel-content]:bg-background *:data-[slot=carousel-content]:text-foreground',
+          '*:data-[slot=carousel-content]:rounded-lg *:data-[slot=carousel-content]:border *:data-[slot=carousel-content]:bg-background *:data-[slot=carousel-content]:text-foreground',
           fullscreen
-            ? 'h-full'
-            : 'h-[calc(100%-var(--controls-height))] *:data-[slot=carousel-content]:rounded-b-none *:data-[slot=carousel-content]:border-b-0',
+            ? 'h-full *:data-[slot=carousel-content]:h-full'
+            : 'h-full *:data-[slot=carousel-content]:h-[calc(100%-var(--controls-height))] *:data-[slot=carousel-content]:rounded-b-none *:data-[slot=carousel-content]:border-b-0',
         )}
         setApi={setApi}
         id="slides"
@@ -189,10 +189,10 @@ const Slides = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
 
         <div
           className={cn(
-            'absolute flex items-center justify-between p-4',
+            'flex items-center justify-between p-4',
             fullscreen
-              ? 'bottom-0 pb-4 opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out w-full inset-x-0'
-              : 'w-full inset-x-1/2 -translate-x-1/2 -bottom-16 border rounded-b-lg bg-background',
+              ? 'absolute bottom-0 pb-4 opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out w-full inset-x-0'
+              : 'w-full border rounded-b-lg bg-background',
           )}
         >
           <ButtonGroup>
