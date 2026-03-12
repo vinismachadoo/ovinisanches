@@ -1,5 +1,5 @@
-import React from 'react';
-import Slides from './components/slides';
+import Slides from '@/app/pitch/components/slides';
+import * as React from 'react';
 
 const HirePage = () => {
   return (

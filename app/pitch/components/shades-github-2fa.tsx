@@ -1,18 +1,17 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { EmptyMedia } from '@/components/ui/empty';
 import { Field, FieldDescription } from '@/components/ui/field';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
-import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { Github } from 'lucide-react';
 import React from 'react';
 import { toast } from 'sonner';
 
-const GithubAuth = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
+const ShadesGithub2FA = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
   const [otp, setOtp] = React.useState<string>('');
 
   const handleVerify = () => {
@@ -69,4 +68,4 @@ const GithubAuth = ({ className, ...props }: React.ComponentProps<typeof Card>) 
   );
 };
 
-export default GithubAuth;
+export default ShadesGithub2FA;

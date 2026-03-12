@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Bell, Mail, MessageCircle, MessageSquare, Send, Slack } from 'lucide-react';
 import React from 'react';
 
-const NotificationSettings = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
+const ShadesNotifications = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
   return (
     <Card className={cn(className)} {...props}>
       <CardHeader>
@@ -77,4 +77,4 @@ const NotificationSettings = ({ className, ...props }: React.ComponentProps<type
   );
 };
 
-export default NotificationSettings;
+export default ShadesNotifications;

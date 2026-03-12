@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
-const StorageUsage = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
+const ShadesStorageUsage = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
   const [hoveredSource, setHoveredSource] = React.useState<string | null>(null);
 
   const data = [
@@ -112,4 +112,4 @@ const StorageUsage = ({ className, ...props }: React.ComponentProps<typeof Card>
   );
 };
 
-export default StorageUsage;
+export default ShadesStorageUsage;

@@ -11,7 +11,7 @@ import { Minus, Plus } from 'lucide-react';
 import * as React from 'react';
 import { Bar, BarChart, Cell, XAxis, YAxis } from 'recharts';
 
-const AirbnbPriceFilter = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
+const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
   const [priceRange, setPriceRange] = React.useState<number[]>([280, 580]);
 
   const bins = [
@@ -153,4 +153,4 @@ const AirbnbPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
   );
 };
 
-export default AirbnbPriceFilter;
+export default ShadesPriceFilter;
