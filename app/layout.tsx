@@ -57,29 +57,29 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ReactQueryProvider>
-            <MainCommandMenuProvider>
-              <NuqsAdapter>
-                <TooltipProvider>
-                  <div data-slot="layout" className="flex flex-col">
-                    <header className="bg-background sticky top-0 z-50 w-full">
-                      <div className="3xl:fixed:px-0">
-                        <div className="3xl:fixed:container flex h-(--main-nav-height) items-center">
-                          <MainNav />
-                        </div>
+            {/* <MainCommandMenuProvider> */}
+            <NuqsAdapter>
+              <TooltipProvider>
+                <div data-slot="layout" className="flex flex-col">
+                  <header className="bg-background sticky top-0 z-50 w-full">
+                    <div className="3xl:fixed:px-0">
+                      <div className="3xl:fixed:container flex h-(--main-nav-height) items-center">
+                        <MainNav />
                       </div>
-                    </header>
+                    </div>
+                  </header>
 
-                    <main className="flex flex-col h-[calc(100svh-var(--main-nav-height))] w-screen">{children}</main>
-                  </div>
-                </TooltipProvider>
-                <StyleSwitcher />
-                <TailwindIndicator />
-                <Toaster />
+                  <main className="flex flex-col h-[calc(100svh-var(--main-nav-height))] w-screen">{children}</main>
+                </div>
+              </TooltipProvider>
+              <StyleSwitcher />
+              <TailwindIndicator />
+              <Toaster />
 
-                {/* open cmd+k in all pages */}
-                {/* <MainCommandMenuContent /> */}
-              </NuqsAdapter>
-            </MainCommandMenuProvider>
+              {/* open cmd+k in all pages */}
+              {/* <MainCommandMenuContent /> */}
+            </NuqsAdapter>
+            {/* </MainCommandMenuProvider> */}
           </ReactQueryProvider>
         </ThemeProvider>
       </body>

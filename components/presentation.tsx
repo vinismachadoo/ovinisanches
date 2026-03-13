@@ -9,7 +9,7 @@ import { useFullscreen } from '@/hooks/use-fullscreen';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, Expand, Moon, Shrink, Sun, Undo2 } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { parseAsInteger, useQueryState } from 'nuqs';
+import { parseAsInteger, parseAsString, useQueryState } from 'nuqs';
 import React from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
@@ -29,6 +29,7 @@ const PresentationContext = React.createContext<
 const PresentationProvider = ({ children }: React.PropsWithChildren) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = useQueryState('slide', parseAsInteger.withDefault(1));
+  const [mode, setMode] = useQueryState('mode', parseAsString.withDefault('normal'));
 
   React.useEffect(() => {
     if (!api) {
@@ -53,30 +54,15 @@ const PresentationProvider = ({ children }: React.PropsWithChildren) => {
   const { ref: fullscreenRef, fullscreen, toggleFullscreen } = useFullscreen();
 
   const { resolvedTheme, setTheme } = useTheme();
-  useHotkeys('d', () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark'), {
-    enableOnFormTags: true,
-    enableOnContentEditable: true,
-  });
+  useHotkeys('d', () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark'));
 
-  useHotkeys('r', () => setCurrent(1), {
-    enableOnFormTags: true,
-    enableOnContentEditable: true,
-  });
+  useHotkeys('r', () => setCurrent(1));
 
-  useHotkeys('left', () => setCurrent(Math.max(1, current - 1)), {
-    enableOnFormTags: true,
-    enableOnContentEditable: true,
-  });
+  useHotkeys('left', () => setCurrent(Math.max(1, current - 1)));
 
-  useHotkeys('right', () => setCurrent(Math.min(api?.scrollSnapList()?.length ?? 0, current + 1)), {
-    enableOnFormTags: true,
-    enableOnContentEditable: true,
-  });
+  useHotkeys('right', () => setCurrent(Math.min(api?.scrollSnapList()?.length ?? 0, current + 1)));
 
-  useHotkeys('f', () => toggleFullscreen(), {
-    enableOnFormTags: true,
-    enableOnContentEditable: true,
-  });
+  useHotkeys('f', () => toggleFullscreen());
 
   return (
     <PresentationContext.Provider
@@ -106,7 +92,7 @@ const Presentation = ({
   return (
     <div
       data-slot="presentation"
-      className={cn('relative size-full [--controls-height:calc(var(--spacing)*16)]', className)}
+      className={cn('relative size-full overscroll-none [--controls-height:calc(var(--spacing)*16)]', className)}
       {...props}
       ref={fullscreenRef}
     >
@@ -198,7 +184,7 @@ const PresentationControls = ({ children, className, ...props }: React.Component
                 variant="outline"
                 size="icon-sm"
                 onClick={() => setCurrent(Math.max(0, current - 1))}
-                className={cn(!api?.canScrollPrev() && 'pointer-events-none [&_svg]:opacity-50')}
+                className={cn(current === 1 && 'pointer-events-none [&_svg]:opacity-50')}
               />
             }
           >
@@ -226,7 +212,7 @@ const PresentationControls = ({ children, className, ...props }: React.Component
                 variant="outline"
                 size="icon-sm"
                 onClick={() => setCurrent(Math.min(api?.scrollSnapList()?.length ?? 0, current + 1))}
-                className={cn(!api?.canScrollNext() && 'pointer-events-none [&_svg]:opacity-50')}
+                className={cn(current === api?.scrollSnapList()?.length && 'pointer-events-none [&_svg]:opacity-50')}
               />
             }
           >

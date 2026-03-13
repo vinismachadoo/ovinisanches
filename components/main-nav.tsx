@@ -19,33 +19,16 @@ const MainNav = () => {
           </div>
         </Link>
 
-        <Button
-          variant="ghost"
-          size="sm"
-          render={<Link href="/resume" data-active={pathname === '/resume'} />}
-          nativeButton={false}
-        >
-          Résumé
+        <Button variant="ghost" size="sm" data-active={pathname === '/resume'}>
+          <Link href="/resume">Résumé</Link>
         </Button>
 
-        <Button
-          variant="ghost"
-          size="sm"
-          render={<Link href="/pitch" data-active={pathname === '/pitch'} />}
-          nativeButton={false}
-        >
-          Pitch Deck
+        <Button variant="ghost" size="sm" data-active={pathname === '/pitch'}>
+          <Link href="/pitch">Pitch Deck</Link>
         </Button>
 
-        <Button
-          variant="ghost"
-          size="sm"
-          render={
-            <Link href="/writings" data-active={pathname === '/writings'} className="pointer-events-none opacity-50" />
-          }
-          nativeButton={false}
-        >
-          Writing
+        <Button variant="ghost" size="sm" disabled data-active={pathname === '/writing'}>
+          <Link href="/writing">Writing</Link>
         </Button>
       </div>
 
