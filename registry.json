@@ -1,0 +1,81 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ovinisanches/ui",
+  "homepage": "https://github.com/anmoldeepsingh/mapcn",
+  "items": [
+    {
+      "name": "index",
+      "type": "registry:style",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "devDependencies": ["tw-animate-css"],
+      "registryDependencies": ["utils"],
+      "files": [],
+      "cssVars": {}
+    },
+    {
+      "name": "style",
+      "type": "registry:style",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "devDependencies": ["tw-animate-css"],
+      "registryDependencies": ["utils"],
+      "files": [],
+      "cssVars": {}
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react/accordion"],
+      "files": [
+        {
+          "path": "components/ui/accordion.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/accordion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react/button"],
+      "files": [
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        }
+      ],
+      "css": {
+        "@layer base": {
+          "button:not(:disabled), [role='button']:not(:disabled)": {
+            "@apply cursor-pointer": {}
+          }
+        }
+      }
+    }
+    // {
+    //   "name": "map",
+    //   "type": "registry:ui",
+    //   "title": "Map",
+    //   "description": "A MapLibre-powered map component with markers, popups, tooltips, routes, and controls.",
+    //   "dependencies": ["maplibre-gl", "lucide-react"],
+    //   "registryDependencies": [],
+    //   "files": [
+    //     {
+    //       "path": "src/registry/map.tsx",
+    //       "type": "registry:ui",
+    //       "target": "components/ui/map.tsx"
+    //     }
+    //   ],
+    //   "css": {
+    //     "@layer base": {
+    //       ".maplibregl-popup-content": {
+    //          "@apply bg-transparent! shadow-none! p-0! rounded-none!": {}
+    //       },
+    //       ".maplibregl-popup-tip": {
+    //         "@apply hidden!": {}
+    //       }
+    //     }
+    //   }
+    // }
+  ]
+}
