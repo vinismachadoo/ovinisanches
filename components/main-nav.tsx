@@ -30,13 +30,17 @@ const MainNav = () => {
         <Button variant="ghost" size="sm" disabled data-active={pathname === '/writing'}>
           <Link href="/writing">Writing</Link>
         </Button>
+
+        <Button variant="ghost" size="sm" disabled data-active={pathname === '/world-map'}>
+          <Link href="/world-map">World Map</Link>
+        </Button>
       </div>
 
       <div className="flex items-center gap-x-2">
         <Tooltip>
           <TooltipTrigger render={<Button variant="ghost" />}>
             <Globe />
-            PT-BR
+            EN-US
             <span className="sr-only">Switch language</span>
           </TooltipTrigger>
           <TooltipContent>Switch language</TooltipContent>

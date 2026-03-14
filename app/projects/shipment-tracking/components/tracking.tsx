@@ -1,11 +1,11 @@
 'use client';
 
 import OrderAttachmentsDialog from '@/app/projects/shipment-tracking/components/attachments-dialog';
-import CarrierAvatar from '@/components/carrier-avatar';
-import OrderProviderAvatar from '@/components/order-provider-avatar';
-import { OrderStatus, OrderStatusBadge, OrderStatusColors, OrderTypes } from '@/components/order-status-badge';
-import { OrderTypeBadge } from '@/components/order-type-badge';
-import SellerChip from '@/components/seller-chip';
+import CarrierAvatar from '@/components/backup/carrier-avatar';
+import OrderProviderAvatar from '@/components/backup/order-provider-avatar';
+import { OrderStatus, OrderStatusBadge, OrderStatusColors, OrderTypes } from '@/components/backup/order-status-badge';
+import { OrderTypeBadge } from '@/components/backup/order-type-badge';
+import SellerChip from '@/components/backup/seller-chip';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';

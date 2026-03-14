@@ -1,7 +1,6 @@
-import { MainCommandMenuContent, MainCommandMenuProvider } from '@/components/main-command-menu';
+import MainNav from '@/components/main-nav';
 import ReactQueryProvider from '@/components/providers/react-query-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
-import { StyleSwitcher } from '@/components/style-switcher';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -10,7 +9,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import './globals.css';
-import MainNav from '@/components/main-nav';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -57,7 +55,6 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ReactQueryProvider>
-            {/* <MainCommandMenuProvider> */}
             <NuqsAdapter>
               <TooltipProvider>
                 <div data-slot="layout" className="flex flex-col">
@@ -72,14 +69,9 @@ export default function RootLayout({
                   <main className="flex flex-col h-[calc(100svh-var(--main-nav-height))] w-screen">{children}</main>
                 </div>
               </TooltipProvider>
-              <StyleSwitcher />
               <TailwindIndicator />
-              <Toaster />
-
-              {/* open cmd+k in all pages */}
-              {/* <MainCommandMenuContent /> */}
+              <Toaster richColors />
             </NuqsAdapter>
-            {/* </MainCommandMenuProvider> */}
           </ReactQueryProvider>
         </ThemeProvider>
       </body>

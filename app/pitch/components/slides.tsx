@@ -29,7 +29,7 @@ import raspberrypiLogo from '@/public/logos/raspberry-pi-logo.svg';
 import microsoftTeamsLogo from '@/public/logos/microsoft-teams-logo.svg';
 import openAiLogo from '@/public/logos/openai-logo.svg';
 
-const Slide1 = () => {
+const SlideWhyMe = () => {
   return (
     <PresentationSlide>
       <h1 className="text-5xl font-bold">Why me?</h1>
@@ -37,7 +37,7 @@ const Slide1 = () => {
   );
 };
 
-const Slide2 = () => {
+const SlideProjectsCover = () => {
   return (
     <PresentationSlide>
       <h1 className="text-5xl font-bold">Projects</h1>
@@ -45,8 +45,9 @@ const Slide2 = () => {
   );
 };
 
-const Slide3 = () => {
+const SlideLabsShades = () => {
   const { current } = usePresentation();
+  const slide = 3;
 
   return (
     <PresentationSlide className="relative flex-col">
@@ -102,7 +103,7 @@ const Slide3 = () => {
         }
       >
         <div
-          data-open={current === 3}
+          data-open={current === slide}
           className={cn(
             'transition-opacity duration-1500 delay-300',
             'opacity-0 data-open:opacity-100',
@@ -111,23 +112,23 @@ const Slide3 = () => {
           )}
         >
           <ShadesStorageUsage
-            data-open={current === 3}
-            data-closed={current !== 3}
+            data-open={current === slide}
+            data-closed={current !== slide}
             className="absolute top-12 left-12"
           />
           <ShadesGithub2FA
-            data-open={current === 3}
-            data-closed={current !== 3}
+            data-open={current === slide}
+            data-closed={current !== slide}
             className="absolute bottom-12 left-12 w-100"
           />
           <ShadesNotifications
-            data-open={current === 3}
-            data-closed={current !== 3}
+            data-open={current === slide}
+            data-closed={current !== slide}
             className="absolute top-20 right-12 w-100"
           />
           <ShadesPriceFilter
-            data-open={current === 3}
-            data-closed={current !== 3}
+            data-open={current === slide}
+            data-closed={current !== slide}
             className="absolute bottom-20 right-12 w-130"
           />
         </div>
@@ -136,7 +137,7 @@ const Slide3 = () => {
   );
 };
 
-const Slide4 = () => {
+const SlidePresentxUi = () => {
   return (
     <PresentationSlide className="relative flex-col">
       <div className="py-10 flex flex-col items-center justify-center gap-y-3">
@@ -150,7 +151,7 @@ const Slide4 = () => {
           alt="PresentX Dark"
           className="size-10 hidden dark:block"
         />
-        <h1 className="text-3xl font-bold ">presentx</h1>
+        <h1 className="text-3xl font-bold ">presentx-ui</h1>
         <p className="text-lg text-muted-foreground text-balance text-center w-[60%]">
           OSS Component Library for creating shareable presentations on the web. Supports fullscreen mode, keyboard
           shortcuts and dark/light themes
@@ -165,7 +166,7 @@ const Slide4 = () => {
   );
 };
 
-const Slide5 = () => {
+const SlideMotionvg = () => {
   const { current, fullscreen } = usePresentation();
 
   return (
@@ -248,11 +249,11 @@ const Slides = () => {
     <PresentationProvider>
       <Presentation>
         <PresentationContent>
-          <Slide1 />
-          <Slide2 />
-          <Slide3 />
-          <Slide4 />
-          <Slide5 />
+          <SlideWhyMe />
+          <SlideProjectsCover />
+          <SlideLabsShades />
+          <SlideMotionvg />
+          <SlidePresentxUi />
         </PresentationContent>
         <PresentationControls />
       </Presentation>

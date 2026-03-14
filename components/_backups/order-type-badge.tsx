@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { OrderTypes } from '@/components/order-status-badge';
+import { OrderTypes } from '@/components/backup/order-status-badge';
 
 export interface OrderTypeBadgeProps
   extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof orderTypeBadgeVariants> {}

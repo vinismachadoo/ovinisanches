@@ -3,6 +3,7 @@ import Presentation from '@/app/(root)/components/presentation';
 import SocialNetworks from '@/app/(root)/components/social-networks';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
@@ -54,7 +55,18 @@ export default function Home() {
           </div>
         </div>
 
-        <Skeleton className="size-full rounded-lg flex flex-col items-center justify-center">Soon...</Skeleton>
+        <div className="size-full rounded-lg flex flex-col">
+          <div className="flex flex-col gap-y-4">
+            <Label className="text-base">Projects</Label>
+            <div className="w-full grid grid-cols-5 gap-4 *:rounded-lg">
+              <Skeleton className="h-40 flex items-center justify-center">labs</Skeleton>
+              <Skeleton className="h-40 flex items-center justify-center">motionvg</Skeleton>
+              <Skeleton className="h-40 flex items-center justify-center">presentx-ui</Skeleton>
+              <Skeleton className="h-40 flex items-center justify-center">json-forms</Skeleton>
+              <Skeleton className="h-40 flex items-center justify-center">charttier</Skeleton>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
