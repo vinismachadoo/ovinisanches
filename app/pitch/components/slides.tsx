@@ -166,11 +166,34 @@ const Slide4 = () => {
 };
 
 const Slide5 = () => {
-  const { current } = usePresentation();
+  const { current, fullscreen } = usePresentation();
 
   return (
-    <PresentationSlide className="relative flex-col">
-      <div className="py-10 flex flex-col items-center justify-center gap-y-3">
+    <PresentationSlide className="relative">
+      <div key="motionvg-logos-left" className={cn('size-full', fullscreen && 'py-40')}>
+        <div className="relative size-full">
+          <Motionvg key={`${current}-metamask`} src={metamaskLogo.src} className="absolute size-64 top-16 left-16" />
+          <Motionvg
+            key={`${current}-microsoft-teams`}
+            src={microsoftTeamsLogo.src}
+            className="absolute size-56 top-10 right-16"
+          />
+          <Motionvg
+            key={`${current}-amazon`}
+            src={amazonLogo.src}
+            className="absolute size-72 bottom-1/2 translate-y-1/2 left-1/2 -translate-x-1/2 dark:[&_*[fill*='#221F1F']]:fill-white!"
+          />
+          <Motionvg
+            key={`${current}-openai`}
+            src={openAiLogo.src}
+            className="absolute size-56 bottom-16 left-16 dark:[&_path]:fill-white!"
+          />
+
+          <Motionvg key={`${current}-livup`} src={livupLogo.src} className="absolute size-56 bottom-10 right-16" />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center gap-y-3 min-w-1/5">
         <img
           src="data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='36' rx='8' fill='%23CBD5E1'/%3E%3Cpath d='M13 9.50001C18 7.50001 20 12 16 13.5C7.5 16 8 21 11 22C16 24 20 12 25 15C30 18 25.5 28.5 21 27C16 24.5 21.5 16 27 25' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A"
           alt="Motionvg Light"
@@ -182,7 +205,7 @@ const Slide5 = () => {
           className="size-10 hidden dark:block"
         />
         <h1 className="text-3xl font-bold ">Motionvg</h1>
-        <p className="text-lg text-muted-foreground text-balance text-center w-[60%]">
+        <p className="text-lg text-muted-foreground text-balance text-center w-full">
           Animate SVGs with ease using the power of React and Tailwind CSS
         </p>
         <Button>
@@ -192,47 +215,30 @@ const Slide5 = () => {
         </Button>
       </div>
 
-      <React.Fragment key="motionvg-logos">
-        <Motionvg key={`${current}-metamask`} src={metamaskLogo.src} className="absolute size-64 top-16 left-16" />
-        <Motionvg
-          key={`${current}-microsoft-teams`}
-          src={microsoftTeamsLogo.src}
-          className="absolute size-56 top-10 left-1/4"
-        />
-        <Motionvg
-          key={`${current}-raspberrypi`}
-          src={raspberrypiLogo.src}
-          className="absolute size-56 top-10 right-1/4 dark:[&_*:not([fill])]:fill-white!"
-        />
-        <Motionvg key={`${current}-edge`} src={edgeLogo.src} className="absolute size-56 top-16 right-16" />
+      <div key="motionvg-logos-right" className={cn('size-full', fullscreen && 'py-40')}>
+        <div className="relative size-full">
+          <Motionvg
+            key={`${current}-raspberrypi`}
+            src={raspberrypiLogo.src}
+            className="absolute size-56 top-10 left-16 dark:[&_*:not([fill])]:fill-white!"
+          />
+          <Motionvg key={`${current}-edge`} src={edgeLogo.src} className="absolute size-56 top-16 right-16" />
 
-        <Motionvg
-          key={`${current}-amazon`}
-          src={amazonLogo.src}
-          className="absolute size-72 bottom-1/2 translate-y-1/2 left-72 dark:[&_*[fill*='#221F1F']]:fill-white!"
-        />
+          <Motionvg
+            key={`${current}-wati`}
+            src={watiLogo.src}
+            className="absolute size-72 bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 dark:[&_*[class*='cls-2']]:fill-white!"
+          />
 
-        <Motionvg
-          key={`${current}-wati`}
-          src={watiLogo.src}
-          className="absolute size-72 bottom-1/2 translate-y-1/2 right-80 dark:[&_*[class*='cls-2']]:fill-white!"
-        />
-
-        <Motionvg
-          key={`${current}-openai`}
-          src={openAiLogo.src}
-          className="absolute size-56 bottom-16 left-16 dark:[&_path]:fill-white!"
-        />
-
-        <Motionvg key={`${current}-livup`} src={livupLogo.src} className="absolute size-56 bottom-10 left-1/4" />
-        <Motionvg key={`${current}-openclaw`} src={openclawLogo.src} className="absolute size-56 bottom-10 right-1/4" />
-        <Motionvg
-          key={`${current}-bmw`}
-          src={bmwLogo.src}
-          pathDelay={0.08}
-          className="absolute size-56 bottom-16 right-16"
-        />
-      </React.Fragment>
+          <Motionvg key={`${current}-openclaw`} src={openclawLogo.src} className="absolute size-56 bottom-10 left-16" />
+          <Motionvg
+            key={`${current}-bmw`}
+            src={bmwLogo.src}
+            pathDelay={0.08}
+            className="absolute size-56 bottom-16 right-16"
+          />
+        </div>
+      </div>
     </PresentationSlide>
   );
 };
