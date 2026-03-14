@@ -192,41 +192,44 @@ const Slide5 = () => {
       </div>
 
       <React.Fragment key="motionvg-logos">
+        <Motionvg key={`${current}-metamask`} src={metamaskLogo.src} className="absolute size-64 top-16 left-16" />
+        <Motionvg
+          key={`${current}-microsoft-teams`}
+          src={microsoftTeamsLogo.src}
+          className="absolute size-56 top-10 left-1/4"
+        />
+        <Motionvg
+          key={`${current}-raspberrypi`}
+          src={raspberrypiLogo.src}
+          className="absolute size-56 top-10 right-1/4 dark:[&_*:not([fill])]:fill-white!"
+        />
+        <Motionvg key={`${current}-edge`} src={edgeLogo.src} className="absolute size-56 top-16 right-16" />
+
+        <Motionvg
+          key={`${current}-amazon`}
+          src={amazonLogo.src}
+          className="absolute size-72 bottom-1/2 translate-y-1/2 left-72 dark:[&_*[fill*='#221F1F']]:fill-white!"
+        />
+
+        <Motionvg
+          key={`${current}-wati`}
+          src={watiLogo.src}
+          className="absolute size-72 bottom-1/2 translate-y-1/2 right-80 dark:[&_*[class*='cls-2']]:fill-white!"
+        />
+
+        <Motionvg
+          key={`${current}-openai`}
+          src={openAiLogo.src}
+          className="absolute size-56 bottom-16 left-16 dark:[&_path]:fill-white!"
+        />
+
+        <Motionvg key={`${current}-livup`} src={livupLogo.src} className="absolute size-56 bottom-10 left-1/4" />
+        <Motionvg key={`${current}-openclaw`} src={openclawLogo.src} className="absolute size-56 bottom-10 right-1/4" />
         <Motionvg
           key={`${current}-bmw`}
           src={bmwLogo.src}
           pathDelay={0.08}
           className="absolute size-56 bottom-16 right-16"
-        />
-        <Motionvg
-          key={`${current}-amazon`}
-          src={amazonLogo.src}
-          className="absolute size-72 bottom-1/2 translate-y-1/2 left-72"
-        />
-        <Motionvg key={`${current}-edge`} src={edgeLogo.src} className="absolute size-56 top-16 right-16" />
-        <Motionvg key={`${current}-metamask`} src={metamaskLogo.src} className="absolute size-64 top-16 left-16" />
-        <Motionvg key={`${current}-openclaw`} src={openclawLogo.src} className="absolute size-56 bottom-10 right-140" />
-        <Motionvg
-          key={`${current}-wati`}
-          src={watiLogo.src}
-          className="absolute size-72 bottom-1/2 translate-y-1/2 right-80"
-        />
-
-        <Motionvg key={`${current}-livup`} src={livupLogo.src} className="absolute size-56 bottom-10 left-120" />
-        <Motionvg
-          key={`${current}-raspberrypi`}
-          src={raspberrypiLogo.src}
-          className="absolute size-56 top-10 right-140"
-        />
-        <Motionvg
-          key={`${current}-microsoft-teams`}
-          src={microsoftTeamsLogo.src}
-          className="absolute size-56 top-10 left-120"
-        />
-        <Motionvg
-          key={`${current}-openai`}
-          src={openAiLogo.src}
-          className="absolute size-56 bottom-16 left-16 dark:[&_path]:fill-white"
         />
       </React.Fragment>
     </PresentationSlide>
