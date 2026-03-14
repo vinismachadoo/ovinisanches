@@ -98,7 +98,14 @@ export const resolveReferences = (element: Element, groups: Record<string, Recor
   return {};
 };
 
-export const AnimatedSvg = ({ src, className, ...props }: React.ComponentPropsWithoutRef<'div'> & { src: string }) => {
+interface MotionvgProps extends React.ComponentPropsWithoutRef<'div'> {
+  src: string;
+  delay?: number;
+  pathDelay?: number;
+  duration?: number;
+}
+
+const Motionvg = ({ src, className, duration = 2, pathDelay = 0.15, delay = 0, ...props }: MotionvgProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   const [svgContent, setSvgContent] = React.useState<string | null>(null);
@@ -111,9 +118,7 @@ export const AnimatedSvg = ({ src, className, ...props }: React.ComponentPropsWi
       });
   }, [src]);
 
-  const drawDuration = 2;
-  const delay = 0;
-  const strokeColor = '#09090B';
+  const strokeColor = 'var(--foreground)';
   const fillAfterEachPath = false;
 
   React.useEffect(() => {
@@ -163,7 +168,7 @@ export const AnimatedSvg = ({ src, className, ...props }: React.ComponentPropsWi
         paths.forEach((path, index) => {
           if (path instanceof SVGGeometryElement) {
             const length = path.getTotalLength();
-            const totalStrokeDuration = drawDuration + index * delay;
+            const totalStrokeDuration = duration + delay + index * pathDelay;
 
             maxStrokeDuration = Math.max(maxStrokeDuration, totalStrokeDuration);
 
@@ -229,7 +234,7 @@ export const AnimatedSvg = ({ src, className, ...props }: React.ComponentPropsWi
             path.style.fillOpacity = '0';
 
             path.style.animation = `
-              animate-draw-path ${drawDuration}s ease-in-out ${index * delay}s forwards
+              animate-draw-path ${duration}s ease-in-out ${delay + index * pathDelay}s forwards
               `;
 
             // // Modify animation for gradient-filled paths
@@ -313,10 +318,10 @@ export const AnimatedSvg = ({ src, className, ...props }: React.ComponentPropsWi
         }
       }
     }
-  }, [svgContent, drawDuration, delay, fillAfterEachPath, strokeColor]);
+  }, [svgContent, duration, pathDelay, delay]);
 
   return (
-    <div className={cn('flex size-full items-center justify-center p-8', className)} {...props}>
+    <div className={cn('flex size-full items-center justify-center p-4', className)} {...props}>
       <style jsx>{`
         @keyframes animate-draw-path {
           to {
@@ -345,3 +350,5 @@ export const AnimatedSvg = ({ src, className, ...props }: React.ComponentPropsWi
     </div>
   );
 };
+
+export default Motionvg;

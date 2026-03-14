@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatedSvg } from '@/app/pitch/components/animated-svg';
+import Motionvg from '@/app/pitch/components/motionvg';
 import ShadesGithub2FA from '@/app/pitch/components/shades-github-2fa';
 import ShadesNotifications from '@/app/pitch/components/shades-notifications';
 import ShadesPriceFilter from '@/app/pitch/components/shades-price-filter';
@@ -184,32 +184,51 @@ const Slide5 = () => {
         <p className="text-lg text-muted-foreground text-balance text-center w-[60%]">
           Animate SVGs with ease using the power of React and Tailwind CSS
         </p>
-        <Button disabled>
+        <Button>
           <Link href="https://motionvg.ovinisanches.com" target="_blank" rel="noopener noreferrer">
-            Soon
+            Try it out
           </Link>
         </Button>
       </div>
 
-      <AnimatedSvg key={`${current}-bmw`} src={bmwLogo.src} className="absolute size-80 bottom-16 right-16" />
-      <AnimatedSvg key={`${current}-amazon`} src={amazonLogo.src} className="absolute size-80 bottom-60 left-72" />
-      <AnimatedSvg key={`${current}-edge`} src={edgeLogo.src} className="absolute size-80 top-16 right-16" />
-      <AnimatedSvg key={`${current}-metamask`} src={metamaskLogo.src} className="absolute size-80 top-16 left-16" />
-      <AnimatedSvg key={`${current}-openclaw`} src={openclawLogo.src} className="absolute size-80 bottom-60 right-80" />
-      <AnimatedSvg key={`${current}-wati`} src={watiLogo.src} className="absolute size-80 bottom-16 left-16" />
+      <React.Fragment key="motionvg-logos">
+        <Motionvg
+          key={`${current}-bmw`}
+          src={bmwLogo.src}
+          pathDelay={0.08}
+          className="absolute size-56 bottom-16 right-16"
+        />
+        <Motionvg
+          key={`${current}-amazon`}
+          src={amazonLogo.src}
+          className="absolute size-72 bottom-1/2 translate-y-1/2 left-72"
+        />
+        <Motionvg key={`${current}-edge`} src={edgeLogo.src} className="absolute size-56 top-16 right-16" />
+        <Motionvg key={`${current}-metamask`} src={metamaskLogo.src} className="absolute size-64 top-16 left-16" />
+        <Motionvg key={`${current}-openclaw`} src={openclawLogo.src} className="absolute size-56 bottom-10 right-140" />
+        <Motionvg
+          key={`${current}-wati`}
+          src={watiLogo.src}
+          className="absolute size-72 bottom-1/2 translate-y-1/2 right-80"
+        />
 
-      <AnimatedSvg key={`${current}-livup`} src={livupLogo.src} className="absolute size-80 bottom-10 left-120" />
-      <AnimatedSvg
-        key={`${current}-raspberrypi`}
-        src={raspberrypiLogo.src}
-        className="absolute size-80 top-10 right-140"
-      />
-      <AnimatedSvg
-        key={`${current}-microsoft-teams`}
-        src={microsoftTeamsLogo.src}
-        className="absolute size-80 top-10 left-120"
-      />
-      <AnimatedSvg key={`${current}-openai`} src={openAiLogo.src} className="absolute size-80 bottom-10 right-140" />
+        <Motionvg key={`${current}-livup`} src={livupLogo.src} className="absolute size-56 bottom-10 left-120" />
+        <Motionvg
+          key={`${current}-raspberrypi`}
+          src={raspberrypiLogo.src}
+          className="absolute size-56 top-10 right-140"
+        />
+        <Motionvg
+          key={`${current}-microsoft-teams`}
+          src={microsoftTeamsLogo.src}
+          className="absolute size-56 top-10 left-120"
+        />
+        <Motionvg
+          key={`${current}-openai`}
+          src={openAiLogo.src}
+          className="absolute size-56 bottom-16 left-16 dark:[&_path]:fill-white"
+        />
+      </React.Fragment>
     </PresentationSlide>
   );
 };
