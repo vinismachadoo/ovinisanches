@@ -150,13 +150,14 @@ const Slide4 = () => {
           alt="PresentX Dark"
           className="size-10 hidden dark:block"
         />
-        <h1 className="text-3xl font-bold ">PresentX</h1>
+        <h1 className="text-3xl font-bold ">presentx</h1>
         <p className="text-lg text-muted-foreground text-balance text-center w-[60%]">
-          OSS Component Library for creating beautiful and shareable presentations on the web with React and Tailwind
+          OSS Component Library for creating shareable presentations on the web. Supports fullscreen mode, keyboard
+          shortcuts and dark/light themes
         </p>
-        <Button disabled>
-          <Link href="#" target="_blank" rel="noopener noreferrer">
-            Soon
+        <Button>
+          <Link href="https://presentx.ovinisanches.com" target="_blank" rel="noopener noreferrer">
+            Try it out
           </Link>
         </Button>
       </div>
