@@ -1,9 +1,9 @@
 'use client';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+import { Avatar, AvatarFallback } from '@/registry/avatar';
+import { Badge } from '@/registry/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/card';
+import { Separator } from '@/registry/separator';
 import { type Member } from '@/lib/supabase';
 import { ArrowDown, ArrowUp, TrendingUp } from 'lucide-react';
 import { useMemo } from 'react';

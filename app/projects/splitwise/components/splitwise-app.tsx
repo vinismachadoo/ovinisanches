@@ -4,9 +4,9 @@ import { parseAsString, useQueryState } from 'nuqs';
 import { MembersList } from './members-list';
 import { ExpensesList } from './expenses-list';
 import { BalanceView } from './balance-view';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/registry/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/registry/tabs';
+import { SidebarTrigger } from '@/registry/sidebar';
 import { Users, Receipt, TrendingUp } from 'lucide-react';
 import { useGroup } from '@/app/projects/splitwise/hooks/use-groups';
 

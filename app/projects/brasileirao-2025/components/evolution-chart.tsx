@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
+import { Button } from '@/registry/button';
+import { ChartContainer, ChartTooltip } from '@/registry/chart';
 import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs';
 import * as React from 'react';
 import { CartesianGrid, ComposedChart, Line, ReferenceArea, XAxis, YAxis } from 'recharts';

@@ -4,20 +4,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { type Member } from '@/lib/supabase';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/registry/dialog';
+import { Button } from '@/registry/button';
+import { Input } from '@/registry/input';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Separator } from '@/components/ui/separator';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/registry/select';
+import { Checkbox } from '@/registry/checkbox';
+import { Separator } from '@/registry/separator';
 import { useCreateExpense } from '../hooks/use-expenses';
 
 const expenseSchema = z
@@ -43,7 +36,7 @@ const expenseSchema = z
         if (!data.payerPercentages) return false;
         const total = Object.values(data.payerPercentages).reduce(
           (sum, p) => sum + (isNaN(parseFloat(p)) ? 0 : parseFloat(p)),
-          0
+          0,
         );
         return Math.abs(total - 100) < 0.01;
       }
@@ -52,7 +45,7 @@ const expenseSchema = z
         const totalAmount = parseFloat(data.amount);
         const payerTotal = Object.values(data.payerAmounts).reduce(
           (sum, a) => sum + (isNaN(parseFloat(a)) ? 0 : parseFloat(a)),
-          0
+          0,
         );
         return Math.abs(payerTotal - totalAmount) < 0.01;
       }
@@ -61,7 +54,7 @@ const expenseSchema = z
     {
       message: 'Payer split totals must match the expense amount',
       path: ['amount'],
-    }
+    },
   )
   .refine(
     (data) => {
@@ -70,7 +63,7 @@ const expenseSchema = z
         if (!data.percentages) return false;
         const total = Object.values(data.percentages).reduce(
           (sum, p) => sum + (isNaN(parseFloat(p)) ? 0 : parseFloat(p)),
-          0
+          0,
         );
         return Math.abs(total - 100) < 0.01;
       }
@@ -79,7 +72,7 @@ const expenseSchema = z
         const totalAmount = parseFloat(data.amount);
         const splitTotal = Object.values(data.amounts).reduce(
           (sum, a) => sum + (isNaN(parseFloat(a)) ? 0 : parseFloat(a)),
-          0
+          0,
         );
         return Math.abs(splitTotal - totalAmount) < 0.01;
       }
@@ -88,7 +81,7 @@ const expenseSchema = z
     {
       message: 'Split totals must match the expense amount',
       path: ['amount'],
-    }
+    },
   );
 
 type ExpenseFormValues = z.infer<typeof expenseSchema>;
@@ -216,7 +209,7 @@ export function CreateExpenseDialog({ groupId, members, open, onOpenChange }: Cr
           form.reset();
           onOpenChange(false);
         },
-      }
+      },
     );
   };
 
@@ -453,9 +446,9 @@ export function CreateExpenseDialog({ groupId, members, open, onOpenChange }: Cr
                             {formatCurrency(
                               Object.values(payerAmounts || {}).reduce(
                                 (sum, a) => sum + (isNaN(parseFloat(a)) ? 0 : parseFloat(a)),
-                                0
+                                0,
                               ),
-                              form.watch('currency')
+                              form.watch('currency'),
                             )}
                             {' / '}
                             {formatCurrency(parseFloat(amount) || 0, form.watch('currency'))}
@@ -620,9 +613,9 @@ export function CreateExpenseDialog({ groupId, members, open, onOpenChange }: Cr
                       {formatCurrency(
                         Object.values(amounts || {}).reduce(
                           (sum, a) => sum + (isNaN(parseFloat(a)) ? 0 : parseFloat(a)),
-                          0
+                          0,
                         ),
-                        form.watch('currency')
+                        form.watch('currency'),
                       )}
                       {' / '}
                       {formatCurrency(parseFloat(amount) || 0, form.watch('currency'))}
@@ -633,7 +626,12 @@ export function CreateExpenseDialog({ groupId, members, open, onOpenChange }: Cr
             )}
 
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={createExpense.isPending}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => onOpenChange(false)}
+                disabled={createExpense.isPending}
+              >
                 Cancel
               </Button>
               <Button type="submit" disabled={createExpense.isPending}>

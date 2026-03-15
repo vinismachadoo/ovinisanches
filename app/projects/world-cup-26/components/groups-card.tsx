@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/registry/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/registry/card';
 import { cn } from '@/lib/utils';
 import { parseAsString, useQueryState } from 'nuqs';
 import { CircleFlag } from 'react-circle-flags';
@@ -87,7 +87,7 @@ export function GroupCard({ groupName, teams, matches }: GroupCardProps) {
                       <span
                         className={cn(
                           'w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold',
-                          qualified ? 'bg-green-500' : thirdPlace ? 'bg-yellow-500' : 'bg-muted text-muted-foreground'
+                          qualified ? 'bg-green-500' : thirdPlace ? 'bg-yellow-500' : 'bg-muted text-muted-foreground',
                         )}
                       >
                         {idx + 1}
@@ -109,8 +109,8 @@ export function GroupCard({ groupName, teams, matches }: GroupCardProps) {
                           s.goalDifference > 0
                             ? 'text-green-500'
                             : s.goalDifference < 0
-                            ? 'text-red-500'
-                            : 'text-muted-foreground'
+                              ? 'text-red-500'
+                              : 'text-muted-foreground'
                         }
                       >
                         {s.goalDifference > 0 ? '+' : ''}

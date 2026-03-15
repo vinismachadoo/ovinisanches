@@ -5,17 +5,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { parseAsString, useQueryState } from 'nuqs';
 import { type Group } from '@/lib/supabase';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/registry/dialog';
+import { Button } from '@/registry/button';
+import { Input } from '@/registry/input';
+import { Textarea } from '@/registry/textarea';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useCreateGroup } from '../hooks/use-groups';
 import { EmojiPickerField } from './emoji-picker-field';
@@ -61,7 +54,7 @@ export function CreateGroupDialog({ open, onOpenChange, onGroupCreated }: Create
           form.reset();
           onOpenChange(false);
         },
-      }
+      },
     );
   };
 

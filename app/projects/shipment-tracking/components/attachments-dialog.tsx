@@ -1,8 +1,8 @@
 import { Order } from '@/app/projects/shipment-tracking/data/order';
 import { OrderStatus, OrderStatusBadge } from '@/components/_backups/order-status-badge';
-import { Card, CardContent } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Card, CardContent } from '@/registry/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/registry/carousel';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/registry/dialog';
 import { formatTime } from '@/lib/times';
 import * as React from 'react';
 

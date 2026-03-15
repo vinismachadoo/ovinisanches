@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
+import { SidebarProvider, SidebarInset } from '@/registry/sidebar';
 import { GroupsSidebar } from './components/groups-sidebar';
 
 export default function SplitwiseLayout({ children }: { children: React.ReactNode }) {

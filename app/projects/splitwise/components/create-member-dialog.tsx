@@ -3,16 +3,9 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/registry/dialog';
+import { Button } from '@/registry/button';
+import { Input } from '@/registry/input';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useCreateMember } from '../hooks/use-members';
 
@@ -52,7 +45,7 @@ export function CreateMemberDialog({ groupId, open, onOpenChange }: CreateMember
           form.reset();
           onOpenChange(false);
         },
-      }
+      },
     );
   };
 

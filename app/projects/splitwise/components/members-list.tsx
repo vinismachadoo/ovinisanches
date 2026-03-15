@@ -1,15 +1,10 @@
 'use client';
 
 import { type Member } from '@/lib/supabase';
-import { Card, CardContent, CardHeader, CardTitle, CardAction } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Card, CardContent, CardHeader, CardTitle, CardAction } from '@/registry/card';
+import { Button } from '@/registry/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/registry/dropdown-menu';
+import { Avatar, AvatarFallback } from '@/registry/avatar';
 import { MoreVertical, Pencil, Plus, Trash2, User } from 'lucide-react';
 import { CreateMemberDialog } from './create-member-dialog';
 import { EditMemberDialog } from './edit-member-dialog';

@@ -10,14 +10,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '@/registry/sidebar';
+import { Button } from '@/registry/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/registry/dropdown-menu';
 import { MoreVertical, Plus, Pencil, Trash2, Smile } from 'lucide-react';
 import { EditGroupDialog } from './edit-group-dialog';
 import { CreateGroupDialog } from './create-group-dialog';

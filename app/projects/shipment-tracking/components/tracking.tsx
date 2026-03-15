@@ -6,10 +6,10 @@ import OrderProviderAvatar from '@/components/_backups/order-provider-avatar';
 import { OrderStatus, OrderStatusBadge, OrderStatusColors, OrderTypes } from '@/components/_backups/order-status-badge';
 import { OrderTypeBadge } from '@/components/_backups/order-type-badge';
 import SellerChip from '@/components/_backups/seller-chip';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/registry/accordion';
+import { Alert, AlertDescription, AlertTitle } from '@/registry/alert';
+import { Avatar, AvatarFallback, AvatarImage } from '@/registry/avatar';
+import { Badge } from '@/registry/badge';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,8 +17,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { Button } from '@/components/ui/button';
+} from '@/registry/breadcrumb';
+import { Button } from '@/registry/button';
 import { DoubleSidebarInset, DoubleSidebarTrigger } from '@/components/ui/double-sidebar';
 import {
   MapCircle,
@@ -28,8 +28,8 @@ import {
   MapPolyline,
   MapTileLayer,
 } from '@/components/ui/leaflet-map';
-import { Separator } from '@/components/ui/separator';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Separator } from '@/registry/separator';
+import { Skeleton } from '@/registry/skeleton';
 import {
   Timeline,
   TimelineDate,
@@ -39,7 +39,7 @@ import {
   TimelineSeparator,
   TimelineTitle,
 } from '@/components/ui/timeline';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/tooltip';
 import { getStraightDistanceBetweenTwoPoints } from '@/lib/distances';
 import { smartTrim } from '@/lib/strings';
 import { formatTime, minutesToHour } from '@/lib/times';

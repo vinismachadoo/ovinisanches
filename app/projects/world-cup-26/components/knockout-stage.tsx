@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import ReactCountryFlag from 'react-country-flag';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/registry/card';
+import { Input } from '@/registry/input';
 import { Trophy, ChevronRight } from 'lucide-react';
 import { type Team, type GroupStanding, getTeamByCode } from '../data/world-cup';
 
@@ -30,7 +30,7 @@ export function KnockoutBracket({ groupStandings }: KnockoutBracketProps) {
       .map(() => ({
         team1: { code: null, score: null },
         team2: { code: null, score: null },
-      }))
+      })),
   );
   const [r16, setR16] = useState<KnockoutMatchData[]>(
     Array(8)
@@ -38,7 +38,7 @@ export function KnockoutBracket({ groupStandings }: KnockoutBracketProps) {
       .map(() => ({
         team1: { code: null, score: null },
         team2: { code: null, score: null },
-      }))
+      })),
   );
   const [qf, setQf] = useState<KnockoutMatchData[]>(
     Array(4)
@@ -46,7 +46,7 @@ export function KnockoutBracket({ groupStandings }: KnockoutBracketProps) {
       .map(() => ({
         team1: { code: null, score: null },
         team2: { code: null, score: null },
-      }))
+      })),
   );
   const [sf, setSf] = useState<KnockoutMatchData[]>(
     Array(2)
@@ -54,7 +54,7 @@ export function KnockoutBracket({ groupStandings }: KnockoutBracketProps) {
       .map(() => ({
         team1: { code: null, score: null },
         team2: { code: null, score: null },
-      }))
+      })),
   );
   const [final, setFinal] = useState<KnockoutMatchData>({
     team1: { code: null, score: null },
@@ -194,7 +194,7 @@ export function KnockoutBracket({ groupStandings }: KnockoutBracketProps) {
 
     const updateMatch = (matches: KnockoutMatchData[], idx: number) => {
       return matches.map((m, i) =>
-        i === idx ? { ...m, [isTeam1 ? 'team1' : 'team2']: { ...m[isTeam1 ? 'team1' : 'team2'], score } } : m
+        i === idx ? { ...m, [isTeam1 ? 'team1' : 'team2']: { ...m[isTeam1 ? 'team1' : 'team2'], score } } : m,
       );
     };
 

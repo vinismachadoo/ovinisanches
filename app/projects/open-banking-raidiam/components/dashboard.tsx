@@ -1,11 +1,11 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Combobox } from '@/components/ui/combobox';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
+import { Badge } from '@/registry/badge';
+import { Button } from '@/registry/button';
+import { Combobox } from '@/registry/combobox';
+import { Label } from '@/registry/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/registry/select';
+import { Separator } from '@/registry/separator';
 import { cn } from '@/lib/utils';
 import { CircleCheck, CircleX, XIcon } from 'lucide-react';
 import Image from 'next/image';

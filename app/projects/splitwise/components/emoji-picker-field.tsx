@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { EmojiPicker, EmojiPickerSearch, EmojiPickerContent, EmojiPickerFooter } from '@/components/ui/emoji-picker';
-import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+// import { EmojiPicker, EmojiPickerSearch, EmojiPickerContent, EmojiPickerFooter } from '@/components/ui/emoji-picker';
+import { Button } from '@/registry/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/registry/popover';
 import { Smile } from 'lucide-react';
 
 interface EmojiPickerFieldProps {
@@ -23,7 +23,7 @@ export function EmojiPickerField({ value, onChange, label }: EmojiPickerFieldPro
           {value ? <span className="text-lg">{value}</span> : <Smile className="size-4" />}
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
-          <EmojiPicker
+          {/* <EmojiPicker
             className="h-[342px]"
             onEmojiSelect={(emoji) => {
               onChange(emoji.emoji);
@@ -33,7 +33,7 @@ export function EmojiPickerField({ value, onChange, label }: EmojiPickerFieldPro
             <EmojiPickerSearch />
             <EmojiPickerContent />
             <EmojiPickerFooter />
-          </EmojiPicker>
+          </EmojiPicker> */}
         </PopoverContent>
       </Popover>
     </div>

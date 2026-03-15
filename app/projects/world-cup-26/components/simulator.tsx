@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/registry/button';
 import {
   DoubleSidebar,
   DoubleSidebarContent,
@@ -9,7 +9,7 @@ import {
   DoubleSidebarTrigger,
 } from '@/components/ui/double-sidebar';
 import { NumberInput } from '@/components/ui/number-input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/registry/tabs';
 import { cn } from '@/lib/utils';
 import { LayoutGrid, Trophy, Volleyball } from 'lucide-react';
 import { parseAsString, useQueryState } from 'nuqs';
@@ -261,7 +261,7 @@ const getGroupMatches = (): Record<string, GroupMatch[]> => {
               homeScore: m.homeScore ?? 0,
               awayScore: m.awayScore ?? 0,
             },
-          ])
+          ]),
         );
         // Restore confirmed matches, and add unconfirmed generated matches
         matches[groupName] = generated.map((m) => {
@@ -361,7 +361,7 @@ const SingleMatch = ({ match }: { match: GroupMatch }) => {
     <div
       className={cn(
         'flex flex-col gap-2 p-3 rounded-lg border',
-        isConfirmed ? 'bg-green-500/10 border-green-500/50' : 'bg-muted/50 border-border'
+        isConfirmed ? 'bg-green-500/10 border-green-500/50' : 'bg-muted/50 border-border',
       )}
     >
       <div className="flex items-center gap-2">

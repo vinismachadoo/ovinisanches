@@ -1,14 +1,9 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { Badge } from '@/registry/badge';
+import { Button } from '@/registry/button';
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/registry/card';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/registry/dropdown-menu';
 import { type Expense } from '@/lib/supabase';
 import { format } from 'date-fns';
 import { DollarSign, MoreVertical, Pencil, Plus, Receipt, Trash2 } from 'lucide-react';
