@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "ovinisanches/ui",
-  "homepage": "https://ovinisanches.com/",
+  "name": "ovinisanches",
+  "homepage": "https://ovinisanches.com",
   "items": [
     {
       "name": "index",
