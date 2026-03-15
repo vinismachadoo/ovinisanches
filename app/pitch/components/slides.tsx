@@ -137,7 +137,7 @@ const SlideLabsShades = () => {
   );
 };
 
-const SlidePresentxUi = () => {
+const SlidePresentcn = () => {
   return (
     <PresentationSlide className="relative flex-col">
       <div className="py-10 flex flex-col items-center justify-center gap-y-3">
@@ -151,13 +151,13 @@ const SlidePresentxUi = () => {
           alt="PresentX Dark"
           className="size-10 hidden dark:block"
         />
-        <h1 className="text-3xl font-bold ">presentx-ui</h1>
+        <h1 className="text-3xl font-bold ">presentcn</h1>
         <p className="text-lg text-muted-foreground text-balance text-center w-[60%]">
           OSS Component Library for creating shareable presentations on the web. Supports fullscreen mode, keyboard
           shortcuts and dark/light themes
         </p>
         <Button>
-          <Link href="https://presentx.ovinisanches.com" target="_blank" rel="noopener noreferrer">
+          <Link href="https://presentcn.ovinisanches.com" target="_blank" rel="noopener noreferrer">
             Try it out
           </Link>
         </Button>
@@ -253,7 +253,7 @@ const Slides = () => {
           <SlideProjectsCover />
           <SlideLabsShades />
           <SlideMotionvg />
-          <SlidePresentxUi />
+          <SlidePresentcn />
         </PresentationContent>
         <PresentationControls />
       </Presentation>
