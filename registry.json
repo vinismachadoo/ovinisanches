@@ -1,14 +1,26 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "ovinisanches/ui",
-  "homepage": "https://github.com/anmoldeepsingh/mapcn",
+  "homepage": "https://ovinisanches.com/",
   "items": [
     {
       "name": "index",
       "type": "registry:style",
-      "dependencies": ["class-variance-authority", "lucide-react"],
-      "devDependencies": ["tw-animate-css"],
+      "dependencies": ["class-variance-authority", "lucide-react", "@base-ui/react"],
+      "devDependencies": ["tw-animate-css", "shadcn"],
       "registryDependencies": ["utils"],
+      "css": {
+        "@import 'tw-animate-css'": {},
+        "@import 'shadcn/tailwind.css'": {},
+        "@layer base": {
+          "*": {
+            "@apply border-border outline-ring/50 text-sm": {}
+          },
+          "body": {
+            "@apply bg-background text-foreground": {}
+          }
+        }
+      },
       "files": [],
       "cssVars": {}
     },
