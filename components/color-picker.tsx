@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { cn } from '@/lib/utils';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/registry/popover';
+import { Button } from '@/registry/button';
 import { Circle } from 'lucide-react';
 import { isValidHexColor } from '@/lib/swatch-generator';
 

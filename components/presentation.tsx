@@ -1,10 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { ButtonGroup } from '@/components/ui/button-group';
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
-import { Kbd } from '@/components/ui/kbd';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Button } from '@/registry/button';
+import { ButtonGroup } from '@/registry/button-group';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/registry/carousel';
+import { Kbd } from '@/registry/kbd';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/tooltip';
 import { useFullscreen } from '@/hooks/use-fullscreen';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, Expand, Moon, Shrink, Sun, Undo2 } from 'lucide-react';

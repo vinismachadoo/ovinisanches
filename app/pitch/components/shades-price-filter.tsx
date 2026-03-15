@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { ButtonGroup } from '@/components/ui/button-group';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChartConfig, ChartContainer } from '@/components/ui/chart';
-import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
-import { Slider } from '@/components/ui/slider';
+import { Button } from '@/registry/button';
+import { ButtonGroup } from '@/registry/button-group';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/card';
+import { ChartConfig, ChartContainer } from '@/registry/chart';
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/registry/input-group';
+import { Slider } from '@/registry/slider';
 import { cn } from '@/lib/utils';
 import { Minus, Plus } from 'lucide-react';
 import * as React from 'react';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/registry/button';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { Check, GithubIcon, InstagramIcon, LinkedinIcon, MailIcon, TwitterIcon } from 'lucide-react';
 import { motion } from 'motion/react';

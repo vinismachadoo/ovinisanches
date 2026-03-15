@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Button } from '@/components/ui/button';
+import { Button } from '@/registry/button';
 import { cn } from '@/lib/utils';
 import { X } from 'lucide-react';
 import * as React from 'react';

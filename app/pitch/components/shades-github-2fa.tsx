@@ -1,10 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { EmptyMedia } from '@/components/ui/empty';
-import { Field, FieldDescription } from '@/components/ui/field';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+import { Button } from '@/registry/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/card';
+import { EmptyMedia } from '@/registry/empty';
+import { Field, FieldDescription } from '@/registry/field';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/registry/input-otp';
 import { cn } from '@/lib/utils';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { Github } from 'lucide-react';

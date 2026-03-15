@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Field, FieldContent, FieldLabel } from '@/components/ui/field';
-import { Switch } from '@/components/ui/switch';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/card';
+import { Field, FieldContent, FieldLabel } from '@/registry/field';
+import { Switch } from '@/registry/switch';
 import { cn } from '@/lib/utils';
 import { Bell, Mail, MessageCircle, MessageSquare, Send, Slack } from 'lucide-react';
 import React from 'react';

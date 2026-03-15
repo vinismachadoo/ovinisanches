@@ -1,9 +1,9 @@
 import { useTheme } from 'next-themes';
 import React from 'react';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/tooltip';
+import { Button } from '@/registry/button';
 import { SunIcon, Moon } from 'lucide-react';
-import { Kbd } from '@/components/ui/kbd';
+import { Kbd } from '@/registry/kbd';
 import { cn } from '@/lib/utils';
 
 const ModeToggle = ({

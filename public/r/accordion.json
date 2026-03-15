@@ -1,9 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "accordion",
-  "dependencies": [
-    "@base-ui/react/accordion"
-  ],
   "files": [
     {
       "path": "registry/accordion.tsx",

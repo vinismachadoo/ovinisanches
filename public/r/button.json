@@ -1,9 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "button",
-  "dependencies": [
-    "@base-ui/react/button"
-  ],
   "files": [
     {
       "path": "registry/button.tsx",

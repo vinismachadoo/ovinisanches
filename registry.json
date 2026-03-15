@@ -36,7 +36,6 @@
     {
       "name": "accordion",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react/accordion"],
       "files": [
         {
           "path": "registry/accordion.tsx",
@@ -48,7 +47,6 @@
     {
       "name": "button",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react/button"],
       "files": [
         {
           "path": "registry/button.tsx",

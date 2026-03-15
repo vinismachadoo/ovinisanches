@@ -2,8 +2,8 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { ButtonGroup } from '@/components/ui/button-group';
+import { Button } from '@/registry/button';
+import { ButtonGroup } from '@/registry/button-group';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -13,7 +13,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '@/registry/dropdown-menu';
 import type { CheckboxItem } from '@radix-ui/react-dropdown-menu';
 import type {
   Circle,

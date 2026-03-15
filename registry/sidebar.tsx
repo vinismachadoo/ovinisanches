@@ -5,12 +5,12 @@ import { useRender } from '@base-ui/react/use-render';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Button } from '@/registry/button';
+import { Input } from '@/registry/input';
+import { Separator } from '@/registry/separator';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/registry/sheet';
+import { Skeleton } from '@/registry/skeleton';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/tooltip';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { PanelLeftIcon } from 'lucide-react';

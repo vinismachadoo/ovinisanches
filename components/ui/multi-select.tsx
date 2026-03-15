@@ -1,18 +1,11 @@
 import * as React from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/registry/popover';
+import { Button } from '@/registry/button';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandSeparator,
-} from '@/components/ui/command';
+import { Badge } from '@/registry/badge';
+import { Separator } from '@/registry/separator';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandSeparator } from '@/registry/command';
 
 interface MultiSelectProps {
   id?: string;

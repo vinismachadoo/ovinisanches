@@ -1,8 +1,8 @@
 'use client';
 
 import ModeToggle from '@/components/mode-toggle';
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Button } from '@/registry/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/tooltip';
 import { Citrus, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

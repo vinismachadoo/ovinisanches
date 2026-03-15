@@ -1,10 +1,10 @@
 import MotionSignature from '@/app/(root)/components/motion-signature';
 import Presentation from '@/app/(root)/components/presentation';
 import SocialNetworks from '@/app/(root)/components/social-networks';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Avatar, AvatarImage } from '@/registry/avatar';
+import { Badge } from '@/registry/badge';
+import { Label } from '@/registry/label';
+import { Skeleton } from '@/registry/skeleton';
 import { cn } from '@/lib/utils';
 
 export default function Home() {
