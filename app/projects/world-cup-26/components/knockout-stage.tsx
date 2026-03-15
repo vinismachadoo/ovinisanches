@@ -309,7 +309,7 @@ export function KnockoutBracket({ groupStandings }: KnockoutBracketProps) {
     <div className="space-y-6">
       {/* Champion Display */}
       {champion && (
-        <Card className="bg-gradient-to-r from-gold/20 via-accent/20 to-gold/20 border-gold/50">
+        <Card className="bg-linear-to-r from-gold/20 via-accent/20 to-gold/20 border-gold/50">
           <CardContent className="p-6 text-center">
             <Trophy className="w-16 h-16 mx-auto mb-4 text-gold" />
             <h2 className="text-2xl font-bold mb-2">WORLD CHAMPION</h2>
@@ -361,7 +361,7 @@ export function KnockoutBracket({ groupStandings }: KnockoutBracketProps) {
               <MatchSlot match={sf[0]} round="sf" matchIdx={0} />
 
               <h3 className="text-xs font-bold text-primary text-center mt-6">🏆 FINAL</h3>
-              <div className="bg-gradient-to-r from-gold/10 to-gold/10 p-1 rounded-lg">
+              <div className="bg-linear-to-r from-gold/10 to-gold/10 p-1 rounded-lg">
                 <MatchSlot match={final} round="final" matchIdx={0} />
               </div>
 
