@@ -11,8 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/80',
-        // PR before: 'dark:bg-input/30 dark:border-input dark:hover:bg-input/50'
-        // PR after: ''
+        // shadcn uses this value: 'dark:bg-input/30 dark:border-input dark:hover:bg-input/50'
         outline:
           'border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground shadow-xs',
         secondary:
