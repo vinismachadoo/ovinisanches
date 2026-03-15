@@ -1,35 +1,44 @@
-'use client';
+"use client"
 
-import { Avatar, AvatarFallback } from '@/registry/avatar';
-import { Badge } from '@/registry/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/card';
-import { Separator } from '@/registry/separator';
-import { type Member } from '@/lib/supabase';
-import { ArrowDown, ArrowUp, TrendingUp } from 'lucide-react';
-import { useMemo } from 'react';
-import { useExpenseDetails } from '../hooks/use-expense-details';
-import { useExpenses } from '../hooks/use-expenses';
-import { useMembers } from '../hooks/use-members';
+import { Avatar, AvatarFallback } from "@/registry/default/ui/avatar"
+import { Badge } from "@/registry/default/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/registry/default/ui/card"
+import { Separator } from "@/registry/default/ui/separator"
+import { type Member } from "@/lib/supabase"
+import { ArrowDown, ArrowUp, TrendingUp } from "lucide-react"
+import { useMemo } from "react"
+import { useExpenseDetails } from "../hooks/use-expense-details"
+import { useExpenses } from "../hooks/use-expenses"
+import { useMembers } from "../hooks/use-members"
 
 interface BalanceViewProps {
-  groupId: string | null;
+  groupId: string | null
 }
 
 interface MemberBalance {
-  member: Member;
-  paid: number;
-  owed: number;
-  balance: number; // positive = they are owed money, negative = they owe money
+  member: Member
+  paid: number
+  owed: number
+  balance: number // positive = they are owed money, negative = they owe money
 }
 
 export function BalanceView({ groupId }: BalanceViewProps) {
-  const { data: members = [] } = useMembers(groupId);
-  const { data: expenses = [] } = useExpenses(groupId);
-  const { data: expensesWithDetails = [], isLoading } = useExpenseDetails(groupId, expenses);
+  const { data: members = [] } = useMembers(groupId)
+  const { data: expenses = [] } = useExpenses(groupId)
+  const { data: expensesWithDetails = [], isLoading } = useExpenseDetails(
+    groupId,
+    expenses
+  )
 
   const { balances, currency } = useMemo(() => {
-    const balancesMap = new Map<string, MemberBalance>();
-    let currency = 'USD';
+    const balancesMap = new Map<string, MemberBalance>()
+    let currency = "USD"
 
     // Initialize balances for all members
     members.forEach((member) => {
@@ -38,77 +47,87 @@ export function BalanceView({ groupId }: BalanceViewProps) {
         paid: 0,
         owed: 0,
         balance: 0,
-      });
-    });
+      })
+    })
 
     // Process each expense
     expensesWithDetails.forEach((expense) => {
       if (expense.currency) {
-        currency = expense.currency;
+        currency = expense.currency
       }
 
       // Add to paid amount for each payer
       expense.payers.forEach((payer) => {
-        const balance = balancesMap.get(payer.member_id);
+        const balance = balancesMap.get(payer.member_id)
         if (balance) {
-          balance.paid += parseFloat(payer.amount.toString());
+          balance.paid += parseFloat(payer.amount.toString())
         }
-      });
+      })
 
       // Add to owed amount for each share
       expense.shares.forEach((share) => {
-        const balance = balancesMap.get(share.member_id);
+        const balance = balancesMap.get(share.member_id)
         if (balance) {
-          balance.owed += parseFloat(share.amount.toString());
+          balance.owed += parseFloat(share.amount.toString())
         }
-      });
-    });
+      })
+    })
 
     // Calculate final balances (paid - owed)
     balancesMap.forEach((balance) => {
-      balance.balance = balance.paid - balance.owed;
-    });
+      balance.balance = balance.paid - balance.owed
+    })
 
     // Convert to array and sort by balance
-    const balancesArray = Array.from(balancesMap.values()).sort((a, b) => b.balance - a.balance);
+    const balancesArray = Array.from(balancesMap.values()).sort(
+      (a, b) => b.balance - a.balance
+    )
 
-    return { balances: balancesArray, currency };
-  }, [members, expensesWithDetails]);
+    return { balances: balancesArray, currency }
+  }, [members, expensesWithDetails])
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
       currency: currency,
-    }).format(Math.abs(amount));
-  };
+    }).format(Math.abs(amount))
+  }
 
   const getInitials = (name: string) => {
     return name
-      .split(' ')
+      .split(" ")
       .map((n) => n[0])
-      .join('')
+      .join("")
       .toUpperCase()
-      .slice(0, 2);
-  };
+      .slice(0, 2)
+  }
 
   // Calculate simplified settlements (who should pay whom)
-  const calculateSettlements = (): Array<{ from: Member; to: Member; amount: number }> => {
-    const settlements: Array<{ from: Member; to: Member; amount: number }> = [];
-    const balancesCopy = balances.map((b) => ({ ...b }));
+  const calculateSettlements = (): Array<{
+    from: Member
+    to: Member
+    amount: number
+  }> => {
+    const settlements: Array<{ from: Member; to: Member; amount: number }> = []
+    const balancesCopy = balances.map((b) => ({ ...b }))
 
     // Sort: debtors first (negative balance), then creditors (positive balance)
-    const debtors = balancesCopy.filter((b) => b.balance < 0).sort((a, b) => a.balance - b.balance);
-    const creditors = balancesCopy.filter((b) => b.balance > 0).sort((a, b) => b.balance - a.balance);
+    const debtors = balancesCopy
+      .filter((b) => b.balance < 0)
+      .sort((a, b) => a.balance - b.balance)
+    const creditors = balancesCopy
+      .filter((b) => b.balance > 0)
+      .sort((a, b) => b.balance - a.balance)
 
-    let debtorIndex = 0;
-    let creditorIndex = 0;
+    let debtorIndex = 0
+    let creditorIndex = 0
 
     while (debtorIndex < debtors.length && creditorIndex < creditors.length) {
-      const debtor = debtors[debtorIndex];
-      const creditor = creditors[creditorIndex];
+      const debtor = debtors[debtorIndex]
+      const creditor = creditors[creditorIndex]
 
-      const debtAmount = Math.abs(debtor.balance);
-      const creditAmount = creditor.balance;
+      const debtAmount = Math.abs(debtor.balance)
+      const creditAmount = creditor.balance
 
       if (debtAmount <= creditAmount) {
         // Debtor can fully pay creditor
@@ -116,13 +135,13 @@ export function BalanceView({ groupId }: BalanceViewProps) {
           from: debtor.member,
           to: creditor.member,
           amount: debtAmount,
-        });
-        creditor.balance -= debtAmount;
-        debtor.balance = 0;
-        debtorIndex++;
+        })
+        creditor.balance -= debtAmount
+        debtor.balance = 0
+        debtorIndex++
 
         if (creditor.balance < 0.01) {
-          creditorIndex++;
+          creditorIndex++
         }
       } else {
         // Debtor partially pays creditor
@@ -130,15 +149,15 @@ export function BalanceView({ groupId }: BalanceViewProps) {
           from: debtor.member,
           to: creditor.member,
           amount: creditAmount,
-        });
-        debtor.balance += creditAmount;
-        creditor.balance = 0;
-        creditorIndex++;
+        })
+        debtor.balance += creditAmount
+        creditor.balance = 0
+        creditorIndex++
       }
     }
 
-    return settlements.filter((s) => s.amount >= 0.01); // Filter out negligible amounts
-  };
+    return settlements.filter((s) => s.amount >= 0.01) // Filter out negligible amounts
+  }
 
   if (isLoading) {
     return (
@@ -147,10 +166,12 @@ export function BalanceView({ groupId }: BalanceViewProps) {
           <CardTitle>Balance</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">Calculating balances...</p>
+          <p className="text-sm text-muted-foreground">
+            Calculating balances...
+          </p>
         </CardContent>
       </Card>
-    );
+    )
   }
 
   if (members.length === 0) {
@@ -160,15 +181,17 @@ export function BalanceView({ groupId }: BalanceViewProps) {
           <CardTitle>Balance</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">Add members and expenses to see balances.</p>
+          <p className="text-sm text-muted-foreground">
+            Add members and expenses to see balances.
+          </p>
         </CardContent>
       </Card>
-    );
+    )
   }
 
-  const settlements = calculateSettlements();
-  const totalPaid = balances.reduce((sum, b) => sum + b.paid, 0);
-  const totalOwed = balances.reduce((sum, b) => sum + b.owed, 0);
+  const settlements = calculateSettlements()
+  const totalPaid = balances.reduce((sum, b) => sum + b.paid, 0)
+  const totalOwed = balances.reduce((sum, b) => sum + b.owed, 0)
 
   return (
     <div className="space-y-6">
@@ -178,17 +201,23 @@ export function BalanceView({ groupId }: BalanceViewProps) {
             <TrendingUp className="h-5 w-5" />
             Summary
           </CardTitle>
-          <CardDescription>Total amounts paid and owed by all members</CardDescription>
+          <CardDescription>
+            Total amounts paid and owed by all members
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Total Paid</p>
-              <p className="text-2xl font-semibold text-green-600 dark:text-green-400">{formatCurrency(totalPaid)}</p>
+              <p className="mb-1 text-sm text-muted-foreground">Total Paid</p>
+              <p className="text-2xl font-semibold text-green-600 dark:text-green-400">
+                {formatCurrency(totalPaid)}
+              </p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Total Owed</p>
-              <p className="text-2xl font-semibold text-orange-600 dark:text-orange-400">{formatCurrency(totalOwed)}</p>
+              <p className="mb-1 text-sm text-muted-foreground">Total Owed</p>
+              <p className="text-2xl font-semibold text-orange-600 dark:text-orange-400">
+                {formatCurrency(totalOwed)}
+              </p>
             </div>
           </div>
         </CardContent>
@@ -197,7 +226,9 @@ export function BalanceView({ groupId }: BalanceViewProps) {
       <Card>
         <CardHeader>
           <CardTitle>Individual Balances</CardTitle>
-          <CardDescription>What each member has paid, owes, and their net balance</CardDescription>
+          <CardDescription>
+            What each member has paid, owes, and their net balance
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {balances.map((balance) => (
@@ -205,7 +236,9 @@ export function BalanceView({ groupId }: BalanceViewProps) {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Avatar>
-                    <AvatarFallback>{getInitials(balance.member.name)}</AvatarFallback>
+                    <AvatarFallback>
+                      {getInitials(balance.member.name)}
+                    </AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="font-medium">{balance.member.name}</p>
@@ -224,20 +257,26 @@ export function BalanceView({ groupId }: BalanceViewProps) {
                       {formatCurrency(balance.owed)}
                     </p>
                   </div>
-                  <div className="text-right min-w-[100px]">
+                  <div className="min-w-[100px] text-right">
                     <p className="text-xs text-muted-foreground">Balance</p>
                     {balance.balance > 0.01 ? (
                       <div className="flex items-center gap-1 text-green-600 dark:text-green-400">
                         <ArrowUp className="h-4 w-4" />
-                        <p className="text-sm font-semibold">Gets {formatCurrency(balance.balance)}</p>
+                        <p className="text-sm font-semibold">
+                          Gets {formatCurrency(balance.balance)}
+                        </p>
                       </div>
                     ) : balance.balance < -0.01 ? (
                       <div className="flex items-center gap-1 text-orange-600 dark:text-orange-400">
                         <ArrowDown className="h-4 w-4" />
-                        <p className="text-sm font-semibold">Owes {formatCurrency(balance.balance)}</p>
+                        <p className="text-sm font-semibold">
+                          Owes {formatCurrency(balance.balance)}
+                        </p>
                       </div>
                     ) : (
-                      <p className="text-sm font-semibold text-muted-foreground">Settled up</p>
+                      <p className="text-sm font-semibold text-muted-foreground">
+                        Settled up
+                      </p>
                     )}
                   </div>
                 </div>
@@ -252,20 +291,26 @@ export function BalanceView({ groupId }: BalanceViewProps) {
         <Card>
           <CardHeader>
             <CardTitle>Settlements</CardTitle>
-            <CardDescription>Simplified list of who should pay whom to settle all debts</CardDescription>
+            <CardDescription>
+              Simplified list of who should pay whom to settle all debts
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             {settlements.map((settlement, index) => (
               <div key={`${settlement.from.id}-${settlement.to.id}-${index}`}>
-                <div className="flex items-center justify-between p-3 rounded-sm border bg-accent/50">
+                <div className="flex items-center justify-between rounded-sm border bg-accent/50 p-3">
                   <div className="flex items-center gap-3">
                     <Avatar>
-                      <AvatarFallback>{getInitials(settlement.from.name)}</AvatarFallback>
+                      <AvatarFallback>
+                        {getInitials(settlement.from.name)}
+                      </AvatarFallback>
                     </Avatar>
                     <p className="font-medium">{settlement.from.name}</p>
                     <ArrowDown className="h-4 w-4 text-muted-foreground" />
                     <Avatar>
-                      <AvatarFallback>{getInitials(settlement.to.name)}</AvatarFallback>
+                      <AvatarFallback>
+                        {getInitials(settlement.to.name)}
+                      </AvatarFallback>
                     </Avatar>
                     <p className="font-medium">{settlement.to.name}</p>
                   </div>
@@ -279,18 +324,19 @@ export function BalanceView({ groupId }: BalanceViewProps) {
         </Card>
       )}
 
-      {settlements.length === 0 && balances.some((b) => Math.abs(b.balance) > 0.01) === false && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Settlements</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground text-center py-4">
-              All members are settled up! No payments needed.
-            </p>
-          </CardContent>
-        </Card>
-      )}
+      {settlements.length === 0 &&
+        balances.some((b) => Math.abs(b.balance) > 0.01) === false && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Settlements</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="py-4 text-center text-sm text-muted-foreground">
+                All members are settled up! No payments needed.
+              </p>
+            </CardContent>
+          </Card>
+        )}
     </div>
-  );
+  )
 }

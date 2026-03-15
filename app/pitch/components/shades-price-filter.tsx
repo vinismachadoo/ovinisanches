@@ -1,18 +1,31 @@
-'use client';
+"use client"
 
-import { Button } from '@/registry/button';
-import { ButtonGroup } from '@/registry/button-group';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/card';
-import { ChartConfig, ChartContainer } from '@/registry/chart';
-import { InputGroup, InputGroupAddon, InputGroupInput } from '@/registry/input-group';
-import { Slider } from '@/registry/slider';
-import { cn } from '@/lib/utils';
-import { Minus, Plus } from 'lucide-react';
-import * as React from 'react';
-import { Bar, BarChart, Cell, XAxis, YAxis } from 'recharts';
+import { Button } from "@/registry/default/ui/button"
+import { ButtonGroup } from "@/registry/default/ui/button-group"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/registry/default/ui/card"
+import { ChartConfig, ChartContainer } from "@/registry/default/ui/chart"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/registry/default/ui/input-group"
+import { Slider } from "@/registry/default/ui/slider"
+import { cn } from "@/lib/utils"
+import { Minus, Plus } from "lucide-react"
+import * as React from "react"
+import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts"
 
-const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
-  const [priceRange, setPriceRange] = React.useState<number[]>([280, 580]);
+const ShadesPriceFilter = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof Card>) => {
+  const [priceRange, setPriceRange] = React.useState<number[]>([280, 580])
 
   const bins = [
     { bin: 100, amount: 12 },
@@ -60,14 +73,14 @@ const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
     { bin: 940, amount: 46 },
     { bin: 960, amount: 15 },
     { bin: 980, amount: 20 },
-  ];
+  ]
 
   const chartConfig = {
     bin: {
-      label: 'Price',
-      color: 'var(--chart-1)',
+      label: "Price",
+      color: "var(--chart-1)",
     },
-  } satisfies ChartConfig;
+  } satisfies ChartConfig
 
   return (
     <Card className={cn(className)} {...props}>
@@ -78,7 +91,10 @@ const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
       <CardContent>
         <div className="flex flex-col gap-y-6">
           <div className="flex flex-col gap-y-2">
-            <ChartContainer config={chartConfig} className="aspect-video max-h-24 -mt-4">
+            <ChartContainer
+              config={chartConfig}
+              className="-mt-4 aspect-video max-h-24"
+            >
               <BarChart accessibilityLayer data={bins}>
                 <XAxis dataKey="bin" hide />
                 <YAxis dataKey="amount" hide />
@@ -87,7 +103,9 @@ const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
                     <Cell
                       key={entry.bin}
                       className={cn(
-                        entry.bin >= priceRange[0] && entry.bin < priceRange[1] ? 'opacity-100' : 'opacity-10',
+                        entry.bin >= priceRange[0] && entry.bin < priceRange[1]
+                          ? "opacity-100"
+                          : "opacity-10"
                       )}
                     />
                   ))}
@@ -103,12 +121,14 @@ const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
             />
           </div>
 
-          <div className="flex gap-x-2 items-center">
+          <div className="flex items-center gap-x-2">
             <ButtonGroup>
               <InputGroup>
                 <InputGroupInput
                   value={priceRange[0]}
-                  onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
+                  onChange={(e) =>
+                    setPriceRange([Number(e.target.value), priceRange[1]])
+                  }
                   min={100}
                   max={1000}
                 />
@@ -117,10 +137,22 @@ const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
                 </InputGroupAddon>
               </InputGroup>
 
-              <Button variant="outline" size="icon" onClick={() => setPriceRange([priceRange[0] - 20, priceRange[1]])}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() =>
+                  setPriceRange([priceRange[0] - 20, priceRange[1]])
+                }
+              >
                 <Minus className="size-4" />
               </Button>
-              <Button variant="outline" size="icon" onClick={() => setPriceRange([priceRange[0] + 20, priceRange[1]])}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() =>
+                  setPriceRange([priceRange[0] + 20, priceRange[1]])
+                }
+              >
                 <Plus className="size-4" />
               </Button>
             </ButtonGroup>
@@ -131,7 +163,9 @@ const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
               <InputGroup>
                 <InputGroupInput
                   value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+                  onChange={(e) =>
+                    setPriceRange([priceRange[0], Number(e.target.value)])
+                  }
                   min={100}
                   max={1000}
                 />
@@ -139,10 +173,22 @@ const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
                   <span>Max: $</span>
                 </InputGroupAddon>
               </InputGroup>
-              <Button variant="outline" size="icon" onClick={() => setPriceRange([priceRange[0], priceRange[1] - 20])}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() =>
+                  setPriceRange([priceRange[0], priceRange[1] - 20])
+                }
+              >
                 <Minus className="size-4" />
               </Button>
-              <Button variant="outline" size="icon" onClick={() => setPriceRange([priceRange[0], priceRange[1] + 20])}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() =>
+                  setPriceRange([priceRange[0], priceRange[1] + 20])
+                }
+              >
                 <Plus className="size-4" />
               </Button>
             </ButtonGroup>
@@ -150,7 +196,7 @@ const ShadesPriceFilter = ({ className, ...props }: React.ComponentProps<typeof 
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default ShadesPriceFilter;
+export default ShadesPriceFilter

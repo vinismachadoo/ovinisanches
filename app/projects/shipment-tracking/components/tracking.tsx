@@ -1,15 +1,33 @@
-'use client';
+"use client"
 
-import OrderAttachmentsDialog from '@/app/projects/shipment-tracking/components/attachments-dialog';
-import CarrierAvatar from '@/components/_backups/carrier-avatar';
-import OrderProviderAvatar from '@/components/_backups/order-provider-avatar';
-import { OrderStatus, OrderStatusBadge, OrderStatusColors, OrderTypes } from '@/components/_backups/order-status-badge';
-import { OrderTypeBadge } from '@/components/_backups/order-type-badge';
-import SellerChip from '@/components/_backups/seller-chip';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/registry/accordion';
-import { Alert, AlertDescription, AlertTitle } from '@/registry/alert';
-import { Avatar, AvatarFallback, AvatarImage } from '@/registry/avatar';
-import { Badge } from '@/registry/badge';
+import OrderAttachmentsDialog from "@/app/projects/shipment-tracking/components/attachments-dialog"
+import CarrierAvatar from "@/components/_backups/carrier-avatar"
+import OrderProviderAvatar from "@/components/_backups/order-provider-avatar"
+import {
+  OrderStatus,
+  OrderStatusBadge,
+  OrderStatusColors,
+  OrderTypes,
+} from "@/components/_backups/order-status-badge"
+import { OrderTypeBadge } from "@/components/_backups/order-type-badge"
+import SellerChip from "@/components/_backups/seller-chip"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/registry/default/ui/accordion"
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/registry/default/ui/alert"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/default/ui/avatar"
+import { Badge } from "@/registry/default/ui/badge"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,9 +35,12 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/registry/breadcrumb';
-import { Button } from '@/registry/button';
-import { DoubleSidebarInset, DoubleSidebarTrigger } from '@/components/ui/double-sidebar';
+} from "@/registry/default/ui/breadcrumb"
+import { Button } from "@/registry/default/ui/button"
+import {
+  DoubleSidebarInset,
+  DoubleSidebarTrigger,
+} from "@/components/ui/double-sidebar"
 import {
   MapCircle,
   Map as MapComponent,
@@ -27,9 +48,9 @@ import {
   MapMarker,
   MapPolyline,
   MapTileLayer,
-} from '@/components/ui/leaflet-map';
-import { Separator } from '@/registry/separator';
-import { Skeleton } from '@/registry/skeleton';
+} from "@/components/ui/leaflet-map"
+import { Separator } from "@/registry/default/ui/separator"
+import { Skeleton } from "@/registry/default/ui/skeleton"
 import {
   Timeline,
   TimelineDate,
@@ -38,16 +59,20 @@ import {
   TimelineItem,
   TimelineSeparator,
   TimelineTitle,
-} from '@/components/ui/timeline';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/tooltip';
-import { getStraightDistanceBetweenTwoPoints } from '@/lib/distances';
-import { smartTrim } from '@/lib/strings';
-import { formatTime, minutesToHour } from '@/lib/times';
-import { cn } from '@/lib/utils';
-import polylineDecode from '@mapbox/polyline';
-import { formatDistance, formatDistanceToNow, formatRelative } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
-import 'leaflet/dist/leaflet.css';
+} from "@/components/ui/timeline"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/registry/default/ui/tooltip"
+import { getStraightDistanceBetweenTwoPoints } from "@/lib/distances"
+import { smartTrim } from "@/lib/strings"
+import { formatTime, minutesToHour } from "@/lib/times"
+import { cn } from "@/lib/utils"
+import polylineDecode from "@mapbox/polyline"
+import { formatDistance, formatDistanceToNow, formatRelative } from "date-fns"
+import { ptBR } from "date-fns/locale"
+import "leaflet/dist/leaflet.css"
 import {
   ArrowUpRight,
   BadgeAlert,
@@ -73,69 +98,73 @@ import {
   Store,
   ThumbsDown,
   ThumbsUp,
-} from 'lucide-react';
-import { useTheme } from 'next-themes';
-import * as React from 'react';
-import type { Delivery, DeliveryEvent, Order } from '../data/order';
-import { ORDER } from '../data/order';
-import { POLYLINE } from '../data/polyline';
+} from "lucide-react"
+import { useTheme } from "next-themes"
+import * as React from "react"
+import type { Delivery, DeliveryEvent, Order } from "../data/order"
+import { ORDER } from "../data/order"
+import { POLYLINE } from "../data/polyline"
 
 const ViewOrderPage = () => {
-  const order = ORDER;
-  const polyline = POLYLINE.polyline;
+  const order = ORDER
+  const polyline = POLYLINE.polyline
 
-  const mapPolyline = polyline ? (polylineDecode.decode(polyline) as [number, number][]) : undefined;
+  const mapPolyline = polyline
+    ? (polylineDecode.decode(polyline) as [number, number][])
+    : undefined
 
-  const [eventsToShow, setEventsToShow] = React.useState<Map<string, DeliveryEvent & { show: boolean }>>(new Map());
+  const [eventsToShow, setEventsToShow] = React.useState<
+    Map<string, DeliveryEvent & { show: boolean }>
+  >(new Map())
 
   React.useEffect(() => {
     setEventsToShow(
       new Map(
         order?.delivery_events
           .filter((event) => event.latitude && event.longitude)
-          .map((event) => [event.id, { ...event, show: true }]) ?? [],
-      ),
-    );
-  }, [order?.delivery_events]);
+          .map((event) => [event.id, { ...event, show: true }]) ?? []
+      )
+    )
+  }, [order?.delivery_events])
 
   const handleToggleEvent = (eventId: string) => {
     setEventsToShow((prev) => {
-      const newMap = new Map(prev);
-      const event = newMap.get(eventId);
+      const newMap = new Map(prev)
+      const event = newMap.get(eventId)
       if (event) {
         newMap.set(eventId, {
           ...event,
           show: !event.show,
-        });
+        })
       }
-      return newMap;
-    });
-  };
+      return newMap
+    })
+  }
 
   const handleToggleAllEvents = (show: boolean) => {
     setEventsToShow((prev) => {
-      const newMap = new Map(prev);
+      const newMap = new Map(prev)
       newMap.forEach((event) => {
-        event.show = show;
-      });
-      return newMap;
-    });
-  };
+        event.show = show
+      })
+      return newMap
+    })
+  }
 
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(true)
 
   const loadData = React.useCallback(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+    const timer = setTimeout(() => setIsLoading(false), 2000)
+    return () => clearTimeout(timer)
+  }, [])
 
   React.useEffect(() => {
-    loadData();
-  }, [loadData]);
+    loadData()
+  }, [loadData])
 
   return (
     <div className="relative flex h-screen min-h-0 w-full min-w-0 flex-col items-center">
-      <div className="min-h-svh flex w-full flex-col">
+      <div className="flex min-h-svh w-full flex-col">
         {/* header */}
         <div className="flex h-(--header-height) w-full items-center justify-between border-b p-4">
           <div className="flex items-center gap-x-2">
@@ -150,7 +179,9 @@ const ViewOrderPage = () => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="font-medium">{order.id}</BreadcrumbPage>
+                  <BreadcrumbPage className="font-medium">
+                    {order.id}
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -163,7 +194,9 @@ const ViewOrderPage = () => {
         </div>
 
         <div className="flex flex-1">
-          <DoubleSidebarInset className={cn('h-[calc(100vh-var(--header-height))] min-w-0')}>
+          <DoubleSidebarInset
+            className={cn("h-[calc(100vh-var(--header-height))] min-w-0")}
+          >
             <div className="flex h-full min-h-0 w-full">
               <div className="flex-co flex h-full min-h-0 w-full gap-4 overflow-hidden overflow-y-auto p-4 lg:grid lg:grid-cols-[6fr_5fr_5fr]">
                 {/* first column */}
@@ -174,7 +207,9 @@ const ViewOrderPage = () => {
 
                   <OrderTimetrack data={order} isLoading={isLoading} />
 
-                  {order?.type !== OrderTypes.TAKEOUT ? <EstimatedDistance data={order} isLoading={isLoading} /> : null}
+                  {order?.type !== OrderTypes.TAKEOUT ? (
+                    <EstimatedDistance data={order} isLoading={isLoading} />
+                  ) : null}
 
                   <OrderMapTracking
                     data={order}
@@ -197,20 +232,32 @@ const ViewOrderPage = () => {
                 />
 
                 {/* third column */}
-                <div className={cn('flex flex-col gap-y-4 overflow-y-auto', !isLoading && 'rounded-sm border p-4')}>
+                <div
+                  className={cn(
+                    "flex flex-col gap-y-4 overflow-y-auto",
+                    !isLoading && "rounded-sm border p-4"
+                  )}
+                >
                   <GeneralOrderDetails data={order} isLoading={isLoading} />
 
                   <CustomerCard data={order} isLoading={isLoading} />
 
-                  {order?.type !== OrderTypes.TAKEOUT ? <AddressCard data={order} isLoading={isLoading} /> : null}
+                  {order?.type !== OrderTypes.TAKEOUT ? (
+                    <AddressCard data={order} isLoading={isLoading} />
+                  ) : null}
 
                   <ReceiverAlert data={order} isLoading={isLoading} />
 
                   {order?.type !== OrderTypes.TAKEOUT ? (
-                    <VerificationCodesAlert data={order} isLoading={isLoading} />
+                    <VerificationCodesAlert
+                      data={order}
+                      isLoading={isLoading}
+                    />
                   ) : null}
 
-                  {order?.type !== OrderTypes.TAKEOUT ? <FreightRevenue data={order} isLoading={isLoading} /> : null}
+                  {order?.type !== OrderTypes.TAKEOUT ? (
+                    <FreightRevenue data={order} isLoading={isLoading} />
+                  ) : null}
 
                   <CsatAlert data={order} isLoading={isLoading} />
                 </div>
@@ -220,10 +267,16 @@ const ViewOrderPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const GeneralOrderDetails = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
+const GeneralOrderDetails = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-72 w-full flex-col items-center justify-center" />
   ) : (
@@ -238,13 +291,17 @@ const GeneralOrderDetails = ({ data, isLoading = false }: { data?: Order; isLoad
 
         <div className="flex w-full items-center justify-between gap-x-2">
           <span className="text-muted-foreground">Filial</span>
-          <SellerChip baseStringToColor={data?.seller.id as string}>{data?.seller.trading_name}</SellerChip>
+          <SellerChip baseStringToColor={data?.seller.id as string}>
+            {data?.seller.trading_name}
+          </SellerChip>
         </div>
 
         <div className="flex w-full items-center justify-between gap-x-2">
           <span className="text-muted-foreground">Origem do pedido</span>
           <div className="flex items-center gap-x-2">
-            <OrderProviderAvatar order_integration_type={data?.creation_origin as string}>
+            <OrderProviderAvatar
+              order_integration_type={data?.creation_origin as string}
+            >
               {data?.creation_origin}
             </OrderProviderAvatar>
             <span>{data?.creation_origin}</span>
@@ -253,7 +310,9 @@ const GeneralOrderDetails = ({ data, isLoading = false }: { data?: Order; isLoad
 
         <div className="flex w-full items-center justify-between gap-x-2">
           <span className="text-muted-foreground">Tipo de pedido</span>
-          <OrderTypeBadge variant={data?.type as OrderTypes}>{data?.type}</OrderTypeBadge>
+          <OrderTypeBadge variant={data?.type as OrderTypes}>
+            {data?.type}
+          </OrderTypeBadge>
         </div>
 
         <div className="flex w-full items-center justify-between gap-x-2">
@@ -275,14 +334,20 @@ const GeneralOrderDetails = ({ data, isLoading = false }: { data?: Order; isLoad
     // Nota fiscal: {data?.invoice_number}- Data de emissão da nota fiscal:{' '}
     // {formatTime(data?.external_created_at)}- Chave de acesso:{' '}
     // {data?.access_keys}- Filial: {data?.seller.trading_name}- Informações
-  );
-};
+  )
+}
 
-const EstimatedDistance = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
+const EstimatedDistance = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
   return (
     <div className="flex h-12 w-full items-center">
       <div className="flex items-center justify-center rounded-sm border p-1 shadow">
-        <div className="bg-muted flex items-center justify-center rounded-sm p-1.5">
+        <div className="flex items-center justify-center rounded-sm bg-muted p-1.5">
           <Store className="h-4 w-4" />
         </div>
       </div>
@@ -293,9 +358,9 @@ const EstimatedDistance = ({ data, isLoading = false }: { data?: Order; isLoadin
         <Skeleton className="flex h-full w-full" />
       ) : (
         <div className="flex w-fit flex-col items-center text-sm">
-          <span className="whitespace-nowrap rounded-sm bg-violet-400/10 px-2 py-1 font-medium text-violet-500">
+          <span className="rounded-sm bg-violet-400/10 px-2 py-1 font-medium whitespace-nowrap text-violet-500">
             {!data?.estimated_distance_meters
-              ? 'Distância dirigida desconhecida'
+              ? "Distância dirigida desconhecida"
               : `Distância dirigida estimada ≈ ${
                   data?.estimated_distance_meters > 1000
                     ? `${(data?.estimated_distance_meters / 1000).toFixed(2)} km`
@@ -308,13 +373,13 @@ const EstimatedDistance = ({ data, isLoading = false }: { data?: Order; isLoadin
       <div className="h-px w-full border-t border-dashed" />
 
       <div className="flex items-center justify-center rounded-sm border p-1 shadow">
-        <div className="bg-muted flex items-center justify-center rounded-sm p-1.5">
+        <div className="flex items-center justify-center rounded-sm bg-muted p-1.5">
           <House className="h-4 w-4" />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const OrderMapTracking = ({
   data,
@@ -325,45 +390,64 @@ const OrderMapTracking = ({
   eventsToShow,
   handleToggleAllEvents,
 }: {
-  data?: Order;
-  isLoading: boolean;
-  polyline?: [number, number][];
-  bbox?: number[];
-  events?: Order['delivery_events'];
-  eventsToShow: Map<string, DeliveryEvent & { show: boolean }>;
-  handleToggleAllEvents: (show: boolean) => void;
+  data?: Order
+  isLoading: boolean
+  polyline?: [number, number][]
+  bbox?: number[]
+  events?: Order["delivery_events"]
+  eventsToShow: Map<string, DeliveryEvent & { show: boolean }>
+  handleToggleAllEvents: (show: boolean) => void
 }) => {
-  const STORE_LOCATION: [number, number] = [data?.source_address.latitude || 0, data?.source_address.longitude || 0];
+  const STORE_LOCATION: [number, number] = [
+    data?.source_address.latitude || 0,
+    data?.source_address.longitude || 0,
+  ]
   // if takeout it is empty
   const CUSTOMER_LOCATION: [number, number] = [
     data?.destination_address?.latitude || 0,
     data?.destination_address?.longitude || 0,
-  ];
+  ]
   // if takeout it is empty
-  const DRIVER_LOCATION: [number, number] = [data?.last_delivery_latitude || 0, data?.last_delivery_longitude || 0];
+  const DRIVER_LOCATION: [number, number] = [
+    data?.last_delivery_latitude || 0,
+    data?.last_delivery_longitude || 0,
+  ]
 
   // if no bbox, use customer location
-  const centerLat = ((bbox?.[1] || 0) + (bbox?.[3] || 0)) / 2 || DRIVER_LOCATION[0] || CUSTOMER_LOCATION[0];
-  const centerLng = ((bbox?.[0] || 0) + (bbox?.[2] || 0)) / 2 || DRIVER_LOCATION[1] || CUSTOMER_LOCATION[1];
-  const center = [centerLat, centerLng] as [number, number];
+  const centerLat =
+    ((bbox?.[1] || 0) + (bbox?.[3] || 0)) / 2 ||
+    DRIVER_LOCATION[0] ||
+    CUSTOMER_LOCATION[0]
+  const centerLng =
+    ((bbox?.[0] || 0) + (bbox?.[2] || 0)) / 2 ||
+    DRIVER_LOCATION[1] ||
+    CUSTOMER_LOCATION[1]
+  const center = [centerLat, centerLng] as [number, number]
 
-  const { resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme()
 
   const lastDelivery = data?.deliveries
-    .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
-    .at(-1);
+    .sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    )
+    .at(-1)
 
-  const allEventsVisible = Array.from(eventsToShow.values()).every((event) => event.show);
+  const allEventsVisible = Array.from(eventsToShow.values()).every(
+    (event) => event.show
+  )
 
-  const successfulEvent = events?.find((event) => event.status === OrderStatus.SUCCESSFUL);
+  const successfulEvent = events?.find(
+    (event) => event.status === OrderStatus.SUCCESSFUL
+  )
   const successfulEventDistance = getStraightDistanceBetweenTwoPoints(
     successfulEvent?.latitude,
     successfulEvent?.longitude,
     CUSTOMER_LOCATION[0],
-    CUSTOMER_LOCATION[1],
-  );
+    CUSTOMER_LOCATION[1]
+  )
 
-  const isFinished = data?.status_name === OrderStatus.SUCCESSFUL;
+  const isFinished = data?.status_name === OrderStatus.SUCCESSFUL
 
   return isLoading ? (
     <Skeleton className="flex h-full min-h-96 w-full flex-col items-center justify-center gap-y-4 text-center" />
@@ -375,7 +459,7 @@ const OrderMapTracking = ({
     >
       <MapTileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        className={cn('grayscale', resolvedTheme === 'dark' && 'brightness-50')}
+        className={cn("grayscale", resolvedTheme === "dark" && "brightness-50")}
       />
 
       {/* Route Polyline */}
@@ -397,14 +481,16 @@ const OrderMapTracking = ({
                 className="relative flex h-6 w-6 items-center justify-center"
                 style={
                   {
-                    '--driver-vehicle-color': lastDelivery?.driver_vehicle_color || 'blue',
-                    '--driver-vehicle-opacity': 'rgb(from var(--driver-vehicle-color) r g b / 0.5)',
+                    "--driver-vehicle-color":
+                      lastDelivery?.driver_vehicle_color || "blue",
+                    "--driver-vehicle-opacity":
+                      "rgb(from var(--driver-vehicle-color) r g b / 0.5)",
                   } as React.CSSProperties
                 }
               >
-                <span className="absolute h-8 w-8 animate-ping rounded-full bg-driver-vehicle-opacity" />
-                <span className="absolute h-8 w-8 animate-pulse rounded-full bg-driver-vehicle-opacity" />
-                <span className="border-background absolute h-4 w-4 rounded-full border-2 bg-driver-vehicle-color" />
+                <span className="bg-driver-vehicle-opacity absolute h-8 w-8 animate-ping rounded-full" />
+                <span className="bg-driver-vehicle-opacity absolute h-8 w-8 animate-pulse rounded-full" />
+                <span className="bg-driver-vehicle-color absolute h-4 w-4 rounded-full border-2 border-background" />
               </span>
             }
           />
@@ -416,11 +502,13 @@ const OrderMapTracking = ({
         position={STORE_LOCATION}
         icon={
           <span className="relative flex h-6 w-6 items-center justify-center">
-            <span className="bg-foreground/25 absolute h-6 w-6 rounded-full" />
-            <span className="bg-foreground/50 absolute h-4 w-4 rounded-full" />
-            <span className="bg-foreground absolute h-2 w-2 rounded-full" />
-            <Badge className="bg-foreground text-background absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
-              {data?.type === OrderTypes.TAKEOUT ? 'local de retirada' : 'partida'}
+            <span className="absolute h-6 w-6 rounded-full bg-foreground/25" />
+            <span className="absolute h-4 w-4 rounded-full bg-foreground/50" />
+            <span className="absolute h-2 w-2 rounded-full bg-foreground" />
+            <Badge className="absolute -top-7 left-1/2 -translate-x-1/2 bg-foreground whitespace-nowrap text-background">
+              {data?.type === OrderTypes.TAKEOUT
+                ? "local de retirada"
+                : "partida"}
             </Badge>
           </span>
         }
@@ -433,10 +521,12 @@ const OrderMapTracking = ({
           position={CUSTOMER_LOCATION}
           icon={
             <span className="relative flex h-6 w-6 items-center justify-center">
-              <span className="bg-foreground/25 absolute h-6 w-6 rounded-full" />
-              <span className="bg-foreground/50 absolute h-4 w-4 rounded-full" />
-              <span className="bg-foreground absolute h-2 w-2 rounded-full" />
-              <Badge className="bg-foreground text-background absolute -top-7 left-1/2 -translate-x-1/2">destino</Badge>
+              <span className="absolute h-6 w-6 rounded-full bg-foreground/25" />
+              <span className="absolute h-4 w-4 rounded-full bg-foreground/50" />
+              <span className="absolute h-2 w-2 rounded-full bg-foreground" />
+              <Badge className="absolute -top-7 left-1/2 -translate-x-1/2 bg-foreground text-background">
+                destino
+              </Badge>
             </span>
           }
         />
@@ -460,19 +550,24 @@ const OrderMapTracking = ({
             <span
               style={
                 {
-                  '--event-color': OrderStatusColors[event.status as keyof typeof OrderStatusColors],
+                  "--event-color":
+                    OrderStatusColors[
+                      event.status as keyof typeof OrderStatusColors
+                    ],
                 } as React.CSSProperties
               }
               className={cn(
-                'group relative flex h-6 w-6 items-center justify-center',
-                !eventsToShow.get(event.id)?.show && 'hidden',
+                "group relative flex h-6 w-6 items-center justify-center",
+                !eventsToShow.get(event.id)?.show && "hidden"
               )}
             >
               <span className="absolute h-6 w-6 rounded-full bg-(--event-color) opacity-25" />
               <span className="absolute h-4 w-4 rounded-full bg-(--event-color) opacity-50" />
               <span className="absolute h-2 w-2 rounded-full bg-(--event-color)" />
-              <div className="bg-foreground absolute -top-9 left-1/2 hidden -translate-x-1/2 rounded-sm p-1 transition-opacity group-hover:block">
-                <OrderStatusBadge variant={event.status as OrderStatus}>{event.status}</OrderStatusBadge>
+              <div className="absolute -top-9 left-1/2 hidden -translate-x-1/2 rounded-sm bg-foreground p-1 transition-opacity group-hover:block">
+                <OrderStatusBadge variant={event.status as OrderStatus}>
+                  {event.status}
+                </OrderStatusBadge>
               </div>
             </span>
           }
@@ -480,14 +575,26 @@ const OrderMapTracking = ({
       ))}
 
       <Button
-        className="leaflet-top leaflet-left pointer-events-auto! absolute left-2! top-2! rounded-full"
-        onClick={() => (allEventsVisible ? handleToggleAllEvents(false) : handleToggleAllEvents(true))}
+        className="leaflet-top leaflet-left pointer-events-auto! absolute top-2! left-2! rounded-full"
+        onClick={() =>
+          allEventsVisible
+            ? handleToggleAllEvents(false)
+            : handleToggleAllEvents(true)
+        }
       >
-        {allEventsVisible ? <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
+        {allEventsVisible ? (
+          <EyeOffIcon className="size-4" />
+        ) : (
+          <EyeIcon className="size-4" />
+        )}
       </Button>
 
       <div className="leaflet-bottom leaflet-left absolute bottom-2! left-2! flex flex-col gap-y-2">
-        {polyline ? <Badge className="bg-foreground text-background w-fit">Rota sugerida</Badge> : null}
+        {polyline ? (
+          <Badge className="w-fit bg-foreground text-background">
+            Rota sugerida
+          </Badge>
+        ) : null}
         {successfulEventDistance ? (
           <Badge className="w-fit bg-green-800 text-white">
             {`Apontamento de sucesso: ${
@@ -499,13 +606,22 @@ const OrderMapTracking = ({
         ) : null}
       </div>
     </MapComponent>
-  );
-};
+  )
+}
 
-const DriverCard = ({ data, isLoading }: { data?: Order; isLoading: boolean }) => {
+const DriverCard = ({
+  data,
+  isLoading,
+}: {
+  data?: Order
+  isLoading: boolean
+}) => {
   const lastDelivery = data?.deliveries
-    .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
-    .at(-1);
+    .sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    )
+    .at(-1)
 
   return isLoading ? (
     <Skeleton className="flex h-28 w-full rounded-sm" />
@@ -515,97 +631,132 @@ const DriverCard = ({ data, isLoading }: { data?: Order; isLoading: boolean }) =
         <Avatar className="aspect-auto h-full w-auto rounded-sm">
           <AvatarImage src={lastDelivery?.driver_image_url} />
           <AvatarFallback className="aspect-square rounded-sm">
-            <ImageOff className="text-muted-foreground h-4 w-4" />
+            <ImageOff className="h-4 w-4 text-muted-foreground" />
           </AvatarFallback>
         </Avatar>
 
         <div className="flex flex-col">
           <div className="flex items-center gap-x-2">
-            <span className="text-muted-foreground whitespace-nowrap">Transportadora:</span>
+            <span className="whitespace-nowrap text-muted-foreground">
+              Transportadora:
+            </span>
             <div className="flex items-center gap-x-2">
-              <CarrierAvatar carrier_name={data?.last_delivery_type || ''} />
-              <span className="whitespace-nowrap">{data?.last_delivery_type}</span>
+              <CarrierAvatar carrier_name={data?.last_delivery_type || ""} />
+              <span className="whitespace-nowrap">
+                {data?.last_delivery_type}
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-x-2">
-            <span className="text-muted-foreground whitespace-nowrap">Motorista:</span>
-            <span>{lastDelivery?.driver_name || '-'}</span>
+            <span className="whitespace-nowrap text-muted-foreground">
+              Motorista:
+            </span>
+            <span>{lastDelivery?.driver_name || "-"}</span>
           </div>
           <div className="flex items-center gap-x-2">
-            <span className="text-muted-foreground whitespace-nowrap">Documento:</span>{' '}
-            <span>{lastDelivery?.driver_document || '-'}</span>
+            <span className="whitespace-nowrap text-muted-foreground">
+              Documento:
+            </span>{" "}
+            <span>{lastDelivery?.driver_document || "-"}</span>
           </div>
           <div className="flex items-center gap-x-2">
-            <span className="text-muted-foreground whitespace-nowrap">Telefone:</span>{' '}
-            <span>{lastDelivery?.driver_phone || '-'}</span>
+            <span className="whitespace-nowrap text-muted-foreground">
+              Telefone:
+            </span>{" "}
+            <span>{lastDelivery?.driver_phone || "-"}</span>
           </div>
         </div>
       </div>
 
       <div>
-        {lastDelivery?.driver_vehicle_type ? <div>{lastDelivery?.driver_vehicle_type}</div> : null}
+        {lastDelivery?.driver_vehicle_type ? (
+          <div>{lastDelivery?.driver_vehicle_type}</div>
+        ) : null}
 
         {lastDelivery?.driver_vehicle_plate ? (
-          <div className="bg-muted rounded-sm p-2">{lastDelivery?.driver_vehicle_plate}</div>
+          <div className="rounded-sm bg-muted p-2">
+            {lastDelivery?.driver_vehicle_plate}
+          </div>
         ) : null}
       </div>
     </div>
-  );
-};
+  )
+}
 
-const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
-  let otd_situation = 'unknown';
+const PromisedDeliveryDate = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
+  let otd_situation = "unknown"
   if (data?.type === OrderTypes.TAKEOUT) {
-    otd_situation = 'takeout';
+    otd_situation = "takeout"
   } else if (data?.status_name === OrderStatus.SUCCESSFUL) {
-    if (data?.last_delivery_delivered_date && data?.expected_customer_shipping_date) {
-      if (new Date(data?.last_delivery_delivered_date) > new Date(data?.expected_customer_shipping_date)) {
-        otd_situation = 'late_finished';
+    if (
+      data?.last_delivery_delivered_date &&
+      data?.expected_customer_shipping_date
+    ) {
+      if (
+        new Date(data?.last_delivery_delivered_date) >
+        new Date(data?.expected_customer_shipping_date)
+      ) {
+        otd_situation = "late_finished"
       } else {
-        otd_situation = 'on_time_finished';
+        otd_situation = "on_time_finished"
       }
     }
   } else {
     if (data?.expected_customer_shipping_date) {
       if (new Date() > new Date(data?.expected_customer_shipping_date)) {
-        otd_situation = 'late_unfinished';
+        otd_situation = "late_unfinished"
       } else {
-        otd_situation = 'on_time_unfinished';
+        otd_situation = "on_time_unfinished"
       }
     }
   }
 
   const title = {
-    on_time_finished: 'Pedido entregue no prazo',
-    on_time_unfinished: 'Este pedido está dentro do prazo',
-    late_finished: 'Pedido entregue com atraso',
-    late_unfinished: 'Este pedido está atrasado',
-    unknown: 'Prazo prometido ao cliente não informado',
-    takeout: 'Pedido para retirada em loja',
-  };
+    on_time_finished: "Pedido entregue no prazo",
+    on_time_unfinished: "Este pedido está dentro do prazo",
+    late_finished: "Pedido entregue com atraso",
+    late_unfinished: "Este pedido está atrasado",
+    unknown: "Prazo prometido ao cliente não informado",
+    takeout: "Pedido para retirada em loja",
+  }
 
   const lastDelivery = data?.deliveries
-    .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
-    .at(-1);
+    .sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    )
+    .at(-1)
 
-  const isOnTime = ['on_time_finished', 'on_time_unfinished'].includes(otd_situation);
-  const isLate = ['late_finished', 'late_unfinished'].includes(otd_situation);
+  const isOnTime = ["on_time_finished", "on_time_unfinished"].includes(
+    otd_situation
+  )
+  const isLate = ["late_finished", "late_unfinished"].includes(otd_situation)
 
-  const isFinished = ['on_time_finished', 'late_finished'].includes(otd_situation);
-  const isNotFinished = ['on_time_unfinished', 'late_unfinished'].includes(otd_situation);
+  const isFinished = ["on_time_finished", "late_finished"].includes(
+    otd_situation
+  )
+  const isNotFinished = ["on_time_unfinished", "late_unfinished"].includes(
+    otd_situation
+  )
 
   return isLoading ? (
     <Skeleton className="flex h-28 w-full flex-col items-center justify-center gap-y-4" />
   ) : (
     <Alert
-      variant={isOnTime ? 'success' : isLate ? 'destructive' : 'neutral'}
-      className={cn(isNotFinished && 'border-dashed')}
+      variant={isOnTime ? "success" : isLate ? "destructive" : "neutral"}
+      className={cn(isNotFinished && "border-dashed")}
     >
       {isOnTime && isNotFinished && <ThumbsUp className="h-4 w-4" />}
       {isOnTime && isFinished && <BadgeCheck className="h-4 w-4" />}
       {isLate && isNotFinished && <ThumbsDown className="h-4 w-4" />}
       {isLate && isFinished && <BadgeX className="h-4 w-4" />}
-      {otd_situation === 'unknown' && <BadgeAlert className="h-4 w-4" />}
+      {otd_situation === "unknown" && <BadgeAlert className="h-4 w-4" />}
 
       <AlertTitle>{title[otd_situation as keyof typeof title]}</AlertTitle>
       <AlertDescription>
@@ -613,24 +764,36 @@ const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoa
           {data?.expected_customer_shipping_date ? (
             <React.Fragment>
               <span>
-                &bull; {isNotFinished ? 'O cliente espera receber ' : 'O cliente esperava receber '}
-                {formatRelative(new Date(data?.expected_customer_shipping_date || ''), new Date(), {
-                  locale: ptBR,
-                })}
+                &bull;{" "}
+                {isNotFinished
+                  ? "O cliente espera receber "
+                  : "O cliente esperava receber "}
+                {formatRelative(
+                  new Date(data?.expected_customer_shipping_date || ""),
+                  new Date(),
+                  {
+                    locale: ptBR,
+                  }
+                )}
               </span>
               {isNotFinished ? (
                 <span className="font-medium">
                   (
-                  {formatDistanceToNow(new Date(data?.expected_customer_shipping_date || ''), {
-                    locale: ptBR,
-                    addSuffix: true,
-                  })}
+                  {formatDistanceToNow(
+                    new Date(data?.expected_customer_shipping_date || ""),
+                    {
+                      locale: ptBR,
+                      addSuffix: true,
+                    }
+                  )}
                   )
                 </span>
               ) : null}
             </React.Fragment>
           ) : (
-            <span>&bull; Prazo de entrega prometido ao cliente não informado</span>
+            <span>
+              &bull; Prazo de entrega prometido ao cliente não informado
+            </span>
           )}
         </div>
 
@@ -640,15 +803,15 @@ const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoa
               <span>
                 &bull;
                 {` O prazo informado pela transportadora é ${formatRelative(
-                  new Date(lastDelivery?.eta || ''),
+                  new Date(lastDelivery?.eta || ""),
                   new Date(),
                   {
                     locale: ptBR,
-                  },
+                  }
                 )}`}
               </span>
               <span className="font-medium">
-                {` (${formatDistanceToNow(new Date(lastDelivery?.eta || ''), {
+                {` (${formatDistanceToNow(new Date(lastDelivery?.eta || ""), {
                   locale: ptBR,
                   addSuffix: true,
                 })})`}
@@ -657,28 +820,30 @@ const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoa
           ) : data?.last_delivery_delivered_date ? (
             <div className="flex flex-wrap gap-x-1">
               <span>
-                &bull;{' '}
+                &bull;{" "}
                 {` O pedido foi entregue ${formatRelative(
-                  new Date(data?.last_delivery_delivered_date || ''),
+                  new Date(data?.last_delivery_delivered_date || ""),
                   new Date(),
                   {
                     locale: ptBR,
-                  },
+                  }
                 )}`}
               </span>
               {data?.expected_customer_shipping_date ? (
                 <span className="font-medium">
                   {` (${formatDistance(
-                    new Date(data?.expected_customer_shipping_date || ''),
-                    new Date(data?.last_delivery_delivered_date || ''),
+                    new Date(data?.expected_customer_shipping_date || ""),
+                    new Date(data?.last_delivery_delivered_date || ""),
                     {
                       locale: ptBR,
-                    },
+                    }
                   )} ${
-                    new Date(data?.expected_customer_shipping_date || '').getTime() >=
-                    new Date(data?.last_delivery_delivered_date || '').getTime()
-                      ? 'antes do'
-                      : 'após o'
+                    new Date(
+                      data?.expected_customer_shipping_date || ""
+                    ).getTime() >=
+                    new Date(data?.last_delivery_delivered_date || "").getTime()
+                      ? "antes do"
+                      : "após o"
                   } prazo)`}
                 </span>
               ) : null}
@@ -689,49 +854,65 @@ const PromisedDeliveryDate = ({ data, isLoading = false }: { data?: Order; isLoa
         </div>
       </AlertDescription>
     </Alert>
-  );
-};
+  )
+}
 
-const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
-  const diffInMinutes = (start: string | Date | null, end: string | Date | null) => {
-    if (!start || !end) return null;
-    const diffMs = new Date(end).getTime() - new Date(start).getTime();
-    return Math.round(diffMs / 60000); // convert ms → minutes
-  };
+const OrderTimetrack = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
+  const diffInMinutes = (
+    start: string | Date | null,
+    end: string | Date | null
+  ) => {
+    if (!start || !end) return null
+    const diffMs = new Date(end).getTime() - new Date(start).getTime()
+    return Math.round(diffMs / 60000) // convert ms → minutes
+  }
 
-  const processedToCreated = diffInMinutes(data?.seller_processed_at || null, data?.created_at || null) || 0;
+  const processedToCreated =
+    diffInMinutes(
+      data?.seller_processed_at || null,
+      data?.created_at || null
+    ) || 0
   const createdToDeliveredOrNow =
-    diffInMinutes(data?.created_at || null, data?.last_delivery_delivered_date || new Date().toISOString()) || 0;
+    diffInMinutes(
+      data?.created_at || null,
+      data?.last_delivery_delivered_date || new Date().toISOString()
+    ) || 0
 
   const chartData = [
     {
-      id: 'pick-and-packing',
-      type: 'pick-and-packing',
-      label: 'Preparo',
+      id: "pick-and-packing",
+      type: "pick-and-packing",
+      label: "Preparo",
       value: processedToCreated,
-      color: '#3b82f6',
+      color: "#3b82f6",
     },
     {
-      id: 'shipping',
-      type: 'shipping',
-      label: data?.type === OrderTypes.TAKEOUT ? 'Retirada' : 'Entrega',
+      id: "shipping",
+      type: "shipping",
+      label: data?.type === OrderTypes.TAKEOUT ? "Retirada" : "Entrega",
       value: createdToDeliveredOrNow,
-      color: '#10b981',
+      color: "#10b981",
     },
-  ];
+  ]
 
-  const total = processedToCreated + createdToDeliveredOrNow;
+  const total = processedToCreated + createdToDeliveredOrNow
 
   const formatPercentage = React.useCallback(
     (value: number) => {
       if (!total) {
-        return '0.00';
+        return "0.00"
       }
 
-      return ((value / total) * 100).toFixed(2);
+      return ((value / total) * 100).toFixed(2)
     },
-    [total],
-  );
+    [total]
+  )
 
   return isLoading ? (
     <Skeleton className="flex h-28 w-full flex-col items-center justify-center gap-y-4" />
@@ -740,28 +921,37 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
       <div className="flex w-full items-end justify-between gap-x-2">
         <span
           className={cn(
-            'bg-muted whitespace-nowrap rounded-sm px-1 text-blue-500',
-            !data?.seller_processed_at && 'text-muted',
+            "rounded-sm bg-muted px-1 whitespace-nowrap text-blue-500",
+            !data?.seller_processed_at && "text-muted"
           )}
         >
-          {data?.seller_processed_at ? formatTime(data?.seller_processed_at, 'dd/MM/yy HH:mm:ss') : '--/--/-- --:--:--'}
+          {data?.seller_processed_at
+            ? formatTime(data?.seller_processed_at, "dd/MM/yy HH:mm:ss")
+            : "--/--/-- --:--:--"}
         </span>
 
         <span className="mb-1 h-px w-full border-b border-dashed" />
-        <span className={cn('bg-muted whitespace-nowrap rounded-sm px-1 text-yellow-500')}>
-          {formatTime(data?.created_at, 'dd/MM/yy HH:mm:ss')}
+        <span
+          className={cn(
+            "rounded-sm bg-muted px-1 whitespace-nowrap text-yellow-500"
+          )}
+        >
+          {formatTime(data?.created_at, "dd/MM/yy HH:mm:ss")}
         </span>
         <span className="mb-1 h-px w-full border-b border-dashed" />
 
         <span
           className={cn(
-            'bg-muted whitespace-nowrap rounded-sm px-1 text-emerald-500',
-            !data?.last_delivery_delivered_date && 'text-muted animate-pulse',
+            "rounded-sm bg-muted px-1 whitespace-nowrap text-emerald-500",
+            !data?.last_delivery_delivered_date && "animate-pulse text-muted"
           )}
         >
           {data?.last_delivery_delivered_date
-            ? formatTime(data?.last_delivery_delivered_date, 'dd/MM/yy HH:mm:ss')
-            : '--/--/-- --:--:--'}
+            ? formatTime(
+                data?.last_delivery_delivered_date,
+                "dd/MM/yy HH:mm:ss"
+              )
+            : "--/--/-- --:--:--"}
         </span>
       </div>
       {/* Chart */}
@@ -772,13 +962,15 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
             <div
               key={idx}
               className={cn(
-                'w-(--bar-width) rounded-sm bg-(--bar-bg)',
-                !data?.last_delivery_delivered_date && cd.id === 'shipping' && 'animate-pulse',
+                "w-(--bar-width) rounded-sm bg-(--bar-bg)",
+                !data?.last_delivery_delivered_date &&
+                  cd.id === "shipping" &&
+                  "animate-pulse"
               )}
               style={
                 {
-                  '--bar-bg': cd.color,
-                  '--bar-width': `${formatPercentage(cd.value)}%`,
+                  "--bar-bg": cd.color,
+                  "--bar-width": `${formatPercentage(cd.value)}%`,
                 } as React.CSSProperties
               }
             />
@@ -790,20 +982,24 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
           <div key={idx} className="flex items-center gap-x-2 text-sm">
             <span
               className={cn(
-                'h-3 w-3 rounded-xs bg-(--color)',
-                !data?.last_delivery_delivered_date && cd.id === 'shipping' && 'animate-pulse',
+                "h-3 w-3 rounded-xs bg-(--color)",
+                !data?.last_delivery_delivered_date &&
+                  cd.id === "shipping" &&
+                  "animate-pulse"
               )}
               style={
                 {
-                  '--color': cd.color,
+                  "--color": cd.color,
                 } as React.CSSProperties
               }
             />
             <div className="flex items-center gap-x-2">
               <span className="text-muted-foreground">{`${cd.label}: `}</span>
               <div className="flex items-center gap-x-1">
-                <span className="font-medium tabular-nums">{formatPercentage(cd.value)}%</span>
-                <span className="text-muted-foreground flex items-center tabular-nums">
+                <span className="font-medium tabular-nums">
+                  {formatPercentage(cd.value)}%
+                </span>
+                <span className="flex items-center text-muted-foreground tabular-nums">
                   ({minutesToHour(cd.value || 0)})
                 </span>
               </div>
@@ -812,8 +1008,8 @@ const OrderTimetrack = ({ data, isLoading = false }: { data?: Order; isLoading?:
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const DeliveriesHistory = ({
   data,
@@ -821,65 +1017,79 @@ const DeliveriesHistory = ({
   handleToggleEvent,
   eventsToShow,
 }: {
-  data?: Order;
-  isLoading?: boolean;
-  handleToggleEvent: (eventId: string) => void;
-  eventsToShow: Map<string, DeliveryEvent & { show: boolean }>;
+  data?: Order
+  isLoading?: boolean
+  handleToggleEvent: (eventId: string) => void
+  eventsToShow: Map<string, DeliveryEvent & { show: boolean }>
 }) => {
-  const [openAttachmentsDialog, setOpenAttachmentsDialog] = React.useState(false);
+  const [openAttachmentsDialog, setOpenAttachmentsDialog] =
+    React.useState(false)
 
-  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
-  const [scrollTop, setScrollTop] = React.useState(0);
-  const [hasMoreBelow, setHasMoreBelow] = React.useState(false);
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null)
+  const [scrollTop, setScrollTop] = React.useState(0)
+  const [hasMoreBelow, setHasMoreBelow] = React.useState(false)
 
   React.useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
+    const container = scrollContainerRef.current
+    if (!container) return
 
     const handleScroll = () => {
-      setScrollTop(container.scrollTop);
-      setHasMoreBelow(container.scrollHeight - container.scrollTop - container.clientHeight > 10);
-    };
+      setScrollTop(container.scrollTop)
+      setHasMoreBelow(
+        container.scrollHeight - container.scrollTop - container.clientHeight >
+          10
+      )
+    }
 
-    container.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    container.addEventListener("scroll", handleScroll)
+    handleScroll() // Initial check
 
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => container.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // created and manual handle
-  const eventsWithoutDelivery = data?.delivery_events.filter((event) => !event.delivery_id) || [];
-  const deliveries = data?.deliveries || [];
+  const eventsWithoutDelivery =
+    data?.delivery_events.filter((event) => !event.delivery_id) || []
+  const deliveries = data?.deliveries || []
 
-  const sortedSingleEventsAndDeliveries = [...eventsWithoutDelivery, ...deliveries].sort(
+  const sortedSingleEventsAndDeliveries = [
+    ...eventsWithoutDelivery,
+    ...deliveries,
+  ].sort(
     (a, b) =>
-      new Date('event_at' in b ? b.event_at : b.created_at).getTime() -
-      new Date('event_at' in a ? a.event_at : a.created_at).getTime(),
-  );
+      new Date("event_at" in b ? b.event_at : b.created_at).getTime() -
+      new Date("event_at" in a ? a.event_at : a.created_at).getTime()
+  )
 
   const lastDelivery = data?.deliveries
-    .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
-    .at(-1);
+    .sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    )
+    .at(-1)
 
   return isLoading ? (
     <Skeleton className="flex h-full w-full flex-col items-center justify-center gap-y-4 text-center" />
   ) : (
     <div className="relative flex h-full min-h-0 flex-col gap-y-2 rounded-sm border">
       {/* Scroll indicators */}
-      <div className={cn('absolute inset-x-0 top-0 flex justify-center')}>
+      <div className={cn("absolute inset-x-0 top-0 flex justify-center")}>
         <div
           className={cn(
-            'text-muted bg-foreground items-center justify-center rounded-full p-1 transition-opacity',
-            scrollTop > 0 ? 'opacity-100' : 'opacity-0',
+            "items-center justify-center rounded-full bg-foreground p-1 text-muted transition-opacity",
+            scrollTop > 0 ? "opacity-100" : "opacity-0"
           )}
         >
           <ChevronUp className="h-3 w-3" />
         </div>
       </div>
 
-      <div className="flex flex-col gap-y-4 overflow-y-auto p-4" ref={scrollContainerRef}>
+      <div
+        className="flex flex-col gap-y-4 overflow-y-auto p-4"
+        ref={scrollContainerRef}
+      >
         {sortedSingleEventsAndDeliveries.map((deliveryOrEvent) =>
-          'event_at' in deliveryOrEvent ? (
+          "event_at" in deliveryOrEvent ? (
             <DeliveryEventTimeline
               key={deliveryOrEvent.id}
               data={deliveryOrEvent as DeliveryEvent}
@@ -896,35 +1106,39 @@ const DeliveriesHistory = ({
               setOpenAttachmentsDialog={setOpenAttachmentsDialog}
               defaultOpen={lastDelivery?.id === deliveryOrEvent.id}
             />
-          ),
+          )
         )}
       </div>
 
       {/* Scroll indicators */}
-      <div className={cn('absolute inset-x-0 bottom-0 flex justify-center')}>
+      <div className={cn("absolute inset-x-0 bottom-0 flex justify-center")}>
         <div
           className={cn(
-            'text-muted bg-foreground items-center justify-center rounded-full p-1 transition-opacity',
-            hasMoreBelow ? 'opacity-100' : 'opacity-0',
+            "items-center justify-center rounded-full bg-foreground p-1 text-muted transition-opacity",
+            hasMoreBelow ? "opacity-100" : "opacity-0"
           )}
         >
           <ChevronDown className="h-3 w-3" />
         </div>
       </div>
 
-      <OrderAttachmentsDialog open={openAttachmentsDialog} onOpenChange={setOpenAttachmentsDialog} data={data} />
+      <OrderAttachmentsDialog
+        open={openAttachmentsDialog}
+        onOpenChange={setOpenAttachmentsDialog}
+        data={data}
+      />
     </div>
-  );
-};
+  )
+}
 
 const DeliveryEventTimeline = ({
   data,
   isLoading = false,
   setOpenAttachmentsDialog,
 }: {
-  data?: DeliveryEvent;
-  isLoading?: boolean;
-  setOpenAttachmentsDialog: (open: boolean) => void;
+  data?: DeliveryEvent
+  isLoading?: boolean
+  setOpenAttachmentsDialog: (open: boolean) => void
 }) => {
   return isLoading || !data ? (
     <Skeleton className="flex h-80 w-full flex-1 flex-col items-center justify-center" />
@@ -935,14 +1149,14 @@ const DeliveryEventTimeline = ({
           <TimelineHeader>
             <TimelineSeparator className="group-data-[orientation=vertical]/timeline:h-[calc(100%-2.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-8" />
             <TimelineDate className="flex justify-between">
-              {formatTime(data.event_at, 'dd/MM/yy HH:mm:ss')}
+              {formatTime(data.event_at, "dd/MM/yy HH:mm:ss")}
 
               <Tooltip>
                 <TooltipTrigger>
                   {data?.manual_action ? (
-                    <MousePointerClick className="text-muted-foreground h-4 w-4" />
+                    <MousePointerClick className="h-4 w-4 text-muted-foreground" />
                   ) : (
-                    <LinkIcon className="text-muted-foreground h-4 w-4" />
+                    <LinkIcon className="h-4 w-4 text-muted-foreground" />
                   )}
                 </TooltipTrigger>
                 <TooltipContent>
@@ -951,35 +1165,39 @@ const DeliveryEventTimeline = ({
                       Ação realizada por <strong>{data?.user?.email}</strong>
                     </>
                   ) : data?.manual_action ? (
-                    'Ação manual'
+                    "Ação manual"
                   ) : (
-                    'Ação automática'
+                    "Ação automática"
                   )}
                 </TooltipContent>
               </Tooltip>
             </TimelineDate>
             <TimelineTitle className="mb-2 w-full">
               <span className="flex items-center gap-x-1">
-                <OrderStatusBadge variant={data.status as OrderStatus}>{data.status}</OrderStatusBadge>
+                <OrderStatusBadge variant={data.status as OrderStatus}>
+                  {data.status}
+                </OrderStatusBadge>
                 {data.sub_status && (
-                  <span className="text-muted-foreground font-normal">{` - ${data.sub_status}`}</span>
+                  <span className="font-normal text-muted-foreground">{` - ${data.sub_status}`}</span>
                 )}
               </span>
             </TimelineTitle>
             <TimelineIndicator
               className={cn(
-                'flex h-8 w-8 items-center justify-center',
+                "flex h-8 w-8 items-center justify-center",
                 data.latitude &&
                   data.longitude &&
-                  'group-data-completed/timeline-item:border-foreground group-data-completed/timeline-item:bg-foreground cursor-pointer',
+                  "cursor-pointer group-data-completed/timeline-item:border-foreground group-data-completed/timeline-item:bg-foreground",
                 !data.latitude &&
                   !data.longitude &&
-                  'bg-muted group-data-completed/timeline-item:border-muted border-red-500',
+                  "border-red-500 bg-muted group-data-completed/timeline-item:border-muted"
               )}
             />
           </TimelineHeader>
           <div className="flex flex-col gap-y-2">
-            {data?.driver_name || data?.driver_document || data?.driver_phone ? (
+            {data?.driver_name ||
+            data?.driver_document ||
+            data?.driver_phone ? (
               <div>
                 {data?.driver_name ? <strong>{data.driver_name}</strong> : null}
                 {data?.driver_document ? (
@@ -998,7 +1216,9 @@ const DeliveryEventTimeline = ({
             ) : null}
 
             {data.observation && (
-              <div className="text-muted-foreground rounded-sm border px-2 py-1 text-sm">{data.observation}</div>
+              <div className="rounded-sm border px-2 py-1 text-sm text-muted-foreground">
+                {data.observation}
+              </div>
             )}
             {data?.attachments.length > 0 && (
               <div className="grid w-full grid-cols-5 gap-2">
@@ -1022,8 +1242,12 @@ const DeliveryEventTimeline = ({
                     </TooltipTrigger>
                     {attachment.user_id ? (
                       <TooltipContent>
-                        Anexado por <strong>{attachment?.user?.email as string}</strong> em{' '}
-                        {formatTime(attachment?.created_at, 'dd/MM/yy HH:mm:ss')}
+                        Anexado por{" "}
+                        <strong>{attachment?.user?.email as string}</strong> em{" "}
+                        {formatTime(
+                          attachment?.created_at,
+                          "dd/MM/yy HH:mm:ss"
+                        )}
                       </TooltipContent>
                     ) : null}
                   </Tooltip>
@@ -1034,8 +1258,8 @@ const DeliveryEventTimeline = ({
         </TimelineItem>
       </Timeline>
     </div>
-  );
-};
+  )
+}
 
 const DeliveryTimeline = ({
   data,
@@ -1045,24 +1269,30 @@ const DeliveryTimeline = ({
   setOpenAttachmentsDialog,
   defaultOpen,
 }: {
-  data?: Delivery;
-  isLoading?: boolean;
-  handleToggleEvent: (eventId: string) => void;
-  eventsToShow: Map<string, DeliveryEvent & { show: boolean }>;
-  setOpenAttachmentsDialog: (open: boolean) => void;
-  defaultOpen: boolean;
+  data?: Delivery
+  isLoading?: boolean
+  handleToggleEvent: (eventId: string) => void
+  eventsToShow: Map<string, DeliveryEvent & { show: boolean }>
+  setOpenAttachmentsDialog: (open: boolean) => void
+  defaultOpen: boolean
 }) => {
   return isLoading ? (
     <Skeleton className="flex h-80 w-full flex-1 flex-col items-center justify-center" />
   ) : (
-    <Accordion defaultValue={defaultOpen ? ['delivery'] : []} className="rounded-sm border px-4">
+    <Accordion
+      defaultValue={defaultOpen ? ["delivery"] : []}
+      className="rounded-sm border px-4"
+    >
       <AccordionItem value="delivery" className="border-none">
         <AccordionTrigger className="hover:no-underline">
           <div className="grid w-full grid-cols-[auto_1fr] items-center gap-x-2">
-            <CarrierAvatar carrier_name={data?.carrier_type || ''} className="h-8 w-8" />
+            <CarrierAvatar
+              carrier_name={data?.carrier_type || ""}
+              className="h-8 w-8"
+            />
             <div className="flex gap-x-1">
-              <time className="text-muted-foreground mb-1 font-medium">
-                {formatTime(data?.created_at, 'dd/MM/yy HH:mm:ss')}
+              <time className="mb-1 font-medium text-muted-foreground">
+                {formatTime(data?.created_at, "dd/MM/yy HH:mm:ss")}
               </time>
             </div>
           </div>
@@ -1070,7 +1300,11 @@ const DeliveryTimeline = ({
         <AccordionContent className="flex flex-col p-2">
           <Timeline value={data?.events.length}>
             {data?.events
-              .sort((a, b) => new Date(b.event_at).getTime() - new Date(a.event_at).getTime())
+              .sort(
+                (a, b) =>
+                  new Date(b.event_at).getTime() -
+                  new Date(a.event_at).getTime()
+              )
               .map((event, index) => (
                 <TimelineItem
                   key={event.id}
@@ -1080,14 +1314,14 @@ const DeliveryTimeline = ({
                   <TimelineHeader>
                     <TimelineSeparator className="group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-8" />
                     <TimelineDate className="flex justify-between">
-                      {formatTime(event.event_at, 'dd/MM/yy HH:mm:ss')}
+                      {formatTime(event.event_at, "dd/MM/yy HH:mm:ss")}
 
                       <Tooltip>
                         <TooltipTrigger>
                           {event?.manual_action ? (
-                            <MousePointerClick className="text-muted-foreground h-4 w-4" />
+                            <MousePointerClick className="h-4 w-4 text-muted-foreground" />
                           ) : (
-                            <LinkIcon className="text-muted-foreground h-4 w-4" />
+                            <LinkIcon className="h-4 w-4 text-muted-foreground" />
                           )}
                         </TooltipTrigger>
                         <TooltipContent>
@@ -1097,56 +1331,70 @@ const DeliveryTimeline = ({
                               <strong>{event?.user?.email}</strong>
                             </>
                           ) : event?.manual_action ? (
-                            'Ação manual'
+                            "Ação manual"
                           ) : (
-                            'Ação automática'
+                            "Ação automática"
                           )}
                         </TooltipContent>
                       </Tooltip>
                     </TimelineDate>
                     <TimelineTitle className="my-2 w-full">
                       <span className="flex items-center gap-x-1">
-                        <OrderStatusBadge variant={event.status as OrderStatus}>{event.status}</OrderStatusBadge>
+                        <OrderStatusBadge variant={event.status as OrderStatus}>
+                          {event.status}
+                        </OrderStatusBadge>
                         {event.sub_status && (
-                          <span className="text-muted-foreground font-normal">{` - ${event.sub_status}`}</span>
+                          <span className="font-normal text-muted-foreground">{` - ${event.sub_status}`}</span>
                         )}
                       </span>
                     </TimelineTitle>
                     <TimelineIndicator
                       className={cn(
-                        'flex h-8 w-8 items-center justify-center',
+                        "flex h-8 w-8 items-center justify-center",
                         event.latitude &&
                           event.longitude &&
-                          'group-data-completed/timeline-item:border-foreground group-data-completed/timeline-item:bg-foreground cursor-pointer',
+                          "cursor-pointer group-data-completed/timeline-item:border-foreground group-data-completed/timeline-item:bg-foreground",
                         !event.latitude &&
                           !event.longitude &&
-                          'bg-muted group-data-completed/timeline-item:border-muted pointer-events-none',
+                          "pointer-events-none bg-muted group-data-completed/timeline-item:border-muted"
                       )}
                       onClick={() => handleToggleEvent(event.id)}
                     >
                       {eventsToShow.get(event.id)?.show ? (
                         <EyeOffIcon
                           className={cn(
-                            'h-4 w-4',
-                            !event.latitude && !event.longitude && 'text-muted-foreground',
-                            event.latitude && event.longitude && 'text-background',
+                            "h-4 w-4",
+                            !event.latitude &&
+                              !event.longitude &&
+                              "text-muted-foreground",
+                            event.latitude &&
+                              event.longitude &&
+                              "text-background"
                           )}
                         />
                       ) : (
                         <EyeIcon
                           className={cn(
-                            'h-4 w-4',
-                            !event.latitude && !event.longitude && 'text-muted-foreground',
-                            event.latitude && event.longitude && 'text-background',
+                            "h-4 w-4",
+                            !event.latitude &&
+                              !event.longitude &&
+                              "text-muted-foreground",
+                            event.latitude &&
+                              event.longitude &&
+                              "text-background"
                           )}
                         />
                       )}
                     </TimelineIndicator>
                   </TimelineHeader>
                   <div className="flex flex-col gap-y-2">
-                    {event?.driver_name || event?.driver_document || event?.driver_phone ? (
+                    {event?.driver_name ||
+                    event?.driver_document ||
+                    event?.driver_phone ? (
                       <div>
-                        {event?.driver_name ? <strong>{event.driver_name}</strong> : null}
+                        {event?.driver_name ? (
+                          <strong>{event.driver_name}</strong>
+                        ) : null}
                         {event?.driver_document ? (
                           <div>
                             <span>Documento: </span>
@@ -1163,7 +1411,7 @@ const DeliveryTimeline = ({
                     ) : null}
 
                     {event.observation && (
-                      <div className="text-muted-foreground rounded-sm border px-2 py-1 text-sm">
+                      <div className="rounded-sm border px-2 py-1 text-sm text-muted-foreground">
                         {event.observation}
                       </div>
                     )}
@@ -1190,8 +1438,12 @@ const DeliveryTimeline = ({
 
                             {attachment.user_id ? (
                               <TooltipContent>
-                                Anexado por <strong>{attachment?.user?.email}</strong> em{' '}
-                                {formatTime(attachment?.created_at, 'dd/MM/yy HH:mm:ss')}
+                                Anexado por{" "}
+                                <strong>{attachment?.user?.email}</strong> em{" "}
+                                {formatTime(
+                                  attachment?.created_at,
+                                  "dd/MM/yy HH:mm:ss"
+                                )}
                               </TooltipContent>
                             ) : null}
                           </Tooltip>
@@ -1205,17 +1457,23 @@ const DeliveryTimeline = ({
         </AccordionContent>
       </AccordionItem>
     </Accordion>
-  );
-};
+  )
+}
 
-const CustomerCard = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
+const CustomerCard = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
   const isTakeoutEditable =
     data?.type === OrderTypes.TAKEOUT &&
-    data?.status_name === 'PENDING' &&
-    data?.sub_status === 'WAITING_TAKEOUT_CONFIRMATION';
+    data?.status_name === "PENDING" &&
+    data?.sub_status === "WAITING_TAKEOUT_CONFIRMATION"
 
-  const disabled = !(isTakeoutEditable || data?.is_routeable);
-  console.log(disabled);
+  const disabled = !(isTakeoutEditable || data?.is_routeable)
+  console.log(disabled)
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-32 w-full items-center justify-center" />
   ) : (
@@ -1226,19 +1484,24 @@ const CustomerCard = ({ data, isLoading = false }: { data?: Order; isLoading?: b
         <AlertDescription className="w-full">
           <div className="flex w-full gap-x-1">
             <span className="text-muted-foreground">Telefone: </span>
-            <span>{data?.customer.phone || '---'}</span>
+            <span>{data?.customer.phone || "---"}</span>
           </div>
 
           <div className="flex w-full gap-x-1">
             <span className="text-muted-foreground">Email: </span>
-            <span>{data?.customer.email ? smartTrim(data?.customer.email || '', 40) : '---'}</span>
+            <span>
+              {data?.customer.email
+                ? smartTrim(data?.customer.email || "", 40)
+                : "---"}
+            </span>
           </div>
 
           <div className="flex w-full gap-x-1">
             <span className="text-muted-foreground">Documento: </span>
             <span>
-              {data?.customer.document_number || '---'}
-              {data?.customer.document_number && ` (${data?.customer.document_type})`}
+              {data?.customer.document_number || "---"}
+              {data?.customer.document_number &&
+                ` (${data?.customer.document_type})`}
             </span>
           </div>
         </AlertDescription>
@@ -1248,7 +1511,7 @@ const CustomerCard = ({ data, isLoading = false }: { data?: Order; isLoading?: b
             render={
               <div
                 data-disabled={disabled}
-                className="hover:bg-muted absolute right-4 top-4 w-fit min-w-fit max-w-fit cursor-pointer rounded-sm p-2 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50"
+                className="absolute top-4 right-4 w-fit max-w-fit min-w-fit cursor-pointer rounded-sm p-2 hover:bg-muted data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50"
               />
             }
           >
@@ -1262,11 +1525,17 @@ const CustomerCard = ({ data, isLoading = false }: { data?: Order; isLoading?: b
         </Tooltip>
       </Alert>
     </React.Fragment>
-  );
-};
+  )
+}
 
-const AddressCard = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
-  const disabled = !data?.is_routeable;
+const AddressCard = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
+  const disabled = !data?.is_routeable
 
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-28 w-full items-center justify-center" />
@@ -1276,18 +1545,22 @@ const AddressCard = ({ data, isLoading = false }: { data?: Order; isLoading?: bo
         <MapPinHouse className="h-4 w-4" />
 
         <AlertTitle>
-          {data?.destination_address.street}, {data?.destination_address.street_number}
+          {data?.destination_address.street},{" "}
+          {data?.destination_address.street_number}
         </AlertTitle>
         <AlertDescription className="w-full">
           <div className="flex w-full gap-x-1">
             <span>
-              {data?.destination_address.complement}, {data?.destination_address.neighborhood},{' '}
-              {data?.destination_address.city}, {data?.destination_address.state} - {data?.destination_address.zip_code}
+              {data?.destination_address.complement},{" "}
+              {data?.destination_address.neighborhood},{" "}
+              {data?.destination_address.city},{" "}
+              {data?.destination_address.state} -{" "}
+              {data?.destination_address.zip_code}
             </span>
           </div>
 
           <span className="text-muted-foreground">
-            Ponto de referência: {data?.destination_address.reference || '---'}
+            Ponto de referência: {data?.destination_address.reference || "---"}
           </span>
         </AlertDescription>
 
@@ -1295,7 +1568,7 @@ const AddressCard = ({ data, isLoading = false }: { data?: Order; isLoading?: bo
           <TooltipTrigger>
             <div
               data-disabled={disabled}
-              className="hover:bg-muted absolute right-4 top-4 w-fit min-w-fit max-w-fit cursor-pointer rounded-sm p-2 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
+              className="absolute top-4 right-4 w-fit max-w-fit min-w-fit cursor-pointer rounded-sm p-2 hover:bg-muted data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
             >
               <Pencil className="h-4 w-4" />
             </div>
@@ -1311,37 +1584,65 @@ const AddressCard = ({ data, isLoading = false }: { data?: Order; isLoading?: bo
           href={`https://maps.google.com/?q=${data?.destination_address.latitude},${data?.destination_address.longitude}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:bg-muted absolute bottom-4 right-4 w-fit min-w-fit max-w-fit cursor-pointer rounded-sm p-2"
+          className="absolute right-4 bottom-4 w-fit max-w-fit min-w-fit cursor-pointer rounded-sm p-2 hover:bg-muted"
         >
           <ArrowUpRight className="h-4 w-4 pl-0" />
         </a>
       </Alert>
     </React.Fragment>
-  );
-};
+  )
+}
 
-const CsatAlert = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
-  const isPromoter = data?.nps.some((nps) => nps?.response_2 >= 9);
-  const isPassive = data?.nps.some((nps) => nps?.response_2 >= 7 && nps?.response_2 <= 8);
-  const isDetractor = data?.nps.some((nps) => nps?.response_2 <= 6);
+const CsatAlert = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
+  const isPromoter = data?.nps.some((nps) => nps?.response_2 >= 9)
+  const isPassive = data?.nps.some(
+    (nps) => nps?.response_2 >= 7 && nps?.response_2 <= 8
+  )
+  const isDetractor = data?.nps.some((nps) => nps?.response_2 <= 6)
 
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-20 w-full flex-col items-center justify-center gap-y-4" />
   ) : (
-    <Alert variant={isPromoter ? 'success' : isPassive ? 'warning' : isDetractor ? 'destructive' : 'neutral'}>
+    <Alert
+      variant={
+        isPromoter
+          ? "success"
+          : isPassive
+            ? "warning"
+            : isDetractor
+              ? "destructive"
+              : "neutral"
+      }
+    >
       <Star className="h-4 w-4" />
       <AlertTitle>
         {data?.nps[0]?.response_2
           ? `O cliente avaliou com nota ${data?.nps[0]?.response_2}`
-          : 'Pedido não avaliado pelo cliente'}
+          : "Pedido não avaliado pelo cliente"}
       </AlertTitle>
-      {data?.nps[0]?.response_3 ? <AlertDescription>{`"${data?.nps[0]?.response_3}"`}</AlertDescription> : null}
+      {data?.nps[0]?.response_3 ? (
+        <AlertDescription>{`"${data?.nps[0]?.response_3}"`}</AlertDescription>
+      ) : null}
     </Alert>
-  );
-};
+  )
+}
 
-const ReceiverAlert = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
-  const receiver = data?.delivery_events.filter((event) => event?.status === OrderStatus.SUCCESSFUL)?.at(0)?.receiver;
+const ReceiverAlert = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
+  const receiver = data?.delivery_events
+    .filter((event) => event?.status === OrderStatus.SUCCESSFUL)
+    ?.at(0)?.receiver
 
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-16 w-full flex-col items-center justify-center gap-y-4" />
@@ -1350,92 +1651,126 @@ const ReceiverAlert = ({ data, isLoading = false }: { data?: Order; isLoading?: 
       <CircleUser className="h-4 w-4" />
       <AlertTitle>
         {receiver
-          ? `O pedido foi ${data.type === OrderTypes.TAKEOUT ? 'retirado por' : 'entregue para'} ${receiver.name}`
-          : 'Não foi possível identificar o recebedor do pedido'}
+          ? `O pedido foi ${data.type === OrderTypes.TAKEOUT ? "retirado por" : "entregue para"} ${receiver.name}`
+          : "Não foi possível identificar o recebedor do pedido"}
       </AlertTitle>
       {receiver?.description || receiver?.document_number ? (
         <AlertDescription>
-          {receiver?.description ? `${receiver?.description}` : ''}
-          {receiver?.document_number ? `Documento: ${receiver?.document_number}` : ''}
+          {receiver?.description ? `${receiver?.description}` : ""}
+          {receiver?.document_number
+            ? `Documento: ${receiver?.document_number}`
+            : ""}
         </AlertDescription>
       ) : null}
     </Alert>
-  ) : null;
-};
+  ) : null
+}
 
-const FreightRevenue = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
-  const customerPaid = data?.expected_customer_shipping_price || 0;
+const FreightRevenue = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
+  const customerPaid = data?.expected_customer_shipping_price || 0
   const estimatedFreight =
-    data?.deliveries.reduce((acc, delivery) => acc + (delivery?.expected_delivery_price || 0), 0) || 0;
+    data?.deliveries.reduce(
+      (acc, delivery) => acc + (delivery?.expected_delivery_price || 0),
+      0
+    ) || 0
   const freightCost =
-    data?.deliveries.reduce((acc, delivery) => acc + (delivery?.delivered_delivery_price || 0), 0) || 0;
+    data?.deliveries.reduce(
+      (acc, delivery) => acc + (delivery?.delivered_delivery_price || 0),
+      0
+    ) || 0
 
-  const isProfit = customerPaid >= freightCost;
-  const isLoss = customerPaid < freightCost;
+  const isProfit = customerPaid >= freightCost
+  const isLoss = customerPaid < freightCost
 
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-44 w-full flex-col items-center justify-center gap-y-4" />
   ) : (
-    <Alert variant={isProfit ? 'success' : isLoss ? 'destructive' : 'neutral'}>
+    <Alert variant={isProfit ? "success" : isLoss ? "destructive" : "neutral"}>
       {isProfit && <BanknoteArrowUp className="h-4 w-4" />}
       {isLoss && <BanknoteArrowDown className="h-4 w-4" />}
 
       {
         <AlertTitle>
-          Você {isProfit ? 'teve uma economia de ' : isLoss ? 'teve uma despesa de ' : 'faturou '}
-          {Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          }).format(Math.abs(customerPaid - freightCost) / 100)}{' '}
+          Você{" "}
+          {isProfit
+            ? "teve uma economia de "
+            : isLoss
+              ? "teve uma despesa de "
+              : "faturou "}
+          {Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(Math.abs(customerPaid - freightCost) / 100)}{" "}
           no frete desse pedido
         </AlertTitle>
       }
       <AlertDescription>
         <div className="flex w-full gap-x-1">
           <span>
-            &bull;{' '}
+            &bull;{" "}
             {data?.expected_customer_shipping_price == null
-              ? 'O valor pago pelo cliente não foi informado'
-              : `O cliente pagou ${Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
+              ? "O valor pago pelo cliente não foi informado"
+              : `O cliente pagou ${Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
                 }).format(customerPaid / 100)} pelo frete`}
           </span>
         </div>
         <div className="flex w-full gap-x-1">
           <span>
-            &bull;{' '}
+            &bull;{" "}
             {estimatedFreight
-              ? `Os fretes tabelados estimaram um custo de ${Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(estimatedFreight / 100)}`
-              : 'Nenhuma tabela de frete foi cadastrada'}
+              ? `Os fretes tabelados estimaram um custo de ${Intl.NumberFormat(
+                  "pt-BR",
+                  {
+                    style: "currency",
+                    currency: "BRL",
+                  }
+                ).format(estimatedFreight / 100)}`
+              : "Nenhuma tabela de frete foi cadastrada"}
           </span>
         </div>
         <div className="flex w-full gap-x-1">
           <span>
-            &bull;{' '}
+            &bull;{" "}
             {freightCost
-              ? `Foi informado pelas transportadoras um gasto total de ${Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(freightCost / 100)} no frete desse pedido`
-              : 'As transportadoras não informaram o valor do frete'}
+              ? `Foi informado pelas transportadoras um gasto total de ${Intl.NumberFormat(
+                  "pt-BR",
+                  {
+                    style: "currency",
+                    currency: "BRL",
+                  }
+                ).format(freightCost / 100)} no frete desse pedido`
+              : "As transportadoras não informaram o valor do frete"}
           </span>
         </div>
       </AlertDescription>
     </Alert>
-  );
-};
+  )
+}
 
-const VerificationCodesAlert = ({ data, isLoading = false }: { data?: Order; isLoading?: boolean }) => {
+const VerificationCodesAlert = ({
+  data,
+  isLoading = false,
+}: {
+  data?: Order
+  isLoading?: boolean
+}) => {
   const lastDelivery = data?.deliveries
-    .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
-    .at(-1);
+    .sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    )
+    .at(-1)
 
-  const returnVerificationCode = lastDelivery?.return_verification_code;
-  const collectVerificationCode = lastDelivery?.collect_verification_code;
+  const returnVerificationCode = lastDelivery?.return_verification_code
+  const collectVerificationCode = lastDelivery?.collect_verification_code
 
   return isLoading ? (
     <div className="flex flex-col gap-y-4">
@@ -1444,27 +1779,27 @@ const VerificationCodesAlert = ({ data, isLoading = false }: { data?: Order; isL
     </div>
   ) : (
     <div className="flex flex-col gap-y-4">
-      <Alert variant={collectVerificationCode ? 'info' : 'neutral'}>
+      <Alert variant={collectVerificationCode ? "info" : "neutral"}>
         <SquareAsterisk className="h-4 w-4" />
         <AlertTitle>Código de verificação de coleta</AlertTitle>
         <AlertDescription>
           {collectVerificationCode
             ? `Informe ao entregador o código ${collectVerificationCode}`
-            : 'Desabilitado para este envio'}
+            : "Desabilitado para este envio"}
         </AlertDescription>
       </Alert>
 
-      <Alert variant={returnVerificationCode ? 'info' : 'neutral'}>
+      <Alert variant={returnVerificationCode ? "info" : "neutral"}>
         <SquareAsterisk className="h-4 w-4" />
         <AlertTitle>Código de Verificação de Retorno</AlertTitle>
         <AlertDescription>
           {returnVerificationCode
             ? `Informe ao entregador o código ${returnVerificationCode}`
-            : 'Desabilitado para este envio'}
+            : "Desabilitado para este envio"}
         </AlertDescription>
       </Alert>
     </div>
-  );
-};
+  )
+}
 
-export { ViewOrderPage };
+export { ViewOrderPage }

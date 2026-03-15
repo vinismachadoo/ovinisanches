@@ -1,23 +1,33 @@
-'use client';
+"use client"
 
-import { parseAsString, useQueryState } from 'nuqs';
-import { MembersList } from './members-list';
-import { ExpensesList } from './expenses-list';
-import { BalanceView } from './balance-view';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/registry/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/registry/tabs';
-import { SidebarTrigger } from '@/registry/sidebar';
-import { Users, Receipt, TrendingUp } from 'lucide-react';
-import { useGroup } from '@/app/projects/splitwise/hooks/use-groups';
+import { parseAsString, useQueryState } from "nuqs"
+import { MembersList } from "./members-list"
+import { ExpensesList } from "./expenses-list"
+import { BalanceView } from "./balance-view"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/registry/default/ui/card"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/registry/default/ui/tabs"
+import { SidebarTrigger } from "@/registry/default/ui/sidebar"
+import { Users, Receipt, TrendingUp } from "lucide-react"
+import { useGroup } from "@/app/projects/splitwise/hooks/use-groups"
 
 export function SplitwiseApp() {
-  const [selectedGroupId] = useQueryState('group_id', parseAsString);
+  const [selectedGroupId] = useQueryState("group_id", parseAsString)
 
-  const { data: group } = useGroup(selectedGroupId);
+  const { data: group } = useGroup(selectedGroupId)
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="border-b px-6 flex items-center gap-4 h-(--header-height)">
+    <div className="flex h-full flex-col">
+      <div className="flex h-(--header-height) items-center gap-4 border-b px-6">
         <SidebarTrigger />
         <span className="text-lg font-medium">{group?.name}</span>
       </div>
@@ -25,7 +35,7 @@ export function SplitwiseApp() {
       <div className="flex-1 overflow-auto p-6">
         {selectedGroupId ? (
           <Tabs defaultValue="members" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 max-w-md">
+            <TabsList className="grid w-full max-w-md grid-cols-3">
               <TabsTrigger value="members">
                 <Users className="mr-2 h-4 w-4" />
                 Members
@@ -56,11 +66,13 @@ export function SplitwiseApp() {
           <Card>
             <CardHeader>
               <CardTitle>No Group Selected</CardTitle>
-              <CardDescription>Create a new group or select an existing one to get started</CardDescription>
+              <CardDescription>
+                Create a new group or select an existing one to get started
+              </CardDescription>
             </CardHeader>
           </Card>
         )}
       </div>
     </div>
-  );
+  )
 }

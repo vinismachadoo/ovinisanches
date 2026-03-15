@@ -1,43 +1,66 @@
-'use client';
+"use client"
 
-import { Button } from '@/registry/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/registry/dialog';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/registry/input';
-import { Textarea } from '@/registry/textarea';
-import { type Group } from '@/lib/supabase';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { useUpdateGroup } from '../hooks/use-groups';
-import { EmojiPickerField } from './emoji-picker-field';
+import { Button } from "@/registry/default/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/registry/default/ui/dialog"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/registry/default/ui/input"
+import { Textarea } from "@/registry/default/ui/textarea"
+import { type Group } from "@/lib/supabase"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+import { useUpdateGroup } from "../hooks/use-groups"
+import { EmojiPickerField } from "./emoji-picker-field"
 
 const groupSchema = z.object({
-  name: z.string().min(1, 'Group name is required').max(255, 'Group name is too long'),
-  description: z.string().max(1000, 'Description is too long').optional(),
+  name: z
+    .string()
+    .min(1, "Group name is required")
+    .max(255, "Group name is too long"),
+  description: z.string().max(1000, "Description is too long").optional(),
   icon: z.string().optional(),
-});
+})
 
-type GroupFormValues = z.infer<typeof groupSchema>;
+type GroupFormValues = z.infer<typeof groupSchema>
 
 interface EditGroupDialogProps {
-  group: Group;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  onGroupUpdated: () => void;
+  group: Group
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  onGroupUpdated: () => void
 }
 
-export function EditGroupDialog({ group, open, onOpenChange, onGroupUpdated }: EditGroupDialogProps) {
-  const updateGroup = useUpdateGroup();
+export function EditGroupDialog({
+  group,
+  open,
+  onOpenChange,
+  onGroupUpdated,
+}: EditGroupDialogProps) {
+  const updateGroup = useUpdateGroup()
 
   const form = useForm<GroupFormValues>({
     resolver: zodResolver(groupSchema),
     defaultValues: {
       name: group.name,
-      description: group.description || '',
-      icon: group.icon || '',
+      description: group.description || "",
+      icon: group.icon || "",
     },
-  });
+  })
 
   const onSubmit = async (values: GroupFormValues) => {
     updateGroup.mutate(
@@ -49,12 +72,12 @@ export function EditGroupDialog({ group, open, onOpenChange, onGroupUpdated }: E
       },
       {
         onSuccess: () => {
-          onGroupUpdated();
-          onOpenChange(false);
+          onGroupUpdated()
+          onOpenChange(false)
         },
-      },
-    );
-  };
+      }
+    )
+  }
 
   return (
     <Dialog
@@ -63,10 +86,10 @@ export function EditGroupDialog({ group, open, onOpenChange, onGroupUpdated }: E
         if (!open) {
           form.reset({
             name: group.name,
-            description: group.description || '',
-            icon: group.icon || '',
-          });
-          onOpenChange(false);
+            description: group.description || "",
+            icon: group.icon || "",
+          })
+          onOpenChange(false)
         }
       }}
     >
@@ -77,7 +100,7 @@ export function EditGroupDialog({ group, open, onOpenChange, onGroupUpdated }: E
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="flex items-center gap-4 w-full">
+            <div className="flex w-full items-center gap-4">
               <FormField
                 control={form.control}
                 name="icon"
@@ -85,7 +108,10 @@ export function EditGroupDialog({ group, open, onOpenChange, onGroupUpdated }: E
                   <FormItem>
                     <FormLabel>Icon</FormLabel>
                     <FormControl>
-                      <EmojiPickerField value={field.value} onChange={field.onChange} />
+                      <EmojiPickerField
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -98,7 +124,11 @@ export function EditGroupDialog({ group, open, onOpenChange, onGroupUpdated }: E
                   <FormItem>
                     <FormLabel>Group Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., Roommates, Trip to Europe" {...field} className="w-full" />
+                      <Input
+                        placeholder="e.g., Roommates, Trip to Europe"
+                        {...field}
+                        className="w-full"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -113,9 +143,14 @@ export function EditGroupDialog({ group, open, onOpenChange, onGroupUpdated }: E
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Add a description for this group..." {...field} />
+                    <Textarea
+                      placeholder="Add a description for this group..."
+                      {...field}
+                    />
                   </FormControl>
-                  <FormDescription>Optional description to help identify this group.</FormDescription>
+                  <FormDescription>
+                    Optional description to help identify this group.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -130,12 +165,12 @@ export function EditGroupDialog({ group, open, onOpenChange, onGroupUpdated }: E
                 Cancel
               </Button>
               <Button type="submit" disabled={updateGroup.isPending}>
-                {updateGroup.isPending ? 'Updating...' : 'Update Group'}
+                {updateGroup.isPending ? "Updating..." : "Update Group"}
               </Button>
             </DialogFooter>
           </form>
         </Form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

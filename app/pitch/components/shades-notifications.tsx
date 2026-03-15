@@ -1,11 +1,27 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/card';
-import { Field, FieldContent, FieldLabel } from '@/registry/field';
-import { Switch } from '@/registry/switch';
-import { cn } from '@/lib/utils';
-import { Bell, Mail, MessageCircle, MessageSquare, Send, Slack } from 'lucide-react';
-import React from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/registry/default/ui/card"
+import { Field, FieldContent, FieldLabel } from "@/registry/default/ui/field"
+import { Switch } from "@/registry/default/ui/switch"
+import { cn } from "@/lib/utils"
+import {
+  Bell,
+  Mail,
+  MessageCircle,
+  MessageSquare,
+  Send,
+  Slack,
+} from "lucide-react"
+import React from "react"
 
-const ShadesNotifications = ({ className, ...props }: React.ComponentProps<typeof Card>) => {
+const ShadesNotifications = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof Card>) => {
   return (
     <Card className={cn(className)} {...props}>
       <CardHeader>
@@ -74,7 +90,7 @@ const ShadesNotifications = ({ className, ...props }: React.ComponentProps<typeo
         </Field>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default ShadesNotifications;
+export default ShadesNotifications

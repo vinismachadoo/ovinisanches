@@ -1,37 +1,59 @@
-'use client';
+"use client"
 
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/registry/dialog';
-import { Button } from '@/registry/button';
-import { Input } from '@/registry/input';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { useCreateMember } from '../hooks/use-members';
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/registry/default/ui/dialog"
+import { Button } from "@/registry/default/ui/button"
+import { Input } from "@/registry/default/ui/input"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { useCreateMember } from "../hooks/use-members"
 
 const memberSchema = z.object({
-  name: z.string().min(1, 'Member name is required').max(255, 'Member name is too long'),
-  email: z.string().email('Invalid email address').optional().or(z.literal('')),
-});
+  name: z
+    .string()
+    .min(1, "Member name is required")
+    .max(255, "Member name is too long"),
+  email: z.string().email("Invalid email address").optional().or(z.literal("")),
+})
 
-type MemberFormValues = z.infer<typeof memberSchema>;
+type MemberFormValues = z.infer<typeof memberSchema>
 
 interface CreateMemberDialogProps {
-  groupId: string;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  groupId: string
+  open: boolean
+  onOpenChange: (open: boolean) => void
 }
 
-export function CreateMemberDialog({ groupId, open, onOpenChange }: CreateMemberDialogProps) {
-  const createMember = useCreateMember();
+export function CreateMemberDialog({
+  groupId,
+  open,
+  onOpenChange,
+}: CreateMemberDialogProps) {
+  const createMember = useCreateMember()
 
   const form = useForm<MemberFormValues>({
     resolver: zodResolver(memberSchema),
     defaultValues: {
-      name: '',
-      email: '',
+      name: "",
+      email: "",
     },
-  });
+  })
 
   const onSubmit = async (values: MemberFormValues) => {
     createMember.mutate(
@@ -42,12 +64,12 @@ export function CreateMemberDialog({ groupId, open, onOpenChange }: CreateMember
       },
       {
         onSuccess: () => {
-          form.reset();
-          onOpenChange(false);
+          form.reset()
+          onOpenChange(false)
         },
-      },
-    );
-  };
+      }
+    )
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -78,9 +100,15 @@ export function CreateMemberDialog({ groupId, open, onOpenChange }: CreateMember
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="e.g., john@example.com" {...field} />
+                    <Input
+                      type="email"
+                      placeholder="e.g., john@example.com"
+                      {...field}
+                    />
                   </FormControl>
-                  <FormDescription>Optional email address for this member.</FormDescription>
+                  <FormDescription>
+                    Optional email address for this member.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -95,12 +123,12 @@ export function CreateMemberDialog({ groupId, open, onOpenChange }: CreateMember
                 Cancel
               </Button>
               <Button type="submit" disabled={createMember.isPending}>
-                {createMember.isPending ? 'Adding...' : 'Add Member'}
+                {createMember.isPending ? "Adding..." : "Add Member"}
               </Button>
             </DialogFooter>
           </form>
         </Form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

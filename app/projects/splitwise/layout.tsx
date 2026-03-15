@@ -1,10 +1,14 @@
-'use client';
+"use client"
 
-import * as React from 'react';
-import { SidebarProvider, SidebarInset } from '@/registry/sidebar';
-import { GroupsSidebar } from './components/groups-sidebar';
+import * as React from "react"
+import { SidebarProvider, SidebarInset } from "@/registry/default/ui/sidebar"
+import { GroupsSidebar } from "./components/groups-sidebar"
 
-export default function SplitwiseLayout({ children }: { children: React.ReactNode }) {
+export default function SplitwiseLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <SidebarProvider className="[--header-height:3rem]">
       <React.Suspense fallback={null}>
@@ -16,5 +20,5 @@ export default function SplitwiseLayout({ children }: { children: React.ReactNod
         </div>
       </SidebarInset>
     </SidebarProvider>
-  );
+  )
 }
