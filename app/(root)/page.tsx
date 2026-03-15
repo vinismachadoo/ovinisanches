@@ -11,7 +11,6 @@ export default function Home() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center p-10 [--sidebar-profile:calc(var(--spacing)*140)]">
       {/* <Image src="/rio-isometric.png" alt="Logo" width={500} height={500} /> */}
-      {/* <MainCommandMenuTrigger /> */}
 
       <div
         className={cn(
@@ -66,7 +65,7 @@ export default function Home() {
                 motionvg
               </Skeleton>
               <Skeleton className="flex h-40 items-center justify-center">
-                presentx-ui
+                presentcn
               </Skeleton>
               <Skeleton className="flex h-40 items-center justify-center">
                 json-forms

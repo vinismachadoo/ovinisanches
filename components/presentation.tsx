@@ -49,10 +49,6 @@ const PresentationProvider = ({ children }: React.PropsWithChildren) => {
     "slide",
     parseAsInteger.withDefault(1)
   )
-  const [mode, setMode] = useQueryState(
-    "mode",
-    parseAsString.withDefault("normal")
-  )
 
   React.useEffect(() => {
     if (!api) {

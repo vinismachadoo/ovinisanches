@@ -56,12 +56,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="group/body overscroll-none antialiased [--main-nav-height:calc(var(--spacing)*14)]">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider>
           <ReactQueryProvider>
             <NuqsAdapter>
               <TooltipProvider>

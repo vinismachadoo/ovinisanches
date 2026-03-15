@@ -28,6 +28,7 @@ import livupLogo from "@/public/logos/livup-logo.svg"
 import raspberrypiLogo from "@/public/logos/raspberry-pi-logo.svg"
 import microsoftTeamsLogo from "@/public/logos/microsoft-teams-logo.svg"
 import openAiLogo from "@/public/logos/openai-logo.svg"
+import { useTheme } from "next-themes"
 
 const SlideWhyMe = () => {
   return (
@@ -128,22 +129,22 @@ const SlideLabsShades = () => {
           <ShadesStorageUsage
             data-open={current === slide}
             data-closed={current !== slide}
-            className="absolute top-12 left-12"
+            className="absolute top-1/4 left-1/6 -translate-x-1/2 -translate-y-1/2"
           />
           <ShadesGithub2FA
             data-open={current === slide}
             data-closed={current !== slide}
-            className="absolute bottom-12 left-12 w-100"
+            className="absolute bottom-1/4 left-1/6 w-100 -translate-x-1/2 translate-y-1/2"
           />
           <ShadesNotifications
             data-open={current === slide}
             data-closed={current !== slide}
-            className="absolute top-20 right-12 w-100"
+            className="absolute top-1/4 right-1/6 w-100 translate-x-1/2 -translate-y-1/2"
           />
           <ShadesPriceFilter
             data-open={current === slide}
             data-closed={current !== slide}
-            className="absolute right-12 bottom-20 w-130"
+            className="absolute right-1/5 bottom-1/4 w-130 translate-x-1/2 translate-y-1/2"
           />
         </div>
       </div>
@@ -186,6 +187,7 @@ const SlidePresentcn = () => {
 
 const SlideMotionvg = () => {
   const { current, fullscreen } = usePresentation()
+  const { resolvedTheme } = useTheme()
 
   return (
     <PresentationSlide className="relative">
@@ -195,28 +197,28 @@ const SlideMotionvg = () => {
       >
         <div className="relative size-full">
           <Motionvg
-            key={`${current}-metamask`}
+            key={`${current}-metamask-${resolvedTheme}`}
             src={metamaskLogo.src}
             className="absolute top-16 left-16 size-64"
           />
           <Motionvg
-            key={`${current}-microsoft-teams`}
+            key={`${current}-microsoft-teams-${resolvedTheme}`}
             src={microsoftTeamsLogo.src}
             className="absolute top-10 right-16 size-56"
           />
           <Motionvg
-            key={`${current}-amazon`}
+            key={`${current}-amazon-${resolvedTheme}`}
             src={amazonLogo.src}
             className="absolute bottom-1/2 left-1/2 size-72 -translate-x-1/2 translate-y-1/2 dark:[&_*[fill*='#221F1F']]:fill-white!"
           />
           <Motionvg
-            key={`${current}-openai`}
+            key={`${current}-openai-${resolvedTheme}`}
             src={openAiLogo.src}
             className="absolute bottom-16 left-16 size-56 dark:[&_path]:fill-white!"
           />
 
           <Motionvg
-            key={`${current}-livup`}
+            key={`${current}-livup-${resolvedTheme}`}
             src={livupLogo.src}
             className="absolute right-16 bottom-10 size-56"
           />
@@ -255,29 +257,29 @@ const SlideMotionvg = () => {
       >
         <div className="relative size-full">
           <Motionvg
-            key={`${current}-raspberrypi`}
+            key={`${current}-raspberrypi-${resolvedTheme}`}
             src={raspberrypiLogo.src}
             className="absolute top-10 left-16 size-56 dark:[&_*:not([fill])]:fill-white!"
           />
           <Motionvg
-            key={`${current}-edge`}
+            key={`${current}-edge-${resolvedTheme}`}
             src={edgeLogo.src}
             className="absolute top-16 right-16 size-56"
           />
 
           <Motionvg
-            key={`${current}-wati`}
+            key={`${current}-wati-${resolvedTheme}`}
             src={watiLogo.src}
             className="absolute right-1/2 bottom-1/2 size-72 translate-x-1/2 translate-y-1/2 dark:[&_*[class*='cls-2']]:fill-white!"
           />
 
           <Motionvg
-            key={`${current}-openclaw`}
+            key={`${current}-openclaw-${resolvedTheme}`}
             src={openclawLogo.src}
             className="absolute bottom-10 left-16 size-56"
           />
           <Motionvg
-            key={`${current}-bmw`}
+            key={`${current}-bmw-${resolvedTheme}`}
             src={bmwLogo.src}
             pathDelay={0.08}
             className="absolute right-16 bottom-16 size-56"
