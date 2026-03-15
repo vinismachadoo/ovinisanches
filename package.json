@@ -7,7 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "registry:build": "npx shadcn build -o ./public/r"
+    "registry:build": "shadcn build"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",

@@ -50,7 +50,7 @@
       "registryDependencies": ["button"],
       "files": [
         {
-          "path": "registry/alert-dialog.tsx",
+          "path": "registry/default/ui/alert-dialog.tsx",
           "type": "registry:ui"
         }
       ]
@@ -127,7 +127,7 @@
       "type": "registry:ui",
       "files": [
         {
-          "path": "registry/button.tsx",
+          "path": "registry/default/ui/button.tsx",
           "type": "registry:ui"
         }
       ],
