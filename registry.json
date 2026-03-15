@@ -51,8 +51,7 @@
       "files": [
         {
           "path": "registry/alert-dialog.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/alert-dialog.tsx"
+          "type": "registry:ui"
         }
       ]
     },

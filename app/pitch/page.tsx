@@ -1,14 +1,14 @@
-import Slides from '@/app/pitch/components/slides';
-import * as React from 'react';
+import Slides from "@/app/pitch/components/slides"
+import * as React from "react"
 
-const HirePage = () => {
+const PitchPage = () => {
   return (
     <div className="h-full w-full p-10">
       <React.Suspense>
         <Slides />
       </React.Suspense>
     </div>
-  );
-};
+  )
+}
 
-export default HirePage;
+export default PitchPage

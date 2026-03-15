@@ -2,13 +2,18 @@ import MainNav from '@/components/main-nav';
 import ReactQueryProvider from '@/components/providers/react-query-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { cn } from '@/lib/utils';
 import { Toaster } from '@/registry/sonner';
 import { TooltipProvider } from '@/registry/tooltip';
-import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import './globals.css';
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+});
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -45,14 +50,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          geistSans.variable,
-          geistMono.variable,
-          'antialiased group/body overscroll-none [--main-nav-height:calc(var(--spacing)*14)]',
-        )}
-      >
+    <html lang="en" className={cn(inter.variable, geistSans.variable, geistMono.variable)} suppressHydrationWarning>
+      <body className="antialiased group/body overscroll-none [--main-nav-height:calc(var(--spacing)*14)]">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ReactQueryProvider>
             <NuqsAdapter>
