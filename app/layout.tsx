@@ -9,6 +9,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono, Inter } from "next/font/google"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import "./globals.css"
+import { NextIntlClientProvider } from "next-intl"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -60,19 +61,21 @@ export default function RootLayout({
           <ReactQueryProvider>
             <NuqsAdapter>
               <TooltipProvider>
-                <div data-slot="layout" className="flex flex-col">
-                  <header className="sticky top-0 z-50 w-full bg-background">
-                    <div className="3xl:fixed:px-0">
-                      <div className="3xl:fixed:container flex h-(--main-nav-height) items-center">
-                        <MainNav />
+                <NextIntlClientProvider>
+                  <div data-slot="layout" className="flex flex-col">
+                    <header className="sticky top-0 z-50 w-full bg-background">
+                      <div className="3xl:fixed:px-0">
+                        <div className="3xl:fixed:container flex h-(--main-nav-height) items-center">
+                          <MainNav />
+                        </div>
                       </div>
-                    </div>
-                  </header>
+                    </header>
 
-                  <main className="flex h-[calc(100svh-var(--main-nav-height))] w-screen flex-col">
-                    {children}
-                  </main>
-                </div>
+                    <main className="flex h-[calc(100svh-var(--main-nav-height))] w-screen flex-col">
+                      {children}
+                    </main>
+                  </div>
+                </NextIntlClientProvider>
               </TooltipProvider>
               <TailwindIndicator />
               <Toaster richColors />

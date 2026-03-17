@@ -1,18 +1,16 @@
 "use client"
 
+import LocaleSwitcher from "@/components/locale-switcher"
 import ModeToggle from "@/components/mode-toggle"
 import { Button } from "@/registry/default/ui/button"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/registry/default/ui/tooltip"
-import { Citrus, Globe } from "lucide-react"
+import { Citrus } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const MainNav = () => {
   const pathname = usePathname()
+  const t = useTranslations("main-nav")
 
   return (
     <nav className="flex h-full w-full items-center justify-between gap-x-2 border-b px-20 **:data-active:bg-muted">
@@ -24,11 +22,11 @@ const MainNav = () => {
         </Link>
 
         <Button variant="ghost" size="sm" data-active={pathname === "/resume"}>
-          <Link href="/resume">Résumé</Link>
+          <Link href="/resume">{t("resume")}</Link>
         </Button>
 
         <Button variant="ghost" size="sm" data-active={pathname === "/pitch"}>
-          <Link href="/pitch">Pitch Deck</Link>
+          <Link href="/pitch">{t("pitch")}</Link>
         </Button>
 
         <Button
@@ -37,7 +35,7 @@ const MainNav = () => {
           disabled
           data-active={pathname === "/writing"}
         >
-          <Link href="/writing">Writing</Link>
+          <Link href="/writing">{t("writing")}</Link>
         </Button>
 
         <Button
@@ -46,19 +44,12 @@ const MainNav = () => {
           disabled
           data-active={pathname === "/world-map"}
         >
-          <Link href="/world-map">World Map</Link>
+          <Link href="/world-map">{t("world-map")}</Link>
         </Button>
       </div>
 
       <div className="flex items-center gap-x-2">
-        <Tooltip>
-          <TooltipTrigger render={<Button variant="ghost" />}>
-            <Globe />
-            EN-US
-            <span className="sr-only">Switch language</span>
-          </TooltipTrigger>
-          <TooltipContent>Switch language</TooltipContent>
-        </Tooltip>
+        <LocaleSwitcher />
 
         <ModeToggle />
       </div>

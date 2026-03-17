@@ -60,6 +60,7 @@ function Calendar({
           defaultClassNames.month,
           classNames?.month
         ),
+        month_grid: cn(defaultClassNames.month_grid, classNames?.month_grid),
         nav: cn(
           "absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1",
           defaultClassNames.nav,
@@ -112,6 +113,7 @@ function Calendar({
           defaultClassNames.weekday,
           classNames?.weekday
         ),
+        weeks: cn(defaultClassNames.weeks, classNames?.weeks),
         week: cn("mt-2 flex w-full", defaultClassNames.week, classNames?.week),
         week_number_header: cn(
           "w-(--cell-size) select-none",
