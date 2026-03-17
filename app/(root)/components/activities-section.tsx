@@ -14,11 +14,7 @@ const GITHUB_USERNAME = "vinismachadoo"
 const Activities = () => {
   const locale = useLocale()
 
-  const {
-    data: githubActivities,
-    isLoading,
-    status,
-  } = useQuery({
+  const { data: githubActivities, isLoading } = useQuery({
     queryKey: ["github", "activities", GITHUB_USERNAME],
     queryFn: () =>
       fetch(`/api/github-activity?username=${GITHUB_USERNAME}`).then((res) =>
@@ -34,16 +30,20 @@ const Activities = () => {
       ),
   })
 
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : (
-    <CalendarHeatmapContainer>
-      <CalendarHeatmap
-        data={githubActivities}
-        locale={locale === "en" ? enUS : ptBR}
-      />
-      <CalendarHeatmapLegend />
-    </CalendarHeatmapContainer>
+  return (
+    <div className="flex w-full justify-center">
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <CalendarHeatmapContainer>
+          <CalendarHeatmap
+            data={githubActivities}
+            locale={locale === "en" ? enUS : ptBR}
+          />
+          <CalendarHeatmapLegend />
+        </CalendarHeatmapContainer>
+      )}
+    </div>
   )
 }
 

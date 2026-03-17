@@ -45,7 +45,7 @@ const CalendarHeatmapContainer = ({
     <CalendarHeatmapContext.Provider value={{}}>
       <div
         className={cn(
-          "flex w-fit flex-col gap-y-4 overflow-x-scroll p-2 [--level-0:var(--color-gray-50)] [--level-1:var(--color-lime-200)] [--level-2:var(--color-lime-400)] [--level-3:var(--color-lime-600)] [--level-4:var(--color-lime-800)]",
+          "flex w-fit flex-col gap-y-4 overflow-x-scroll p-2 [--level-0:var(--color-neutral-100)] [--level-1:var(--color-lime-200)] [--level-2:var(--color-lime-400)] [--level-3:var(--color-lime-600)] [--level-4:var(--color-lime-800)] dark:[--level-0:var(--color-neutral-800)]",
           className
         )}
         style={

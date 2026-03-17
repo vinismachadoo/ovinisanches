@@ -12,7 +12,7 @@ import React from "react"
 
 const Projects = () => {
   return (
-    <div className="grid w-full grid-cols-8 gap-4">
+    <div className="grid w-full grid-cols-9">
       <Link
         href="https://labs.ovinisanches.com"
         target="_blank"
