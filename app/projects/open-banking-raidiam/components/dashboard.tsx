@@ -426,7 +426,6 @@ const FilterSection = ({ data }: { data: Participant[] }) => {
           <Select
             value={hasEnrollmentsResource}
             onValueChange={(value) => {
-              console.log(value)
               setHasEnrollmentsResource(value)
             }}
           >

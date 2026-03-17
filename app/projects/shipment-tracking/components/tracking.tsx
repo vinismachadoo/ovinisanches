@@ -1473,7 +1473,7 @@ const CustomerCard = ({
     data?.sub_status === "WAITING_TAKEOUT_CONFIRMATION"
 
   const disabled = !(isTakeoutEditable || data?.is_routeable)
-  console.log(disabled)
+
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-32 w-full items-center justify-center" />
   ) : (
