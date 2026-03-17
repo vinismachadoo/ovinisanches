@@ -13,6 +13,14 @@
       "description": "Encurto o caminho entre o negócio e os times de design e engenharia com a minha expertise em desenvolvimento de produto e todo seu ciclo de vida",
       "role": "Engenheiro de Produto localizado no Rio de Janeiro, Brasil.",
       "footer": "Nem um gerente de produto que supervisiona quem constrói... nem um engenheiro de software que subestima o contexto da sua empresa"
+    },
+    "about": {
+      "activity": {
+        "title": "Atividade"
+      },
+      "projects": {
+        "title": "Projetos"
+      }
     }
   }
 }

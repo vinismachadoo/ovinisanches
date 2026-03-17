@@ -13,6 +13,14 @@
       "description": "I solidify bridges between business, design and engineering teams with my expertise in product development and product lifecycle",
       "role": "Product Engineer based in Rio de Janeiro, Brazil.",
       "footer": "Nor a product manager that oversees people who build... nor a software engineer that takes bussiness context for granted."
+    },
+    "about": {
+      "activity": {
+        "title": "Activity"
+      },
+      "projects": {
+        "title": "Projects"
+      }
     }
   }
 }

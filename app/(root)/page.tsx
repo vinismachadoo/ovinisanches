@@ -1,13 +1,6 @@
-import ActivitiesSection from "@/app/(root)/components/activities-section"
+import About from "@/app/(root)/components/about"
 import Presentation from "@/app/(root)/components/presentation"
-import ProjectsSection from "@/app/(root)/components/projects-section"
 import { cn } from "@/lib/utils"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/registry/default/ui/accordion"
 
 export default function Home() {
   return (
@@ -21,28 +14,7 @@ export default function Home() {
         )}
       >
         <Presentation />
-
-        <div className="flex size-full flex-col rounded-lg border border-dashed px-4">
-          <Accordion multiple defaultValue={["activity", "projects"]}>
-            <AccordionItem value="activity">
-              <AccordionTrigger className="text-base hover:no-underline">
-                Activity
-              </AccordionTrigger>
-              {/* use keepMounted to avoid unmounting the component when the accordion is closed (heavy component causes lag) */}
-              <AccordionContent keepMounted>
-                <ActivitiesSection />
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="projects">
-              <AccordionTrigger className="text-base hover:no-underline">
-                Projects
-              </AccordionTrigger>
-              <AccordionContent>
-                <ProjectsSection />
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
+        <About />
       </div>
     </div>
   )
