@@ -3,6 +3,7 @@ import {
   Circle,
   FlaskConical,
   Folder,
+  Grip,
   LineSquiggle,
   Projector,
   type LucideIcon,
@@ -10,58 +11,72 @@ import {
 import Link from "next/link"
 import React from "react"
 
+const PROJECTS = [
+  {
+    url: "https://labs.ovinisanches.com",
+    icon: FlaskConical,
+    name: "Labs",
+    className:
+      "[--color-dark:var(--color-purple-800)] [--color-light:var(--color-purple-300)]",
+  },
+  {
+    url: "https://motionvg.ovinisanches.com",
+    icon: LineSquiggle,
+    name: "Motionvg",
+    className:
+      "[--color-dark:var(--color-slate-800)] [--color-light:var(--color-slate-300)]",
+  },
+
+  {
+    url: "https://presentcn.ovinisanches.com",
+    icon: Projector,
+    name: "presentcn",
+    className:
+      "[--color-dark:var(--color-sky-800)] [--color-light:var(--color-sky-300)]",
+  },
+  {
+    url: "https://heatmap-tracker.ovinisanches.com",
+    icon: Grip,
+    name: "Heatmap Tracker",
+    className:
+      "[--color-dark:var(--color-emerald-800)] [--color-light:var(--color-emerald-300)]",
+  },
+  {
+    url: "https://json-forms.ovinisanches.com",
+    icon: FlaskConical,
+    name: "json-forms",
+    className:
+      "[--color-dark:var(--color-rose-800)] [--color-light:var(--color-rose-300)]",
+    disabled: true,
+  },
+  {
+    url: "https://charttier.ovinisanches.com",
+    icon: FlaskConical,
+    name: "Charttier",
+    className:
+      "[--color-dark:var(--color-yellow-800)] [--color-light:var(--color-yellow-300)]",
+    disabled: true,
+  },
+]
+
 const Projects = () => {
   return (
     <div className="grid w-full grid-cols-9">
-      <Link
-        href="https://labs.ovinisanches.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <FolderComponent
-          icon={FlaskConical}
-          name="Labs"
-          className="[--color-dark:var(--color-purple-800)] [--color-light:var(--color-purple-300)]"
-        />
-      </Link>
-
-      <Link
-        href="https://motionvg.ovinisanches.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <FolderComponent
-          icon={LineSquiggle}
-          name="Motionvg"
-          className="[--color-dark:var(--color-slate-800)] [--color-light:var(--color-slate-300)]"
-        />
-      </Link>
-
-      <Link
-        href="https://presentcn.ovinisanches.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <FolderComponent
-          icon={Projector}
-          name="presentcn"
-          className="[--color-dark:var(--color-sky-800)] [--color-light:var(--color-sky-300)]"
-        />
-      </Link>
-
-      <FolderComponent
-        icon={FlaskConical}
-        name="json-forms"
-        className="[--color-dark:var(--color-rose-800)] [--color-light:var(--color-rose-300)]"
-        aria-disabled
-      />
-
-      <FolderComponent
-        icon={FlaskConical}
-        name="Charttier"
-        className="[--color-dark:var(--color-yellow-800)] [--color-light:var(--color-yellow-300)]"
-        aria-disabled
-      />
+      {PROJECTS.map((project) => (
+        <Link
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          key={project.name}
+        >
+          <FolderComponent
+            icon={project.icon}
+            name={project.name}
+            className={project.className}
+            aria-disabled={project.disabled}
+          />
+        </Link>
+      ))}
     </div>
   )
 }
