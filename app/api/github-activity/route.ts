@@ -5,7 +5,9 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
     const username = searchParams.get("username") || "vinismachadoo"
-    const data = await fetchDataForAllYears(username, "flat")
+    const years = searchParams.get("years")?.split(",") || []
+
+    const data = await fetchDataForAllYears(username, "flat", years)
     return NextResponse.json(data)
   } catch (error) {
     console.error("[github-activity] Error fetching data:", error)

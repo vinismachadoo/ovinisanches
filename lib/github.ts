@@ -99,44 +99,22 @@ async function fetchDataForYear(url: string, year: string, format: string) {
   }
 }
 
-interface GithubActivityContributions extends Record<
-  string,
-  Record<
-    string,
-    Record<
-      string,
-      {
-        date: string
-        count: number
-        color: string
-        level: string
-      }
-    >
-  >
-> {}
-
-interface GithubActivityForAllYears {
-  years: Record<
-    string,
-    {
-      total: number
-      range: {
-        start: string
-        end: string
-      }
-      year: number
-    }
-  >
-  contributions: GithubActivityContributions
-}
-
 export async function fetchDataForAllYears(
   username: string,
-  format: "nested" | "flat"
+  format: "nested" | "flat",
+  years: string[] = []
 ) {
-  const years = await fetchYears(username)
+  const _years = await fetchYears(username)
+
+  const yearsToFetch =
+    years.length > 0
+      ? years
+          .map((year) => _years.find((y) => y.text === year))
+          .filter((y) => y !== undefined)
+      : _years
+
   return Promise.all(
-    years.map((year) => fetchDataForYear(year.href, year.text, format))
+    yearsToFetch.map((year) => fetchDataForYear(year.href, year.text, format))
   ).then((resp) => {
     return {
       years: (() => {
