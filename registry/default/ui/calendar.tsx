@@ -47,8 +47,8 @@ function Calendar({
           date.toLocaleString(locale?.code, { month: "short" }),
         ...formatters,
       }}
-      // PR: removed "...classNames" from classNames object and added classNames to each cn call
       classNames={{
+        ...classNames,
         root: cn("w-fit", defaultClassNames.root, classNames?.root),
         months: cn(
           "relative flex flex-col gap-4 md:flex-row",
