@@ -20,7 +20,6 @@
   },
   "registries": {
     "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json",
-    "@mapcn": "https://mapcn.dev/r/{name}.json",
-    "@heatmap-tracker": "https://heatmap-tracker.ovinisanches.com/r/{name}.json"
+    "@mapcn": "https://mapcn.dev/r/{name}.json"
   }
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { HeatmapTracker } from "@/components/ui/heatmap-tracker"
+import { HeatmapTracker } from "@/registry/default/ui/heatmap-tracker"
 import { Skeleton } from "@/registry/default/ui/skeleton"
 import { useQuery } from "@tanstack/react-query"
 import { enUS, ptBR } from "date-fns/locale"

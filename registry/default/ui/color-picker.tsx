@@ -8,7 +8,13 @@ import {
 } from "@/registry/default/ui/popover"
 import { Button } from "@/registry/default/ui/button"
 import { Circle } from "lucide-react"
-import { isValidHexColor } from "@/lib/swatch-generator"
+
+export function isValidHexColor(color: string): boolean {
+  return (
+    (color.startsWith("#") && color.length === 7) ||
+    (!color.startsWith("#") && color.length === 6)
+  )
+}
 
 interface ColorPickerProps {
   value?: string
@@ -126,4 +132,4 @@ const ColorPicker = ({
   )
 }
 
-export default ColorPicker
+export { ColorPicker }

@@ -199,6 +199,18 @@
       ]
     },
     {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "registryDependencies": ["popover", "button"],
+      "dependencies": ["react-colorful"],
+      "files": [
+        {
+          "path": "registry/default/ui/color-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name"  : "combobox",
       "type": "registry:ui",
       "registryDependencies": ["button", "input-group"],
@@ -291,6 +303,18 @@
       "files": [
         {
           "path": "registry/default/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "heatmap-tracker",
+      "type": "registry:ui",
+      "registryDependencies": ["calendar", "tooltip"],
+      "dependencies": ["react-day-picker", "date-fns"],
+      "files": [
+        {
+          "path": "registry/default/ui/heatmap-tracker.tsx",
           "type": "registry:ui"
         }
       ]
