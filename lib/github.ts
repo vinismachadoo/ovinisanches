@@ -74,7 +74,7 @@ async function fetchDataForYear(url: string, year: string, format: string) {
           date: $day.attr("data-date"),
           count: parseInt($tooltip.text().split(" ")[0], 10) ?? 0,
           color,
-          intensity: parseInt($day.attr("data-level") ?? "0", 10),
+          level: parseInt($day.attr("data-level") ?? "0", 10),
         }
         return { date, value }
       }
@@ -109,7 +109,7 @@ interface GithubActivityContributions extends Record<
         date: string
         count: number
         color: string
-        intensity: string
+        level: string
       }
     >
   >
@@ -160,7 +160,7 @@ export async function fetchDataForAllYears(
                   date: string | undefined
                   count: number
                   color: string
-                  intensity: string | number
+                  level: string | number
                 }>
               >(
                 (list, curr) => [
