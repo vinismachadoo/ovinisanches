@@ -1,12 +1,12 @@
-'use client';
+"use client"
 
-import { cn } from '@/lib/utils';
-import { motion, Variants } from 'motion/react';
+import { cn } from "@/lib/utils"
+import { motion, Variants } from "motion/react"
 
 const container: Variants = {
   initial: {},
   animate: {},
-};
+}
 
 const createDrawVariant = (index: number): Variants => ({
   initial: {
@@ -28,43 +28,49 @@ const createDrawVariant = (index: number): Variants => ({
       },
     },
   },
-});
+})
 
-const PATH_DURATIONS = [0.4, 0.08, 0.15, 0.08, 0.15, 0.08, 0.15, 0.15, 0.4, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15];
+const PATH_DURATIONS = [
+  0.4, 0.08, 0.15, 0.08, 0.15, 0.08, 0.15, 0.15, 0.4, 0.15, 0.15, 0.15, 0.15,
+  0.15, 0.15,
+]
 
 const PATH_DELAYS = PATH_DURATIONS.reduce<number[]>(
   (acc, _, i) => [...acc, i === 0 ? 0 : acc[i - 1] + PATH_DURATIONS[i - 1]],
-  [],
-);
+  []
+)
 
-const MotionSignature = () => {
+const MotionSignature = ({ ...props }: React.ComponentProps<"div">) => {
   return (
-    <div className="flex items-center justify-center gap-x-6 px-2 text-muted-foreground relative p-3">
+    <div
+      className="relative flex items-center justify-center gap-x-6 p-3 px-2 text-muted-foreground"
+      {...props}
+    >
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="absolute bottom-6 left-0 w-full h-px bg-muted-foreground/20"
+        className="absolute bottom-6 left-0 h-px w-full bg-muted-foreground/20"
       />
 
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col items-center justify-center absolute bottom-1 left-0 w-full text-xs"
+        className="absolute bottom-1 left-0 flex w-full flex-col items-center justify-center text-xs"
       >
         Made by
       </motion.div>
 
       <div
         className={cn(
-          'flex items-center justify-center',
+          "flex items-center justify-center",
           // gather letters
-          '**:-ms-1 **:not-first:mt-9',
+          "**:-ms-1 **:not-first:mt-9",
           // V
-          '**:first:-me-6',
+          "**:first:-me-6",
           // s
-          '**:last:-ms-2',
+          "**:last:-ms-2"
         )}
         id="Vinicius"
       >
@@ -209,13 +215,13 @@ const MotionSignature = () => {
 
       <div
         className={cn(
-          'flex items-center justify-center',
+          "flex items-center justify-center",
           // gather letters
-          '**:-ms-1 **:not-first:mt-9',
+          "**:-ms-1 **:not-first:mt-9",
           // V
-          '**:first:-me-4',
+          "**:first:-me-4",
           // s
-          '**:last:-ms-4',
+          "**:last:-ms-4"
         )}
         id="Sanches"
       >
@@ -339,7 +345,7 @@ const MotionSignature = () => {
         </motion.svg>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MotionSignature;
+export default MotionSignature

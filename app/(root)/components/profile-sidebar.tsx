@@ -1,6 +1,6 @@
 "use client"
 
-import MotionSignature from "@/app/(root)/components/motion-signature"
+import MotionSignature from "@/components/motion-signature"
 import { Map, MapMarker, MarkerContent } from "@/components/ui/map"
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import { cn } from "@/lib/utils"
@@ -29,7 +29,7 @@ const RIO_DE_JANEIRO_CENTER = [-43.2104764711645, -22.95194069864799] as [
   number,
 ]
 
-const Presentation = () => {
+const ProfileSidebar = () => {
   const t = useTranslations("home-page.sidebar")
 
   return (
@@ -258,4 +258,4 @@ const SocialNetworks = () => {
   )
 }
 
-export default Presentation
+export default ProfileSidebar

@@ -9,31 +9,89 @@ import {
   Presentation,
   PresentationContent,
   PresentationControls,
-  PresentationProvider,
+  PresentationPaginationControls,
+  PresentationSettingsControls,
   PresentationSlide,
   usePresentation,
+  usePresentationSlide,
 } from "@/components/presentation"
-import { Button } from "@/registry/default/ui/button"
 import { cn } from "@/lib/utils"
+import { Button } from "@/registry/default/ui/button"
 import Link from "next/link"
 import * as React from "react"
 
-import bmwLogo from "@/public/logos/bmw-logo.svg"
+import MotionSignature from "@/components/motion-signature"
 import amazonLogo from "@/public/logos/amazon-logo.svg"
+import bmwLogo from "@/public/logos/bmw-logo.svg"
 import edgeLogo from "@/public/logos/edge-logo.svg"
-import metamaskLogo from "@/public/logos/metamask-logo.svg"
-import openclawLogo from "@/public/logos/openclaw-logo.svg"
-import watiLogo from "@/public/logos/wati-logo.svg"
 import livupLogo from "@/public/logos/livup-logo.svg"
-import raspberrypiLogo from "@/public/logos/raspberry-pi-logo.svg"
+import metamaskLogo from "@/public/logos/metamask-logo.svg"
 import microsoftTeamsLogo from "@/public/logos/microsoft-teams-logo.svg"
 import openAiLogo from "@/public/logos/openai-logo.svg"
+import openclawLogo from "@/public/logos/openclaw-logo.svg"
+import raspberrypiLogo from "@/public/logos/raspberry-pi-logo.svg"
+import watiLogo from "@/public/logos/wati-logo.svg"
+import { Separator } from "@/registry/default/ui/separator"
+import { Megaphone, Target } from "lucide-react"
 import { useTheme } from "next-themes"
+
+const SlideWhyMeCover = () => {
+  return (
+    <PresentationSlide>
+      <h1 className="text-5xl font-bold">Why me?</h1>
+    </PresentationSlide>
+  )
+}
 
 const SlideWhyMe = () => {
   return (
     <PresentationSlide>
-      <h1 className="text-5xl font-bold">Why me?</h1>
+      <div className="flex w-full max-w-350 items-center justify-center gap-x-8">
+        <div className="flex w-full flex-col items-center gap-y-3 text-center">
+          <div className="mb-4 flex size-12 items-center justify-center rounded-md border bg-background p-0.5 shadow-sm">
+            <div className="flex size-full items-center justify-center rounded-sm bg-yellow-500/50">
+              <Target className="size-6" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-semibold">Outcomes Over Output</h2>
+          <p className="text-base text-balance text-muted-foreground">
+            Frame the right problem, define measurable success, and prioritize
+            initiatives by customer and business impact before committing to a
+            solution.
+          </p>
+        </div>
+
+        <Separator orientation="vertical" />
+
+        <div className="flex w-full flex-col items-center gap-y-3 text-center">
+          <div className="mb-4 flex size-12 items-center justify-center rounded-md border bg-background p-0.5 shadow-sm">
+            <div className="flex size-full items-center justify-center rounded-sm bg-blue-500/50">
+              <Megaphone className="size-6" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-semibold">Strategic Collaboration</h2>
+          <p className="text-base text-balance text-muted-foreground">
+            Partner closely with design and engineering to turn ambiguity into
+            clear direction, align stakeholders early, and communicate decisions
+            and trade-offs with clarity.
+          </p>
+        </div>
+
+        <Separator orientation="vertical" />
+
+        <div className="flex w-full flex-col items-center gap-y-3 text-center">
+          <div className="mb-4 flex size-12 items-center justify-center rounded-md border bg-background p-0.5 shadow-sm">
+            <div className="flex size-full items-center justify-center rounded-sm bg-green-500/50">
+              <Megaphone className="size-6" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-semibold">Execution with Momentum</h2>
+          <p className="text-base text-balance text-muted-foreground">
+            Deliver incrementally with fast learning loops, use data to validate
+            direction and continuously improve perceived value to end users.
+          </p>
+        </div>
+      </div>
     </PresentationSlide>
   )
 }
@@ -46,13 +104,23 @@ const SlideProjectsCover = () => {
   )
 }
 
-const SlideLabsShades = () => {
+const SlideLabsShades = ({
+  showWatermark,
+  ...props
+}: React.ComponentProps<typeof PresentationSlide>) => {
   const { current } = usePresentation()
-  const slide = 3
+  const { slide } = usePresentationSlide()
 
   return (
-    <PresentationSlide className="relative flex-col">
-      <div className="flex flex-col items-center justify-center gap-y-3 py-10">
+    <PresentationSlide
+      className="relative flex-col"
+      showWatermark={showWatermark}
+      {...props}
+    >
+      <div
+        id="logo"
+        className="flex flex-col items-center justify-center gap-y-3 py-10"
+      >
         <img
           src="data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='36' rx='8' fill='%23D8B4FE'/%3E%3Cpath d='M20 8V14C19.9999 14.3355 20.0841 14.6656 20.245 14.96L25.755 25.04C25.9217 25.3446 26.0062 25.6874 26.0002 26.0345C25.9942 26.3817 25.8979 26.7213 25.7208 27.02C25.5437 27.3187 25.2919 27.5661 24.9902 27.7379C24.6885 27.9098 24.3472 28.0001 24 28H12C11.6528 28.0001 11.3115 27.9098 11.0098 27.7379C10.7081 27.5661 10.4563 27.3187 10.2792 27.02C10.1021 26.7213 10.0058 26.3817 9.99983 26.0345C9.99384 25.6874 10.0783 25.3446 10.245 25.04L15.755 14.96C15.9159 14.6656 16.0001 14.3355 16 14V8' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12.453 21H23.547' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.5 8H21.5' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A"
           alt="Labs Shades Light"
@@ -154,32 +222,62 @@ const SlideLabsShades = () => {
 
 const SlidePresentcn = () => {
   return (
-    <PresentationSlide className="relative flex-col">
-      <div className="flex flex-col items-center justify-center gap-y-3 py-10">
-        <img
-          src="data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='36' rx='8' fill='%237DD3FC'/%3E%3Cpath d='M11 13L9 11' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 12V9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M19 13L21 11' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 22C16.6569 22 18 20.6569 18 19C18 17.3431 16.6569 16 15 16C13.3431 16 12 17.3431 12 19C12 20.6569 13.3431 22 15 22Z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.83 18H26C26.5304 18 27.0391 18.2107 27.4142 18.5858C27.7893 18.9609 28 19.4696 28 20V24C28 24.5304 27.7893 25.0391 27.4142 25.4142C27.0391 25.7893 26.5304 26 26 26H10C9.46957 26 8.96086 25.7893 8.58579 25.4142C8.21071 25.0391 8 24.5304 8 24V20C8 19.4696 8.21071 18.9609 8.58579 18.5858C8.96086 18.2107 9.46957 18 10 18H12.17' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 22H24' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A"
-          alt="PresentX Light"
-          className="size-10 dark:hidden"
-        />
-        <img
-          src="data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='36' rx='8' fill='%23075985'/%3E%3Cpath d='M11 13L9 11' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 12V9' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M19 13L21 11' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 22C16.6569 22 18 20.6569 18 19C18 17.3431 16.6569 16 15 16C13.3431 16 12 17.3431 12 19C12 20.6569 13.3431 22 15 22Z' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.83 18H26C26.5304 18 27.0391 18.2107 27.4142 18.5858C27.7893 18.9609 28 19.4696 28 20V24C28 24.5304 27.7893 25.0391 27.4142 25.4142C27.0391 25.7893 26.5304 26 26 26H10C9.46957 26 8.96086 25.7893 8.58579 25.4142C8.21071 25.0391 8 24.5304 8 24V20C8 19.4696 8.21071 18.9609 8.58579 18.5858C8.96086 18.2107 9.46957 18 10 18H12.17' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 22H24' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A"
-          alt="PresentX Dark"
-          className="hidden size-10 dark:block"
-        />
-        <h1 className="text-3xl font-bold">presentcn</h1>
-        <p className="w-[60%] text-center text-lg text-balance text-muted-foreground">
-          OSS Component Library for creating shareable presentations on the web.
-          Supports fullscreen mode, keyboard shortcuts and dark/light themes
+    <PresentationSlide>
+      <div className="relative flex size-full flex-col items-center justify-center rounded-md border border-dashed border-red-500">
+        <p className="absolute top-2 left-1/2 -translate-x-1/2 font-mono text-red-500">
+          Presentation content
         </p>
-        <Button>
-          <Link
-            href="https://presentcn.ovinisanches.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Try it out
-          </Link>
-        </Button>
+        <div
+          id="logo"
+          className="flex flex-col items-center justify-center gap-y-3 py-10"
+        >
+          <img
+            src="data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='36' rx='8' fill='%237DD3FC'/%3E%3Cpath d='M11 13L9 11' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 12V9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M19 13L21 11' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 22C16.6569 22 18 20.6569 18 19C18 17.3431 16.6569 16 15 16C13.3431 16 12 17.3431 12 19C12 20.6569 13.3431 22 15 22Z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.83 18H26C26.5304 18 27.0391 18.2107 27.4142 18.5858C27.7893 18.9609 28 19.4696 28 20V24C28 24.5304 27.7893 25.0391 27.4142 25.4142C27.0391 25.7893 26.5304 26 26 26H10C9.46957 26 8.96086 25.7893 8.58579 25.4142C8.21071 25.0391 8 24.5304 8 24V20C8 19.4696 8.21071 18.9609 8.58579 18.5858C8.96086 18.2107 9.46957 18 10 18H12.17' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 22H24' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A"
+            alt="PresentX Light"
+            className="size-10 dark:hidden"
+          />
+          <img
+            src="data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='36' rx='8' fill='%23075985'/%3E%3Cpath d='M11 13L9 11' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 12V9' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M19 13L21 11' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 22C16.6569 22 18 20.6569 18 19C18 17.3431 16.6569 16 15 16C13.3431 16 12 17.3431 12 19C12 20.6569 13.3431 22 15 22Z' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.83 18H26C26.5304 18 27.0391 18.2107 27.4142 18.5858C27.7893 18.9609 28 19.4696 28 20V24C28 24.5304 27.7893 25.0391 27.4142 25.4142C27.0391 25.7893 26.5304 26 26 26H10C9.46957 26 8.96086 25.7893 8.58579 25.4142C8.21071 25.0391 8 24.5304 8 24V20C8 19.4696 8.21071 18.9609 8.58579 18.5858C8.96086 18.2107 9.46957 18 10 18H12.17' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 22H24' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A"
+            alt="PresentX Dark"
+            className="hidden size-10 dark:block"
+          />
+          <h1 className="text-3xl font-bold">presentcn</h1>
+          <p className="w-[60%] text-center text-lg text-balance text-muted-foreground">
+            OSS Component Library for creating shareable presentations on the
+            web. Supports fullscreen mode, keyboard shortcuts and dark/light
+            themes
+          </p>
+          <Button>
+            <Link
+              href="https://presentcn.ovinisanches.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Try it out
+            </Link>
+          </Button>
+        </div>
+
+        <div className="absolute inset-x-0 bottom-0 grid h-36 grid-cols-3 pb-2">
+          <div className="flex size-full min-h-0 flex-col gap-y-2 ps-12">
+            <p className="animate-bounce font-mono text-red-500">
+              Pagination controls
+            </p>
+            <div className="h-full min-h-0 w-16 bg-red-500 [clip-path:polygon(0_99%,99%_0,100%_1%,1%_100%)]"></div>
+          </div>
+
+          <div className="flex min-h-0 flex-col items-center gap-y-2">
+            <p className="animate-bounce font-mono text-red-500">Watermark</p>
+            <div className="h-20 w-px bg-red-500"></div>
+          </div>
+
+          <div className="flex size-full min-h-0 flex-col place-items-end gap-y-2 pe-12">
+            <p className="animate-bounce font-mono text-red-500">
+              Settings controls
+            </p>
+            <div className="h-full min-h-0 w-16 bg-red-500 [clip-path:polygon(1%_0,100%_99%,99%_100%,0%_1%)]"></div>
+          </div>
+        </div>
       </div>
     </PresentationSlide>
   )
@@ -290,20 +388,37 @@ const SlideMotionvg = () => {
   )
 }
 
+const SlideFinalCredits = ({
+  showWatermark,
+  ...props
+}: React.ComponentProps<typeof PresentationSlide> & {
+  showWatermark?: boolean
+}) => {
+  const { current } = usePresentation()
+  return (
+    <PresentationSlide showWatermark={showWatermark} {...props}>
+      <MotionSignature key={current} />
+    </PresentationSlide>
+  )
+}
+
 const Slides = () => {
   return (
-    <PresentationProvider>
-      <Presentation>
-        <PresentationContent>
-          <SlideWhyMe />
-          <SlideProjectsCover />
-          <SlideLabsShades />
-          <SlideMotionvg />
-          <SlidePresentcn />
-        </PresentationContent>
-        <PresentationControls />
-      </Presentation>
-    </PresentationProvider>
+    <Presentation config={{ watermark: "Crafted by @ovinisanches" }}>
+      <PresentationContent>
+        <SlideWhyMeCover />
+        <SlideWhyMe />
+        <SlideProjectsCover />
+        <SlideLabsShades showWatermark={false} />
+        <SlideMotionvg />
+        <SlidePresentcn />
+        <SlideFinalCredits showWatermark={false} />
+      </PresentationContent>
+      <PresentationControls>
+        <PresentationPaginationControls />
+        <PresentationSettingsControls />
+      </PresentationControls>
+    </Presentation>
   )
 }
 

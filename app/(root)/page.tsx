@@ -1,5 +1,5 @@
 import About from "@/app/(root)/components/about"
-import Presentation from "@/app/(root)/components/presentation"
+import ProfileSidebar from "@/app/(root)/components/profile-sidebar"
 import { cn } from "@/lib/utils"
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
           "min-h-min w-full flex-1 items-start gap-x-6 px-0"
         )}
       >
-        <Presentation />
+        <ProfileSidebar />
         <About />
       </div>
     </div>
