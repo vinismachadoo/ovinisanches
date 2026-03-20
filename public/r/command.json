@@ -5,8 +5,8 @@
     "cmdk"
   ],
   "registryDependencies": [
-    "dialog",
-    "input-group"
+    "https://ovinisanches.com/registry/default/ui/dialog",
+    "https://ovinisanches.com/registry/default/ui/input-group"
   ],
   "files": [
     {

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "toggle-group",
   "registryDependencies": [
-    "toggle"
+    "https://ovinisanches.com/registry/default/ui/toggle"
   ],
   "files": [
     {

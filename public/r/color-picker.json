@@ -5,8 +5,8 @@
     "react-colorful"
   ],
   "registryDependencies": [
-    "popover",
-    "button"
+    "https://ovinisanches.com/registry/default/ui/popover",
+    "https://ovinisanches.com/registry/default/ui/button"
   ],
   "files": [
     {

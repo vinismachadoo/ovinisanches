@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "alert-dialog",
   "registryDependencies": [
-    "button"
+    "https://ovinisanches.com/registry/default/ui/button"
   ],
   "files": [
     {

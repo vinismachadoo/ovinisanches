@@ -6,7 +6,7 @@
     "date-fns"
   ],
   "registryDependencies": [
-    "button"
+    "https://ovinisanches.com/registry/default/ui/button"
   ],
   "files": [
     {
