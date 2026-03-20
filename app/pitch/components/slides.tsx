@@ -14,7 +14,7 @@ import {
   PresentationSlide,
   usePresentation,
   usePresentationSlide,
-} from "@/components/presentation"
+} from "@/components/presentcn/presentation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/registry/default/ui/button"
 import Link from "next/link"

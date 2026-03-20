@@ -22,5 +22,14 @@
         "title": "Projetos"
       }
     }
+  },
+  "travel-page": {
+    "title": "Países que já visitei ou morei",
+    "legend": {
+      "visited": "Visitado",
+      "lived": "Residente"
+    },
+    "status": "Status atual",
+    "last-update": "Última atualização em"
   }
 }

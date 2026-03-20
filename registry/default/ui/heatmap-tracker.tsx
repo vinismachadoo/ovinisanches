@@ -4,6 +4,8 @@ import { Calendar } from "@/registry/default/ui/calendar"
 import {
   Tooltip,
   TooltipContent,
+  TooltipCreateHandle,
+  TooltipProvider,
   TooltipTrigger,
 } from "@/registry/default/ui/tooltip"
 import { cn } from "@/lib/utils"
@@ -43,6 +45,8 @@ interface HeatmapTrackerData {
   count: number
   level: number | null
 }
+
+const tooltipHandle = TooltipCreateHandle<React.ComponentType>()
 
 const HeatmapTracker = ({
   data,
@@ -149,61 +153,72 @@ const HeatmapTracker = ({
         className
       )}
     >
-      <Calendar
-        formatters={{ formatCaption }}
-        locale={locale}
-        numberOfMonths={13}
-        defaultMonth={twelveMonthAgo}
-        hideWeekdays
-        fixedWeeks
-        className="w-fit items-center justify-center p-0"
-        classNames={{
-          ...classNames,
-          root: cn("w-auto", classNames?.root),
-          nav: cn("hidden", classNames?.nav),
-          caption_label: cn("text-xs font-normal", classNames?.caption_label),
-          month: cn("ml-0 w-fit", classNames?.month),
-          month_caption: cn("h-fit px-0", classNames?.month_caption),
-          months: cn("w-fit gap-0", classNames?.months),
-          month_grid: cn("w-fit", classNames?.month_grid),
-          weeks: cn("flex w-fit", classNames?.weeks),
-          week: cn(
-            "mt-0 flex flex-col select-none data-[duplicated-previous-month=true]:hidden",
-            classNames?.week
-          ),
-          day: cn(
-            "m-(--day-margin) size-(--day-size) rounded-sm border border-border/20 bg-muted text-xs text-transparent",
-            "data-[hidden=true]:hidden",
-            classNames?.day
-          ),
-          outside: cn("text-xs text-transparent", classNames?.outside),
-          today: cn(
-            "m-(--day-margin) size-(--day-size) rounded-sm border border-border/20 bg-muted text-xs text-transparent",
-            classNames?.day,
-            classNames?.today
-          ),
-        }}
-        modifiers={levelModifiers}
-        modifiersClassNames={{
-          zero: "bg-(--level-0)",
-          one: "bg-(--level-1)",
-          two: "bg-(--level-2)",
-          three: "bg-(--level-3)",
-          four: "bg-(--level-4)",
-        }}
-        components={{
-          Week: ({ ...props }) => <CustomWeek {...props} />,
-          Day: ({ ...props }) => (
-            <CustomDay
-              data={dataMap}
-              firstDay={oneYearAgoStartOfWeek}
-              {...props}
-            />
-          ),
-          ...components,
-        }}
-        {...props}
-      />
+      <TooltipProvider>
+        <Calendar
+          formatters={{ formatCaption }}
+          locale={locale}
+          numberOfMonths={13}
+          defaultMonth={twelveMonthAgo}
+          hideWeekdays
+          fixedWeeks
+          className="w-fit items-center justify-center p-0"
+          classNames={{
+            ...classNames,
+            root: cn("w-auto", classNames?.root),
+            nav: cn("hidden", classNames?.nav),
+            caption_label: cn("text-xs font-normal", classNames?.caption_label),
+            month: cn("ml-0 w-fit", classNames?.month),
+            month_caption: cn("h-fit px-0", classNames?.month_caption),
+            months: cn("w-fit gap-0", classNames?.months),
+            month_grid: cn("w-fit", classNames?.month_grid),
+            weeks: cn("flex w-fit", classNames?.weeks),
+            week: cn(
+              "mt-0 flex flex-col select-none data-[duplicated-previous-month=true]:hidden",
+              classNames?.week
+            ),
+            day: cn(
+              "m-(--day-margin) size-(--day-size) rounded-sm border border-border/20 bg-muted text-xs text-transparent",
+              "data-[hidden=true]:hidden",
+              classNames?.day
+            ),
+            outside: cn("text-xs text-transparent", classNames?.outside),
+            today: cn(
+              "m-(--day-margin) size-(--day-size) rounded-sm border border-border/20 bg-muted text-xs text-transparent",
+              classNames?.day,
+              classNames?.today
+            ),
+          }}
+          modifiers={levelModifiers}
+          modifiersClassNames={{
+            zero: "bg-(--level-0)",
+            one: "bg-(--level-1)",
+            two: "bg-(--level-2)",
+            three: "bg-(--level-3)",
+            four: "bg-(--level-4)",
+          }}
+          components={{
+            Week: ({ ...props }) => <CustomWeek {...props} />,
+            Day: ({ ...props }) => (
+              <CustomDay
+                data={dataMap}
+                firstDay={oneYearAgoStartOfWeek}
+                {...props}
+              />
+            ),
+            ...components,
+          }}
+          {...props}
+        />
+
+        <Tooltip handle={tooltipHandle}>
+          {({ payload: Payload }) => (
+            <TooltipContent className="animate-none">
+              {Payload !== undefined && <Payload />}
+            </TooltipContent>
+          )}
+        </Tooltip>
+      </TooltipProvider>
+
       <HeatmapTrackerLegend classNames={classNames} />
     </div>
   )
@@ -267,35 +282,33 @@ function CustomDay({
   const level = item?.level ?? undefined
 
   return (
-    <Tooltip key={`${day.isoDate}_${day.displayMonthId}`}>
-      <TooltipTrigger
-        render={
-          <Day
-            {...props}
-            day={day}
-            modifiers={modifiers}
-            className={cn(
-              dayClassName, //shapes
-              "data-[level=0]:[clip-path:var(--shape-0)]",
-              "data-[level=1]:[clip-path:var(--shape-1)]",
-              "data-[level=2]:[clip-path:var(--shape-2)]",
-              "data-[level=3]:[clip-path:var(--shape-3)]",
-              "data-[level=4]:[clip-path:var(--shape-4)]"
-            )}
-            style={styles?.day}
-            role="gridcell"
-            data-level={level}
-            // using modifiers don't work cause dates don't exist in data
-            data-hidden={day.date > new Date() || day.date < firstDay}
-          />
-        }
-      >
-        {formatters.formatDay(day.date, day.dateLib.options, day.dateLib)}
-      </TooltipTrigger>
-      <TooltipContent>
-        {`${count} activities on ${day.date.toDateString()}`}
-      </TooltipContent>
-    </Tooltip>
+    <TooltipTrigger
+      key={`${day.isoDate}_${day.displayMonthId}`}
+      render={
+        <Day
+          {...props}
+          day={day}
+          modifiers={modifiers}
+          className={cn(
+            dayClassName, //shapes
+            "data-[level=0]:[clip-path:var(--shape-0)]",
+            "data-[level=1]:[clip-path:var(--shape-1)]",
+            "data-[level=2]:[clip-path:var(--shape-2)]",
+            "data-[level=3]:[clip-path:var(--shape-3)]",
+            "data-[level=4]:[clip-path:var(--shape-4)]"
+          )}
+          style={styles?.day}
+          role="gridcell"
+          data-level={level}
+          // using modifiers don't work cause dates don't exist in data
+          data-hidden={day.date > new Date() || day.date < firstDay}
+        />
+      }
+      handle={tooltipHandle}
+      payload={() => `${count} activities on ${day.date.toDateString()}`}
+    >
+      {formatters.formatDay(day.date, day.dateLib.options, day.dateLib)}
+    </TooltipTrigger>
   )
 }
 

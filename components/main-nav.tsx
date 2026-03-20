@@ -32,19 +32,18 @@ const MainNav = () => {
         <Button
           variant="ghost"
           size="sm"
-          disabled
-          data-active={pathname === "/writing"}
+          data-active={pathname === "/world-map"}
         >
-          <Link href="/writing">{t("writing")}</Link>
+          <Link href="/world-map">{t("world-map")}</Link>
         </Button>
 
         <Button
           variant="ghost"
           size="sm"
           disabled
-          data-active={pathname === "/world-map"}
+          data-active={pathname === "/writing"}
         >
-          <Link href="/world-map">{t("world-map")}</Link>
+          <Link href="/writing">{t("writing")}</Link>
         </Button>
       </div>
 

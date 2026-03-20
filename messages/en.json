@@ -22,5 +22,14 @@
         "title": "Projects"
       }
     }
+  },
+  "travel-page": {
+    "title": "Countries I've visited or lived in",
+    "legend": {
+      "visited": "Visited",
+      "lived": "Lived"
+    },
+    "status": "Current status",
+    "last-update": "Last update at"
   }
 }
