@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "dialog",
   "registryDependencies": [
-    "https://ovinisanches.com/registry/default/ui/button"
+    "https://ovinisanches.com/r/button.json"
   ],
   "files": [
     {

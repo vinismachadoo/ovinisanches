@@ -5,7 +5,7 @@
     "recharts@2.15.4"
   ],
   "registryDependencies": [
-    "https://ovinisanches.com/registry/default/ui/card"
+    "https://ovinisanches.com/r/card.json"
   ],
   "files": [
     {

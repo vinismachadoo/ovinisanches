@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "button-group",
   "registryDependencies": [
-    "https://ovinisanches.com/registry/default/ui/separator"
+    "https://ovinisanches.com/r/separator.json"
   ],
   "files": [
     {

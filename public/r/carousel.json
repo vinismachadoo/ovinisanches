@@ -5,7 +5,7 @@
     "embla-carousel-react"
   ],
   "registryDependencies": [
-    "https://ovinisanches.com/registry/default/ui/button"
+    "https://ovinisanches.com/r/button.json"
   ],
   "files": [
     {

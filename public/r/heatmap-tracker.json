@@ -6,8 +6,8 @@
     "date-fns"
   ],
   "registryDependencies": [
-    "https://ovinisanches.com/registry/default/ui/calendar",
-    "https://ovinisanches.com/registry/default/ui/tooltip"
+    "https://ovinisanches.com/r/calendar.json",
+    "https://ovinisanches.com/r/tooltip.json"
   ],
   "files": [
     {

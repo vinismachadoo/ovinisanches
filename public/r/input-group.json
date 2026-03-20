@@ -2,9 +2,9 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "input-group",
   "registryDependencies": [
-    "https://ovinisanches.com/registry/default/ui/button",
-    "https://ovinisanches.com/registry/default/ui/input",
-    "https://ovinisanches.com/registry/default/ui/textarea"
+    "https://ovinisanches.com/r/button.json",
+    "https://ovinisanches.com/r/input.json",
+    "https://ovinisanches.com/r/textarea.json"
   ],
   "files": [
     {
