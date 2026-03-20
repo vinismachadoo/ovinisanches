@@ -31,10 +31,8 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
 
   const visited = [...new Set(_visited)]
 
-  const createQueryString = (
-    params: Record<string, string | number | null>
-  ) => {
-    console.log(params)
+  const handleClick = (country: string) => {
+    return
   }
 
   return (
@@ -72,13 +70,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="004"
           name="Afghanistan"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "AFG",
-              })}`
-            )
-          }
+          onClick={() => handleClick("AFG")}
           data-active={activeCountry == "AFG"}
           data-visited={visited.includes("AFG")}
           onMouseMove={(e) => showTooltip(e, "Afghanistan")}
@@ -90,13 +82,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="AO"
           alpha-3="AGO"
           id="024"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "AGO",
-              })}`
-            )
-          }
+          onClick={() => handleClick("AGO")}
           data-active={activeCountry == "AGO"}
           data-visited={visited.includes("AGO")}
           onMouseMove={(e) => showTooltip(e, "Angola")}
@@ -118,13 +104,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="008"
           name="Albania"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ALB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ALB")}
           data-active={activeCountry == "ALB"}
           data-visited={visited.includes("ALB")}
           onMouseMove={(e) => showTooltip(e, "Albania")}
@@ -137,13 +117,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="784"
           name="United Arab Emirates"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ARE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ARE")}
           data-active={activeCountry == "ARE"}
           data-visited={visited.includes("ARE")}
           onMouseMove={(e) => showTooltip(e, "United Arab Emirates")}
@@ -155,13 +129,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ARG"
           id="032"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ARG",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ARG")}
           data-active={activeCountry == "ARG"}
           data-visited={visited.includes("ARG")}
           onMouseMove={(e) => showTooltip(e, "Argentina")}
@@ -183,13 +151,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="051"
           name="Armenia"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ARM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ARM")}
           data-active={activeCountry == "ARM"}
           data-visited={visited.includes("ARM")}
           onMouseMove={(e) => showTooltip(e, "Armenia")}
@@ -201,13 +163,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="AU"
           alpha-3="AUS"
           id="036"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "AUS",
-              })}`
-            )
-          }
+          onClick={() => handleClick("AUS")}
           data-active={activeCountry == "AUS"}
           data-visited={visited.includes("AUS")}
           onMouseMove={(e) => showTooltip(e, "Australia")}
@@ -229,13 +185,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="040"
           name="Austria"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "AUT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("AUT")}
           data-active={activeCountry == "AUT"}
           data-visited={visited.includes("AUT")}
           onMouseMove={(e) => showTooltip(e, "Austria")}
@@ -247,13 +197,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="AZE"
           id="031"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "AZE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("AZE")}
           data-active={activeCountry == "AZE"}
           data-visited={visited.includes("AZE")}
           onMouseMove={(e) => showTooltip(e, "Azerbaijan")}
@@ -275,13 +219,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="108"
           name="Burundi"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BDI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BDI")}
           data-active={activeCountry == "BDI"}
           data-visited={visited.includes("BDI")}
           onMouseMove={(e) => showTooltip(e, "Burundi")}
@@ -294,13 +232,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="056"
           name="Belgium"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BEL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BEL")}
           data-active={activeCountry == "BEL"}
           data-visited={visited.includes("BEL")}
           onMouseMove={(e) => showTooltip(e, "Belgium")}
@@ -313,13 +245,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="204"
           name="Benin"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BEN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BEN")}
           data-active={activeCountry == "BEN"}
           data-visited={visited.includes("BEN")}
           onMouseMove={(e) => showTooltip(e, "Benin")}
@@ -332,13 +258,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="854"
           name="Burkina Faso"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BFA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BFA")}
           data-active={activeCountry == "BFA"}
           data-visited={visited.includes("BFA")}
           onMouseMove={(e) => showTooltip(e, "Burkina Faso")}
@@ -351,13 +271,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="050"
           name="Bangladesh"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BGD",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BGD")}
           data-active={activeCountry == "BGD"}
           data-visited={visited.includes("BGD")}
           onMouseMove={(e) => showTooltip(e, "Bangladesh")}
@@ -370,13 +284,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="100"
           name="Bulgaria"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BGR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BGR")}
           data-active={activeCountry == "BGR"}
           data-visited={visited.includes("BGR")}
           onMouseMove={(e) => showTooltip(e, "Bulgaria")}
@@ -389,13 +297,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="070"
           name="Bosnia and Herzegovina"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BIH",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BIH")}
           data-active={activeCountry == "BIH"}
           data-visited={visited.includes("BIH")}
           onMouseMove={(e) => showTooltip(e, "Bosnia and Herzegovina")}
@@ -408,13 +310,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="112"
           name="Belarus"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BLR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BLR")}
           data-active={activeCountry == "BLR"}
           data-visited={visited.includes("BLR")}
           onMouseMove={(e) => showTooltip(e, "Belarus")}
@@ -427,13 +323,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="084"
           name="Belize"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BLZ",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BLZ")}
           data-active={activeCountry == "BLZ"}
           data-visited={visited.includes("BLZ")}
           onMouseMove={(e) => showTooltip(e, "Belize")}
@@ -446,13 +336,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="068"
           name="Bolivia"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BOL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BOL")}
           data-active={activeCountry == "BOL"}
           data-visited={visited.includes("BOL")}
           onMouseMove={(e) => showTooltip(e, "Bolivia")}
@@ -465,13 +349,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="076"
           name="Brazil"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BRA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BRA")}
           data-active={activeCountry == "BRA"}
           data-visited={visited.includes("BRA")}
           data-lived={true}
@@ -485,13 +363,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="096"
           className="map"
           d="M1633.1 472.8l2.2-2.4 4.6-3.6-0.1 3.2-0.1 4.1-2.7-0.2-1.1 2.2-2.8-3.3z"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BRN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BRN")}
           data-active={activeCountry == "BRN"}
           data-visited={visited.includes("BRN")}
           onMouseMove={(e) => showTooltip(e, "Brunei Darussalam")}
@@ -504,13 +376,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="BTN"
           id="064"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BTN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BTN")}
           data-active={activeCountry == "BTN"}
           data-visited={visited.includes("BTN")}
           onMouseMove={(e) => showTooltip(e, "Bhutan")}
@@ -523,13 +389,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="BWA"
           id="072"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BWA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BWA")}
           data-active={activeCountry == "BWA"}
           data-visited={visited.includes("BWA")}
           onMouseMove={(e) => showTooltip(e, "Botswana")}
@@ -541,13 +401,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="CAF"
           id="140"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CAF",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CAF")}
           data-active={activeCountry == "CAF"}
           data-visited={visited.includes("CAF")}
           onMouseMove={(e) => showTooltip(e, "Central African Republic")}
@@ -560,13 +414,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="CA"
           alpha-3="CAN"
           id="124"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CAN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CAN")}
           data-active={activeCountry == "CAN"}
           data-visited={visited.includes("CAN")}
           onMouseMove={(e) => showTooltip(e, "Canada")}
@@ -700,13 +548,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="756"
           className="map"
           name="Switzerland"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CHE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CHE")}
           data-active={activeCountry == "CHE"}
           data-visited={visited.includes("CHE")}
           onMouseMove={(e) => showTooltip(e, "Switzerland")}
@@ -718,13 +560,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="CHN"
           id="156"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CHN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CHN")}
           data-active={activeCountry == "CHN"}
           data-visited={visited.includes("CHN")}
           onMouseMove={(e) => showTooltip(e, "China")}
@@ -746,13 +582,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="CIV"
           id="384"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CIV",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CIV")}
           data-active={activeCountry == "CIV"}
           data-visited={visited.includes("CIV")}
           onMouseMove={(e) => showTooltip(e, "Côte d'Ivoire")}
@@ -765,13 +595,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="CMR"
           id="120"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CMR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CMR")}
           data-active={activeCountry == "CMR"}
           data-visited={visited.includes("CMR")}
           onMouseMove={(e) => showTooltip(e, "Cameroon")}
@@ -784,13 +608,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="COD"
           id="180"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "COD",
-              })}`
-            )
-          }
+          onClick={() => handleClick("COD")}
           data-active={activeCountry == "COD"}
           data-visited={visited.includes("COD")}
           onMouseMove={(e) =>
@@ -805,13 +623,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="COG"
           id="178"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "COG",
-              })}`
-            )
-          }
+          onClick={() => handleClick("COG")}
           data-active={activeCountry == "COG"}
           data-visited={visited.includes("COG")}
           onMouseMove={(e) => showTooltip(e, "Republic of Congo")}
@@ -824,13 +636,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="COL"
           id="170"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "COL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("COL")}
           data-active={activeCountry == "COL"}
           data-visited={visited.includes("COL")}
           onMouseMove={(e) => showTooltip(e, "Colombia")}
@@ -843,13 +649,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="CRI"
           id="188"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CRI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CRI")}
           data-active={activeCountry == "CRI"}
           data-visited={visited.includes("CRI")}
           onMouseMove={(e) => showTooltip(e, "Costa Rica")}
@@ -861,13 +661,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="CUB"
           id="192"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CUB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CUB")}
           data-active={activeCountry == "CUB"}
           data-visited={visited.includes("CUB")}
           onMouseMove={(e) => showTooltip(e, "Cuba")}
@@ -881,13 +675,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="203"
           className="map"
           name="Czech Republic"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CZE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CZE")}
           data-active={activeCountry == "CZE"}
           data-visited={visited.includes("CZE")}
           onMouseMove={(e) => showTooltip(e, "Czech Republic")}
@@ -900,13 +688,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="276"
           className="map"
           name="Germany"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "DEU",
-              })}`
-            )
-          }
+          onClick={() => handleClick("DEU")}
           data-active={activeCountry == "DEU"}
           data-visited={visited.includes("DEU")}
           onMouseMove={(e) => showTooltip(e, "Germany")}
@@ -918,13 +700,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="DJI"
           id="262"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "DJI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("DJI")}
           data-active={activeCountry == "DJI"}
           data-visited={visited.includes("DJI")}
           onMouseMove={(e) => showTooltip(e, "Djibouti")}
@@ -937,13 +713,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="DK"
           alpha-3="DNK"
           id="208"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "DNK",
-              })}`
-            )
-          }
+          onClick={() => handleClick("DNK")}
           data-active={activeCountry == "DNK"}
           data-visited={visited.includes("DNK")}
           onMouseMove={(e) => showTooltip(e, "Denmark")}
@@ -964,13 +734,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="DOM"
           id="214"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "DOM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("DOM")}
           data-active={activeCountry == "DOM"}
           data-visited={visited.includes("DOM")}
           onMouseMove={(e) => showTooltip(e, "Dominican Republic")}
@@ -983,13 +747,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="DZA"
           id="012"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "DZA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("DZA")}
           data-active={activeCountry == "DZA"}
           data-visited={visited.includes("DZA")}
           onMouseMove={(e) => showTooltip(e, "Algeria")}
@@ -1002,13 +760,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ECU"
           id="218"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ECU",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ECU")}
           data-active={activeCountry == "ECU"}
           data-visited={visited.includes("ECU")}
           onMouseMove={(e) => showTooltip(e, "Ecuador")}
@@ -1021,13 +773,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="EGY"
           id="818"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "EGY",
-              })}`
-            )
-          }
+          onClick={() => handleClick("EGY")}
           data-active={activeCountry == "EGY"}
           data-visited={visited.includes("EGY")}
           onMouseMove={(e) => showTooltip(e, "Egypt")}
@@ -1040,13 +786,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ERI"
           id="232"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ERI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ERI")}
           data-active={activeCountry == "ERI"}
           data-visited={visited.includes("ERI")}
           onMouseMove={(e) => showTooltip(e, "Eritrea")}
@@ -1060,13 +800,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="233"
           className="map"
           name="Estonia"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "EST",
-              })}`
-            )
-          }
+          onClick={() => handleClick("EST")}
           data-active={activeCountry == "EST"}
           data-visited={visited.includes("EST")}
           onMouseMove={(e) => showTooltip(e, "Estonia")}
@@ -1078,13 +812,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ETH"
           id="231"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ETH",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ETH")}
           data-active={activeCountry == "ETH"}
           data-visited={visited.includes("ETH")}
           onMouseMove={(e) => showTooltip(e, "Ethiopia")}
@@ -1097,13 +825,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="FIN"
           id="246"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "FIN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("FIN")}
           data-active={activeCountry == "FIN"}
           data-visited={visited.includes("FIN")}
           onMouseMove={(e) => showTooltip(e, "Finland")}
@@ -1116,13 +838,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GAB"
           id="266"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GAB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GAB")}
           data-active={activeCountry == "GAB"}
           data-visited={visited.includes("GAB")}
           onMouseMove={(e) => showTooltip(e, "Gabon")}
@@ -1131,13 +847,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GBR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GBR")}
           data-active={activeCountry == "GBR"}
           data-visited={visited.includes("GBR")}
           onMouseMove={(e) => showTooltip(e, "United Kingdom")}
@@ -1162,13 +872,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GEO"
           id="268"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GEO",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GEO")}
           data-active={activeCountry == "GEO"}
           data-visited={visited.includes("GEO")}
           onMouseMove={(e) => showTooltip(e, "Georgia")}
@@ -1181,13 +885,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GHA"
           id="288"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GHA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GHA")}
           data-active={activeCountry == "GHA"}
           data-visited={visited.includes("GHA")}
           onMouseMove={(e) => showTooltip(e, "Ghana")}
@@ -1200,13 +898,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GIN"
           id="324"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GIN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GIN")}
           data-active={activeCountry == "GIN"}
           data-visited={visited.includes("GIN")}
           onMouseMove={(e) => showTooltip(e, "Guinea")}
@@ -1219,13 +911,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GMB"
           id="270"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GMB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GMB")}
           data-active={activeCountry == "GMB"}
           data-visited={visited.includes("GMB")}
           onMouseMove={(e) => showTooltip(e, "The Gambia")}
@@ -1238,13 +924,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GNB"
           id="624"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GNB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GNB")}
           data-active={activeCountry == "GNB"}
           data-visited={visited.includes("GNB")}
           onMouseMove={(e) => showTooltip(e, "Guinea-Bissau")}
@@ -1257,13 +937,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GNQ"
           id="226"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GNQ",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GNQ")}
           data-active={activeCountry == "GNQ"}
           data-visited={visited.includes("GNQ")}
           onMouseMove={(e) => showTooltip(e, "Equatorial Guinea")}
@@ -1272,13 +946,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GRC",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GRC")}
           data-active={activeCountry == "GRC"}
           data-visited={visited.includes("GRC")}
           onMouseMove={(e) => showTooltip(e, "Greece")}
@@ -1303,13 +971,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GRL"
           id="304"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GRL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GRL")}
           data-active={activeCountry == "GRL"}
           data-visited={visited.includes("GRL")}
           onMouseMove={(e) => showTooltip(e, "Greenland")}
@@ -1322,13 +984,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GTM"
           id="320"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GTM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GTM")}
           data-active={activeCountry == "GTM"}
           data-visited={visited.includes("GTM")}
           onMouseMove={(e) => showTooltip(e, "Guatemala")}
@@ -1341,13 +997,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GUY"
           id="328"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GUY",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GUY")}
           data-active={activeCountry == "GUY"}
           data-visited={visited.includes("GUY")}
           onMouseMove={(e) => showTooltip(e, "Guyana")}
@@ -1360,13 +1010,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="HND"
           id="340"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "HND",
-              })}`
-            )
-          }
+          onClick={() => handleClick("HND")}
           data-active={activeCountry == "HND"}
           data-visited={visited.includes("HND")}
           onMouseMove={(e) => showTooltip(e, "Honduras")}
@@ -1379,13 +1023,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="HRV"
           id="191"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "HRV",
-              })}`
-            )
-          }
+          onClick={() => handleClick("HRV")}
           data-active={activeCountry == "HRV"}
           data-visited={visited.includes("HRV")}
           onMouseMove={(e) => showTooltip(e, "Croatia")}
@@ -1398,13 +1036,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="HTI"
           id="332"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "HTI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("HTI")}
           data-active={activeCountry == "HTI"}
           data-visited={visited.includes("HTI")}
           onMouseMove={(e) => showTooltip(e, "Haiti")}
@@ -1418,13 +1050,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="348"
           className="map"
           name="Hungary"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "HUN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("HUN")}
           data-active={activeCountry == "HUN"}
           data-visited={visited.includes("HUN")}
           onMouseMove={(e) => showTooltip(e, "Hungary")}
@@ -1432,13 +1058,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "IDN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("IDN")}
           data-active={activeCountry == "IDN"}
           data-visited={visited.includes("IDN")}
           onMouseMove={(e) => showTooltip(e, "Indonesia")}
@@ -1507,13 +1127,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="IND"
           id="356"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "IND",
-              })}`
-            )
-          }
+          onClick={() => handleClick("IND")}
           data-active={activeCountry == "IND"}
           data-visited={visited.includes("IND")}
           onMouseMove={(e) => showTooltip(e, "India")}
@@ -1526,13 +1140,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="IRL"
           id="372"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "IRL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("IRL")}
           data-active={activeCountry == "IRL"}
           data-visited={visited.includes("IRL")}
           onMouseMove={(e) => showTooltip(e, "Ireland")}
@@ -1545,13 +1153,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="IRN"
           id="364"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "IRN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("IRN")}
           data-active={activeCountry == "IRN"}
           data-visited={visited.includes("IRN")}
           onMouseMove={(e) => showTooltip(e, "Iran")}
@@ -1564,13 +1166,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="IRQ"
           id="368"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "IRQ",
-              })}`
-            )
-          }
+          onClick={() => handleClick("IRQ")}
           data-active={activeCountry == "IRQ"}
           data-visited={visited.includes("IRQ")}
           onMouseMove={(e) => showTooltip(e, "Iraq")}
@@ -1583,13 +1179,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ISL"
           id="352"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ISL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ISL")}
           data-active={activeCountry == "ISL"}
           data-visited={visited.includes("ISL")}
           onMouseMove={(e) => showTooltip(e, "Iceland")}
@@ -1602,13 +1192,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ISR"
           id="376"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ISR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ISR")}
           data-active={activeCountry == "ISR"}
           data-visited={visited.includes("ISR")}
           onMouseMove={(e) => showTooltip(e, "Israel")}
@@ -1617,13 +1201,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ITA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ITA")}
           data-active={activeCountry == "ITA"}
           data-visited={visited.includes("ITA")}
           onMouseMove={(e) => showTooltip(e, "Italy")}
@@ -1652,13 +1230,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="JAM"
           id="388"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "JAM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("JAM")}
           data-active={activeCountry == "JAM"}
           data-visited={visited.includes("JAM")}
           onMouseMove={(e) => showTooltip(e, "Jamaica")}
@@ -1671,13 +1243,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="JOR"
           id="400"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "JOR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("JOR")}
           data-active={activeCountry == "JOR"}
           data-visited={visited.includes("JOR")}
           onMouseMove={(e) => showTooltip(e, "Jordan")}
@@ -1686,13 +1252,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "JPN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("JPN")}
           data-active={activeCountry == "JPN"}
           data-visited={visited.includes("JPN")}
           onMouseMove={(e) => showTooltip(e, "Japan")}
@@ -1721,13 +1281,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="KAZ"
           id="398"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "KAZ",
-              })}`
-            )
-          }
+          onClick={() => handleClick("KAZ")}
           data-active={activeCountry == "KAZ"}
           data-visited={visited.includes("KAZ")}
           onMouseMove={(e) => showTooltip(e, "Kazakhstan")}
@@ -1740,13 +1294,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="KEN"
           id="404"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "KEN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("KEN")}
           data-active={activeCountry == "KEN"}
           data-visited={visited.includes("KEN")}
           onMouseMove={(e) => showTooltip(e, "Kenya")}
@@ -1759,13 +1307,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="KGZ"
           id="417"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "KGZ",
-              })}`
-            )
-          }
+          onClick={() => handleClick("KGZ")}
           data-active={activeCountry == "KGZ"}
           data-visited={visited.includes("KGZ")}
           onMouseMove={(e) => showTooltip(e, "Kyrgyzstan")}
@@ -1778,13 +1320,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="KHM"
           id="116"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "KHM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("KHM")}
           data-active={activeCountry == "KHM"}
           data-visited={visited.includes("KHM")}
           onMouseMove={(e) => showTooltip(e, "Cambodia")}
@@ -1797,13 +1333,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="KOR"
           id="410"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "KOR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("KOR")}
           data-active={activeCountry == "KOR"}
           data-visited={visited.includes("KOR")}
           onMouseMove={(e) => showTooltip(e, "Republic of Korea")}
@@ -1816,13 +1346,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="KWT"
           id="414"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "KWT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("KWT")}
           data-active={activeCountry == "KWT"}
           data-visited={visited.includes("KWT")}
           onMouseMove={(e) => showTooltip(e, "Kuwait")}
@@ -1835,13 +1359,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LAO"
           id="418"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LAO",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LAO")}
           data-active={activeCountry == "LAO"}
           data-visited={visited.includes("LAO")}
           onMouseMove={(e) => showTooltip(e, "Lao PDR")}
@@ -1854,13 +1372,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LBN"
           id="422"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LBN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LBN")}
           data-active={activeCountry == "LBN"}
           data-visited={visited.includes("LBN")}
           onMouseMove={(e) => showTooltip(e, "Lebanon")}
@@ -1873,13 +1385,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LBR"
           id="430"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LBR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LBR")}
           data-active={activeCountry == "LBR"}
           data-visited={visited.includes("LBR")}
           onMouseMove={(e) => showTooltip(e, "Liberia")}
@@ -1892,13 +1398,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LBY"
           id="434"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LBY",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LBY")}
           data-active={activeCountry == "LBY"}
           data-visited={visited.includes("LBY")}
           onMouseMove={(e) => showTooltip(e, "Libya")}
@@ -1911,13 +1411,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LKA"
           id="144"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LKA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LKA")}
           data-active={activeCountry == "LKA"}
           data-visited={visited.includes("LKA")}
           onMouseMove={(e) => showTooltip(e, "Sri Lanka")}
@@ -1930,13 +1424,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LSO"
           id="426"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LSO",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LSO")}
           data-active={activeCountry == "LSO"}
           data-visited={visited.includes("LSO")}
           onMouseMove={(e) => showTooltip(e, "Lesotho")}
@@ -1949,13 +1437,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LTU"
           id="440"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LTU",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LTU")}
           data-active={activeCountry == "LTU"}
           data-visited={visited.includes("LTU")}
           onMouseMove={(e) => showTooltip(e, "Lithuania")}
@@ -1968,13 +1450,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LUX"
           id="442"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LUX",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LUX")}
           data-active={activeCountry == "LUX"}
           data-visited={visited.includes("LUX")}
           onMouseMove={(e) => showTooltip(e, "Luxembourg")}
@@ -1987,13 +1463,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="LVA"
           id="428"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LVA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LVA")}
           data-active={activeCountry == "LVA"}
           data-visited={visited.includes("LVA")}
           onMouseMove={(e) => showTooltip(e, "Latvia")}
@@ -2006,13 +1476,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MAR"
           id="504"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MAR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MAR")}
           data-active={activeCountry == "MAR"}
           data-visited={visited.includes("MAR")}
           onMouseMove={(e) => showTooltip(e, "Morocco")}
@@ -2025,13 +1489,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MDA"
           id="498"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MDA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MDA")}
           data-active={activeCountry == "MDA"}
           data-visited={visited.includes("MDA")}
           onMouseMove={(e) => showTooltip(e, "Moldova")}
@@ -2044,13 +1502,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MDG"
           id="450"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MDG",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MDG")}
           data-active={activeCountry == "MDG"}
           data-visited={visited.includes("MDG")}
           onMouseMove={(e) => showTooltip(e, "Madagascar")}
@@ -2064,13 +1516,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="484"
           className="map"
           name="Mexico"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MEX",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MEX")}
           data-active={activeCountry == "MEX"}
           data-visited={visited.includes("MEX")}
           onMouseMove={(e) => showTooltip(e, "Mexico")}
@@ -2082,13 +1528,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MKD"
           id="807"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MKD",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MKD")}
           data-active={activeCountry == "MKD"}
           data-visited={visited.includes("MKD")}
           onMouseMove={(e) => showTooltip(e, "Macedonia")}
@@ -2101,13 +1541,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MLI"
           id="466"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MLI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MLI")}
           data-active={activeCountry == "MLI"}
           data-visited={visited.includes("MLI")}
           onMouseMove={(e) => showTooltip(e, "Mali")}
@@ -2120,13 +1554,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MMR"
           id="104"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MMR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MMR")}
           data-active={activeCountry == "MMR"}
           data-visited={visited.includes("MMR")}
           onMouseMove={(e) => showTooltip(e, "Myanmar")}
@@ -2139,13 +1567,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MNE"
           id="499"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MNE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MNE")}
           data-active={activeCountry == "MNE"}
           data-visited={visited.includes("MNE")}
           onMouseMove={(e) => showTooltip(e, "Montenegro")}
@@ -2158,13 +1580,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MNG"
           id="496"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MNG",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MNG")}
           data-active={activeCountry == "MNG"}
           data-visited={visited.includes("MNG")}
           onMouseMove={(e) => showTooltip(e, "Mongolia")}
@@ -2177,13 +1593,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MOZ"
           id="508"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MOZ",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MOZ")}
           data-active={activeCountry == "MOZ"}
           data-visited={visited.includes("MOZ")}
           onMouseMove={(e) => showTooltip(e, "Mozambique")}
@@ -2196,13 +1606,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MRT"
           id="478"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MRT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MRT")}
           data-active={activeCountry == "MRT"}
           data-visited={visited.includes("MRT")}
           onMouseMove={(e) => showTooltip(e, "Mauritania")}
@@ -2215,13 +1619,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="MWI"
           id="454"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MWI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MWI")}
           data-active={activeCountry == "MWI"}
           data-visited={visited.includes("MWI")}
           onMouseMove={(e) => showTooltip(e, "Malawi")}
@@ -2230,13 +1628,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MYS",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MYS")}
           data-active={activeCountry == "MYS"}
           data-visited={visited.includes("MYS")}
           onMouseMove={(e) => showTooltip(e, "Malaysia")}
@@ -2261,13 +1653,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="NAM"
           id="516"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NAM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NAM")}
           data-active={activeCountry == "NAM"}
           data-visited={visited.includes("NAM")}
           onMouseMove={(e) => showTooltip(e, "Namibia")}
@@ -2280,13 +1666,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="NER"
           id="562"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NER",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NER")}
           data-active={activeCountry == "NER"}
           data-visited={visited.includes("NER")}
           onMouseMove={(e) => showTooltip(e, "Austria")}
@@ -2299,13 +1679,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="NGA"
           id="566"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NGA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NGA")}
           data-active={activeCountry == "NGA"}
           data-visited={visited.includes("NGA")}
           onMouseMove={(e) => showTooltip(e, "Nigeria")}
@@ -2318,13 +1692,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="NIC"
           id="558"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NIC",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NIC")}
           data-active={activeCountry == "NIC"}
           data-visited={visited.includes("NIC")}
           onMouseMove={(e) => showTooltip(e, "Nicaragua")}
@@ -2333,13 +1701,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NOR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NOR")}
           data-active={activeCountry == "NOR"}
           data-visited={visited.includes("NOR")}
           onMouseMove={(e) => showTooltip(e, "Norway")}
@@ -2372,13 +1734,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="NPL"
           id="524"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NPL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NPL")}
           data-active={activeCountry == "NPL"}
           data-visited={visited.includes("NPL")}
           onMouseMove={(e) => showTooltip(e, "Nepal")}
@@ -2387,13 +1743,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "OMN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("OMN")}
           data-active={activeCountry == "OMN"}
           data-visited={visited.includes("OMN")}
           onMouseMove={(e) => showTooltip(e, "Oman")}
@@ -2418,13 +1768,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="PAK"
           id="586"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PAK",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PAK")}
           data-active={activeCountry == "PAK"}
           data-visited={visited.includes("PAK")}
           onMouseMove={(e) => showTooltip(e, "Pakistan")}
@@ -2437,13 +1781,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="PAN"
           id="591"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PAN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PAN")}
           data-active={activeCountry == "PAN"}
           data-visited={visited.includes("PAN")}
           onMouseMove={(e) => showTooltip(e, "Panama")}
@@ -2456,13 +1794,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="PER"
           id="604"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PER",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PER")}
           data-active={activeCountry == "PER"}
           data-visited={visited.includes("PER")}
           onMouseMove={(e) => showTooltip(e, "Peru")}
@@ -2471,13 +1803,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PHL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PHL")}
           data-active={activeCountry == "PHL"}
           data-visited={visited.includes("PHL")}
           onMouseMove={(e) => showTooltip(e, "Philippines")}
@@ -2518,13 +1844,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         </g>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PNG",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PNG")}
           data-active={activeCountry == "PNG"}
           data-visited={visited.includes("PNG")}
           onMouseMove={(e) => showTooltip(e, "Papua New Guinea")}
@@ -2557,13 +1877,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="POL"
           id="616"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "POL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("POL")}
           data-active={activeCountry == "POL"}
           data-visited={visited.includes("POL")}
           onMouseMove={(e) => showTooltip(e, "Poland")}
@@ -2576,13 +1890,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="PRK"
           id="408"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PRK",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PRK")}
           data-active={activeCountry == "PRK"}
           data-visited={visited.includes("PRK")}
           onMouseMove={(e) => showTooltip(e, "Dem. Rep. Korea")}
@@ -2595,13 +1903,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="PRY"
           id="600"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PRY",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PRY")}
           data-active={activeCountry == "PRY"}
           data-visited={visited.includes("PRY")}
           onMouseMove={(e) => showTooltip(e, "Paraguay")}
@@ -2614,13 +1916,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="PSE"
           id="275"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PSE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PSE")}
           data-active={activeCountry == "PSE"}
           data-visited={visited.includes("PSE")}
           onMouseMove={(e) => showTooltip(e, "Palestine")}
@@ -2633,13 +1929,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="QAT"
           id="634"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "QAT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("QAT")}
           data-active={activeCountry == "QAT"}
           data-visited={visited.includes("QAT")}
           onMouseMove={(e) => showTooltip(e, "Qatar")}
@@ -2652,13 +1942,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ROU"
           id="642"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ROU",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ROU")}
           data-active={activeCountry == "ROU"}
           data-visited={visited.includes("ROU")}
           onMouseMove={(e) => showTooltip(e, "Romania")}
@@ -2671,13 +1955,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="RWA"
           id="646"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "RWA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("RWA")}
           data-active={activeCountry == "RWA"}
           data-visited={visited.includes("RWA")}
           onMouseMove={(e) => showTooltip(e, "Rwanda")}
@@ -2690,13 +1968,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ESH"
           id="732"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ESH",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ESH")}
           data-active={activeCountry == "ESH"}
           data-visited={visited.includes("ESH")}
           onMouseMove={(e) => showTooltip(e, "Western Sahara")}
@@ -2709,13 +1981,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SAU"
           id="682"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SAU",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SAU")}
           data-active={activeCountry == "SAU"}
           data-visited={visited.includes("SAU")}
           onMouseMove={(e) => showTooltip(e, "Saudi Arabia")}
@@ -2728,13 +1994,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SDN"
           id="729"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SDN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SDN")}
           data-active={activeCountry == "SDN"}
           data-visited={visited.includes("SDN")}
           onMouseMove={(e) => showTooltip(e, "Sudan")}
@@ -2747,13 +2007,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SSD"
           id="728"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SSD",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SSD")}
           data-active={activeCountry == "SSD"}
           data-visited={visited.includes("SSD")}
           onMouseMove={(e) => showTooltip(e, "South Sudan")}
@@ -2766,13 +2020,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SEN"
           id="686"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SEN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SEN")}
           data-active={activeCountry == "SEN"}
           data-visited={visited.includes("SEN")}
           onMouseMove={(e) => showTooltip(e, "Senegal")}
@@ -2785,13 +2033,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SLE"
           id="694"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SLE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SLE")}
           data-active={activeCountry == "SLE"}
           data-visited={visited.includes("SLE")}
           onMouseMove={(e) => showTooltip(e, "Sierra Leone")}
@@ -2804,13 +2046,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SLV"
           id="222"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SLV",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SLV")}
           data-active={activeCountry == "SLV"}
           data-visited={visited.includes("SLV")}
           onMouseMove={(e) => showTooltip(e, "El Salvador")}
@@ -2823,13 +2059,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SRB"
           id="688"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SRB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SRB")}
           data-active={activeCountry == "SRB"}
           data-visited={visited.includes("SRB")}
           onMouseMove={(e) => showTooltip(e, "Serbia")}
@@ -2842,13 +2072,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SUR"
           id="740"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SUR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SUR")}
           data-active={activeCountry == "SUR"}
           data-visited={visited.includes("SUR")}
           onMouseMove={(e) => showTooltip(e, "Suriname")}
@@ -2861,13 +2085,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SVK"
           id="703"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SVK",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SVK")}
           data-active={activeCountry == "SVK"}
           data-visited={visited.includes("SVK")}
           onMouseMove={(e) => showTooltip(e, "Slovakia")}
@@ -2880,13 +2098,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SVN"
           id="705"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SVN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SVN")}
           data-active={activeCountry == "SVN"}
           data-visited={visited.includes("SVN")}
           onMouseMove={(e) => showTooltip(e, "Slovenia")}
@@ -2900,13 +2112,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="752"
           className="map"
           name="Sweden"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SWE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SWE")}
           data-active={activeCountry == "SWE"}
           data-visited={visited.includes("SWE")}
           data-lived="true"
@@ -2919,13 +2125,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SWZ"
           id="748"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SWZ",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SWZ")}
           data-active={activeCountry == "SWZ"}
           data-visited={visited.includes("SWZ")}
           onMouseMove={(e) => showTooltip(e, "Eswatini")}
@@ -2938,13 +2138,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SYR"
           id="760"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SYR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SYR")}
           data-active={activeCountry == "SYR"}
           data-visited={visited.includes("SYR")}
           onMouseMove={(e) => showTooltip(e, "Syria")}
@@ -2957,13 +2151,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="TCD"
           id="148"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TCD",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TCD")}
           data-active={activeCountry == "TCD"}
           data-visited={visited.includes("TCD")}
           onMouseMove={(e) => showTooltip(e, "Chad")}
@@ -2976,13 +2164,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="TGO"
           id="768"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TGO",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TGO")}
           data-active={activeCountry == "TGO"}
           data-visited={visited.includes("TGO")}
           onMouseMove={(e) => showTooltip(e, "Togo")}
@@ -2995,13 +2177,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="THA"
           id="764"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "THA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("THA")}
           data-active={activeCountry == "THA"}
           data-visited={visited.includes("THA")}
           onMouseMove={(e) => showTooltip(e, "Thailand")}
@@ -3014,13 +2190,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="TJK"
           id="762"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TJK",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TJK")}
           data-active={activeCountry == "TJK"}
           data-visited={visited.includes("TJK")}
           onMouseMove={(e) => showTooltip(e, "Tajikistan")}
@@ -3033,13 +2203,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="TKM"
           id="795"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TKM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TKM")}
           data-active={activeCountry == "TKM"}
           data-visited={visited.includes("TKM")}
           onMouseMove={(e) => showTooltip(e, "Turkmenistan")}
@@ -3052,13 +2216,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="TLS"
           id="626"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TLS",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TLS")}
           data-active={activeCountry == "TLS"}
           data-visited={visited.includes("TLS")}
           onMouseMove={(e) => showTooltip(e, "Timor-Leste")}
@@ -3071,13 +2229,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="TUN"
           id="788"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TUN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TUN")}
           data-active={activeCountry == "TUN"}
           data-visited={visited.includes("TUN")}
           onMouseMove={(e) => showTooltip(e, "Tunisia")}
@@ -3086,13 +2238,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TUR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TUR")}
           data-active={activeCountry == "TUR"}
           data-visited={visited.includes("TUR")}
           onMouseMove={(e) => showTooltip(e, "Turkey")}
@@ -3117,13 +2263,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="TWN"
           id="158"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TWN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TWN")}
           data-active={activeCountry == "TWN"}
           data-visited={visited.includes("TWN")}
           onMouseMove={(e) => showTooltip(e, "Taiwan")}
@@ -3136,13 +2276,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="TZA"
           id="834"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TZA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TZA")}
           data-active={activeCountry == "TZA"}
           data-visited={visited.includes("TZA")}
           onMouseMove={(e) => showTooltip(e, "Tanzania")}
@@ -3155,13 +2289,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="UGA"
           id="800"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "UGA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("UGA")}
           data-active={activeCountry == "UGA"}
           data-visited={visited.includes("UGA")}
           onMouseMove={(e) => showTooltip(e, "Uganda")}
@@ -3174,13 +2302,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="UKR"
           id="804"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "UKR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("UKR")}
           data-active={activeCountry == "UKR"}
           data-visited={visited.includes("UKR")}
           onMouseMove={(e) => showTooltip(e, "Ukraine")}
@@ -3194,13 +2316,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="858"
           className="map"
           name="Uruguay"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "URY",
-              })}`
-            )
-          }
+          onClick={() => handleClick("URY")}
           data-active={activeCountry == "URY"}
           data-visited={visited.includes("URY")}
           onMouseMove={(e) => showTooltip(e, "Uruguay")}
@@ -3212,13 +2328,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="UZB"
           id="860"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "UZB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("UZB")}
           data-active={activeCountry == "UZB"}
           data-visited={visited.includes("UZB")}
           onMouseMove={(e) => showTooltip(e, "Uzbekistan")}
@@ -3231,13 +2341,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="VEN"
           id="862"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "VEN",
-              })}`
-            )
-          }
+          onClick={() => handleClick("VEN")}
           data-active={activeCountry == "VEN"}
           data-visited={visited.includes("VEN")}
           onMouseMove={(e) => showTooltip(e, "Venezuela")}
@@ -3250,13 +2354,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="VNM"
           id="704"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "VNM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("VNM")}
           data-active={activeCountry == "VNM"}
           data-visited={visited.includes("VNM")}
           onMouseMove={(e) => showTooltip(e, "Vietnam")}
@@ -3269,13 +2367,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="YEM"
           id="887"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "YEM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("YEM")}
           data-active={activeCountry == "YEM"}
           data-visited={visited.includes("YEM")}
           onMouseMove={(e) => showTooltip(e, "Yemen")}
@@ -3288,13 +2380,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ZMB"
           id="894"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ZMB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ZMB")}
           data-active={activeCountry == "ZMB"}
           data-visited={visited.includes("ZMB")}
           onMouseMove={(e) => showTooltip(e, "Zambia")}
@@ -3307,13 +2393,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ZWE"
           id="716"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ZWE",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ZWE")}
           data-active={activeCountry == "ZWE"}
           data-visited={visited.includes("ZWE")}
           onMouseMove={(e) => showTooltip(e, "Zimbabwe")}
@@ -3326,13 +2406,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="SOM"
           id="706"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SOM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SOM")}
           data-active={activeCountry == "SOM"}
           data-visited={visited.includes("SOM")}
           onMouseMove={(e) => showTooltip(e, "Somalia")}
@@ -3344,13 +2418,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="XK"
           alpha-3="XXK"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "XXK",
-              })}`
-            )
-          }
+          onClick={() => handleClick("XXK")}
           data-active={activeCountry == "XXK"}
           data-visited={visited.includes("XXK")}
           onMouseMove={(e) => showTooltip(e, "Kosovo")}
@@ -3364,13 +2432,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="710"
           className="map"
           name="South Africa"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ZAF",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ZAF")}
           data-active={activeCountry == "ZAF"}
           data-visited={visited.includes("ZAF")}
           onMouseMove={(e) => showTooltip(e, "South Africa")}
@@ -3378,13 +2440,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NZL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NZL")}
           data-active={activeCountry == "NZL"}
           data-visited={visited.includes("NZL")}
           onMouseMove={(e) => showTooltip(e, "New Zealand")}
@@ -3405,13 +2461,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         </g>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CHL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CHL")}
           data-active={activeCountry == "CHL"}
           data-visited={visited.includes("CHL")}
           onMouseMove={(e) => showTooltip(e, "Chile")}
@@ -3437,13 +2487,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="528"
           className="map"
           name="Netherlands"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NLD",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NLD")}
           data-active={activeCountry == "NLD"}
           data-visited={visited.includes("NLD")}
           onMouseMove={(e) => showTooltip(e, "Netherlands")}
@@ -3455,13 +2499,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="PRT"
           id="620"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PRT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PRT")}
           data-active={activeCountry == "PRT"}
           data-visited={visited.includes("PRT")}
           onMouseMove={(e) => showTooltip(e, "Portugal")}
@@ -3470,13 +2508,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         ></path>
         <g
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "RUS",
-              })}`
-            )
-          }
+          onClick={() => handleClick("RUS")}
           data-active={activeCountry == "RUS"}
           data-visited={visited.includes("RUS")}
           onMouseMove={(e) => showTooltip(e, "Russian Federation")}
@@ -3533,13 +2565,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           id="724"
           className="map"
           name="Spain"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ESP",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ESP")}
           data-active={activeCountry == "ESP"}
           data-visited={visited.includes("ESP")}
           onMouseMove={(e) => showTooltip(e, "Spain")}
@@ -3584,13 +2610,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="FR"
           alpha-3="FRA"
           id="250"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "FRA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("FRA")}
           data-active={activeCountry == "FRA"}
           data-visited={visited.includes("FRA")}
           onMouseMove={(e) => showTooltip(e, "France")}
@@ -3611,13 +2631,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="US"
           alpha-3="USA"
           id="840"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "USA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("USA")}
           data-active={activeCountry == "USA"}
           data-visited={visited.includes("USA")}
           onMouseMove={(e) => showTooltip(e, "United States")}
@@ -3670,13 +2684,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="GUF"
           id="254"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GUF",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GUF")}
           data-active={activeCountry == "GUF"}
           data-visited={visited.includes("GUF")}
           onMouseMove={(e) => showTooltip(e, "French Guiana")}
@@ -3689,13 +2697,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="ABW"
           id="533"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ABW",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ABW")}
           data-active={activeCountry == "ABW"}
           data-visited={visited.includes("ABW")}
           onMouseMove={(e) => showTooltip(e, "Aruba")}
@@ -3708,13 +2710,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="AIA"
           id="660"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "AIA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("AIA")}
           data-active={activeCountry == "AIA"}
           data-visited={visited.includes("AIA")}
           onMouseMove={(e) => showTooltip(e, "Anguilla")}
@@ -3726,13 +2722,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="AS"
           alpha-3="ASM"
           id="016"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ASM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ASM")}
           data-active={activeCountry == "ASM"}
           data-visited={visited.includes("ASM")}
           onMouseMove={(e) => showTooltip(e, "American Samoa")}
@@ -3753,13 +2743,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="AG"
           alpha-3="ATG"
           id="028"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ATG",
-              })}`
-            )
-          }
+          onClick={() => handleClick("ATG")}
           data-active={activeCountry == "ATG"}
           data-visited={visited.includes("ATG")}
           onMouseMove={(e) => showTooltip(e, "Antigua and Barbuda")}
@@ -3781,13 +2765,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-3="BHR"
           id="048"
           className="map"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BHR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BHR")}
           data-active={activeCountry == "BHR"}
           data-visited={visited.includes("BHR")}
           onMouseMove={(e) => showTooltip(e, "Bahrain")}
@@ -3800,13 +2778,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           alpha-2="BS"
           alpha-3="BHS"
           id="044"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BHS",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BHS")}
           data-active={activeCountry == "BHS"}
           data-visited={visited.includes("BHS")}
           onMouseMove={(e) => showTooltip(e, "Bahamas")}
@@ -3891,13 +2863,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Saint-Barthélemy"
           alpha-2="BL"
           alpha-3="BLM"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BLM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BLM")}
           data-active={activeCountry == "BLM"}
           data-visited={visited.includes("BLM")}
           onMouseMove={(e) => showTooltip(e, "Saint-Barthélemy")}
@@ -3908,13 +2874,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M637.3 294l-0.3 0-0.1 0.1 0.1 0.2-0.4 0.2-0.1-0.1 0.2-0.1 0.1 0 0.1-0.3 0.3-0.1 0.1 0.1z"
           alpha-2="BM"
           alpha-3="BMU"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BMU",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BMU")}
           data-active={activeCountry == "BMU"}
           data-visited={visited.includes("BMU")}
           onMouseMove={(e) => showTooltip(e, "Bermuda")}
@@ -3927,13 +2887,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M651.5 418l-0.6-0.2-0.1-0.5 0-0.8 0.2-0.4 0.2 0.2 0.2 0.6 0.5 0.3 0.1 0.4-0.5 0.4z"
           alpha-2="BB"
           alpha-3="BRB"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BRB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BRB")}
           data-active={activeCountry == "BRB"}
           data-visited={visited.includes("BRB")}
           onMouseMove={(e) => showTooltip(e, "Barbados")}
@@ -3947,13 +2901,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Comoros"
           alpha-2="KM"
           alpha-3="COM"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "COM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("COM")}
           data-active={activeCountry == "COM"}
           data-visited={visited.includes("COM")}
           onMouseMove={(e) => showTooltip(e, "Comoros")}
@@ -3978,13 +2926,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Cape Verde"
           alpha-2="CV"
           alpha-3="CPV"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CPV",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CPV")}
           data-active={activeCountry == "CPV"}
           data-visited={visited.includes("CPV")}
           onMouseMove={(e) => showTooltip(e, "Cape Verde")}
@@ -4032,13 +2974,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M599 424.5l-0.3 0-0.4-0.3-0.3-0.1-0.3-0.3-0.1-0.2-0.3-0.1-0.2-0.4-0.3-0.3 0.1-0.5 0.5 0.3 0.1 0.5 0.4 0.4 0.7 0.2 0.2 0.3 0.3 0.4-0.1 0.1z"
           alpha-2="CW"
           alpha-3="CUW"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CUW",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CUW")}
           data-active={activeCountry == "CUW"}
           data-visited={visited.includes("CUW")}
           onMouseMove={(e) => showTooltip(e, "Curaçao")}
@@ -4052,13 +2988,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Cayman Islands"
           alpha-2="KY"
           alpha-3="CYM"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CYM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CYM")}
           data-active={activeCountry == "CYM"}
           data-visited={visited.includes("CYM")}
           onMouseMove={(e) => showTooltip(e, "Cayman Islands")}
@@ -4083,13 +3013,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Cyprus"
           alpha-2="CY"
           alpha-3="CYP"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "CYP",
-              })}`
-            )
-          }
+          onClick={() => handleClick("CYP")}
           data-active={activeCountry == "CYP"}
           data-visited={visited.includes("CYP")}
           onMouseMove={(e) => showTooltip(e, "Cyprus")}
@@ -4109,13 +3033,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M642 401.7l0.5 0.1 0.2 0.5 0 0.6-0.1 0.8-0.1 0.2-0.2 0.1-0.4 0.2 0.1-0.4-0.1-0.2-0.1-0.7-0.3-0.5 0-0.3 0.1-0.3 0-0.3 0.2 0 0.2 0.2z"
           alpha-2="DM"
           alpha-3="DMA"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "DMA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("DMA")}
           data-active={activeCountry == "DMA"}
           data-visited={visited.includes("DMA")}
           onMouseMove={(e) => showTooltip(e, "Dominica")}
@@ -4129,13 +3047,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Falkland Islands"
           alpha-2="FK"
           alpha-3="FLK"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "FLK",
-              })}`
-            )
-          }
+          onClick={() => handleClick("FLK")}
           data-active={activeCountry == "FLK"}
           data-visited={visited.includes("FLK")}
           onMouseMove={(e) => showTooltip(e, "Falkland Islands")}
@@ -4192,13 +3104,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Faeroe Islands"
           alpha-2="FO"
           alpha-3="FRO"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "FRO",
-              })}`
-            )
-          }
+          onClick={() => handleClick("FRO")}
           data-active={activeCountry == "FRO"}
           data-visited={visited.includes("FRO")}
           onMouseMove={(e) => showTooltip(e, "Faeroe Islands")}
@@ -4239,13 +3145,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Federated States of Micronesia"
           alpha-2="FM"
           alpha-3="FSM"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "FSM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("FSM")}
           data-active={activeCountry == "FSM"}
           data-visited={visited.includes("FSM")}
           onMouseMove={(e) => showTooltip(e, "Federated States of Micronesia")}
@@ -4269,13 +3169,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M639.2 424.5l-0.4 0.3-0.2-0.1-0.1-0.5 0.2-0.5 0.3-0.4 0.3 0 0.1 0.3-0.1 0.7-0.1 0.2z"
           alpha-2="GD"
           alpha-3="GRD"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GRD",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GRD")}
           data-active={activeCountry == "GRD"}
           data-visited={visited.includes("GRD")}
           onMouseMove={(e) => showTooltip(e, "Grenada")}
@@ -4288,13 +3182,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M1800.8 415.5l-0.1 0.4 0 0.6-0.1 0.3-0.3 0-0.2-0.3-0.1-0.5 0-0.5 0.6-0.5 0.1-0.2 0.1-0.5 0.2-0.1 0.1 0.2 0.4 0.1-0.2 0.5-0.5 0.5z"
           alpha-2="GU"
           alpha-3="GUM"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GUM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GUM")}
           data-active={activeCountry == "GUM"}
           data-visited={visited.includes("GUM")}
           onMouseMove={(e) => showTooltip(e, "Guam")}
@@ -4308,13 +3196,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Saint Kitts and Nevis"
           alpha-2="KN"
           alpha-3="KNA"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "KNA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("KNA")}
           data-active={activeCountry == "KNA"}
           data-visited={visited.includes("KNA")}
           onMouseMove={(e) => showTooltip(e, "Saint Kitts and Nevis")}
@@ -4334,13 +3216,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M643.7 413.8l-0.2-0.2-0.4-0.2-0.1-0.2 0-0.6 0.1-0.2 0.7-1.1 0.3 0.2 0 0.7-0.1 0.8-0.1 0.4-0.2 0.4z"
           alpha-2="LC"
           alpha-3="LCA"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "LCA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("LCA")}
           data-active={activeCountry == "LCA"}
           data-visited={visited.includes("LCA")}
           onMouseMove={(e) => showTooltip(e, "Saint Lucia")}
@@ -4353,13 +3229,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M634.2 386l-0.4-0.1 0.2-0.3 0.3-0.1-0.1 0.5z"
           alpha-2="MF"
           alpha-3="MAF"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MAF",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MAF")}
           data-active={activeCountry == "MAF"}
           data-visited={visited.includes("MAF")}
           onMouseMove={(e) => showTooltip(e, "Saint-Martin")}
@@ -4372,13 +3242,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M1402.9 474.8l0 0.2-0.2-0.1 0.2-0.2 0 0.1z"
           alpha-2="MV"
           alpha-3="MDV"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MDV",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MDV")}
           data-active={activeCountry == "MDV"}
           data-visited={visited.includes("MDV")}
           onMouseMove={(e) => showTooltip(e, "Maldives")}
@@ -4391,13 +3255,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M1953.8 456l1 0.4-0.2 0-0.8-0.4z"
           alpha-2="MH"
           alpha-3="MHL"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MHL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MHL")}
           data-active={activeCountry == "MHL"}
           data-visited={visited.includes("MHL")}
           onMouseMove={(e) => showTooltip(e, "Marshall Islands")}
@@ -4411,13 +3269,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Malta"
           alpha-2="MT"
           alpha-3="MLT"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MLT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MLT")}
           data-active={activeCountry == "MLT"}
           data-visited={visited.includes("MLT")}
           onMouseMove={(e) => showTooltip(e, "Malta")}
@@ -4438,13 +3290,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Northern Mariana Islands"
           alpha-2="MP"
           alpha-3="MNP"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MNP",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MNP")}
           data-active={activeCountry == "MNP"}
           data-visited={visited.includes("MNP")}
           onMouseMove={(e) => showTooltip(e, "Northern Mariana Islands")}
@@ -4480,13 +3326,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M638.2 393.9l0.2 0.4 0 0.3-0.2 0.2-0.2-0.1-0.1-0.3 0.3-0.5z"
           alpha-2="MS"
           alpha-3="MSR"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MSR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MSR")}
           data-active={activeCountry == "MSR"}
           data-visited={visited.includes("MSR")}
           onMouseMove={(e) => showTooltip(e, "Montserrat")}
@@ -4500,13 +3340,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Mauritius"
           alpha-2="MU"
           alpha-3="MUS"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MUS",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MUS")}
           data-active={activeCountry == "MUS"}
           data-visited={visited.includes("MUS")}
           onMouseMove={(e) => showTooltip(e, "Mauritius")}
@@ -4527,13 +3361,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="New Caledonia"
           alpha-2="NC"
           alpha-3="NCL"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NCL",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NCL")}
           data-active={activeCountry == "NCL"}
           data-visited={visited.includes("NCL")}
           onMouseMove={(e) => showTooltip(e, "New Caledonia")}
@@ -4577,13 +3405,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M1933 505.3l-0.2 0-0.1-0.3 0.3 0 0 0.3z"
           alpha-2="NR"
           alpha-3="NRU"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "NRU",
-              })}`
-            )
-          }
+          onClick={() => handleClick("NRU")}
           data-active={activeCountry == "NRU"}
           data-visited={visited.includes("NRU")}
           onMouseMove={(e) => showTooltip(e, "Nauru")}
@@ -4596,13 +3418,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M1747.7 453.1l-0.2 0.4 0.1 0.1-0.2 0.6 0.1 0.2-0.5 0.2-0.2-0.7 0.3-0.2-0.2-0.2 0.3-0.6 0.3-0.1 0.2 0.3z"
           alpha-2="PW"
           alpha-3="PLW"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PLW",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PLW")}
           data-active={activeCountry == "PLW"}
           data-visited={visited.includes("PLW")}
           onMouseMove={(e) => showTooltip(e, "Palau")}
@@ -4616,13 +3432,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Puerto Rico"
           alpha-2="PR"
           alpha-3="PRI"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PRI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PRI")}
           data-active={activeCountry == "PRI"}
           data-visited={visited.includes("PRI")}
           onMouseMove={(e) => showTooltip(e, "Puerto Rico")}
@@ -4647,13 +3457,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="French Polynesia"
           alpha-2="PF"
           alpha-3="PYF"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "PYF",
-              })}`
-            )
-          }
+          onClick={() => handleClick("PYF")}
           data-active={activeCountry == "PYF"}
           data-visited={visited.includes("PYF")}
           onMouseMove={(e) => showTooltip(e, "French Polynesia")}
@@ -4726,13 +3530,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Solomon Islands"
           alpha-2="SB"
           alpha-3="SLB"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SLB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SLB")}
           data-active={activeCountry == "SLB"}
           data-visited={visited.includes("SLB")}
           onMouseMove={(e) => showTooltip(e, "Solomon Islands")}
@@ -4877,13 +3675,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="São Tomé and Principe"
           alpha-2="ST"
           alpha-3="STP"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "STP",
-              })}`
-            )
-          }
+          onClick={() => handleClick("STP")}
           data-active={activeCountry == "STP"}
           data-visited={visited.includes("STP")}
           onMouseMove={(e) => showTooltip(e, "São Tomé and Principe")}
@@ -4903,13 +3695,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M634.2 386l0 0.1-0.4-0.1 0-0.1 0.4 0.1z"
           alpha-2="SX"
           alpha-3="SXM"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SXM",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SXM")}
           data-active={activeCountry == "SXM"}
           data-visited={visited.includes("SXM")}
           onMouseMove={(e) => showTooltip(e, "Sint Maarten")}
@@ -4923,13 +3709,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Seychelles"
           alpha-2="SC"
           alpha-3="SYC"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "SYC",
-              })}`
-            )
-          }
+          onClick={() => handleClick("SYC")}
           data-active={activeCountry == "SYC"}
           data-visited={visited.includes("SYC")}
           onMouseMove={(e) => showTooltip(e, "Seychelles")}
@@ -4954,13 +3734,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Turks and Caicos Islands"
           alpha-2="TC"
           alpha-3="TCA"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TCA",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TCA")}
           data-active={activeCountry == "TCA"}
           data-visited={visited.includes("TCA")}
           onMouseMove={(e) => showTooltip(e, "Turks and Caicos Islands")}
@@ -4985,13 +3759,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Tonga"
           alpha-2="TO"
           alpha-3="TON"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TON",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TON")}
           data-active={activeCountry == "TON"}
           data-visited={visited.includes("TON")}
           onMouseMove={(e) => showTooltip(e, "Tonga")}
@@ -5024,13 +3792,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Trinidad and Tobago"
           alpha-2="TT"
           alpha-3="TTO"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TTO",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TTO")}
           data-active={activeCountry == "TTO"}
           data-visited={visited.includes("TTO")}
           onMouseMove={(e) => showTooltip(e, "Trinidad and Tobago")}
@@ -5050,13 +3812,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M1998.9 556.6l0-0.2 0.1 0 0 0.1-0.1 0.1z"
           alpha-2="TV"
           alpha-3="TUV"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "TUV",
-              })}`
-            )
-          }
+          onClick={() => handleClick("TUV")}
           data-active={activeCountry == "TUV"}
           data-visited={visited.includes("TUV")}
           onMouseMove={(e) => showTooltip(e, "Tuvalu")}
@@ -5069,13 +3825,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M642.2 417.4l-0.1 0.1-0.5-0.3 0-0.4 0.2-0.3 0.2-0.5 0.4 0 0.1 0.4-0.1 0.8-0.2 0.2z"
           alpha-2="VC"
           alpha-3="VCT"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "VCT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("VCT")}
           data-active={activeCountry == "VCT"}
           data-visited={visited.includes("VCT")}
           onMouseMove={(e) =>
@@ -5090,13 +3840,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M626.1 383.4l-0.4 0.2-0.1 0-0.3 0.2-0.1-0.1 0.1-0.3 0.6-0.1 0.2 0.1z"
           alpha-2="VG"
           alpha-3="VGB"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "VGB",
-              })}`
-            )
-          }
+          onClick={() => handleClick("VGB")}
           data-active={activeCountry == "VGB"}
           data-visited={visited.includes("VGB")}
           onMouseMove={(e) => showTooltip(e, "British Virgin Islands")}
@@ -5110,13 +3854,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="United States Virgin Islands"
           alpha-2="VI"
           alpha-3="VIR"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "VIR",
-              })}`
-            )
-          }
+          onClick={() => handleClick("VIR")}
           data-active={activeCountry == "VIR"}
           data-visited={visited.includes("VIR")}
           onMouseMove={(e) => showTooltip(e, "United States Virgin Islands")}
@@ -5141,13 +3879,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Vanuatu"
           alpha-2="VU"
           alpha-3="VUT"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "VUT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("VUT")}
           data-active={activeCountry == "VUT"}
           data-visited={visited.includes("VUT")}
           onMouseMove={(e) => showTooltip(e, "Vanuatu")}
@@ -5230,17 +3962,11 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
         <g
           className="map"
           name="Samoa"
-          alpha-2="AS"
-          alpha-3="ASM"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "ASM",
-              })}`
-            )
-          }
-          data-active={activeCountry == "ASM"}
-          data-visited={visited.includes("ASM")}
+          alpha-2="WS"
+          alpha-3="WSM"
+          onClick={() => handleClick("WSM")}
+          data-active={activeCountry == "WSM"}
+          data-visited={visited.includes("WSM")}
           onMouseMove={(e) => showTooltip(e, "Samoa")}
           onMouseOut={() => hideTooltip()}
           id="016"
@@ -5259,13 +3985,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Bonaire, Sint Eustatius and Saba"
           alpha-2="BQ"
           alpha-3="BES"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "BES",
-              })}`
-            )
-          }
+          onClick={() => handleClick("BES")}
           data-active={activeCountry == "BES"}
           data-visited={visited.includes("BES")}
           onMouseMove={(e) =>
@@ -5291,13 +4011,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M644 406.9l0 0.2 0.4-0.1-0.2 0.5 0.2 0.2 0 0.2 0.2 0.2 0.2 0.9-0.3 0.3-0.1-0.4-0.1 0.1-0.6-0.1-0.4 0-0.2-0.3 0.6-0.5-0.4 0-0.4-0.4-0.1-0.5-0.2-0.5 0.3-0.4 0.4 0.1 0.5 0.3 0.2 0.2z"
           alpha-2="MQ"
           alpha-3="MTQ"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MTQ",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MTQ")}
           data-active={activeCountry == "MTQ"}
           data-visited={visited.includes("MTQ")}
           onMouseMove={(e) => showTooltip(e, "Martinique")}
@@ -5310,13 +4024,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M1240.2 583.1l0.2 0.3 0.5 0.2 0 0.3-0.2 0.2 0.1 0.2-0.3 0.6 0.1 0.2-0.3 0.1-0.2-0.3 0-0.3 0.2-0.2-0.2-0.7-0.1-0.1-0.1-0.2 0.3-0.3z"
           alpha-2="YT"
           alpha-3="MYT"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "MYT",
-              })}`
-            )
-          }
+          onClick={() => handleClick("MYT")}
           data-active={activeCountry == "MYT"}
           data-visited={visited.includes("MYT")}
           onMouseMove={(e) => showTooltip(e, "Mayotte")}
@@ -5329,13 +4037,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           d="M1295 635.8l0.4 0 0.4 0.2 0.3 0.3 0 0.3 0.1 0.5 0.3 0.2 0.2 0.2 0.1 0.2-0.2 0.6-0.1 0.4-0.2 0.2-0.4 0.1-0.9 0-0.2-0.2-0.8-0.4-0.3-0.5 0-0.3-0.3-0.6 0.1-0.4 0.2-0.2 0.2-0.4 0.1 0 0.5-0.2 0.5 0z"
           alpha-2="RE"
           alpha-3="REU"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "REU",
-              })}`
-            )
-          }
+          onClick={() => handleClick("REU")}
           data-active={activeCountry == "REU"}
           data-visited={visited.includes("REU")}
           onMouseMove={(e) => showTooltip(e, "Reunion")}
@@ -5349,13 +4051,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Guadeloupe"
           alpha-2="GP"
           alpha-3="GLP"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "GLP",
-              })}`
-            )
-          }
+          onClick={() => handleClick("GLP")}
           data-active={activeCountry == "GLP"}
           data-visited={visited.includes("GLP")}
           onMouseMove={(e) => showTooltip(e, "Guadeloupe")}
@@ -5380,13 +4076,7 @@ const WorldMap = ({ visited: _visited, className, ...props }: SVGMap) => {
           name="Fiji"
           alpha-2="FJ"
           alpha-3="FJI"
-          onClick={() =>
-            router.push(
-              `${pathname}?${createQueryString({
-                country: "FJI",
-              })}`
-            )
-          }
+          onClick={() => handleClick("FJI")}
           data-active={activeCountry == "FJI"}
           data-visited={visited.includes("FJI")}
           onMouseMove={(e) => showTooltip(e, "Fiji")}
