@@ -46,8 +46,6 @@ interface HeatmapTrackerData {
   level: number | null
 }
 
-const tooltipHandle = TooltipCreateHandle<React.ComponentType>()
-
 const HeatmapTracker = ({
   data,
   lightColors = [],
@@ -104,6 +102,11 @@ const HeatmapTracker = ({
     }
     return map
   }, [data])
+
+  const tooltipHandle = React.useMemo(
+    () => TooltipCreateHandle<React.ComponentType>(),
+    []
+  )
 
   const oneYearAgoStartOfWeek = React.useMemo(() => {
     const d = new Date()
@@ -202,6 +205,7 @@ const HeatmapTracker = ({
               <CustomDay
                 data={dataMap}
                 firstDay={oneYearAgoStartOfWeek}
+                tooltipHandle={tooltipHandle}
                 {...props}
               />
             ),
@@ -260,8 +264,13 @@ function CustomDay({
   modifiers,
   data,
   firstDay,
+  tooltipHandle,
   ...props
-}: DayProps & { data: Map<number, HeatmapTrackerData>; firstDay: Date }) {
+}: DayProps & {
+  data: Map<number, HeatmapTrackerData>
+  firstDay: Date
+  tooltipHandle: ReturnType<typeof TooltipCreateHandle<React.ComponentType>>
+}) {
   const { classNames, styles, dayPickerProps, formatters } = useDayPicker()
 
   const modifierClassNames = dayPickerProps.modifiersClassNames ?? {}
