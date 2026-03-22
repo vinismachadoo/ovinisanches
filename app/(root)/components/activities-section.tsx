@@ -28,8 +28,6 @@ const Activities = () => {
       ),
   })
 
-  console.log(githubActivities)
-
   return (
     <div className="flex w-full flex-col items-center justify-center gap-y-2">
       {isLoading ? (
