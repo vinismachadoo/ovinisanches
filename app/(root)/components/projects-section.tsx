@@ -6,6 +6,7 @@ import {
   Grip,
   LineSquiggle,
   Projector,
+  Satellite,
   type LucideIcon,
 } from "lucide-react"
 import Link from "next/link"
@@ -40,6 +41,13 @@ const PROJECTS = [
     name: "Heatmap Tracker",
     className:
       "[--color-dark:var(--color-emerald-800)] [--color-light:var(--color-emerald-300)]",
+  },
+  {
+    url: "https://geoposter.ovinisanches.com",
+    icon: Satellite,
+    name: "GeoPoster",
+    className:
+      "[--color-dark:var(--color-taupe-800)] [--color-light:var(--color-taupe-300)]",
   },
   {
     url: "https://json-forms.ovinisanches.com",
