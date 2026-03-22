@@ -41,6 +41,7 @@ const Activities = () => {
         <HeatmapTracker
           data={githubActivities}
           locale={locale === "en" ? enUS : ptBR}
+          shapes={["x", "x", "x", "x", "x"]}
         />
       )}
 
