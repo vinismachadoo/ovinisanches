@@ -52,9 +52,9 @@ const PROJECTS = [
       "[--color-dark:var(--color-taupe-800)] [--color-light:var(--color-taupe-300)]",
   },
   {
-    url: "https://json-forms.ovinisanches.com",
+    url: "https://dbforms.ovinisanches.com",
     icon: Braces,
-    name: "json-forms",
+    name: "dbforms",
     className:
       "[--color-dark:var(--color-rose-800)] [--color-light:var(--color-rose-300)]",
     disabled: true,
