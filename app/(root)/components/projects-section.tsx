@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import {
+  Braces,
   Circle,
   FlaskConical,
   Folder,
@@ -7,6 +8,7 @@ import {
   LineSquiggle,
   Projector,
   Satellite,
+  SquareDashedKanban,
   type LucideIcon,
 } from "lucide-react"
 import Link from "next/link"
@@ -51,7 +53,7 @@ const PROJECTS = [
   },
   {
     url: "https://json-forms.ovinisanches.com",
-    icon: FlaskConical,
+    icon: Braces,
     name: "json-forms",
     className:
       "[--color-dark:var(--color-rose-800)] [--color-light:var(--color-rose-300)]",
@@ -59,10 +61,10 @@ const PROJECTS = [
   },
   {
     url: "https://charttier.ovinisanches.com",
-    icon: FlaskConical,
+    icon: SquareDashedKanban,
     name: "Charttier",
     className:
-      "[--color-dark:var(--color-yellow-800)] [--color-light:var(--color-yellow-300)]",
+      "[--color-dark:var(--color-yellow-800)] [--color-light:var(--color-yellow-300)] [&_svg[data-icon='inset-lucide-folder']]:rotate-180",
     disabled: true,
   },
 ]
@@ -111,7 +113,10 @@ const FolderComponent = ({
     >
       <Folder className="size-32 fill-current stroke-0" />
       <div className="absolute inset-1/2 size-6 -translate-x-1/2 -translate-y-1/2">
-        <Icon className="size-full stroke-foreground stroke-2" />
+        <Icon
+          data-icon="inset-lucide-folder"
+          className="size-full stroke-foreground stroke-2"
+        />
       </div>
 
       <div className="-mt-2 flex min-w-0 items-center justify-center gap-x-1.5">
