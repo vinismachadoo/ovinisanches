@@ -30,18 +30,12 @@ const Activities = () => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-y-2">
-      {isLoading ? (
-        <div className="flex w-full flex-col gap-y-4 p-4">
-          <Skeleton className="h-44 w-full" />
-          <Skeleton className="h-6 w-32 self-end" />
-        </div>
-      ) : (
-        <HeatmapTracker
-          data={githubActivities}
-          locale={locale === "en" ? enUS : ptBR}
-          shapes={["x", "x", "x", "x", "x"]}
-        />
-      )}
+      <HeatmapTracker
+        data={githubActivities || []}
+        isLoading={isLoading}
+        locale={locale === "en" ? enUS : ptBR}
+        shapes={["x", "x", "x", "x", "x"]}
+      />
 
       <span className="text-muted-foreground">
         Built with{" "}

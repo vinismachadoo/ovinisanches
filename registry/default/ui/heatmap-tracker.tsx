@@ -48,6 +48,7 @@ interface HeatmapTrackerData {
 
 const HeatmapTracker = ({
   data,
+  isLoading = false,
   lightColors = [],
   darkColors = [],
   shapes = [],
@@ -59,6 +60,7 @@ const HeatmapTracker = ({
   ...props
 }: React.ComponentProps<typeof Calendar> & {
   data: HeatmapTrackerData[]
+  isLoading?: boolean
   lightColors?: string[]
   darkColors?: string[]
   shapes?: HeatmapShape[]
@@ -223,7 +225,7 @@ const HeatmapTracker = ({
         </Tooltip>
       </TooltipProvider>
 
-      <HeatmapTrackerLegend classNames={classNames} />
+      <HeatmapTrackerLegend classNames={classNames} isLoading={isLoading} />
     </div>
   )
 }
@@ -324,16 +326,18 @@ function CustomDay({
 const HeatmapTrackerLegend = ({
   className,
   classNames,
+  isLoading = false,
   ...props
 }: React.ComponentProps<"div"> & {
   classNames?: DayPickerProps["classNames"]
+  isLoading?: boolean
 }) => {
   const LEVEL_CLASSES = [
-    "bg-(--level-0) data-[level=0]:[clip-path:var(--shape-0)]",
-    "bg-(--level-1) data-[level=1]:[clip-path:var(--shape-1)]",
-    "bg-(--level-2) data-[level=2]:[clip-path:var(--shape-2)]",
-    "bg-(--level-3) data-[level=3]:[clip-path:var(--shape-3)]",
-    "bg-(--level-4) data-[level=4]:[clip-path:var(--shape-4)]",
+    "data-[level=0]:bg-(--level-0) data-[level=0]:[clip-path:var(--shape-0)]",
+    "data-[level=1]:bg-(--level-1) data-[level=1]:[clip-path:var(--shape-1)]",
+    "data-[level=2]:bg-(--level-2) data-[level=2]:[clip-path:var(--shape-2)]",
+    "data-[level=3]:bg-(--level-3) data-[level=3]:[clip-path:var(--shape-3)]",
+    "data-[level=4]:bg-(--level-4) data-[level=4]:[clip-path:var(--shape-4)]",
   ]
 
   return (
@@ -349,9 +353,9 @@ const HeatmapTrackerLegend = ({
         {LEVEL_CLASSES.map((levelClassName, index) => (
           <div
             key={index}
-            data-level={index.toString()}
+            data-level={isLoading ? "null" : index.toString()}
             className={cn(
-              "size-(--day-size) rounded-sm",
+              "size-(--day-size) rounded-sm data-[level=null]:bg-muted",
               levelClassName,
               classNames?.day
             )}

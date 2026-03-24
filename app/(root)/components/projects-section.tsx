@@ -52,12 +52,11 @@ const PROJECTS = [
       "[--color-dark:var(--color-taupe-800)] [--color-light:var(--color-taupe-300)]",
   },
   {
-    url: "https://dbforms.ovinisanches.com",
+    url: "https://dbforms-rho.vercel.app/",
     icon: Braces,
     name: "dbforms",
     className:
       "[--color-dark:var(--color-rose-800)] [--color-light:var(--color-rose-300)]",
-    disabled: true,
   },
   {
     url: "https://charttier.ovinisanches.com",
