@@ -56,7 +56,7 @@ export default function RootLayout({
       className={cn(inter.variable, geistSans.variable, geistMono.variable)}
       suppressHydrationWarning
     >
-      <body className="group/body overscroll-none antialiased [--main-nav-height:calc(var(--spacing)*14)]">
+      <body className="group/body overscroll-none antialiased [--main-nav-height:--spacing(14)]">
         <ThemeProvider>
           <ReactQueryProvider>
             <NuqsAdapter>
