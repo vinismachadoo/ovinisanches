@@ -2,12 +2,12 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "sidebar",
   "registryDependencies": [
-    "https://ovinisanches.com/r/button.json",
-    "https://ovinisanches.com/r/input.json",
-    "https://ovinisanches.com/r/separator.json",
-    "https://ovinisanches.com/r/sheet.json",
-    "https://ovinisanches.com/r/skeleton.json",
-    "https://ovinisanches.com/r/tooltip.json",
+    "https://www.ovinisanches.com/r/button.json",
+    "https://www.ovinisanches.com/r/input.json",
+    "https://www.ovinisanches.com/r/separator.json",
+    "https://www.ovinisanches.com/r/sheet.json",
+    "https://www.ovinisanches.com/r/skeleton.json",
+    "https://www.ovinisanches.com/r/tooltip.json",
     "use-mobile"
   ],
   "files": [

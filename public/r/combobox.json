@@ -5,8 +5,8 @@
     "@base-ui/react"
   ],
   "registryDependencies": [
-    "https://ovinisanches.com/r/button.json",
-    "https://ovinisanches.com/r/input-group.json"
+    "https://www.ovinisanches.com/r/button.json",
+    "https://www.ovinisanches.com/r/input-group.json"
   ],
   "files": [
     {

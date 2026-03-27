@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "ovinisanches",
-  "homepage": "https://ovinisanches.com",
+  "homepage": "https://www.ovinisanches.com",
   "items": [
     {
       "name": "index",
@@ -50,7 +50,7 @@
     {
       "name": "alert-dialog",
       "type": "registry:ui",
-      "registryDependencies": ["https://ovinisanches.com/r/button.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/button.json"],
       "files": [
         {
           "path": "registry/default/ui/alert-dialog.tsx",
@@ -111,7 +111,7 @@
     {
       "name": "button-group",
       "type": "registry:ui",
-      "registryDependencies": ["https://ovinisanches.com/r/separator.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/separator.json"],
       "files": [
         {
           "path": "registry/default/ui/button-group.tsx",
@@ -140,7 +140,7 @@
       "name": "calendar",
       "type": "registry:ui",
       "dependencies": ["react-day-picker@latest", "date-fns"],
-      "registryDependencies": ["https://ovinisanches.com/r/button.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/button.json"],
       "files": [
         {
           "path": "registry/default/ui/calendar.tsx",
@@ -167,7 +167,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://ovinisanches.com/r/button.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/button.json"],
       "dependencies": ["embla-carousel-react"]
     },
     {
@@ -179,7 +179,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://ovinisanches.com/r/card.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/card.json"],
       "dependencies": ["recharts@2.15.4"]
     },
     {
@@ -206,8 +206,8 @@
       "name": "color-picker",
       "type": "registry:ui",
       "registryDependencies": [
-        "https://ovinisanches.com/r/popover.json",
-        "https://ovinisanches.com/r/button.json"
+        "https://www.ovinisanches.com/r/popover.json",
+        "https://www.ovinisanches.com/r/button.json"
       ],
       "dependencies": ["react-colorful"],
       "files": [
@@ -221,8 +221,8 @@
       "name": "combobox",
       "type": "registry:ui",
       "registryDependencies": [
-        "https://ovinisanches.com/r/button.json",
-        "https://ovinisanches.com/r/input-group.json"
+        "https://www.ovinisanches.com/r/button.json",
+        "https://www.ovinisanches.com/r/input-group.json"
       ],
       "dependencies": ["@base-ui/react"],
       "files": [
@@ -237,8 +237,8 @@
       "type": "registry:ui",
       "dependencies": ["cmdk"],
       "registryDependencies": [
-        "https://ovinisanches.com/r/dialog.json",
-        "https://ovinisanches.com/r/input-group.json"
+        "https://www.ovinisanches.com/r/dialog.json",
+        "https://www.ovinisanches.com/r/input-group.json"
       ],
       "files": [
         {
@@ -260,7 +260,7 @@
     {
       "name": "dialog",
       "type": "registry:ui",
-      "registryDependencies": ["https://ovinisanches.com/r/button.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/button.json"],
       "files": [
         {
           "path": "registry/default/ui/dialog.tsx",
@@ -313,8 +313,8 @@
       "name": "field",
       "type": "registry:ui",
       "registryDependencies": [
-        "https://ovinisanches.com/r/label.json",
-        "https://ovinisanches.com/r/separator.json"
+        "https://www.ovinisanches.com/r/label.json",
+        "https://www.ovinisanches.com/r/separator.json"
       ],
       "files": [
         {
@@ -327,8 +327,8 @@
       "name": "heatmap-tracker",
       "type": "registry:ui",
       "registryDependencies": [
-        "https://ovinisanches.com/r/calendar.json",
-        "https://ovinisanches.com/r/tooltip.json"
+        "https://www.ovinisanches.com/r/calendar.json",
+        "https://www.ovinisanches.com/r/tooltip.json"
       ],
       "dependencies": ["react-day-picker", "date-fns"],
       "files": [
@@ -352,9 +352,9 @@
       "name": "input-group",
       "type": "registry:ui",
       "registryDependencies": [
-        "https://ovinisanches.com/r/button.json",
-        "https://ovinisanches.com/r/input.json",
-        "https://ovinisanches.com/r/textarea.json"
+        "https://www.ovinisanches.com/r/button.json",
+        "https://www.ovinisanches.com/r/input.json",
+        "https://www.ovinisanches.com/r/textarea.json"
       ],
       "files": [
         {
@@ -387,7 +387,7 @@
     {
       "name": "item",
       "type": "registry:ui",
-      "registryDependencies": ["https://ovinisanches.com/r/separator.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/separator.json"],
       "files": [
         {
           "path": "registry/default/ui/item.tsx",
@@ -418,7 +418,9 @@
     {
       "name": "menubar",
       "type": "registry:ui",
-      "registryDependencies": ["https://ovinisanches.com/r/dropdown-menu.json"],
+      "registryDependencies": [
+        "https://www.ovinisanches.com/r/dropdown-menu.json"
+      ],
       "files": [
         {
           "path": "registry/default/ui/menubar.tsx",
@@ -449,7 +451,7 @@
     {
       "name": "pagination",
       "type": "registry:ui",
-      "registryDependencies": ["https://ovinisanches.com/r/button.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/button.json"],
       "files": [
         {
           "path": "registry/default/ui/pagination.tsx",
@@ -531,7 +533,7 @@
     {
       "name": "sheet",
       "type": "registry:ui",
-      "registryDependencies": ["https://ovinisanches.com/r/button.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/button.json"],
       "files": [
         {
           "path": "registry/default/ui/sheet.tsx",
@@ -543,12 +545,12 @@
       "name": "sidebar",
       "type": "registry:ui",
       "registryDependencies": [
-        "https://ovinisanches.com/r/button.json",
-        "https://ovinisanches.com/r/input.json",
-        "https://ovinisanches.com/r/separator.json",
-        "https://ovinisanches.com/r/sheet.json",
-        "https://ovinisanches.com/r/skeleton.json",
-        "https://ovinisanches.com/r/tooltip.json",
+        "https://www.ovinisanches.com/r/button.json",
+        "https://www.ovinisanches.com/r/input.json",
+        "https://www.ovinisanches.com/r/separator.json",
+        "https://www.ovinisanches.com/r/sheet.json",
+        "https://www.ovinisanches.com/r/skeleton.json",
+        "https://www.ovinisanches.com/r/tooltip.json",
         "use-mobile"
       ],
       "files": [
@@ -642,7 +644,7 @@
     {
       "name": "toggle-group",
       "type": "registry:ui",
-      "registryDependencies": ["https://ovinisanches.com/r/toggle.json"],
+      "registryDependencies": ["https://www.ovinisanches.com/r/toggle.json"],
       "files": [
         {
           "path": "registry/default/ui/toggle-group.tsx",
