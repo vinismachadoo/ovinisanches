@@ -749,7 +749,7 @@ const PromisedDeliveryDate = ({
     <Skeleton className="flex h-28 w-full flex-col items-center justify-center gap-y-4" />
   ) : (
     <Alert
-      variant={isOnTime ? "success" : isLate ? "destructive" : "neutral"}
+      variant={isOnTime ? "success" : isLate ? "destructive" : "normal"}
       className={cn(isNotFinished && "border-dashed")}
     >
       {isOnTime && isNotFinished && <ThumbsUp className="h-4 w-4" />}
@@ -1617,7 +1617,7 @@ const CsatAlert = ({
             ? "warning"
             : isDetractor
               ? "destructive"
-              : "neutral"
+              : "normal"
       }
     >
       <Star className="h-4 w-4" />
@@ -1691,7 +1691,7 @@ const FreightRevenue = ({
   return isLoading ? (
     <Skeleton className="flex h-fit min-h-44 w-full flex-col items-center justify-center gap-y-4" />
   ) : (
-    <Alert variant={isProfit ? "success" : isLoss ? "destructive" : "neutral"}>
+    <Alert variant={isProfit ? "success" : isLoss ? "destructive" : "normal"}>
       {isProfit && <BanknoteArrowUp className="h-4 w-4" />}
       {isLoss && <BanknoteArrowDown className="h-4 w-4" />}
 
@@ -1779,7 +1779,7 @@ const VerificationCodesAlert = ({
     </div>
   ) : (
     <div className="flex flex-col gap-y-4">
-      <Alert variant={collectVerificationCode ? "info" : "neutral"}>
+      <Alert variant={collectVerificationCode ? "info" : "normal"}>
         <SquareAsterisk className="h-4 w-4" />
         <AlertTitle>Código de verificação de coleta</AlertTitle>
         <AlertDescription>
@@ -1789,7 +1789,7 @@ const VerificationCodesAlert = ({
         </AlertDescription>
       </Alert>
 
-      <Alert variant={returnVerificationCode ? "info" : "neutral"}>
+      <Alert variant={returnVerificationCode ? "info" : "normal"}>
         <SquareAsterisk className="h-4 w-4" />
         <AlertTitle>Código de Verificação de Retorno</AlertTitle>
         <AlertDescription>
