@@ -124,6 +124,7 @@ const ProfileSidebar = () => {
             center={RIO_DE_JANEIRO_CENTER}
             zoom={10}
             className="size-full rounded-sm"
+            attributionControl={false}
           >
             <MapMarker
               longitude={RIO_DE_JANEIRO_CENTER[0]}
