@@ -10,6 +10,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import "./globals.css"
 import { NextIntlClientProvider } from "next-intl"
+import Script from "next/script"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -56,6 +57,14 @@ export default function RootLayout({
       className={cn(inter.variable, geistSans.variable, geistMono.variable)}
       suppressHydrationWarning
     >
+      <head>
+        {/* Traffic Source Analytics */}
+        <Script
+          defer
+          src="https://traffic-source-production-fb43.up.railway.app/t.js"
+          data-site="2"
+        />
+      </head>
       <body className="group/body overscroll-none antialiased [--main-nav-height:--spacing(14)]">
         <ThemeProvider>
           <ReactQueryProvider>
