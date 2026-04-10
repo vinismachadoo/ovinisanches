@@ -63,7 +63,7 @@ const PROJECTS = [
     icon: SquareDashedKanban,
     name: "Charttier",
     className:
-      "[--color-dark:var(--color-yellow-800)] [--color-light:var(--color-yellow-300)] [&_svg[data-icon='inset-lucide-folder']]:rotate-180",
+      "[--color-dark:var(--color-orange-800)] [--color-light:var(--color-orange-300)] [&_svg[data-icon='inset-lucide-folder']]:rotate-180",
     disabled: true,
   },
 ]

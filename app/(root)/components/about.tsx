@@ -1,4 +1,5 @@
 import ActivitiesSection from "@/app/(root)/components/activities-section"
+import ProductsSection from "@/app/(root)/components/products-section"
 import ProjectsSection from "@/app/(root)/components/projects-section"
 import {
   Accordion,
@@ -13,7 +14,7 @@ export default function About() {
 
   return (
     <div className="flex size-full flex-col rounded-lg border border-dashed px-4">
-      <Accordion multiple defaultValue={["activity", "projects"]}>
+      <Accordion multiple defaultValue={["activity", "projects", "products"]}>
         <AccordionItem value="activity">
           <AccordionTrigger className="text-base hover:no-underline">
             {t("activity.title")}
@@ -29,6 +30,14 @@ export default function About() {
           </AccordionTrigger>
           <AccordionContent>
             <ProjectsSection />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="products">
+          <AccordionTrigger className="text-base hover:no-underline">
+            {t("products.title")}
+          </AccordionTrigger>
+          <AccordionContent>
+            <ProductsSection />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
