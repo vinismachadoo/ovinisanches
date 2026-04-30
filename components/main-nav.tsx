@@ -21,9 +21,9 @@ const MainNav = () => {
           </div>
         </Link>
 
-        <Button variant="ghost" size="sm" data-active={pathname === "/resume"}>
+        {/* <Button variant="ghost" size="sm" data-active={pathname === "/resume"}>
           <Link href="/resume">{t("resume")}</Link>
-        </Button>
+        </Button> */}
 
         <Button variant="ghost" size="sm" data-active={pathname === "/pitch"}>
           <Link href="/pitch">{t("pitch")}</Link>

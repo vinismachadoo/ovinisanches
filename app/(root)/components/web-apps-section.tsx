@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils"
-import { Beer, Circle, Folder, type LucideIcon } from "lucide-react"
+import { Beer, Check, Circle, Folder, type LucideIcon } from "lucide-react"
 import Link from "next/link"
 import React from "react"
 
-const PRODUCTS = [
+const WEB_APPS = [
   {
     url: "https://botecada.vercel.app",
     icon: Beer,
@@ -12,23 +12,31 @@ const PRODUCTS = [
       "[--color-dark:var(--color-yellow-800)] [--color-light:var(--color-yellow-300)]",
     disabled: false,
   },
+  {
+    url: "https://checked-nu.vercel.app/",
+    icon: Check,
+    name: "Checked",
+    className:
+      "[--color-dark:var(--color-blue-600)] [--color-light:var(--color-blue-600)] [&_svg[data-icon='inset-lucide-folder']]:stroke-white",
+    disabled: false,
+  },
 ]
 
-const Products = () => {
+const WebApps = () => {
   return (
     <div className="grid w-full grid-cols-9">
-      {PRODUCTS.map((product) => (
+      {WEB_APPS.map((webApp) => (
         <Link
-          href={product.url}
+          href={webApp.url}
           target="_blank"
           rel="noopener noreferrer"
-          key={product.name}
+          key={webApp.name}
         >
           <FolderComponent
-            icon={product.icon}
-            name={product.name}
-            className={product.className}
-            aria-disabled={product.disabled}
+            icon={webApp.icon}
+            name={webApp.name}
+            className={webApp.className}
+            aria-disabled={webApp.disabled}
           />
         </Link>
       ))}
@@ -77,4 +85,4 @@ const FolderComponent = ({
   )
 }
 
-export default Products
+export default WebApps
