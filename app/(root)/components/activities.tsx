@@ -1,11 +1,9 @@
 "use client"
 
 import { HeatmapTracker } from "@/registry/default/ui/heatmap-tracker"
-import { Skeleton } from "@/registry/default/ui/skeleton"
 import { useQuery } from "@tanstack/react-query"
 import { enUS, ptBR } from "date-fns/locale"
 import { useLocale } from "next-intl"
-import Link from "next/link"
 
 const GITHUB_USERNAME = "vinismachadoo"
 
@@ -29,25 +27,19 @@ const Activities = () => {
   })
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-y-2">
-      <HeatmapTracker
-        data={githubActivities || []}
-        isLoading={isLoading}
-        locale={locale === "en" ? enUS : ptBR}
-        shapes={["x", "x", "x", "x", "x"]}
-      />
-
-      <span className="text-muted-foreground">
-        Built with{" "}
-        <Link
-          href="https://heatmap-tracker.ovinisanches.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Heatmap Tracker
-        </Link>
-      </span>
-    </div>
+    <HeatmapTracker
+      data={githubActivities || []}
+      isLoading={isLoading}
+      locale={locale === "en" ? enUS : ptBR}
+      shapes={["x", "x", "x", "x", "x"]}
+      className="w-full"
+      style={
+        {
+          "--day-size": "calc(var(--spacing)*3)",
+        } as React.CSSProperties
+      }
+      legendAlign="center"
+    />
   )
 }
 

@@ -57,6 +57,7 @@ const HeatmapTracker = ({
   classNames,
   components,
   locale = enUS,
+  legendAlign,
   ...props
 }: React.ComponentProps<typeof Calendar> & {
   data: HeatmapTrackerData[]
@@ -65,6 +66,7 @@ const HeatmapTracker = ({
   darkColors?: string[]
   shapes?: HeatmapShape[]
   children?: React.ReactNode
+  legendAlign?: "start" | "center" | "end"
 }) => {
   const formatCaption = (date: Date) =>
     date.toLocaleString(locale?.code, { month: "short" })
@@ -225,7 +227,11 @@ const HeatmapTracker = ({
         </Tooltip>
       </TooltipProvider>
 
-      <HeatmapTrackerLegend classNames={classNames} isLoading={isLoading} />
+      <HeatmapTrackerLegend
+        classNames={classNames}
+        isLoading={isLoading}
+        align={legendAlign}
+      />
     </div>
   )
 }
@@ -327,10 +333,12 @@ const HeatmapTrackerLegend = ({
   className,
   classNames,
   isLoading = false,
+  align = "end",
   ...props
 }: React.ComponentProps<"div"> & {
   classNames?: DayPickerProps["classNames"]
   isLoading?: boolean
+  align?: "start" | "center" | "end"
 }) => {
   const LEVEL_CLASSES = [
     "data-[level=0]:bg-(--level-0) data-[level=0]:[clip-path:var(--shape-0)]",
@@ -342,8 +350,10 @@ const HeatmapTrackerLegend = ({
 
   return (
     <div
+      data-align={align}
       className={cn(
-        "flex w-full justify-end space-x-2 text-sm text-muted-foreground",
+        "flex w-full space-x-2 text-sm text-muted-foreground",
+        "data-[align=center]:justify-center data-[align=end]:justify-end data-[align=start]:justify-start",
         className
       )}
       {...props}

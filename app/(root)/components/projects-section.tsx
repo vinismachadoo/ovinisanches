@@ -16,35 +16,6 @@ import React from "react"
 
 const PROJECTS = [
   {
-    url: "https://labs.ovinisanches.com",
-    icon: FlaskConical,
-    name: "Labs",
-    className:
-      "[--color-dark:var(--color-purple-800)] [--color-light:var(--color-purple-300)]",
-  },
-  {
-    url: "https://motionvg.ovinisanches.com",
-    icon: LineSquiggle,
-    name: "Motionvg",
-    className:
-      "[--color-dark:var(--color-slate-800)] [--color-light:var(--color-slate-300)]",
-  },
-
-  {
-    url: "https://presentcn.ovinisanches.com",
-    icon: Projector,
-    name: "presentcn",
-    className:
-      "[--color-dark:var(--color-sky-800)] [--color-light:var(--color-sky-300)]",
-  },
-  {
-    url: "https://heatmap-tracker.ovinisanches.com",
-    icon: Grip,
-    name: "Heatmap Tracker",
-    className:
-      "[--color-dark:var(--color-emerald-800)] [--color-light:var(--color-emerald-300)]",
-  },
-  {
     url: "https://geoposter.ovinisanches.com",
     icon: Satellite,
     name: "GeoPoster",
