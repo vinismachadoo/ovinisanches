@@ -20,7 +20,7 @@ export default function Home() {
     <div className="flex h-full w-full flex-col items-center [--sidebar-profile:--spacing(140)]">
       <div
         className={cn(
-          "mx-auto flex max-w-5xl flex-col border-x py-4",
+          "mx-auto flex max-w-5xl flex-col py-4 min-[1024px]:border-x",
           "min-h-min w-full flex-1 items-start gap-x-6 px-0"
         )}
       >
