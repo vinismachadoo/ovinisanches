@@ -33,6 +33,9 @@ const Activities = () => {
       locale={locale === "en" ? enUS : ptBR}
       shapes={["x", "x", "x", "x", "x"]}
       className="w-full"
+      classNames={{
+        months: "flex-row",
+      }}
       style={
         {
           "--day-size": "calc(var(--spacing)*3)",

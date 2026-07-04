@@ -151,7 +151,7 @@ const HeatmapTracker = ({
         } as React.CSSProperties
       }
       className={cn(
-        "flex w-fit flex-col gap-y-4 overflow-x-scroll p-2",
+        "flex w-fit flex-col gap-y-2 p-2",
         "[--level-0:var(--level-0-light)] dark:[--level-0:var(--level-0-dark)]",
         "[--level-1:var(--level-1-light)] dark:[--level-1:var(--level-1-dark)]",
         "[--level-2:var(--level-2-light)] dark:[--level-2:var(--level-2-dark)]",
@@ -160,72 +160,77 @@ const HeatmapTracker = ({
         className
       )}
     >
-      <TooltipProvider>
-        <Calendar
-          formatters={{ formatCaption }}
-          locale={locale}
-          numberOfMonths={13}
-          defaultMonth={twelveMonthAgo}
-          hideWeekdays
-          fixedWeeks
-          className="w-fit items-center justify-center p-0"
-          classNames={{
-            ...classNames,
-            root: cn("w-auto", classNames?.root),
-            nav: cn("hidden", classNames?.nav),
-            caption_label: cn("text-xs font-normal", classNames?.caption_label),
-            month: cn("ml-0 w-fit", classNames?.month),
-            month_caption: cn("h-fit px-0", classNames?.month_caption),
-            months: cn("w-fit gap-0", classNames?.months),
-            month_grid: cn("w-fit", classNames?.month_grid),
-            weeks: cn("flex w-fit", classNames?.weeks),
-            week: cn(
-              "mt-0 flex flex-col select-none data-[duplicated-previous-month=true]:hidden",
-              classNames?.week
-            ),
-            day: cn(
-              "m-(--day-margin) size-(--day-size) rounded-sm border border-border/20 bg-muted text-xs text-transparent",
-              "data-[hidden=true]:hidden",
-              classNames?.day
-            ),
-            outside: cn("text-xs text-transparent", classNames?.outside),
-            today: cn(
-              "m-(--day-margin) size-(--day-size) rounded-sm border border-border/20 bg-muted text-xs text-transparent",
-              classNames?.day,
-              classNames?.today
-            ),
-          }}
-          modifiers={levelModifiers}
-          modifiersClassNames={{
-            zero: "bg-(--level-0)",
-            one: "bg-(--level-1)",
-            two: "bg-(--level-2)",
-            three: "bg-(--level-3)",
-            four: "bg-(--level-4)",
-          }}
-          components={{
-            Week: ({ ...props }) => <CustomWeek {...props} />,
-            Day: ({ ...props }) => (
-              <CustomDay
-                data={dataMap}
-                firstDay={oneYearAgoStartOfWeek}
-                tooltipHandle={tooltipHandle}
-                {...props}
-              />
-            ),
-            ...components,
-          }}
-          {...props}
-        />
+      <div className="overflow-x-scroll p-2 md:flex md:items-center md:justify-center">
+        <TooltipProvider>
+          <Calendar
+            formatters={{ formatCaption }}
+            locale={locale}
+            numberOfMonths={13}
+            defaultMonth={twelveMonthAgo}
+            hideWeekdays
+            fixedWeeks
+            className="w-fit items-center justify-center p-0"
+            classNames={{
+              ...classNames,
+              root: cn("w-auto", classNames?.root),
+              nav: cn("hidden", classNames?.nav),
+              caption_label: cn(
+                "text-xs font-normal",
+                classNames?.caption_label
+              ),
+              month: cn("ml-0 w-fit", classNames?.month),
+              month_caption: cn("h-fit px-0", classNames?.month_caption),
+              months: cn("w-fit gap-0", classNames?.months),
+              month_grid: cn("w-fit", classNames?.month_grid),
+              weeks: cn("flex w-fit", classNames?.weeks),
+              week: cn(
+                "mt-0 flex flex-col select-none data-[duplicated-previous-month=true]:hidden",
+                classNames?.week
+              ),
+              day: cn(
+                "m-(--day-margin) size-(--day-size) rounded-sm border border-border/20 bg-muted text-xs text-transparent",
+                "data-[hidden=true]:hidden",
+                classNames?.day
+              ),
+              outside: cn("text-xs text-transparent", classNames?.outside),
+              today: cn(
+                "m-(--day-margin) size-(--day-size) rounded-sm border border-border/20 bg-muted text-xs text-transparent",
+                classNames?.day,
+                classNames?.today
+              ),
+            }}
+            modifiers={levelModifiers}
+            modifiersClassNames={{
+              zero: "bg-(--level-0)",
+              one: "bg-(--level-1)",
+              two: "bg-(--level-2)",
+              three: "bg-(--level-3)",
+              four: "bg-(--level-4)",
+            }}
+            components={{
+              Week: ({ ...props }) => <CustomWeek {...props} />,
+              Day: ({ ...props }) => (
+                <CustomDay
+                  data={dataMap}
+                  firstDay={oneYearAgoStartOfWeek}
+                  tooltipHandle={tooltipHandle}
+                  {...props}
+                />
+              ),
+              ...components,
+            }}
+            {...props}
+          />
 
-        <Tooltip handle={tooltipHandle}>
-          {({ payload: Payload }) => (
-            <TooltipContent className="animate-none">
-              {Payload !== undefined && <Payload />}
-            </TooltipContent>
-          )}
-        </Tooltip>
-      </TooltipProvider>
+          <Tooltip handle={tooltipHandle}>
+            {({ payload: Payload }) => (
+              <TooltipContent className="animate-none">
+                {Payload !== undefined && <Payload />}
+              </TooltipContent>
+            )}
+          </Tooltip>
+        </TooltipProvider>
+      </div>
 
       <HeatmapTrackerLegend
         classNames={classNames}

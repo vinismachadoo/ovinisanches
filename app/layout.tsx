@@ -1,16 +1,16 @@
-import MainNav from "@/components/main-nav"
 import ReactQueryProvider from "@/components/providers/react-query-provider"
 import { ThemeProvider } from "@/components/providers/theme-provider"
+import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/registry/default/ui/sonner"
 import { TooltipProvider } from "@/registry/default/ui/tooltip"
 import type { Metadata } from "next"
+import { NextIntlClientProvider } from "next-intl"
 import { Geist, Geist_Mono, Inter } from "next/font/google"
+import Script from "next/script"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import "./globals.css"
-import { NextIntlClientProvider } from "next-intl"
-import Script from "next/script"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -72,14 +72,7 @@ export default function RootLayout({
               <TooltipProvider>
                 <NextIntlClientProvider>
                   <div data-slot="layout" className="flex flex-col">
-                    <header className="sticky top-0 z-50 w-full bg-background">
-                      <div className="3xl:fixed:px-0">
-                        <div className="3xl:fixed:container flex h-(--main-nav-height) items-center">
-                          <MainNav />
-                        </div>
-                      </div>
-                    </header>
-
+                    <SiteHeader />
                     <main className="flex h-[calc(100svh-var(--main-nav-height))] w-screen flex-col">
                       {children}
                     </main>

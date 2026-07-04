@@ -14,15 +14,22 @@
       "role": "Product Engineer based in Rio de Janeiro, Brazil.",
       "footer": "Nor a product manager that oversees people who build... nor a software engineer that takes bussiness context for granted."
     },
-    "about": {
-      "activity": {
-        "title": "Activity"
+    "main": {
+      "clients": {
+        "title": "Clients",
+        "subtitle": "Companies who trusted in my work"
       },
       "projects": {
-        "title": "Projects"
+        "title": "Projects",
+        "subtitle": "Small experiments I've built"
       },
       "web-apps": {
-        "title": "Web Apps"
+        "title": "Web Apps",
+        "subtitle": "Interesting apps with real users"
+      },
+      "activity": {
+        "title": "Activity",
+        "subtitle": "My coding journey. Built with"
       }
     }
   },

@@ -14,15 +14,22 @@
       "role": "Engenheiro de Produto localizado no Rio de Janeiro, Brasil.",
       "footer": "Nem um gerente de produto que supervisiona quem constrói... nem um engenheiro de software que subestima o contexto da sua empresa"
     },
-    "about": {
-      "activity": {
-        "title": "Atividade"
+    "main": {
+      "clients": {
+        "title": "Clientes",
+        "subtitle": "Empresas que confiaram em meu trabalho"
       },
       "projects": {
-        "title": "Projetos"
+        "title": "Projetos",
+        "subtitle": "Pequenos experimentos que construí"
       },
       "web-apps": {
-        "title": "Web Apps"
+        "title": "Web Apps",
+        "subtitle": "Aplicações interessantes com usuários reais"
+      },
+      "activity": {
+        "title": "Atividade",
+        "subtitle": "Minha jornada de código. Construído com"
       }
     }
   },
