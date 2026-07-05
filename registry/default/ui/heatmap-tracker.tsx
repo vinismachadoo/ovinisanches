@@ -13,6 +13,7 @@ import { enUS } from "date-fns/locale"
 import * as React from "react"
 import {
   Day,
+  DayPicker,
   DayPickerProps,
   useDayPicker,
   WeekNumber,
@@ -236,6 +237,7 @@ const HeatmapTracker = ({
         classNames={classNames}
         isLoading={isLoading}
         align={legendAlign}
+        locale={locale}
       />
     </div>
   )
@@ -339,11 +341,13 @@ const HeatmapTrackerLegend = ({
   classNames,
   isLoading = false,
   align = "end",
+  locale = enUS,
   ...props
 }: React.ComponentProps<"div"> & {
   classNames?: DayPickerProps["classNames"]
   isLoading?: boolean
   align?: "start" | "center" | "end"
+  locale?: React.ComponentProps<typeof DayPicker>["locale"]
 }) => {
   const LEVEL_CLASSES = [
     "data-[level=0]:bg-(--level-0) data-[level=0]:[clip-path:var(--shape-0)]",
@@ -363,7 +367,7 @@ const HeatmapTrackerLegend = ({
       )}
       {...props}
     >
-      <span>less</span>
+      <span>{locale.code === "pt-BR" ? "menos" : "less"}</span>
       <div className="flex items-center space-x-1">
         {LEVEL_CLASSES.map((levelClassName, index) => (
           <div
@@ -377,7 +381,7 @@ const HeatmapTrackerLegend = ({
           />
         ))}
       </div>
-      <span>more</span>
+      <span>{locale.code === "pt-BR" ? "mais" : "more"}</span>
     </div>
   )
 }

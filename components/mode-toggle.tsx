@@ -39,8 +39,8 @@ const ModeToggle = ({
           />
         }
       >
-        <SunIcon className="hidden size-4 dark:block" />
-        <Moon className="block size-4 dark:hidden" />
+        <SunIcon className="hidden dark:block" />
+        <Moon className="block dark:hidden" />
         <span className="sr-only">{t("toggle-theme")}</span>
       </TooltipTrigger>
       <TooltipContent

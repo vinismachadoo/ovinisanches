@@ -32,7 +32,7 @@ const Activities = () => {
       isLoading={isLoading}
       locale={locale === "en" ? enUS : ptBR}
       shapes={["x", "x", "x", "x", "x"]}
-      className="w-full"
+      className="no-scrollbar w-full"
       classNames={{
         months: "flex-row",
       }}

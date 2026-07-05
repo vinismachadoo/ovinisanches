@@ -4,15 +4,14 @@ import Link, { type LinkProps } from "next/link"
 import { useRouter } from "next/navigation"
 import * as React from "react"
 
+import { cn } from "@/lib/utils"
 import { Button } from "@/registry/default/ui/button"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/registry/default/ui/popover"
-import { cn } from "@/lib/utils"
-import { Menu, XIcon } from "lucide-react"
-import { Separator } from "@/registry/default/ui/separator"
+import { BookIcon, CitrusIcon, MailIcon, Menu, XIcon } from "lucide-react"
 
 function MobileNav({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false)
@@ -34,33 +33,26 @@ function MobileNav({ className }: { className?: string }) {
         <span className="sr-only">Toggle Menu</span>
       </PopoverTrigger>
       <PopoverContent
-        className="no-scrollbar w-(--available-width) gap-0 overflow-y-auto p-0 shadow-none backdrop-blur duration-100"
+        className="no-scrollbar h-(--available-height) w-(--available-width) gap-0 overflow-y-auto p-0 shadow-none backdrop-blur duration-100"
         align="start"
         side="bottom"
+        alignOffset={-16}
         sideOffset={14}
       >
         <MobileLink href="/" onOpenChange={setOpen}>
-          O Café
+          <CitrusIcon />
+          Portfólio
         </MobileLink>
 
-        <Separator />
-
-        <MobileLink href="/reservar" onOpenChange={setOpen}>
-          Reservar
+        <MobileLink href="/blog" onOpenChange={setOpen} disabled>
+          <BookIcon />
+          Blog
         </MobileLink>
 
-        <Separator />
-
-        <MobileLink href="/compartilhar" onOpenChange={setOpen}>
-          Compartilhar
+        <MobileLink href="/contato" onOpenChange={setOpen} disabled>
+          <MailIcon />
+          Contato
         </MobileLink>
-
-        {/* <db.SignedIn>
-          <MobileLink href={!user ? "/" : "/admin"} onOpenChange={setOpen}>
-            Admin
-          </MobileLink>
-          <Separator />
-        </db.SignedIn> */}
       </PopoverContent>
     </Popover>
   )
@@ -91,11 +83,7 @@ function MobileLink({
         className={cn("flex w-full items-center gap-2", className)}
         {...props}
       >
-        <Button
-          variant="ghost"
-          disabled={disabled}
-          className="w-full justify-start"
-        >
+        <Button variant="ghost" disabled={disabled}>
           {children}
         </Button>
       </Link>

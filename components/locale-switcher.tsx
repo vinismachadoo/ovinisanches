@@ -20,8 +20,8 @@ const LocaleSwitcher = () => {
   }, [locale, router])
 
   return (
-    <Button variant="ghost" onClick={handleLocaleSwitch} type="button">
-      <Globe className="size-4" />
+    <Button variant="ghost" onClick={handleLocaleSwitch} className="text-xs">
+      <Globe className="size-3" />
       {locale === "en" ? "EN-US" : "PT-BR"}
     </Button>
   )
