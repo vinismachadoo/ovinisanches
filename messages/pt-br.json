@@ -17,7 +17,11 @@
     "main": {
       "clients": {
         "title": "Clientes",
-        "subtitle": "Empresas que confiaram em meu trabalho"
+        "subtitle": "Pessoas que confiaram em meu trabalho"
+      },
+      "experiences": {
+        "title": "Experiências",
+        "subtitle": "Companias em que trabalhei"
       },
       "projects": {
         "title": "Projetos",

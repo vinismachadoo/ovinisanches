@@ -32,7 +32,7 @@ export default function Home() {
                 {t("clients.subtitle")}
               </p>
             </div>
-            <section className="grid min-h-0 grid-cols-1 gap-1.5 rounded-sm border bg-muted p-1 sm:grid-cols-2 lg:grid-cols-3">
+            <section className="grid min-h-0 grid-cols-1 gap-1.5 rounded-sm border bg-muted p-1">
               <a target="_blank" href="https://cafecomoscapuchinhos.com.br">
                 <div className="flex h-full min-w-0 cursor-pointer flex-col gap-1 rounded-sm border bg-background p-4 shadow-sm transition-colors hover:bg-muted/50">
                   <div className="flex aspect-square size-8 flex-col items-center justify-center rounded-md bg-taupe-700 shadow-sm">
@@ -56,12 +56,73 @@ export default function Home() {
 
           <section className="flex flex-col gap-3">
             <div className="flex flex-col gap-px p-2">
+              <h2 className="text-base font-medium">
+                {t("experiences.title")}
+              </h2>
+              <p className="max-w-xl text-sm text-balance text-muted-foreground">
+                {t("experiences.subtitle")}
+              </p>
+            </div>
+            <section className="grid min-h-0 grid-cols-1 gap-1.5 rounded-sm border bg-muted p-1">
+              <a target="_blank" href="https://www.stone.com.br/">
+                <div className="flex h-full min-w-0 cursor-pointer flex-col gap-1 rounded-sm border bg-background p-4 shadow-sm transition-colors hover:bg-muted/50">
+                  <div className="flex size-8 items-center justify-center overflow-hidden rounded-md">
+                    <img
+                      src="https://www.imaquininhas.com.br/wp-content/uploads/2023/02/logo-da-stone.jpg"
+                      alt="Stone"
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="mt-3 flex items-center justify-between">
+                    <div className="flex items-center gap-x-2">
+                      <p className="text-base font-medium">Stone</p>
+                      <p className="text-sm text-muted-foreground">
+                        (2026 - Presente)
+                      </p>
+                    </div>
+                    <ArrowUpRightIcon className="size-4" />
+                  </div>
+                  <p className="text-sm font-medium text-pretty text-muted-foreground">
+                    Gerente de Produto III - Logística
+                  </p>
+                </div>
+              </a>
+              <a target="_blank" href="https://abbiamolog.com">
+                <div className="flex h-full min-w-0 cursor-pointer flex-col gap-1 rounded-sm border bg-background p-4 shadow-sm transition-colors hover:bg-muted/50">
+                  <div className="flex size-8 items-center justify-center overflow-hidden rounded-md">
+                    <img
+                      src="https://abbiamolog.com/logos/Abbiamo_icon.png"
+                      alt="Abbiamo"
+                      className="scale-190 object-cover"
+                    />
+                  </div>
+
+                  <div className="mt-3 flex items-center justify-between">
+                    <div className="flex items-center gap-x-2">
+                      <p className="text-base font-medium">Abbiamo</p>
+                      <p className="text-sm text-muted-foreground">
+                        (2022 - 2026)
+                      </p>
+                    </div>
+                    <ArrowUpRightIcon className="size-4" />
+                  </div>
+                  <p className="text-sm font-medium text-pretty text-muted-foreground">
+                    Líder de Produto
+                  </p>
+                </div>
+              </a>
+            </section>
+          </section>
+
+          <section className="flex flex-col gap-3">
+            <div className="flex flex-col gap-px p-2">
               <h2 className="text-base font-medium">{t("web-apps.title")}</h2>
               <p className="max-w-xl text-sm text-balance text-muted-foreground">
                 {t("web-apps.subtitle")}
               </p>
             </div>
-            <section className="grid min-h-0 grid-cols-1 gap-1.5 rounded-sm border bg-muted p-1 sm:grid-cols-2 lg:grid-cols-3">
+            <section className="grid min-h-0 grid-cols-1 gap-1.5 rounded-sm border bg-muted p-1">
               <a target="_blank" href="https://botecada.vercel.app">
                 <div className="flex h-full min-w-0 cursor-pointer flex-col gap-1 rounded-sm border bg-background p-4 shadow-sm transition-colors hover:bg-muted/50">
                   <div className="flex aspect-square size-8 flex-col items-center justify-center rounded-md bg-yellow-300 shadow-sm">
