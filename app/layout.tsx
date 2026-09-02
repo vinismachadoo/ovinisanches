@@ -10,7 +10,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { Geist, Geist_Mono, Inter } from "next/font/google"
 import Script from "next/script"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
-import "./globals.css"
+import "@/app/globals.css"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -68,14 +68,7 @@ export default function RootLayout({
           <ReactQueryProvider>
             <NuqsAdapter>
               <TooltipProvider>
-                <NextIntlClientProvider>
-                  <div data-slot="layout" className="flex flex-col">
-                    <SiteHeader />
-                    <main className="flex h-[calc(100svh-var(--main-nav-height))] w-screen flex-col">
-                      {children}
-                    </main>
-                  </div>
-                </NextIntlClientProvider>
+                <NextIntlClientProvider>{children}</NextIntlClientProvider>
               </TooltipProvider>
               <TailwindIndicator />
               <Toaster richColors />
