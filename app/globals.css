@@ -113,6 +113,88 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Stone brand palette, sampled from stone.com.br design tokens. */
+@theme {
+  --color-stone-green-50: #e7ffec;
+  --color-stone-green-100: #c8ffd3;
+  --color-stone-green-200: #8effa2;
+  --color-stone-green-300: #29f446;
+  --color-stone-green-400: #00eb33;
+  --color-stone-green-500: #00cc2c;
+  --color-stone-green-600: #009420;
+  --color-stone-green-700: #05751a;
+  --color-stone-green-800: #055f04;
+  --color-stone-green-900: #094002;
+  --color-stone-jade-500: #00a868;
+  --color-stone-jade-700: #00734d;
+  --color-stone-ink: #20252a;
+  --color-stone-ink-soft: #2c3238;
+  --color-stone-mist: #f7fff9;
+
+  --animate-stone-grafismo: stone-grafismo 7s ease-in-out infinite alternate;
+  --animate-stone-marquee: stone-marquee 40s linear infinite;
+  --animate-stone-marquee-x: stone-marquee-x 40s linear infinite;
+  --animate-stone-marquee-vertical: stone-marquee-vertical 40s linear infinite;
+
+  @keyframes stone-grafismo {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes stone-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes stone-marquee-x {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes stone-marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+
+  --animate-stone-journey-dash: stone-journey-dash 1.4s linear infinite;
+
+  @keyframes stone-journey-dash {
+    to {
+      stroke-dashoffset: -44;
+    }
+  }
+}
+
+/* Declared as a utility rather than a theme token so that `--font-anton`, which is scoped to
+   the landing page subtree, resolves on the element instead of on `:root`, where it is undefined. */
+@utility font-stone-display {
+  font-family: var(--font-anton), ui-sans-serif, sans-serif;
+}
+
+/* Stone's CTA "grafismo": the official gradient artwork, oversized so it can drift on loop. */
+@utility bg-stone-grafismo {
+  background-image: url("/stone-entrega/grafismo-cta.webp");
+  background-size: 240% 100%;
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50 text-sm;
