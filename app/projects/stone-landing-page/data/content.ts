@@ -61,7 +61,7 @@ export const hero = {
   primaryCta: "Simular frete",
   secondaryCta: "Falar com especialista",
   reassurance: ["Sem mensalidade", "Sem volume mínimo"],
-  backdrop: unsplash("1687422808311-a776f467a468", 2400, 1500),
+  backdrop: "/stone-entrega/hero-1.jpeg",
   backdropAlt: "Empreendedora sorrindo atrás do balcão da sua loja de bairro",
   stats: [
     { value: "+5.500", label: "cidades atendidas" },

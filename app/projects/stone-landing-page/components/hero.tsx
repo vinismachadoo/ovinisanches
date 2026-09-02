@@ -23,11 +23,11 @@ export function Hero() {
           Narrow screens skip it: the column is too tight to hide the photo behind solid ink. */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 hidden bg-linear-to-r from-stone-ink via-stone-ink/85 to-transparent sm:block"
+        className="absolute inset-0 -z-10 hidden bg-linear-to-r from-stone-ink/85 via-stone-ink/60 to-transparent sm:block"
       />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-linear-to-t from-stone-ink/95 via-stone-ink/40 to-black/55"
+        className="absolute inset-0 -z-10 bg-linear-to-t from-stone-ink/85 via-stone-ink/60 to-black/55"
       />
 
       <div className="flex h-full min-h-0 flex-1 flex-col items-center justify-center p-26 px-6 pb-12">
