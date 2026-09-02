@@ -76,14 +76,14 @@ export function Differentials() {
       className="relative scroll-mt-28 bg-white py-20 lg:py-28"
     >
       <div className="mx-auto max-w-[90rem] px-6">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-6xl text-center">
           <Reveal>
             <DisplayHeading className="text-stone-ink">
               {differentials.title}
             </DisplayHeading>
           </Reveal>
           <Reveal delay={0.08}>
-            <p className="text-stone-ink/65 mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-pretty">
+            <p className="mx-auto mt-5 max-w-5xl text-lg leading-relaxed text-pretty text-stone-ink/65">
               {differentials.description}
             </p>
           </Reveal>

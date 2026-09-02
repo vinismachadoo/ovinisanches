@@ -1,6 +1,14 @@
 "use client"
 
 import { cn } from "@/lib/utils"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
+import { IconStack } from "@/components/reui/icon-stack"
 import { IconTile } from "@/components/reui/icon-tile"
 import {
   Field,
@@ -21,8 +29,10 @@ import {
   Clock,
   LoaderCircle,
   LocateFixed,
+  Package,
   Truck,
   Zap,
+  type LucideIcon,
 } from "lucide-react"
 import { useEffect, useId, useMemo, useRef, useState } from "react"
 import {
@@ -46,6 +56,8 @@ export function Simulator() {
   const [geo, setGeo] = useState<GeoState>("idle")
   const [bidding, setBidding] = useState(false)
   const [selected, setSelected] = useState<QuoteOption["id"]>("turbo")
+  /** Highest step unlocked — empty states never return once a step has been reached. */
+  const [maxReached, setMaxReached] = useState(0)
 
   const originId = useId()
   const destinationId = useId()
@@ -137,15 +149,22 @@ export function Simulator() {
     )
   }
 
+  function goToStep(next: number) {
+    setStep(next)
+    setMaxReached((value) => Math.max(value, next))
+  }
+
   function startAuction() {
     setBidding(true)
-    setStep(1)
+    goToStep(1)
   }
 
   const canQuote = origin.trim().length > 3 && destination.trim().length > 3
   const step0Active = step === 0
   const step1Active = step === 1
   const step2Active = step === 2
+  const showAuction = maxReached >= 1
+  const showDelivery = maxReached >= 2
 
   return (
     <section id="simular" className="scroll-mt-28 bg-white py-20 sm:py-28">
@@ -285,63 +304,71 @@ export function Simulator() {
                 title={simulator.steps[1].name}
                 className="max-lg:snap-center"
               >
-                <div
-                  className={cn(
-                    "flex h-full flex-col gap-4",
-                    !step1Active && "pointer-events-none"
-                  )}
-                >
-                  {bidding && step1Active ? (
-                    <Auction />
-                  ) : (
-                    <div
-                      role="radiogroup"
-                      aria-label="Opções de entrega"
-                      aria-disabled={!step1Active}
-                      className="grid gap-2.5"
-                    >
-                      {priced.map(({ option, price }) => (
-                        <OptionCard
-                          key={option.id}
-                          option={option}
-                          price={price}
-                          checked={selected === option.id}
-                          cheapest={option.id === cheapestId}
-                          fastest={option.id === fastestId}
-                          disabled={!step1Active}
-                          onSelect={() => setSelected(option.id)}
-                        />
-                      ))}
-                    </div>
-                  )}
-
+                {!showAuction ? (
+                  <EmptyState
+                    icon={Truck}
+                    title="Aguardando a simulação"
+                    description="Assim que você informar coleta, entrega e o tamanho do pacote, abrimos o leilão com as transportadoras."
+                  />
+                ) : (
                   <div
                     className={cn(
-                      "mt-auto flex flex-col gap-3",
-                      bidding && step1Active && "invisible"
+                      "flex h-full flex-col gap-4",
+                      !step1Active && "pointer-events-none"
                     )}
                   >
-                    <StoneButton
-                      size="lg"
-                      className="w-full"
-                      disabled={!step1Active || bidding}
-                      onClick={() => setStep(2)}
+                    {bidding && step1Active ? (
+                      <Auction />
+                    ) : (
+                      <div
+                        role="radiogroup"
+                        aria-label="Opções de entrega"
+                        aria-disabled={!step1Active}
+                        className="grid gap-2.5"
+                      >
+                        {priced.map(({ option, price }) => (
+                          <OptionCard
+                            key={option.id}
+                            option={option}
+                            price={price}
+                            checked={selected === option.id}
+                            cheapest={option.id === cheapestId}
+                            fastest={option.id === fastestId}
+                            disabled={!step1Active}
+                            onSelect={() => setSelected(option.id)}
+                          />
+                        ))}
+                      </div>
+                    )}
+
+                    <div
+                      className={cn(
+                        "mt-auto flex flex-col gap-3",
+                        bidding && step1Active && "invisible"
+                      )}
                     >
-                      Continuar com {chosen.name}
-                      <ArrowRight aria-hidden className="size-4" />
-                    </StoneButton>
-                    <StoneButton
-                      size="lg"
-                      tone="outline"
-                      className="w-full"
-                      disabled={!step1Active || bidding}
-                      onClick={() => setStep(0)}
-                    >
-                      <ArrowLeft aria-hidden className="size-4" />
-                      Voltar
-                    </StoneButton>
+                      <StoneButton
+                        size="lg"
+                        className="w-full"
+                        disabled={!step1Active || bidding}
+                        onClick={() => goToStep(2)}
+                      >
+                        Continuar com {chosen.name}
+                        <ArrowRight aria-hidden className="size-4" />
+                      </StoneButton>
+                      <StoneButton
+                        size="lg"
+                        tone="outline"
+                        className="w-full"
+                        disabled={!step1Active || bidding}
+                        onClick={() => goToStep(0)}
+                      >
+                        <ArrowLeft aria-hidden className="size-4" />
+                        Voltar
+                      </StoneButton>
+                    </div>
                   </div>
-                </div>
+                )}
               </StepColumn>
 
               <StepColumn
@@ -350,76 +377,88 @@ export function Simulator() {
                 title={simulator.steps[2].name}
                 className="max-lg:snap-center"
               >
-                <div
-                  className={cn(
-                    "flex h-full flex-col gap-5",
-                    !step2Active && "pointer-events-none"
-                  )}
-                >
-                  <div className="grid gap-3 rounded-xl border border-stone-green-200 bg-stone-green-50 p-4">
-                    <div className="flex items-start gap-3">
-                      <IconTile
-                        variant="frame"
-                        size="default"
-                        aria-hidden="true"
-                      >
-                        {chosen.id === "turbo" ? <Zap /> : <Truck />}
-                      </IconTile>
-                      <div className="min-w-0">
-                        <p className="font-semibold text-stone-ink">
-                          {chosen.carrier} {chosen.name}
-                        </p>
-                        <p className="text-sm text-stone-ink/65">
-                          {chosen.eta} · pacote {sizeMeta.label.toLowerCase()}
-                        </p>
+                {!showDelivery ? (
+                  <EmptyState
+                    icon={Package}
+                    title="Entrega ainda bloqueada"
+                    description={
+                      showAuction
+                        ? "Escolha uma oferta no leilão para liberar a criação da entrega e o resumo do envio."
+                        : "Primeiro simule o frete e escolha a melhor oferta. Depois você confirma a coleta aqui."
+                    }
+                  />
+                ) : (
+                  <div
+                    className={cn(
+                      "flex h-full flex-col gap-5",
+                      !step2Active && "pointer-events-none"
+                    )}
+                  >
+                    {/* <div className="grid gap-3 rounded-xl border border-stone-green-200 bg-stone-green-50 p-4">
+                      <div className="flex items-start gap-3">
+                        <IconTile
+                          variant="frame"
+                          size="default"
+                          aria-hidden="true"
+                        >
+                          {chosen.id === "turbo" ? <Zap /> : <Truck />}
+                        </IconTile>
+                        <div className="min-w-0">
+                          <p className="font-semibold text-stone-ink">
+                            {chosen.carrier} {chosen.name}
+                          </p>
+                          <p className="text-sm text-stone-ink/65">
+                            {chosen.eta} · pacote {sizeMeta.label.toLowerCase()}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <p className="font-stone-display text-4xl leading-none text-stone-ink">
-                      {brl.format(
-                        priceFor(chosen, distanceKm, sizeMeta.multiplier)
-                      )}
-                    </p>
-                  </div>
+                      <p className="font-stone-display text-4xl leading-none text-stone-ink">
+                        {brl.format(
+                          priceFor(chosen, distanceKm, sizeMeta.multiplier)
+                        )}
+                      </p>
+                    </div> */}
 
-                  <p className="text-sm leading-relaxed text-stone-ink/65">
-                    Falta só a sua conta Stone. O cadastro leva alguns minutos,
-                    não tem mensalidade e a simulação fica salva para você
-                    confirmar a coleta.
-                  </p>
-
-                  <div className="grid gap-2">
-                    <p className="text-xs font-semibold tracking-[0.16em] text-stone-ink/65 uppercase">
-                      Depois de criada
+                    <p className="text-sm leading-relaxed text-stone-ink/65">
+                      Falta só a sua conta Stone. O cadastro leva alguns
+                      minutos, não tem mensalidade e a simulação fica salva para
+                      você confirmar a coleta
                     </p>
+
+                    <p className="text-sm leading-relaxed text-stone-ink/65">
+                      Uma vez criada a entrega você acompanha pela plataforma e
+                      só paga depois que a entrega for realizada.
+                    </p>
+
                     <ShipmentPanel />
-                  </div>
 
-                  <div className="mt-auto flex flex-col gap-3">
-                    <StoneLink
-                      size="lg"
-                      className={cn(
-                        "w-full",
-                        !step2Active && "pointer-events-none opacity-60"
-                      )}
-                      aria-disabled={!step2Active}
-                      tabIndex={!step2Active ? -1 : undefined}
-                      href={`/projects/stone-landing-page/entrar?frete=${chosen.id}&de=${encodeURIComponent(origin)}&para=${encodeURIComponent(destination)}&pacote=${packageSize}`}
-                    >
-                      Criar entrega
-                      <ArrowRight aria-hidden className="size-4" />
-                    </StoneLink>
-                    <StoneButton
-                      size="lg"
-                      tone="outline"
-                      className="w-full"
-                      disabled={!step2Active}
-                      onClick={() => setStep(1)}
-                    >
-                      <ArrowLeft aria-hidden className="size-4" />
-                      Ver outras ofertas
-                    </StoneButton>
+                    <div className="mt-auto flex flex-col gap-3">
+                      <StoneLink
+                        size="lg"
+                        className={cn(
+                          "w-full",
+                          !step2Active && "pointer-events-none opacity-60"
+                        )}
+                        aria-disabled={!step2Active}
+                        tabIndex={!step2Active ? -1 : undefined}
+                        href={`/projects/stone-landing-page/entrar?frete=${chosen.id}&de=${encodeURIComponent(origin)}&para=${encodeURIComponent(destination)}&pacote=${packageSize}`}
+                      >
+                        Criar entrega
+                        <ArrowRight aria-hidden className="size-4" />
+                      </StoneLink>
+                      <StoneButton
+                        size="lg"
+                        tone="outline"
+                        className="w-full"
+                        disabled={!step2Active}
+                        onClick={() => goToStep(1)}
+                      >
+                        <ArrowLeft aria-hidden className="size-4" />
+                        Ver outras ofertas
+                      </StoneButton>
+                    </div>
                   </div>
-                </div>
+                )}
               </StepColumn>
             </div>
           </div>
@@ -525,6 +564,30 @@ function Stepper({ current }: { current: number }) {
         )
       })}
     </ol>
+  )
+}
+
+function EmptyState({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: LucideIcon
+  title: string
+  description: string
+}) {
+  return (
+    <Empty className="h-full min-h-56 justify-center p-6">
+      <EmptyHeader>
+        <EmptyMedia>
+          <IconStack aria-hidden="true" className="h-24 w-22 text-primary">
+            <Icon className="size-5 text-primary" />
+          </IconStack>
+        </EmptyMedia>
+        <EmptyTitle className="text-base">{title}</EmptyTitle>
+        <EmptyDescription>{description}</EmptyDescription>
+      </EmptyHeader>
+    </Empty>
   )
 }
 
