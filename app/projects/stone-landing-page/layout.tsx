@@ -14,7 +14,7 @@ const anton = Anton({
 export const metadata: Metadata = {
   title: "Stone Entrega — Logística para quem empreende",
   description:
-    "Coleta, fracionado, lotação e last mile na mesma plataforma. Um contato, um contrato e várias operações para entregar em todo o Brasil.",
+    "Logística da coleta ao pós-venda, com contrato único, rastreio em tempo real e operações turbo, local e nacional para todo o Brasil.",
   icons: [{ rel: "icon", url: "/stone-entrega/mark.png" }],
 }
 
@@ -24,17 +24,21 @@ export default function StoneLandingLayout({
   children: React.ReactNode
 }) {
   return (
+    // The landing is light-only: `data-theme="light"` reloads the light tokens and
+    // switches off every `dark:` variant inside, whatever theme the site is on.
     <div
       lang="pt-BR"
+      data-theme="light"
       className={cn(
         inter.variable,
         anton.variable,
-        "min-h-full bg-white font-(family-name:--font-stone-sans) text-stone-ink antialiased",
-        // Stone green as theme primary for shadcn form controls (radio, focus ring, etc.)
-        "[--primary-foreground:#20252a] [--primary:#00cc2c] [--ring:#009420]"
+        "min-h-full scheme-light bg-white font-(family-name:--font-stone-sans) text-stone-ink antialiased"
       )}
     >
-      {children}
+      {/* Nested so these win over the light tokens set on the element above. */}
+      <div className="[--primary-foreground:#20252a] [--primary:#00cc2c] [--ring:#009420]">
+        {children}
+      </div>
     </div>
   )
 }

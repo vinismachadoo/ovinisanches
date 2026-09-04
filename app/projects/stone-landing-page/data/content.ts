@@ -1,12 +1,4 @@
-import {
-  Boxes,
-  Headset,
-  PackageCheck,
-  Plug,
-  Radar,
-  ShieldCheck,
-  type LucideIcon,
-} from "lucide-react"
+import { Boxes, Headset, Zap, type LucideIcon } from "lucide-react"
 
 const unsplash = (id: string, w: number, h: number) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`
@@ -16,8 +8,8 @@ export const nav = {
     { label: "Soluções", href: "#diferenciais" },
     { label: "Simular frete", href: "#simular" },
     { label: "Documentação", href: "#jornada" },
-    { label: "Rastrear pacote", href: "#rastrear" },
     { label: "Blog", href: "#blog" },
+    { label: "Rastrear pacote", href: "#rastrear" },
   ],
   cta: "Quero entregar",
 }
@@ -60,10 +52,16 @@ export const hero = {
   description: "Você vende, a Stone entrega... em todo o Brasil.",
   primaryCta: "Simular frete",
   secondaryCta: "Falar com especialista",
-  reassurance: ["Sem mensalidade", "Sem volume mínimo"],
+  reassurance: ["Sem mensalidade", "Sem volume mínimo", "Sem burocracia"],
   backdrop: "/stone-entrega/hero-1.jpeg",
   backdropAlt: "Empreendedora sorrindo atrás do balcão da sua loja de bairro",
-  stats: [
+}
+
+export const stats = {
+  title: "Números que constroem confiança",
+  description:
+    "Malha nacional, prazo cumprido e gente no atendimento. São os números da operação que o empreendedor vê todo dia — sem asterisco, sem letra miúda.",
+  items: [
     { value: "+5.500", label: "cidades atendidas" },
     { value: "98,7%", label: "entregas no prazo" },
     { value: "5s", label: "de espera no atendimento" },
@@ -208,63 +206,85 @@ type Differential = {
   icon: LucideIcon
   title: string
   description: string
+  bullets?: string[]
   tags?: string[]
   /** Renders the card on the accent surface and gives it more visual weight. */
   featured?: boolean
   /** Lays the card out horizontally, for the full-width row of the bento grid. */
   wide?: boolean
-  visual?: "chat" | "contract"
+  visual?: "chat"
 }
 
 export const differentials = {
-  title: "Um contato, um contrato, várias operações",
+  title: "Praticidade, velocidade, flexibilidade",
   description:
-    "Você negocia uma vez com a Stone e passa a operar com uma malha inteira de transportadoras homologadas. Sem planilha paralela, sem cinco contratos, sem ficar no telefone atrás de quem perdeu o seu pacote.",
+    "A Stone assume a logística para você vender. Integra o que já está na sua loja, cobre o Brasil no prazo que o pedido pede e deixa um único contrato no lugar de uma planilha de transportadoras.",
   items: [
     {
       icon: Headset,
-      title: "Um contato",
+      title: "Praticidade",
       description:
-        "Um time Stone responsável pela sua operação de ponta a ponta. Deu problema em qualquer trecho, você fala com a gente — nunca com a transportadora.",
+        "Nós fazemos a logística por você, da coleta ao pós-venda. Um contrato só te dá adesão imediata a diversos OPLs, o cliente acompanha o pacote em tempo real e, se precisar de ajuda, o atendimento é Stone.",
+      bullets: [
+        "Contrato unificado, com adesão imediata a dezenas de operadores",
+        "Rastreio em tempo real, com aviso automático para o seu cliente",
+        "Atendimento Stone quando alguma etapa da rota precisa de gente",
+      ],
       featured: true,
       visual: "chat",
     },
     {
-      icon: PackageCheck,
-      title: "Um contrato",
+      icon: Zap,
+      title: "Velocidade",
       description:
-        "Uma assinatura destrava mais de 20 parceiros logísticos homologados, com preço negociado no volume de toda a base Stone.",
-      tags: ["+20 parceiros", "Preço de escala", "Sem fidelidade"],
-      visual: "contract",
+        "Estamos integrados às plataformas que você já usa, então o onboarding acontece quase sozinho. Tarefa manual some do dia a dia e sobra tempo para o que melhora o resultado do negócio.",
+      bullets: [
+        "Onboarding automático a partir da sua loja",
+        "Sem planilha paralela e sem retrabalho no faturamento",
+        "Você foca em vender; a malha cuida de sair o pedido",
+      ],
+      tags: ["Shopify", "Nuvemshop", "VTEX", "Tray", "Bling", "API aberta"],
     },
     {
       icon: Boxes,
-      title: "Várias operações",
+      title: "Flexibilidade",
       description:
-        "Todos os modais no mesmo painel, do envio unitário à carga fechada.",
-      tags: ["Coleta", "Fracionado", "Lotação", "Last mile", "Reversa"],
-    },
-    {
-      icon: Radar,
-      title: "Rastreio em tempo real",
-      description:
-        "Você acompanha cada etapa e seu cliente recebe avisos automáticos por SMS e WhatsApp.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Seguro total de carga",
-      description:
-        "100% do valor da nota coberto em todos os envios, sem custo adicional.",
-    },
-    {
-      icon: Plug,
-      title: "Integra com a sua loja",
-      description:
-        "Shopify, Nuvemshop, Tray, Bling e API aberta. Conecta em minutos.",
-      tags: ["Shopify", "Nuvemshop", "Tray", "Bling", "API aberta"],
+        "Vários tipos de operação no mesmo painel, para você escolher o que o pedido pede. Turbo em até 4h, local no mesmo dia e nacional para todo o Brasil. Deixe na agência mais próxima ou combine uma coleta — e, se o envio pede cuidado extra, os Green Angels saem de carro ou moto.",
+      bullets: [
+        "Turbo em até 4h, same-day na região e nacional para todo o Brasil",
+        "Deixe na agência mais próxima ou combine uma coleta",
+        "Green Angels de carro e moto, o serviço premium da Stone",
+      ],
+      tags: [
+        "Turbo 4h",
+        "Same-day",
+        "Nacional",
+        "Agência",
+        "Coleta",
+        "Green Angels",
+      ],
       wide: true,
     },
   ] satisfies Differential[],
+}
+
+export const integrations = {
+  titleLines: ["Conectamos a sua operação", "de ponta a ponta"],
+  items: [
+    { name: "VTEX", domain: "vtex.com" },
+    { name: "Shopify", domain: "shopify.com" },
+    { name: "Nuvemshop", domain: "nuvemshop.com.br" },
+    { name: "Tray", domain: "tray.com.br" },
+    { name: "Linx", domain: "linx.com.br" },
+    { name: "Yampi", domain: "yampi.com.br" },
+    { name: "WBuy", domain: "wbuy.com.br" },
+    { name: "Bling", domain: "bling.com.br" },
+    { name: "Plugg.to", domain: "plugg.to" },
+    { name: "Baselinker", domain: "baselinker.com" },
+    { name: "Intelipost", domain: "intelipost.com.br" },
+    { name: "Abbiamo Log", domain: "abbiamolog.com" },
+    { name: "Claude", domain: "claude.ai" },
+  ],
 }
 
 export const support = {
@@ -294,63 +314,83 @@ export const support = {
   ],
 }
 
+type Segment = {
+  id: string
+  name: string
+  kicker: string
+  headline: string
+  description: string
+  /** `highlight` renders as the accented metric that opens the sentence. */
+  bullets: { highlight?: string; text: string }[]
+  caseHref: string
+  photo: string
+  photoAlt: string
+}
+
 export const segments = {
   title: "Logística para todo tipo de negócio",
   description:
     "Cada operação tem uma dor diferente. A gente monta a malha, o modal e o prazo em cima do que o seu negócio realmente precisa.",
+  caseCta: "Ler o case",
   items: [
     {
       id: "varejo",
       name: "Comércio e Varejo",
-      headline: "Do balcão ao bairro inteiro",
+      kicker: "Case de impacto",
+      headline: "Como a Oficina 31 entregou o bairro inteiro no mesmo dia",
       description:
-        "Entrega no mesmo dia na sua região, reposição entre lojas e envio para todo o Brasil quando a venda vem do online.",
+        "Uma rede de quatro lojas medindo prazo, reposição e recompra na malha urbana.",
       bullets: [
-        "Entrega same-day e next-day no raio urbano",
-        "Transferência de estoque entre lojas",
-        "Coleta programada no horário que você escolhe",
+        {
+          highlight: "3x",
+          text: "mais rápido que o envio tradicional no raio urbano",
+        },
+        { text: "Transferência de estoque entre as quatro lojas" },
+        { text: "Coleta programada no horário escolhido pelo lojista" },
       ],
-      stat: {
-        value: "3x",
-        label: "mais rápido que o envio tradicional no raio urbano",
-      },
+      caseHref: "#cadastro",
       photo: unsplash("1604074309324-72543c99d59c", 900, 1100),
       photoAlt: "Lojista organizando produtos em um pequeno comércio de bairro",
     },
     {
       id: "beleza",
       name: "Saúde e Beleza",
-      headline: "Produto sensível chega inteiro",
+      kicker: "Case de impacto",
+      headline: "Como a Beleza Pura zerou a avaria em produto sensível",
       description:
-        "Manuseio, embalagem e rotas pensados para itens frágeis, líquidos e com validade curta.",
+        "Itens frágeis, líquidos e de validade curta saindo com manuseio e rota dedicados.",
       bullets: [
-        "Embalagem e manuseio para itens frágeis",
-        "Rotas com controle de temperatura",
-        "Reversa simples para troca e recall",
+        {
+          highlight: "0,4%",
+          text: "de índice de avaria nos envios do segmento",
+        },
+        { text: "Rotas com controle de temperatura" },
+        { text: "Reversa simples para troca e recall" },
       ],
-      stat: {
-        value: "0,4%",
-        label: "de índice de avaria nos envios do segmento",
-      },
+      caseHref: "#cadastro",
       photo: unsplash("1653130029149-9109b115ab9a", 900, 1100),
       photoAlt: "Profissional de beleza sorrindo em seu salão",
     },
     {
       id: "moda",
       name: "Moda e Calçados",
-      headline: "Troca fácil vende mais",
+      kicker: "Case de impacto",
+      headline: "Como a Passo Firme fez a troca deixar de travar o caixa",
       description:
-        "Grade completa saindo junto, etiqueta de devolução no pacote e reversa que não trava o seu caixa.",
+        "Grade completa saindo junta e uma reversa que fecha antes do cliente desistir.",
       bullets: [
-        "Logística reversa em um clique",
-        "Etiqueta de devolução já dentro do pacote",
-        "Fracionado para enviar a grade completa",
+        {
+          highlight: "72h",
+          text: "de ciclo médio para concluir uma troca, com reversa em um clique",
+        },
+        { text: "Etiqueta de devolução já dentro do pacote" },
+        { text: "Fracionado para enviar a grade completa" },
       ],
-      stat: { value: "72h", label: "de ciclo médio para concluir uma troca" },
+      caseHref: "#cadastro",
       photo: unsplash("1441984904996-e0b6ba687e04", 900, 1100),
       photoAlt: "Interior de uma boutique de roupas com araras organizadas",
     },
-  ],
+  ] satisfies Segment[],
 }
 
 export const join = {

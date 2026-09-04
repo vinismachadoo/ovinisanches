@@ -9,10 +9,10 @@ import { Reveal } from "./reveal"
 export function Join() {
   return (
     <section id="cadastro" className="scroll-mt-28">
-      <div className="relative overflow-hidden bg-stone-green-500 px-6 py-16 sm:px-10 lg:px-14 lg:py-20">
+      <div className="relative overflow-hidden bg-stone-green-50 px-6 py-16 sm:px-10 lg:px-14 lg:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_-10%,rgba(255,255,255,0.45),transparent_55%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_-10%,rgba(255,255,255,0.7),transparent_55%)]"
         />
 
         <div className="relative mx-auto max-w-[90rem] text-center">
@@ -26,7 +26,7 @@ export function Join() {
                       alt=""
                       width={44}
                       height={44}
-                      className="size-11 rounded-full object-cover ring-3 ring-[var(--color-stone-green-500)]"
+                      className="size-11 rounded-full object-cover ring-3 ring-stone-green-50"
                       style={{ zIndex: join.avatars.length - avatarIndex }}
                     />
                   </li>
@@ -73,7 +73,7 @@ export function Join() {
         </div>
       </div>
 
-      <div className="w-full border-y border-stone-ink/8 bg-white py-10 sm:py-14">
+      <div className="w-full bg-white py-10 sm:py-14">
         <Reveal delay={0.08}>
           <ul className="grid w-full gap-px bg-stone-ink/8 sm:grid-cols-2 xl:grid-cols-4">
             {join.testimonials.map((item) => (

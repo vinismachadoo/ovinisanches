@@ -167,7 +167,7 @@ export function Simulator() {
   const showDelivery = maxReached >= 2
 
   return (
-    <section id="simular" className="scroll-mt-28 bg-white py-20 sm:py-28">
+    <section id="simular" className="scroll-mt-28 bg-white py-16">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <Reveal>
           <DisplayHeading className="text-stone-ink">
@@ -176,225 +176,219 @@ export function Simulator() {
         </Reveal>
 
         <Reveal delay={0.1} className="mt-10">
-          <div className="rounded-2xl border border-stone-ink/10 bg-stone-mist p-2 sm:p-3">
-            <Stepper current={step} />
+          {/* <Stepper current={step} /> */}
 
-            <div className="grid min-h-[40rem] gap-3 max-lg:snap-x max-lg:snap-mandatory max-lg:auto-cols-[minmax(17.5rem,82vw)] max-lg:grid-flow-col max-lg:overflow-x-auto max-lg:pb-2 lg:grid-cols-3 lg:items-stretch lg:gap-4">
-              <StepColumn
-                index={0}
-                current={step}
-                title={simulator.steps[0].name}
-                className="max-lg:snap-center"
+          <div className="grid min-h-[40rem] gap-3 px-10 max-lg:snap-x max-lg:snap-mandatory max-lg:auto-cols-[minmax(17.5rem,82vw)] max-lg:grid-flow-col max-lg:overflow-x-auto max-lg:pb-2 lg:grid-cols-3 lg:items-stretch lg:gap-4">
+            <StepColumn
+              index={0}
+              current={step}
+              title={simulator.steps[0].name}
+              className="max-lg:snap-center"
+            >
+              <fieldset
+                disabled={!step0Active}
+                className="flex h-full min-h-0 flex-col disabled:pointer-events-none"
               >
-                <fieldset
-                  disabled={!step0Active}
-                  className="flex h-full min-h-0 flex-col disabled:pointer-events-none"
+                <form
+                  className="flex h-full flex-col gap-5"
+                  onSubmit={(event) => {
+                    event.preventDefault()
+                    if (!step0Active || !canQuote) return
+                    startAuction()
+                  }}
                 >
-                  <form
-                    className="flex h-full flex-col gap-5"
-                    onSubmit={(event) => {
-                      event.preventDefault()
-                      if (!step0Active || !canQuote) return
-                      startAuction()
-                    }}
-                  >
-                    <div className="grid gap-2">
-                      <Label htmlFor={originId}>Endereço de coleta</Label>
-                      <Input
-                        id={originId}
-                        required
-                        value={origin}
-                        onChange={(event) => setOrigin(event.target.value)}
-                        placeholder="Rua, número, bairro e cidade"
-                        autoComplete="street-address"
-                      />
-                      <button
-                        type="button"
-                        onClick={useCurrentLocation}
-                        disabled={geo === "loading" || !step0Active}
-                        aria-describedby={
-                          geo === "error" ? geoStatusId : undefined
-                        }
-                        className="inline-flex w-fit touch-manipulation items-center gap-1.5 rounded-md text-sm font-medium text-primary transition-colors hover:text-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none disabled:opacity-60"
-                      >
-                        {geo === "loading" ? (
-                          <LoaderCircle
-                            aria-hidden
-                            className="size-4 animate-spin motion-reduce:animate-none"
-                          />
-                        ) : (
-                          <LocateFixed aria-hidden className="size-4" />
-                        )}
-                        {geo === "loading"
-                          ? "Buscando localização…"
-                          : "Usar minha localização atual"}
-                      </button>
-                      <p
-                        id={geoStatusId}
-                        role="status"
-                        className="text-xs text-muted-foreground"
-                      >
-                        {geo === "error" &&
-                          "Não consegui acessar sua localização. Digite o endereço de coleta."}
-                      </p>
-                    </div>
-
-                    <div className="grid gap-2">
-                      <Label htmlFor={destinationId}>Endereço de entrega</Label>
-                      <Input
-                        id={destinationId}
-                        required
-                        value={destination}
-                        onChange={(event) => setDestination(event.target.value)}
-                        placeholder="Onde o seu cliente recebe"
-                        autoComplete="off"
-                      />
-                    </div>
-
-                    <FieldSet>
-                      <FieldLegend variant="label">
-                        Tamanho do pacote
-                      </FieldLegend>
-                      <RadioGroup
-                        value={packageSize}
-                        disabled={!step0Active}
-                        onValueChange={(value) => {
-                          if (value) setPackageSize(value as PackageSize)
-                        }}
-                      >
-                        {packageSizes.map((size) => (
-                          <FieldLabel
-                            key={size.id}
-                            htmlFor={`pacote-${size.id}`}
-                          >
-                            <Field orientation="horizontal">
-                              <RadioGroupItem
-                                value={size.id}
-                                id={`pacote-${size.id}`}
-                                disabled={!step0Active}
-                              />
-                              <FieldContent>
-                                <FieldTitle>{size.label}</FieldTitle>
-                                <FieldDescription>{size.hint}</FieldDescription>
-                              </FieldContent>
-                            </Field>
-                          </FieldLabel>
-                        ))}
-                      </RadioGroup>
-                    </FieldSet>
-
-                    <div className="mt-auto flex flex-col gap-3">
-                      <StoneButton
-                        type="submit"
-                        size="lg"
-                        className="w-full"
-                        disabled={!step0Active || !canQuote}
-                      >
-                        Ver ofertas
-                        <ArrowRight aria-hidden className="size-4" />
-                      </StoneButton>
-                    </div>
-                  </form>
-                </fieldset>
-              </StepColumn>
-
-              <StepColumn
-                index={1}
-                current={step}
-                title={simulator.steps[1].name}
-                className="max-lg:snap-center"
-              >
-                {!showAuction ? (
-                  <EmptyState
-                    icon={Truck}
-                    title="Aguardando a simulação"
-                    description="Assim que você informar coleta, entrega e o tamanho do pacote, abrimos o leilão com as transportadoras."
-                  />
-                ) : (
-                  <div
-                    className={cn(
-                      "flex h-full flex-col gap-4",
-                      !step1Active && "pointer-events-none"
-                    )}
-                  >
-                    {bidding && step1Active ? (
-                      <Auction />
-                    ) : (
-                      <div
-                        role="radiogroup"
-                        aria-label="Opções de entrega"
-                        aria-disabled={!step1Active}
-                        className="grid gap-2.5"
-                      >
-                        {priced.map(({ option, price }) => (
-                          <OptionCard
-                            key={option.id}
-                            option={option}
-                            price={price}
-                            checked={selected === option.id}
-                            cheapest={option.id === cheapestId}
-                            fastest={option.id === fastestId}
-                            disabled={!step1Active}
-                            onSelect={() => setSelected(option.id)}
-                          />
-                        ))}
-                      </div>
-                    )}
-
-                    <div
-                      className={cn(
-                        "mt-auto flex flex-col gap-3",
-                        bidding && step1Active && "invisible"
-                      )}
+                  <div className="grid gap-2">
+                    <Label htmlFor={originId}>Endereço de coleta</Label>
+                    <Input
+                      id={originId}
+                      required
+                      value={origin}
+                      onChange={(event) => setOrigin(event.target.value)}
+                      placeholder="Rua, número, bairro e cidade"
+                      autoComplete="street-address"
+                    />
+                    <button
+                      type="button"
+                      onClick={useCurrentLocation}
+                      disabled={geo === "loading" || !step0Active}
+                      aria-describedby={
+                        geo === "error" ? geoStatusId : undefined
+                      }
+                      className="inline-flex w-fit touch-manipulation items-center gap-1.5 rounded-md text-sm font-medium text-primary transition-colors hover:text-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none disabled:opacity-60"
                     >
-                      <StoneButton
-                        size="lg"
-                        className="w-full"
-                        disabled={!step1Active || bidding}
-                        onClick={() => goToStep(2)}
-                      >
-                        Continuar com {chosen.name}
-                        <ArrowRight aria-hidden className="size-4" />
-                      </StoneButton>
-                      <StoneButton
-                        size="lg"
-                        tone="outline"
-                        className="w-full"
-                        disabled={!step1Active || bidding}
-                        onClick={() => goToStep(0)}
-                      >
-                        <ArrowLeft aria-hidden className="size-4" />
-                        Voltar
-                      </StoneButton>
-                    </div>
+                      {geo === "loading" ? (
+                        <LoaderCircle
+                          aria-hidden
+                          className="size-4 animate-spin motion-reduce:animate-none"
+                        />
+                      ) : (
+                        <LocateFixed aria-hidden className="size-4" />
+                      )}
+                      {geo === "loading"
+                        ? "Buscando localização…"
+                        : "Usar minha localização atual"}
+                    </button>
+                    <p
+                      id={geoStatusId}
+                      role="status"
+                      className="text-xs text-muted-foreground"
+                    >
+                      {geo === "error" &&
+                        "Não consegui acessar sua localização. Digite o endereço de coleta."}
+                    </p>
                   </div>
-                )}
-              </StepColumn>
 
-              <StepColumn
-                index={2}
-                current={step}
-                title={simulator.steps[2].name}
-                className="max-lg:snap-center"
-              >
-                {!showDelivery ? (
-                  <EmptyState
-                    icon={Package}
-                    title="Entrega ainda bloqueada"
-                    description={
-                      showAuction
-                        ? "Escolha uma oferta no leilão para liberar a criação da entrega e o resumo do envio."
-                        : "Primeiro simule o frete e escolha a melhor oferta. Depois você confirma a coleta aqui."
-                    }
-                  />
-                ) : (
+                  <div className="grid gap-2">
+                    <Label htmlFor={destinationId}>Endereço de entrega</Label>
+                    <Input
+                      id={destinationId}
+                      required
+                      value={destination}
+                      onChange={(event) => setDestination(event.target.value)}
+                      placeholder="Onde o seu cliente recebe"
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  <FieldSet>
+                    <FieldLegend variant="label">Tamanho do pacote</FieldLegend>
+                    <RadioGroup
+                      value={packageSize}
+                      disabled={!step0Active}
+                      onValueChange={(value) => {
+                        if (value) setPackageSize(value as PackageSize)
+                      }}
+                    >
+                      {packageSizes.map((size) => (
+                        <FieldLabel key={size.id} htmlFor={`pacote-${size.id}`}>
+                          <Field orientation="horizontal">
+                            <RadioGroupItem
+                              value={size.id}
+                              id={`pacote-${size.id}`}
+                              disabled={!step0Active}
+                            />
+                            <FieldContent>
+                              <FieldTitle>{size.label}</FieldTitle>
+                              <FieldDescription>{size.hint}</FieldDescription>
+                            </FieldContent>
+                          </Field>
+                        </FieldLabel>
+                      ))}
+                    </RadioGroup>
+                  </FieldSet>
+
+                  <div className="mt-auto flex flex-col gap-3">
+                    <StoneButton
+                      type="submit"
+                      size="lg"
+                      className="w-full"
+                      disabled={!step0Active || !canQuote}
+                    >
+                      Ver ofertas
+                      <ArrowRight aria-hidden className="size-4" />
+                    </StoneButton>
+                  </div>
+                </form>
+              </fieldset>
+            </StepColumn>
+
+            <StepColumn
+              index={1}
+              current={step}
+              title={simulator.steps[1].name}
+              className="max-lg:snap-center"
+            >
+              {!showAuction ? (
+                <EmptyState
+                  icon={Truck}
+                  title="Aguardando a simulação"
+                  description="Assim que você informar coleta, entrega e o tamanho do pacote, abrimos o leilão com as transportadoras."
+                />
+              ) : (
+                <div
+                  className={cn(
+                    "flex h-full flex-col gap-4",
+                    !step1Active && "pointer-events-none"
+                  )}
+                >
+                  {bidding && step1Active ? (
+                    <Auction />
+                  ) : (
+                    <div
+                      role="radiogroup"
+                      aria-label="Opções de entrega"
+                      aria-disabled={!step1Active}
+                      className="grid gap-2.5"
+                    >
+                      {priced.map(({ option, price }) => (
+                        <OptionCard
+                          key={option.id}
+                          option={option}
+                          price={price}
+                          checked={selected === option.id}
+                          cheapest={option.id === cheapestId}
+                          fastest={option.id === fastestId}
+                          disabled={!step1Active}
+                          onSelect={() => setSelected(option.id)}
+                        />
+                      ))}
+                    </div>
+                  )}
+
                   <div
                     className={cn(
-                      "flex h-full flex-col gap-5",
-                      !step2Active && "pointer-events-none"
+                      "mt-auto flex flex-col gap-3",
+                      bidding && step1Active && "invisible"
                     )}
                   >
-                    {/* <div className="grid gap-3 rounded-xl border border-stone-green-200 bg-stone-green-50 p-4">
+                    <StoneButton
+                      size="lg"
+                      className="w-full"
+                      disabled={!step1Active || bidding}
+                      onClick={() => goToStep(2)}
+                    >
+                      Continuar com {chosen.name}
+                      <ArrowRight aria-hidden className="size-4" />
+                    </StoneButton>
+                    <StoneButton
+                      size="lg"
+                      tone="outline"
+                      className="w-full"
+                      disabled={!step1Active || bidding}
+                      onClick={() => goToStep(0)}
+                    >
+                      <ArrowLeft aria-hidden className="size-4" />
+                      Voltar
+                    </StoneButton>
+                  </div>
+                </div>
+              )}
+            </StepColumn>
+
+            <StepColumn
+              index={2}
+              current={step}
+              title={simulator.steps[2].name}
+              className="max-lg:snap-center"
+            >
+              {!showDelivery ? (
+                <EmptyState
+                  icon={Package}
+                  title="Entrega ainda bloqueada"
+                  description={
+                    showAuction
+                      ? "Escolha uma oferta no leilão para liberar a criação da entrega e o resumo do envio."
+                      : "Primeiro simule o frete e escolha a melhor oferta. Depois você confirma a coleta aqui."
+                  }
+                />
+              ) : (
+                <div
+                  className={cn(
+                    "flex h-full flex-col gap-5",
+                    !step2Active && "pointer-events-none"
+                  )}
+                >
+                  {/* <div className="grid gap-3 rounded-xl border border-stone-green-200 bg-stone-green-50 p-4">
                       <div className="flex items-start gap-3">
                         <IconTile
                           variant="frame"
@@ -419,48 +413,47 @@ export function Simulator() {
                       </p>
                     </div> */}
 
-                    <p className="text-sm leading-relaxed text-stone-ink/65">
-                      Falta só a sua conta Stone. O cadastro leva alguns
-                      minutos, não tem mensalidade e a simulação fica salva para
-                      você confirmar a coleta
-                    </p>
+                  <p className="text-sm leading-relaxed text-stone-ink/65">
+                    Falta só a sua conta Stone. O cadastro leva alguns minutos,
+                    não tem mensalidade e a simulação fica salva para você
+                    confirmar a coleta
+                  </p>
 
-                    <p className="text-sm leading-relaxed text-stone-ink/65">
-                      Uma vez criada a entrega você acompanha pela plataforma e
-                      só paga depois que a entrega for realizada.
-                    </p>
+                  <p className="text-sm leading-relaxed text-stone-ink/65">
+                    Uma vez criada a entrega você acompanha pela plataforma e só
+                    paga depois que a entrega for realizada.
+                  </p>
 
-                    <ShipmentPanel />
+                  <ShipmentPanel />
 
-                    <div className="mt-auto flex flex-col gap-3">
-                      <StoneLink
-                        size="lg"
-                        className={cn(
-                          "w-full",
-                          !step2Active && "pointer-events-none opacity-60"
-                        )}
-                        aria-disabled={!step2Active}
-                        tabIndex={!step2Active ? -1 : undefined}
-                        href={`/projects/stone-landing-page/entrar?frete=${chosen.id}&de=${encodeURIComponent(origin)}&para=${encodeURIComponent(destination)}&pacote=${packageSize}`}
-                      >
-                        Criar entrega
-                        <ArrowRight aria-hidden className="size-4" />
-                      </StoneLink>
-                      <StoneButton
-                        size="lg"
-                        tone="outline"
-                        className="w-full"
-                        disabled={!step2Active}
-                        onClick={() => goToStep(1)}
-                      >
-                        <ArrowLeft aria-hidden className="size-4" />
-                        Ver outras ofertas
-                      </StoneButton>
-                    </div>
+                  <div className="mt-auto flex flex-col gap-3">
+                    <StoneLink
+                      size="lg"
+                      className={cn(
+                        "w-full",
+                        !step2Active && "pointer-events-none opacity-60"
+                      )}
+                      aria-disabled={!step2Active}
+                      tabIndex={!step2Active ? -1 : undefined}
+                      href={`/projects/stone-landing-page/entrar?frete=${chosen.id}&de=${encodeURIComponent(origin)}&para=${encodeURIComponent(destination)}&pacote=${packageSize}`}
+                    >
+                      Criar entrega
+                      <ArrowRight aria-hidden className="size-4" />
+                    </StoneLink>
+                    <StoneButton
+                      size="lg"
+                      tone="outline"
+                      className="w-full"
+                      disabled={!step2Active}
+                      onClick={() => goToStep(1)}
+                    >
+                      <ArrowLeft aria-hidden className="size-4" />
+                      Ver outras ofertas
+                    </StoneButton>
                   </div>
-                )}
-              </StepColumn>
-            </div>
+                </div>
+              )}
+            </StepColumn>
           </div>
         </Reveal>
       </div>
@@ -489,8 +482,7 @@ function StepColumn({
       data-sim-step={index}
       className={cn(
         "flex h-full min-h-[40rem] flex-col rounded-xl border bg-white p-5 transition-[box-shadow,border-color,opacity] sm:p-6",
-        active &&
-          "border-stone-green-500 shadow-[0_24px_50px_-40px_rgba(0,148,32,0.55)]",
+        active && "border-stone-green-500",
         done && "border-stone-ink/10",
         !active && "border-stone-ink/8 opacity-45",
         className
