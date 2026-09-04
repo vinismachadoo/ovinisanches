@@ -23,13 +23,13 @@ export function Journey() {
   }, [reduceMotion, total])
 
   return (
-    <section id="jornada" className="scroll-mt-28 py-20 sm:py-28">
+    <section id="jornada" className="scroll-mt-28 py-16">
       <div className="mx-auto max-w-[90rem] px-6">
         <Reveal className="mx-auto max-w-3xl text-center">
           <DisplayHeading className="text-stone-ink">
             {journey.title}
           </DisplayHeading>
-          <p className="text-stone-ink/65 mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-pretty">
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-pretty text-stone-ink/65">
             {journey.description}
           </p>
         </Reveal>

@@ -5,42 +5,7 @@ import { differentials } from "../data/content"
 import { DisplayHeading } from "./brand"
 import { Reveal } from "./reveal"
 
-const spans = [
-  "lg:col-span-3",
-  "lg:col-span-3",
-  "lg:col-span-2",
-  "lg:col-span-2",
-  "lg:col-span-2",
-  "lg:col-span-6",
-]
-
-function ContractVisual() {
-  const carriers = ["Rota Sul", "Expresso Norte", "Via Rápida", "+17 parceiros"]
-
-  return (
-    <div className="mt-7 rounded-xl border border-stone-ink/8 bg-stone-mist p-4">
-      <div className="flex items-center justify-between gap-3 border-b border-dashed border-black/5 pb-3">
-        <span className="text-xs font-semibold text-stone-ink">
-          Contrato Stone Entrega
-        </span>
-        <span className="rounded-sm bg-stone-green-500 px-2 py-0.5 text-[11px] font-bold text-stone-ink">
-          Assinado
-        </span>
-      </div>
-      <ul className="mt-3 space-y-2">
-        {carriers.map((carrier) => (
-          <li key={carrier} className="flex items-center justify-between gap-3">
-            <span className="text-xs text-stone-ink/70">{carrier}</span>
-            <span className="flex items-center gap-1 text-[11px] font-medium text-stone-green-700">
-              <Check aria-hidden className="size-3" strokeWidth={3} />
-              homologada
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
+const spans = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-6"]
 
 function FeaturedVisual() {
   return (
@@ -71,10 +36,7 @@ function FeaturedVisual() {
 
 export function Differentials() {
   return (
-    <section
-      id="diferenciais"
-      className="relative scroll-mt-28 bg-white py-20 lg:py-28"
-    >
+    <section id="diferenciais" className="relative scroll-mt-28 py-16">
       <div className="mx-auto max-w-[90rem] px-6">
         <div className="mx-auto max-w-6xl text-center">
           <Reveal>
@@ -123,6 +85,28 @@ export function Differentials() {
                       <p className="mt-2.5 text-base leading-relaxed text-pretty text-stone-ink/65">
                         {item.description}
                       </p>
+
+                      {item.bullets && (
+                        <ul className="mt-5 space-y-2.5">
+                          {item.bullets.map((bullet) => (
+                            <li
+                              key={bullet}
+                              className="flex items-start gap-2.5"
+                            >
+                              <IconTile
+                                variant="frame"
+                                size="xs"
+                                aria-hidden="true"
+                              >
+                                <Check strokeWidth={3} />
+                              </IconTile>
+                              <span className="text-sm leading-snug text-stone-ink/75">
+                                {bullet}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
 
                     {item.tags && (
@@ -148,7 +132,6 @@ export function Differentials() {
                   </div>
 
                   {item.visual === "chat" && <FeaturedVisual />}
-                  {item.visual === "contract" && <ContractVisual />}
                 </li>
               </Reveal>
             )

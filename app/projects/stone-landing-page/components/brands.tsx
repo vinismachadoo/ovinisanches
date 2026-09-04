@@ -9,7 +9,7 @@ import { Reveal } from "./reveal"
 
 export function Brands() {
   return (
-    <section className="overflow-hidden bg-white py-16 sm:py-20">
+    <section className="overflow-hidden bg-white pt-16">
       <div className="mx-auto max-w-[90rem] px-6">
         <Reveal>
           <DisplayHeading className="text-stone-ink">
