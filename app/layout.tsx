@@ -1,6 +1,6 @@
+import "@/app/globals.css"
 import ReactQueryProvider from "@/components/providers/react-query-provider"
 import { ThemeProvider } from "@/components/providers/theme-provider"
-import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/registry/default/ui/sonner"
@@ -10,7 +10,6 @@ import { NextIntlClientProvider } from "next-intl"
 import { Geist, Geist_Mono, Inter } from "next/font/google"
 import Script from "next/script"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
-import "@/app/globals.css"
 
 const inter = Inter({
   variable: "--font-inter",

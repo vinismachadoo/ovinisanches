@@ -1,6 +1,5 @@
 import { Button } from "@/registry/default/ui/button"
 import Link from "next/link"
-import React from "react"
 
 const NotFoundPage = () => {
   return (
